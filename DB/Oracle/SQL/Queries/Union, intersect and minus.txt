@@ -1,0 +1,26 @@
+UNION
+
+select emp_id, emp_name from employee
+UNION
+select emp_id, emp_name from employee_copy;
+
+
+UNION ALL
+
+select emp_id, emp_name from employee
+UNION ALL
+select emp_id, emp_name from employee_copy;
+
+
+INTERSECT
+
+select emp_id, emp_name from employee
+INTERSECT
+select emp_id, emp_name from employee_copy;
+
+MINUS
+
+select emp_id, emp_name from employee
+MINUS
+select emp_id, emp_name from employee_copy;
+

@@ -1,0 +1,4 @@
+CREATE TABLE dummy(
+	id NUMBER NOT NULL,
+	first_name VARCHAR2(50) NOT NULL
+)

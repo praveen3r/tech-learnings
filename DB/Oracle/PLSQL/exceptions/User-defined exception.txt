@@ -1,0 +1,16 @@
+set serveroutput on
+DECLARE
+v_empName EMPLOYEE.EMP_NAME%TYPE;
+ex_invalid_emp  EXCEPTION; 
+BEGIN
+SELECT EMP_NAME INTO v_empName FROM EMPLOYEE WHERE emp_id =1;
+IF v_empName != 'Sachin' THEN
+  RAISE ex_invalid_emp; 
+END IF;
+EXCEPTION 
+   WHEN ex_invalid_emp THEN 
+      dbms_output.put_line('It is not Sachin!'); 
+   WHEN others THEN 
+      dbms_output.put_line('Error!'); 
+END;
+/

@@ -1,0 +1,10 @@
+set serveroutput on
+DECLARE
+    TYPE deptnames IS TABLE OF VARCHAR2(100);
+   dept_names deptnames:= deptnames ('COMPUTER','MECHANICAL', 'ELCTRICAL');
+BEGIN
+     dbms_output.put_line(' number of element is ' || dept_names.COUNT);
+      dept_names.DELETE(2);
+       dbms_output.put_line(' number of element is ' || dept_names.COUNT); 
+END;
+/

@@ -1,0 +1,47 @@
+----------------------------------------------------------------------------------------------------------
+
+set serveroutput on
+DECLARE
+    TYPE empnames IS TABLE OF VARCHAR2(100);
+    emp_names empnames;
+BEGIN
+    select emp_name bulk collect INTO emp_names from employee;
+     FOR i IN emp_names.FIRST .. emp_names.LAST
+    LOOP
+     dbms_output.put_line('emp name is ' || emp_names(i)); 
+    END LOOP; 
+END;
+/
+
+----------------------------------------------------------------------------------------------------------
+set serveroutput on
+DECLARE
+    TYPE emp_type IS TABLE OF employee%rowtype;
+    emp_obj emp_type;
+BEGIN
+    select * bulk collect INTO emp_obj from employee;
+     FOR i IN emp_obj.FIRST .. emp_obj.LAST
+    LOOP
+     dbms_output.put_line('emp name is ' || emp_obj(i).emp_name); 
+    END LOOP; 
+END;
+/
+----------------------------------------------------------------------------------------------------------
+set serveroutput on
+DECLARE
+TYPE emp_type IS RECORD 
+(emp_id NUMBER, 
+   emp_name  varchar(50));
+    TYPE empnames IS TABLE OF emp_type;
+    emp_names empnames;
+   
+BEGIN
+   
+   select emp_id,emp_name bulk collect INTO emp_names from employee;
+    For i IN emp_names.FIRST .. emp_names.LAST 
+    Loop
+      dbms_output.put_line( emp_names(i).emp_id || ' - ' ||emp_names(i).emp_name ) ;
+     End loop ; 
+END;
+/
+----------------------------------------------------------------------------------------------------------

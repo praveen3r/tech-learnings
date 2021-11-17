@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    
+    
+    stages {
+	
+        stage('build maven') { 
+		   steps {
+		        dir("spring-boot-e2e") {
+				bat "mvn clean install -Dmaven.test.skip=true"
+				bat "copy  target\\spring-boot-e2e-0.0.1-SNAPSHOT.jar dev-ops"
+			}
+		   }
+        }
+	stage('Docker Build') {
+	  steps {
+	    dir("spring-boot-e2e/dev-ops"){
+	    
+              bat 'docker-compose build'
+		withDockerRegistry([ credentialsId: "docker-hub-access", url: "" ]) {
+                    bat 'docker push praveen12rajan/spring-boot:latest'
+                   }
+	    }
+          }
+        }	
+        stage('deploy') { 
+		steps {
+			echo 'deploying the app'
+			}
+	    }
+	}
+ }

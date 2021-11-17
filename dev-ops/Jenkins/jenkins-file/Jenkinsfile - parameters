@@ -1,0 +1,34 @@
+pipeline {
+    agent any 
+    parameters {
+	choice(choices: ['1.1', '1.2'], name: 'VERSIONS' )
+	booleanParam(defaultValue: true, description: '',name: 'executeTests' )         
+	string(defaultValue: 'test@gmail.com', name: 'EMAIL', trim: true)  
+                 
+    }
+    stages {
+        stage('build') { 
+            steps {
+	       echo 'building the app' 
+	       echo "choice selected ${params.VERSIONS}"
+	       echo "string ${params.EMAIL}"
+	     }
+        }
+	stage('test') { 
+	 when {
+	       expression {
+	         params.executeTests
+	       }
+	    }
+            steps {
+	        echo 'testing the app'   
+            }
+        }
+	stage('deploy') { 
+            steps {
+	       echo 'deploying the app'
+                    
+            }
+        }
+    }
+ }

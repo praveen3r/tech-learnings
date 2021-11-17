@@ -1,0 +1,20 @@
+<configuration>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<!-- <encoder> <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern> 
+			</encoder> -->
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="com.demo.MaskingPatternLayout">
+				<mask>*</mask>
+				<patternsProperty>^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$</patternsProperty>
+				<pattern>%d [%thread] %-5level %logger{35} - %msg%n</pattern>
+			</layout>
+		</encoder>
+	</appender>
+
+	<root level="debug">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

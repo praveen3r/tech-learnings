@@ -1,0 +1,37 @@
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4 login-panel shadow">
+        <form class="p-3" [formGroup]="regForm" (ngSubmit)="register()">
+            <div class="form-group text-center">
+                <h2>Campaign Managment System</h2>
+            </div>
+            <div *ngIf="error" class="form-group text-center">
+                <label class="text-danger">{{error}}</label>
+            </div>
+            <div *ngIf="success" class="form-group text-center">
+                <label class="text-success">{{success}}</label>
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input class="form-control" type="text" name="name" formControlName="name"/>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" type="email" name="email" formControlName="email"/>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input class="form-control" type="password" name="password" formControlName="password"/>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input class="form-control" type="password" name="confirmPwd" formControlName="confirmPwd"/>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+            <div class="form-group text-center">
+                <a routerLink="/login">Already User? Login</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+---------------------------------------------------------------------------------------------------------------------
+
+db.collection.find(<query>).limit(<number>)
+
+Use the limit() method on a cursor to specify the maximum number of documents the cursor will return. 
+limit() is analogous to the LIMIT statement in a SQL database.
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	ZERO VALUE
+
+---------------------------------------------------------------------------------------------------------------------
+
+A limit() value of 0 (i.e. .limit(0)) is equivalent to setting no limit.
+
+
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	NEGATIVE VALUES
+
+---------------------------------------------------------------------------------------------------------------------
+
+A negative limit is similar to a positive limit but closes the cursor after returning a single batch of results. 
+As such, with a negative limit, if the limited result set does not fit into a single batch, the number of documents 
+received will be less than the specified limit. By passing a negative limit, the client indicates to the server that 
+it will not ask for a subsequent batch via getMore.

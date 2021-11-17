@@ -1,0 +1,8 @@
+set serveroutput on
+DECLARE
+v_name varchar2(50);
+begin
+v_name := 'hello world';
+dbms_output.put_line(v_name);
+end;
+/

@@ -1,0 +1,30 @@
+set serveroutput on
+DECLARE
+v_empName EMPLOYEE.EMP_NAME%TYPE;
+v_sql VARCHAR2(200) := 'SELECT EMP_NAME FROM EMPLOYEE WHERE emp_id =1';
+BEGIN
+execute immediate v_sql INTO v_empName ;
+dbms_output.put_line('v_empName ' || v_empName);
+END;
+/
+
+-------------------------------------------------------------------------------------------------
+
+                USING CLAUSE
+
+-------------------------------------------------------------------------------------------------
+
+set serveroutput on
+DECLARE
+v_empName EMPLOYEE.EMP_NAME%TYPE;
+v_sql VARCHAR2(200) := 'SELECT EMP_NAME FROM EMPLOYEE WHERE emp_id = :emp_id';
+BEGIN
+execute immediate v_sql INTO v_empName USING 1;
+dbms_output.put_line('v_empName ' || v_empName);
+END;
+/
+
+---------------------------------------------------------------------------------------------------
+
+
+

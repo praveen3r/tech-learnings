@@ -1,0 +1,9 @@
+set serveroutput on
+DECLARE
+    TYPE deptnames IS TABLE OF VARCHAR2(100) INDEX BY BINARY_INTEGER;
+    dept_names deptnames;
+BEGIN
+     dept_names(1) := 'ELECTRICAL';
+     dbms_output.put_line('First dept name is ' || dept_names(1)); 
+END;
+/

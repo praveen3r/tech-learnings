@@ -1,0 +1,5 @@
+echo "boolean param -> %deploy%"
+echo "%params.deploy%"
+echo "params.deploy"
+echo "choice params -> %choice%"
+echo "string param -> %testStr%"

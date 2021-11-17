@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.demo</groupId>
+  <artifactId>java-parent-project</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>java-core</module>
+  	<module>junit</module>
+  	<module>junit5</module>
+  	<module>java8</module>
+  	<module>java-thread</module>
+  	<module>java-design-patterns</module>
+  	<module>java-memory</module>
+  	<module>java-file-processing</module>
+    <module>java-rabbitmq</module>
+    <module>java11</module>
+    <module>java9</module>
+    <module>java10</module>
+    <module>java9-modularity</module>
+    <module>java12</module>
+    <module>java13</module>
+    <module>java-activemq</module>
+    <module>java-kafka</module>
+  </modules>
+</project>

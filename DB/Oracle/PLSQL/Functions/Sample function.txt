@@ -1,0 +1,10 @@
+CREATE OR REPLACE FUNCTION get_employee_name(
+        p_emp_id NUMBER)
+    RETURN VARCHAR2
+IS
+    v_emp_name VARCHAR2(50);
+BEGIN
+   SELECT emp_name INTO v_emp_name FROM EMPLOYEE where emp_id = p_emp_id;
+    RETURN v_emp_name;
+END;
+/

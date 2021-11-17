@@ -1,0 +1,29 @@
+pipeline {
+    agent any 
+    stages {
+        stage('clean install') { 
+            steps {
+	        dir("multi-branch/demo-proj"){
+		echo "Branch Name: ${env.BRANCH_NAME}"
+		script {
+		    def branchName = "$env.BRANCH_NAME"
+
+		    switch (branchName) {
+			    case ~/develop/:
+				bat "mvn clean install"
+			    break
+			    case ~/^feature\/.*/:
+			    	echo "feature branch won't be deployed"
+			    break
+			    default:
+			        echo "unknown branch"
+			}
+			     
+		    }
+                    
+                }
+                    
+            }
+        }
+   }
+}

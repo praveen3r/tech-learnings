@@ -1,0 +1,8 @@
+set serveroutput on
+DECLARE
+v_emp EMPLOYEE%ROWTYPE;
+BEGIN
+SELECT * INTO v_emp FROM EMPLOYEE where emp_id = 1;
+dbms_output.put_line('v_empId ' || v_emp.emp_id || 'v_empName ' || v_emp.emp_name);
+END;
+/

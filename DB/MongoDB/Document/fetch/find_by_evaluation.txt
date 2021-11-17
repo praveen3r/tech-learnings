@@ -1,0 +1,304 @@
+---------------------------------------------------------------------------------------------------------------------
+
+{ _id: 1, item: { name: "ab", code: "123" }, qty: 15, tags: [ "A", "B", "C" ] },
+{ _id: 2, item: { name: "cd", code: "123" }, qty: 20, tags: [ "B" ] },
+{ _id: 3, item: { name: "ij", code: "456" }, qty: 25, tags: [ "A", "B" ] },
+{ _id: 4, item: { name: "xy", code: "456" }, qty: 30, tags: [ "B", "A" ] },
+{ _id: 5, item: { name: "mn", code: "000" }, qty: 20, tags: [ [ "A", "B" ], "C" ] }
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$expr
+
+---------------------------------------------------------------------------------------------------------------------
+
+{ "_id" : 1, "category" : "food", "budget": 400, "spent": 450 }
+{ "_id" : 2, "category" : "drinks", "budget": 100, "spent": 150 }
+{ "_id" : 3, "category" : "clothes", "budget": 100, "spent": 50 }
+{ "_id" : 4, "category" : "misc", "budget": 500, "spent": 300 }
+{ "_id" : 5, "category" : "travel", "budget": 200, "spent": 650 }
+
+Allows use of aggregation expressions within the query language.
+
+cmd: { $expr: { <expression> } }
+
+Example
+---------
+
+db.monthlyBudget.find( { $expr: { $gt: [ "$spent" , "$budget" ] } } )
+
+The above operation uses $expr to find documents where the spent amount exceeds the budget
+
+Using $expr With Conditional Statements
+-----------------------------------------
+
+{ "_id" : 1, "item" : "binder", "qty" : NumberInt("100"), "price" : NumberDecimal("12") },
+   { "_id" : 2, "item" : "notebook", "qty" : NumberInt("200"), "price" : NumberDecimal("8") },
+   { "_id" : 3, "item" : "pencil", "qty" : NumberInt("50"), "price" : NumberDecimal("6") },
+   { "_id" : 4, "item" : "eraser", "qty" : NumberInt("150"), "price" : NumberDecimal("3") },
+   { "_id" : 5, "item" : "legal pad", "qty" : NumberInt("42"), "price" : NumberDecimal("10") }
+
+Assume that for an upcoming sale next month, you want to discount the prices such that:
+
+If qty is greater than or equal to 100, the discounted price will be 0.5 of the price.
+If qty is less than 100, the discounted price is 0.75 of the price.
+
+Before applying the discounts, you would like to know which items in the supplies collection have a 
+discounted price of less than 5.
+
+// Aggregation expression to calculate discounted price
+
+let discountedPrice = {
+   $cond: {
+      if: { $gte: ["$qty", 100] },
+      then: { $multiply: ["$price", NumberDecimal("0.50")] },
+      else: { $multiply: ["$price", NumberDecimal("0.75")] }
+   }
+};
+
+// Query the supplies collection using the aggregation expression
+
+db.supplies.find( { $expr: { $lt:[ discountedPrice,  NumberDecimal("5") ] } });
+
+
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$jsonSchema
+
+---------------------------------------------------------------------------------------------------------------------
+
+Validate documents against the given JSON Schema.
+
+cmd: { $jsonSchema: <JSON Schema object> }
+
+Example
+---------
+
+{
+  $jsonSchema: {
+     required: [ "name", "major", "gpa", "address" ],
+     properties: {
+        name: {
+           bsonType: "string",
+           description: "must be a string and is required"
+        },
+        address: {
+           bsonType: "object",
+           required: [ "zipcode" ],
+           properties: {
+               "street": { bsonType: "string" },
+               "zipcode": { bsonType: "string" }
+           }
+        }
+     }
+  }
+}
+
+Document Validator
+-------------------
+
+db.createCollection( <collection>, { validator: { $jsonSchema: <schema> } } )
+db.runCommand( { collMod: <collection>, validator:{ $jsonSchema: <schema> } } )
+
+Query Conditions
+------------------
+
+db.collection.find( { $jsonSchema: <schema> } )
+db.collection.aggregate( [ { $match: { $jsonSchema: <schema> } } ] )
+db.collection.updateMany( { $jsonSchema: <schema> }, <update> )
+db.collection.deleteOne( { $jsonSchema: <schema> } )
+
+db.collection.find( { $nor: [ { $jsonSchema: <schema> } ] } )
+db.collection.aggregate( [ { $match: { $nor: [ { $jsonSchema: <schema> } ] } }, ... ] )
+db.collection.updateMany( { $nor: [ { $jsonSchema: <schema> } ] }, <update> )
+db.collection.deleteOne( { $nor: [ { $jsonSchema: <schema> } ] } )
+
+Examples
+
+Schema Validation
+-------------------
+
+db.createCollection("students", {
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         required: [ "name", "year", "major", "address" ],
+         properties: {
+            name: {
+               bsonType: "string",
+               description: "must be a string and is required"
+            },
+            year: {
+               bsonType: "int",
+               minimum: 2017,
+               maximum: 3017,
+               description: "must be an integer in [ 2017, 3017 ] and is required"
+            },
+            major: {
+               enum: [ "Math", "English", "Computer Science", "History", null ],
+               description: "can only be one of the enum values and is required"
+            },
+            gpa: {
+               bsonType: [ "double" ],
+               description: "must be a double if the field exists"
+            },
+            address: {
+               bsonType: "object",
+               required: [ "city" ],
+               properties: {
+                  street: {
+                     bsonType: "string",
+                     description: "must be a string if the field exists"
+                  },
+                  city: {
+                     bsonType: "string",
+                     "description": "must be a string and is required"
+                  }
+               }
+            }
+         }
+      }
+   }
+})
+
+Given the created validator for the collection, the following insert operation will fail because gpa is an integer when the validator requires a double.
+
+db.students.insert({
+   name: "Alice",
+   year: NumberInt(2019),
+   major: "History",
+   gpa: NumberInt(3),
+   address: {
+      city: "NYC",
+      street: "33rd Street"
+   }
+})
+The operation returns the following error:
+
+WriteResult({
+   "nInserted" : 0,
+   "writeError" : {
+      "code" : 121,
+      "errmsg" : "Document failed validation"
+   }
+})
+
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$mod
+
+---------------------------------------------------------------------------------------------------------------------
+
+{ "_id" : 1, "item" : "abc123", "qty" : 0 }
+{ "_id" : 2, "item" : "xyz123", "qty" : 5 }
+{ "_id" : 3, "item" : "ijk123", "qty" : 12 }
+
+Performs a modulo operation on the value of a field and selects documents with a specified result.
+
+Select documents where the value of a field divided by a divisor has the specified remainder 
+(i.e. perform a modulo operation to select documents).
+
+cmd: { field: { $mod: [ divisor, remainder ] } }
+
+Example
+---------
+
+db.inventory.find( { qty: { $mod: [ 4, 0 ] } } )
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$regex
+
+---------------------------------------------------------------------------------------------------------------------
+
+Selects documents where values match a specified regular expression.
+
+cmd: 
+{ <field>: { $regex: /pattern/, $options: '<options>' } }
+{ <field>: { $regex: 'pattern', $options: '<options>' } }
+{ <field>: { $regex: /pattern/<options> } }
+
+or
+
+{ <field>: /pattern/<options> }
+
+$in Expressions
+-----------------
+
+To include a regular expression in an $in query expression, you can only use JavaScript regular expression objects 
+(i.e. /pattern/ ). 
+
+For example:
+
+{ name: { $in: [ /^acme/i, /^ack/ ] } }
+
+You cannot use $regex operator expressions inside an $in.
+
+Implicit AND Conditions for the Field
+--------------------------------------
+
+{ name: { $regex: /acme.*corp/i, $nin: [ 'acmeblahcorp' ] } }
+{ name: { $regex: /acme.*corp/, $options: 'i', $nin: [ 'acmeblahcorp' ] } }
+{ name: { $regex: 'acme.*corp', $options: 'i', $nin: [ 'acmeblahcorp' ] } }
+
+Perform a LIKE Match
+------------------------
+
+db.products.find( { sku: { $regex: /789$/ } } )
+
+The example is analogous to the following SQL LIKE statement:
+
+SELECT * FROM products WHERE sku like "%789";
+
+https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$text
+
+---------------------------------------------------------------------------------------------------------------------
+
+Performs text search.
+
+cmd:
+{
+  $text:
+    {
+      $search: <string>,
+      $language: <string>,
+      $caseSensitive: <boolean>,
+      $diacriticSensitive: <boolean>
+    }
+}
+
+Example:
+
+1) db.articles.find( { $text: { $search: "coffee" } } )
+
+2) db.articles.find( { $text: { $search: "bake coffee cake" } } )
+
+This query returns documents that contain either bake or coffee or cake in the indexed subject field, 
+or more precisely, the stemmed version of these words:
+
+The following query searches for the phrase coffee shop:
+
+3) db.articles.find( { $text: { $search: "\"coffee shop\"" } } )
+
+The following example searches for documents that contain the words coffee but do not contain the term shop, 
+or more precisely the stemmed version of the words:
+
+4) db.articles.find( { $text: { $search: "coffee -shop" } } )
+
+5) db.articles.find( { $text: { $search: "Coffee", $caseSensitive: true } } )
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$where
+
+---------------------------------------------------------------------------------------------------------------------
+
+Matches documents that satisfy a JavaScript expression.
+
+https://docs.mongodb.com/manual/reference/operator/query/where/#op._S_where

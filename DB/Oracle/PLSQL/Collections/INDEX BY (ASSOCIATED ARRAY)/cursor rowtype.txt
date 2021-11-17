@@ -1,0 +1,18 @@
+set serveroutput on
+DECLARE
+    TYPE empnames IS TABLE OF employee%rowtype INDEX BY BINARY_INTEGER;
+    CURSOR cur_emp is select * from employee;
+    emp_rec employee%ROWTYPE ;
+    emp_names empnames;
+    ind integer :=0; 
+BEGIN
+    FOR emp_rec IN cur_emp
+    LOOP
+      emp_names(cur_emp%ROWCOUNT) := emp_rec ;
+    END LOOP;
+    For i IN emp_names.FIRST .. emp_names.LAST 
+    Loop
+      dbms_output.put_line( emp_names(i).emp_id || ' - ' ||emp_names(i).emp_name ) ;
+     End loop ; 
+END;
+/

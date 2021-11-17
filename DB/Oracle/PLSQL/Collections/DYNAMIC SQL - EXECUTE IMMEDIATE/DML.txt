@@ -1,0 +1,6 @@
+BEGIN
+EXECUTE IMMEDIATE 'INSERT INTO dummy1 (test) VALUES (:text_string)' USING 'test';
+EXECUTE IMMEDIATE 'UPDATE dummy1 SET test = :text_string WHERE test = :test2' USING 'test2', 'test';
+EXECUTE IMMEDIATE 'DELETE FROM dummy1 WHERE test = :value' USING 'test2';
+END;
+/

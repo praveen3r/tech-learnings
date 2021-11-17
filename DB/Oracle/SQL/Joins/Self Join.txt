@@ -1,0 +1,3 @@
+select e1.last_name as "Worker", e2.last_name as "Manager"
+from employees e1 JOIN employees e2
+ON e1.mgr_id = e2.emp_id;

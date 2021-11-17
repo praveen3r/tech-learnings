@@ -1,0 +1,17 @@
+
+{ $skip: <positive integer> }
+
+-----------------------------------------
+
+Skips over the specified number of documents that pass into the stage and passes the remaining 
+documents to the next stage in the pipeline.
+
+Example
+---------
+
+db.article.aggregate([
+    { $skip : 5 }
+]);
+
+This operation returns only the first 5 documents passed to it by the pipeline. 
+$limit has no effect on the content of the documents it passes.

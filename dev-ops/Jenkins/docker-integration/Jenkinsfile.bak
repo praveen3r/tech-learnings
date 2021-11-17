@@ -1,0 +1,89 @@
+pipeline {
+    agent any
+    
+    environment {
+      DOCKER_HUB_CREDENTIALS = credentials('docker-hub-access')
+    }
+    stages {
+	
+        stage('build maven') { 
+		   steps {
+		        dir("docker-integration") {
+				bat "mvn clean install -Dmaven.test.skip=true"
+				bat "copy  target\\docker-integration-0.0.1-SNAPSHOT.jar dev-ops"
+			}
+		   }
+        }
+	/* stage('Docker Build') {
+	  steps {
+	    dir("docker-integration/dev-ops"){
+	    
+              bat 'docker build -t docker-integration:1.1 .'
+	    }
+          }
+        }
+	stage('Docker compose') {
+	  steps {
+	    dir("docker-integration/dev-ops"){
+	    
+              bat 'docker-compose build'
+	      bat 'docker-compose up'
+	      bat 'docker-compose down'
+	    }
+          }
+        }
+	stage('Docker login') {
+	  steps {
+		
+		withCredentials([
+            usernamePassword(credentialsId: 'docker-hub-access',
+              usernameVariable: 'username',
+              passwordVariable: 'password')
+          ]) {
+	        echo 'username=' + username
+		echo 'password=' + password
+		bat 'docker login -u ' + username + ' -p ' + password
+	  }
+	      	    
+          }
+        } */
+	/*stage('Docker push') {
+	  steps {
+	        dir("docker-integration/dev-ops"){
+		 withCredentials([
+            usernamePassword(credentialsId: 'docker-hub-access',
+              usernameVariable: 'username',
+              passwordVariable: 'password')
+          ]) {
+		bat 'docker-compose build'
+		bat 'docker tag dev-ops_my-jenkins ' + username + '/pravasini:latest'
+		bat 'docker push ' + username +'/pravasini:latest'
+		} 
+		
+	      } 
+          }
+        }*/
+	stage('Docker push') {
+	  steps {
+	        dir("docker-integration/dev-ops"){
+		bat 'docker-compose build'
+		bat 'docker tag dev-ops_my-jenkins praveen12rajan/pravasini:latest'
+		  withDockerRegistry([ credentialsId: "docker-hub-access", url: "" ]) {
+                    bat 'docker push praveen12rajan/pravasini:latest'
+                   }
+	      } 
+          }
+        }
+        /* stage('Docker run') { 
+		steps {
+			bat 'docker run docker-integration:1.1'
+			}
+	    }*/
+	}
+	post {
+		always {
+			bat 'docker logout'
+		}
+	}
+
+ }

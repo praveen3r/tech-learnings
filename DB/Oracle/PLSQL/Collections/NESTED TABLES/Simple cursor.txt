@@ -1,0 +1,17 @@
+set serveroutput on
+DECLARE
+   CURSOR c_emp is select emp_name from employee;
+    TYPE empnames IS TABLE OF employee.emp_name%type;
+    emp_names empnames;
+    ind integer :=0; 
+BEGIN
+    emp_names := empnames();
+    FOR empName IN c_emp
+    LOOP
+     emp_names.EXTEND;
+     ind := ind +1; 
+     emp_names(ind) := empName.emp_name;
+     dbms_output.put_line('emp name is ' || emp_names(ind)); 
+    END LOOP;
+END;
+/

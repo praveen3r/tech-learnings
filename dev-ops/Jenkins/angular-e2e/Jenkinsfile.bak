@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    
+    
+    stages {
+        stage('build') { 
+	  steps {
+	  dir('angular-e2e'){
+	    echo 'building the app'
+	    nodejs('Node-10.16.3'){
+	        bat 'npm install'
+	    	bat 'ng build'
+		}
+	    }
+	  }
+        }
+	stage('deploy') { 
+            steps {
+	       echo 'deploying the app'
+                    
+            }
+        }
+    }
+ }

@@ -1,0 +1,128 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="myDataSource_" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <!-- results in a setDriverClassName(String) call -->
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/mydb"/>
+        <property name="username" value="root"/>
+        <property name="password" value="masterkaoli"/>
+    </bean>
+
+    <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close"
+          p:driverClassName="com.mysql.jdbc.Driver"
+          p:url="jdbc:mysql://localhost:3306/mydb"
+          p:username="root"
+          p:password="masterkaoli"/>
+
+
+    <bean id="moreComplexObject" class="ioc.collection.ComplexObject">
+        <!-- results in a setAdminEmails(java.util.Properties) call -->
+        <property name="adminEmails">
+            <props>
+                <prop key="administrator">administrator@example.org</prop>
+                <prop key="support">support@example.org</prop>
+                <prop key="development">development@example.org</prop>
+            </props>
+        </property>
+        <!-- results in a setSomeList(java.util.List) call -->
+        <property name="someList">
+            <list>
+                <value>a list element followed by a reference</value>
+                <ref bean="myDataSource"/>
+            </list>
+        </property>
+        <!-- results in a setSomeMap(java.util.Map) call -->
+        <property name="someMap">
+            <map>
+                <entry key="an entry" value="just some string"/>
+                <entry key="a ref" value-ref="myDataSource"/>
+            </map>
+        </property>
+        <!-- results in a setSomeSet(java.util.Set) call -->
+        <property name="someSet">
+            <set>
+                <value>just some string</value>
+                <ref bean="myDataSource"/>
+            </set>
+        </property>
+    </bean>
+
+    <!-- FYI -->
+    <!-- Strong Typed Collection -->
+    <bean id="foo" class="ioc.collection.StrongTypedCollection">
+        <property name="accounts">
+            <map>
+                <entry key="one" value="9.99"/>
+                <entry key="two" value="2.75"/>
+                <entry key="six" value="3.99"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- Empty value -->
+    <bean class="ioc.collection.StrongTypedCollection">
+        <property name="value" value=""/>
+    </bean>
+    <!-- null value -->
+    <bean class="ioc.collection.StrongTypedCollection">
+        <property name="accounts">
+            <null/>
+        </property>
+    </bean>
+    <!-- namespace -->
+    <bean name="p-namespace" class="ioc.collection.StrongTypedCollection"
+          p:value="foo@bar.com"/>
+
+    <!--  Lazy-initialized beans -->
+    <bean id="lazy" class="ioc.collection.StrongTypedCollection" lazy-init="true"/>
+    <bean name="not.lazy" class="ioc.collection.StrongTypedCollection"/>
+
+    <!-- Destroy Method -->
+
+    <bean id="exampleDestoryBean" class="ioc.initdestroy.MessageTwo" destroy-method="destroy"/>
+    <bean id="exampleDestoryBean_" class="ioc.initdestroy.MessageTwo"/>
+
+    <bean id="netManager" class="ioc.initdestroy.NetworkManager"/>
+
+    <!-- Aware  -->
+    <bean autowire="byName" class="ioc.aware.Triangle" id="triangle"></bean>
+
+    <bean class="ioc.aware.Point" id="pointA" scope="prototype">
+        <property name="x" value="0"></property>
+        <property name="y" value="0"></property>
+    </bean>
+
+    <bean class="ioc.aware.Point" id="pointB" scope="prototype">
+        <property name="x" value="-20"></property>
+        <property name="y" value="0"></property>
+    </bean>
+
+    <bean class="ioc.aware.Point" id="pointC" scope="prototype">
+        <property name="x" value="20"></property>
+        <property name="y" value="0"></property>
+    </bean>
+
+    <!--Properties Files Read/Write -->
+    <!--<context:property-placeholder location="classpath:database.properties"/>-->
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:database.properties</value>
+        </property>
+    </bean>
+
+    <bean id="dbConfig" class="ioc.propertiesfile.MyDBConfig">
+        <property name="dbHost" value="${db.host.url}"/>
+        <property name="dbPort" value="${db.port.number}"/>
+        <property name="dbService" value="${db.service.name}"/>
+        <property name="dbUrl" value="${db.user}"/>
+        <property name="dbPassword" value="${db.password}"/>
+    </bean>
+
+
+</beans>

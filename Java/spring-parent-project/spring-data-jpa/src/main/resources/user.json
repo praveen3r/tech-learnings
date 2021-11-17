@@ -1,0 +1,7 @@
+[
+  {
+    "_class": "com.demo.entity.User",
+    "userName" : "TestPrav",
+    "pwd"  : "afad"
+  }
+]

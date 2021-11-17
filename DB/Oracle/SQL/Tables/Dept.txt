@@ -1,0 +1,19 @@
+--------------------------------------------------------
+--  DDL for Table EMPLOYEE
+--------------------------------------------------------
+
+CREATE TABLE "DEPT"
+  (
+    "DEPT_ID"   NUMBER,
+    "DEPT_NAME" VARCHAR2(40 BYTE)
+  );
+
+--------------------------------------------------------
+--  DML for Table EMPLOYEE
+--------------------------------------------------------
+
+Insert into CPHPORTAL.DEPT (DEPT_ID,DEPT_NAME) values (1,'Batsman');
+Insert into CPHPORTAL.DEPT (DEPT_ID,DEPT_NAME) values (2,'All rounder');
+Insert into CPHPORTAL.DEPT (DEPT_ID,DEPT_NAME) values (3,'Bowler');
+Insert into CPHPORTAL.DEPT (DEPT_ID,DEPT_NAME) values (5,'Fielder');
+COMMIT;

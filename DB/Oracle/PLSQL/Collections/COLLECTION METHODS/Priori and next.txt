@@ -1,0 +1,14 @@
+set serveroutput on
+DECLARE
+    TYPE deptnames IS ARRAY(5) OF VARCHAR2(100);
+   dept_names deptnames:= deptnames ('COMPUTER','MECHANICAL', 'ELCTRICAL');
+   c NUMBER;
+BEGIN
+     c := dept_names.FIRST ;
+     Loop
+         Dbms_Output.Put_Line( 'dept_names(' || c || ') = ' || dept_names(c) ) ;
+       c := dept_names.NEXT(c) ; -- get the successor element
+       Exit When c IS NULL ; -- end of collection
+      End loop ;
+END;
+/

@@ -1,0 +1,5 @@
+select * from emp where sal = (
+select sal from
+     (select rownum n,a.sal from
+    ( select distinct sal from emp order by sal desc) a)
+where n = 2);

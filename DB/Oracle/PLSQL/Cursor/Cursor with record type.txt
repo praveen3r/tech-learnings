@@ -1,0 +1,12 @@
+set serveroutput on
+DECLARE
+CURSOR cur_emp
+IS select emp_id, emp_name from employee;
+emp_rec cur_emp%ROWTYPE; 
+BEGIN
+  FOR emp_rec IN cur_emp
+    LOOP
+      dbms_output.put_line('v_emp_id ' || emp_rec.emp_id || ' v_emp_name ' || emp_rec.emp_name);
+    END LOOP;
+END;
+/

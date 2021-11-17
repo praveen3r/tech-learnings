@@ -1,0 +1,35 @@
+<div class="col-12 p-4 row">
+    <h3 class="col-12 col-sm-12 col-md-6 text-dark">Survey's List</h3>
+    <div class="col-12 col-sm-12 col-md-6 text-dark text-md-right my-3 my-md-0">
+        <button class="btn btn-sm btn-primary" routerLink="/admin/addSurvey"><i class="fa fa-plus mr-1"></i>Add New Survey</button>
+    </div>
+    <div class="col-12">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Survey Name</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let camp of compaigns;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{camp.title}}</td>
+                    <td>{{camp.startDate}}</td>
+                    <td [ngClass]="{'text-danger': camp.expired}">{{camp.endDate}}</td>
+                    <td>
+                        <i class="fa fa-list mr-2 cursor-pointer" [routerLink]="['/admin/viewSurvey',camp.campaignId]" title="View Questions" ></i>
+                        <i class="fa fa-list-alt mr-2 cursor-pointer" title="View Reports" [routerLink]="['/admin/viewSurveyAttends',camp.campaignId]"></i>
+                        <i class="fa fa-trash-o mr-2 cursor-pointer" title="Remove Survey" (click)="removeCampaign(camp.campaignId)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12" *ngIf="compaigns.length==0">
+        <label class="text-danger">No Campaigns Found!</label>
+    </div>
+</div>

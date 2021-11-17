@@ -1,0 +1,10 @@
+CREATE OR REPLACE
+  FUNCTION get_employees(
+      p_emp_id IN employee.emp_id%TYPE)
+    RETURN SYS_REFCURSOR
+  AS
+    c_employees SYS_REFCURSOR;
+  BEGIN
+    OPEN c_employees FOR SELECT emp_id, emp_name FROM employee WHERE emp_id = p_emp_id;
+    RETURN c_employees;
+  END;

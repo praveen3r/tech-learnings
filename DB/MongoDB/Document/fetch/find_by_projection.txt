@@ -1,0 +1,92 @@
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$
+
+---------------------------------------------------------------------------------------------------------------------
+
+Projects the first element in an array that matches the query condition.
+
+Use $ in the projection document of the find() method or the findOne() method when you only need one particular 
+array element in selected documents.
+
+cmd:
+
+db.collection.find( { <array>: <value> ... },
+                    { "<array>.$": 1 } )
+db.collection.find( { <array.field>: <value> ...},
+                    { "<array>.$": 1 } )
+
+Example
+---------
+
+db.students.find( { grades: { $elemMatch: {
+                                            mean: { $gt: 70 },
+                                            grade: { $gt:90 }
+                                          } } },
+                  { "grades.$": 1 } )
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$meta
+
+---------------------------------------------------------------------------------------------------------------------
+
+The $meta projection operator returns for each matching document the metadata (e.g. "textScore") 
+associated with the query.
+
+cmd: { $meta: <metaDataKeyword> }
+
+"textScore"	
+-------------
+Returns the score associated with the corresponding $text query for each matching document. 
+The text score signifies how well the document matched the search term or terms. 
+If not used in conjunction with a $text query, returns a score of 0.
+
+{ <projectedFieldName>: { $meta: "textScore" } }
+
+Example
+---------
+
+db.scores.find(
+   { results: { $elemMatch: { $gte: 80, $lt: 85 } } }
+)
+
+db.collection.find(
+   <query>,
+   { score: { $meta: "textScore" } }
+)
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$slice
+
+---------------------------------------------------------------------------------------------------------------------
+
+The $slice operator controls the number of items of an array that a query returns. 
+
+
+db.collection.find( { field: value }, { array: {$slice: count } } );
+
+Example
+--------
+
+db.posts.find( {}, { comments: { $slice: 5 } } )
+
+Here, $slice selects the first five items in an array in the comments field.
+
+db.posts.find( {}, { comments: { $slice: -5 } } )
+
+This operation returns the last five items in array.
+
+array as an argument 
+------------------------
+
+Arrays take the form of [ skip , limit ], where the first value indicates the number of items 
+in the array to skip and the second value indicates the number of items to return.
+
+db.posts.find( {}, { comments: { $slice: [ 20, 10 ] } } )
+
+Here, the query will only return 10 items, after skipping the first 20 items of that array.
+
+db.posts.find( {}, { comments: { $slice: [ -20, 10 ] } } )
+
+This operation returns 10 items as well, beginning with the item that is 20th from the last item of the array.

@@ -1,0 +1,8 @@
+set serveroutput on
+DECLARE
+    TYPE deptnames IS ARRAY(5) OF VARCHAR2(100);
+   dept_names deptnames:= deptnames ('COMPUTER','MECHANICAL', 'ELCTRICAL');
+BEGIN
+     dbms_output.put_line(' size is ' || dept_names.LIMIT);
+END;
+/

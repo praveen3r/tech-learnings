@@ -1,0 +1,21 @@
+pipeline {
+    agent any 
+    stages {
+        stage('clean install') { 
+            steps {
+                dir("maven-jfrog/demo-proj"){
+				bat "mvn clean install"
+                }
+                    
+            }
+        }
+		stage('deploy') { 
+            steps {
+				dir("maven-jfrog/demo-proj"){
+				echo "starting deployment"
+				bat "mvn deploy -DaltSnapshotDeploymentRepository=central::default::http://localhost:8081/artifactory/libs-snapshot-local"
+                }
+			}
+			}
+   }
+}

@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  spring-boot-e2e:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: praveen12rajan/spring-boot:latest
+    restart: unless-stopped
+    
+    ports:
+      - "8081:8080"
+    
+    container_name: my-jenkins-container

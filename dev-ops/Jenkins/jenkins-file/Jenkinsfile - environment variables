@@ -1,0 +1,33 @@
+pipeline {
+    agent any 
+    environment {
+      VERSION_ENV = '1.2'
+    }
+    stages {
+        stage('build') { 
+            steps {
+	       echo 'building the app' 
+	       echo "version is ${VERSION_ENV}"
+	       echo 'version is ${VERSION_ENV}'
+            }
+        }
+	stage('test') { 
+	 when {
+	       expression {
+	         env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'feature'
+	      
+                    
+		  }
+	    }
+            steps {
+	        echo 'testing the app'   
+            }
+        }
+	stage('deploy') { 
+            steps {
+	       echo 'deploying the app'
+                    
+            }
+        }
+    }
+ }

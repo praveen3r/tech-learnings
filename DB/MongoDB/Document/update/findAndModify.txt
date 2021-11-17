@@ -1,0 +1,194 @@
+---------------------------------------------------------------------------------------------------------------------
+
+Syntax:
+
+db.collection.findAndModify({
+    query: <document>,
+    sort: <document>,
+    remove: <boolean>,
+    update: <document or aggregation pipeline>, // Changed in MongoDB 4.2
+    new: <boolean>,
+    fields: <document>,
+    upsert: <boolean>,
+    bypassDocumentValidation: <boolean>,
+    writeConcern: <document>,
+    collation: <document>,
+    arrayFilters: [ <filterdocument1>, ... ]
+});
+
+Modifies and returns a single document. By default, the returned document does not include the modifications 
+made on the update. To return the document with the modifications made on the update, use the new option.
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	UPDATE AND RETURN
+
+---------------------------------------------------------------------------------------------------------------------
+
+db.people.findAndModify({
+    query: { name: "Tom", state: "active", rating: { $gt: 10 } },
+    sort: { rating: 1 },
+    update: { $inc: { score: 1 } }
+})
+
+This method performs the following actions:
+
+The query finds a document in the people collection where the name field has the value Tom, the state field has the 
+value active and the rating field has a value greater than 10.
+
+The sort orders the results of the query in ascending order. If multiple documents meet the query condition, 
+the method will select for modification the first document as ordered by this sort.
+
+The update increments the value of the score field by 1.
+
+The method returns the original (i.e. pre-modification) document selected for this update:
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	UPSERT
+
+---------------------------------------------------------------------------------------------------------------------
+
+The following method includes the upsert: true option for the update operation to either update a matching document 
+or, if no matching document exists, create a new document:
+
+Example
+---------
+
+db.people.findAndModify({
+    query: { name: "Gus", state: "active", rating: 100 },
+    sort: { rating: 1 },
+    update: { $inc: { score: 1 } },
+    upsert: true
+})
+
+If no document matches the <query> parameter, the update operation inserts a document with only the replacement document. 
+Because no _id field was specified in the replacement document or query document, the operation creates a new unique 
+ObjectId for the new document’s _id field. You can see the upsert reflected in the WriteResult of the operation:
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	RETURN NEW DOCUMEN
+
+---------------------------------------------------------------------------------------------------------------------
+
+The following method includes both the upsert: true option and the new:true option. The method either updates a 
+matching document and returns the updated document or, if no matching document exists, inserts a document and 
+returns the newly inserted document in the value field.
+
+Example
+---------
+
+db.people.findAndModify({
+    query: { name: "Pascal", state: "active", rating: 25 },
+    sort: { rating: 1 },
+    update: { $inc: { score: 1 } },
+    upsert: true,
+    new: true
+})
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	SORT AND REMOVE
+
+---------------------------------------------------------------------------------------------------------------------
+
+Example
+---------
+
+db.people.findAndModify(
+   {
+     query: { state: "active" },
+     sort: { rating: 1 },
+     remove: true
+   }
+)
+)
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	ARRAYFILTERS FOR ARRAY UPDATE OPERATIONS
+
+---------------------------------------------------------------------------------------------------------------------
+
+{ "_id" : 1, "grades" : [ 95, 92, 90 ] },
+{ "_id" : 2, "grades" : [ 98, 100, 102 ] },
+{ "_id" : 3, "grades" : [ 95, 110, 100 ] }
+
+NOTE
+
+The <identifier> must begin with a lowercase letter and contain only alphanumeric characters.
+
+Example
+---------
+
+db.students.findAndModify({
+   query: { grades: { $gte: 100 } },
+   update: { $set: { "grades.$[element]" : 100 } },
+   arrayFilters: [ { "element": { $gte: 100 } } ]
+})
+]
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	UPDATE SPECIFIC ELEMENTS OF AN ARRAY OF DOCUMENTS
+
+---------------------------------------------------------------------------------------------------------------------
+
+{
+    "_id" : 1,
+    "grades" : [
+       { "grade" : 80, "mean" : 75, "std" : 6 },
+       { "grade" : 85, "mean" : 90, "std" : 4 },
+       { "grade" : 85, "mean" : 85, "std" : 6 }
+    ]
+  }
+  {
+     "_id" : 2,
+     "grades" : [
+        { "grade" : 90, "mean" : 75, "std" : 6 },
+        { "grade" : 87, "mean" : 90, "std" : 3 },
+        { "grade" : 85, "mean" : 85, "std" : 4 }
+     ]
+  }
+
+Example
+---------
+
+db.students2.findAndModify({
+   query: { _id : 1 },
+   update: { $set: { "grades.$[elem].mean" : 100 } },
+   arrayFilters: [ { "elem.grade": { $gte: 85 } } ]
+})
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	AGGREGATION PIPELINE FOR UPDATES
+
+---------------------------------------------------------------------------------------------------------------------
+
+{
+    "_id" : 1,
+    "grades" : [
+       { "grade" : 80, "mean" : 75, "std" : 6 },
+       { "grade" : 85, "mean" : 90, "std" : 4 },
+       { "grade" : 85, "mean" : 85, "std" : 6 }
+    ]
+  }
+  {
+     "_id" : 2,
+     "grades" : [
+        { "grade" : 90, "mean" : 75, "std" : 6 },
+        { "grade" : 87, "mean" : 90, "std" : 3 },
+        { "grade" : 85, "mean" : 85, "std" : 4 }
+     ]
+  }
+
+Example
+---------
+
+db.students2.findAndModify( {
+   query: {  "_id" : 1 },
+   update: [ { $set: { "total" : { $sum: "$grades.grade" } } } ],  // The $set stage is an alias for ``$addFields`` stage
+   new: true
+} )

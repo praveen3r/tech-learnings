@@ -1,0 +1,44 @@
+----------------------------------------------------------------------------------------------------------
+
+set serveroutput on
+DECLARE
+    TYPE empnames IS TABLE OF VARCHAR2(100);
+    emp_names empnames;
+BEGIN
+    select emp_name bulk collect INTO emp_names from employee;
+     FORALL i IN emp_names.FIRST .. emp_names.LAST
+     INSERT INTO employee_copy (emp_name) values(emp_names(i));
+     COMMIT;
+END;
+/
+
+----------------------------------------------------------------------------------------------------------
+set serveroutput on
+DECLARE
+    TYPE emp_type IS TABLE OF employee%rowtype;
+    emp_obj emp_type;
+BEGIN
+    select * bulk collect INTO emp_obj from employee;
+    FORALL i IN emp_obj.FIRST .. emp_obj.LAST
+     INSERT INTO employee_copy (emp_name) values(emp_obj(i).emp_name);
+     COMMIT;
+END;
+/
+----------------------------------------------------------------------------------------------------------
+set serveroutput on
+DECLARE
+TYPE emp_type IS RECORD 
+(emp_id NUMBER, 
+   emp_name  varchar(50));
+    TYPE empnames IS TABLE OF emp_type;
+    emp_names empnames;
+   
+BEGIN
+   
+   select emp_id,emp_name bulk collect INTO emp_names from employee;
+    FORALL i IN emp_names.FIRST .. emp_names.LAST
+     INSERT INTO employee_copy (emp_name) values(emp_names(i).emp_name);
+     COMMIT; 
+END;
+/
+----------------------------------------------------------------------------------------------------------

@@ -1,0 +1,139 @@
+---------------------------------------------------------------------------------------------------------------------
+
+{ _id: 1, item: { name: "ab", code: "123" }, qty: 15, tags: [ "A", "B", "C" ] },
+{ _id: 2, item: { name: "cd", code: "123" }, qty: 20, tags: [ "B" ] },
+{ _id: 3, item: { name: "ij", code: "456" }, qty: 25, tags: [ "A", "B" ] },
+{ _id: 4, item: { name: "xy", code: "456" }, qty: 30, tags: [ "B", "A" ] },
+{ _id: 5, item: { name: "mn", code: "000" }, qty: 20, tags: [ [ "A", "B" ], "C" ] }
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$eq
+
+---------------------------------------------------------------------------------------------------------------------
+
+Matches values that are equal to a specified value.
+
+cmd: { <field>: { $eq: <value> } } 
+
+or
+
+{ field: <value> }
+
+
+Example
+---------
+
+db.inventory.find( { qty: { $eq: 20 } } ) 
+db.inventory.find( { qty: 20 } )
+db.inventory.find( { "item.name": { $eq: "ab" } } )
+
+Array Element Equals a Value
+------------------------------
+
+db.inventory.find( { tags: { $eq: "B" } } )
+
+Equals an Array Value
+------------------------
+
+db.inventory.find( { tags: { $eq: [ "A", "B" ] } } )
+
+
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$gt
+
+---------------------------------------------------------------------------------------------------------------------
+
+Matches values that are greater than a specified value.
+
+cmd: {field: {$gt: value} }
+
+Example
+---------
+
+db.inventory.find( { qty: { $gt: 20 } } )
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$gte
+
+---------------------------------------------------------------------------------------------------------------------
+
+Matches values that are greater than or equal to a specified value.
+
+cmd: {field: {$gte: value} }
+
+Example
+---------
+
+db.inventory.find( { qty: { $gte: 20 } } )
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$in
+
+---------------------------------------------------------------------------------------------------------------------
+
+Matches any of the values specified in an array.
+
+cmd: { field: { $in: [<value1>, <value2>, ... <valueN> ] } }
+
+Example
+---------
+
+db.inventory.find( { qty: { $in: [ 5, 15 ] } } )
+
+$in Operator with a Regular Expression
+--------------------------------------
+
+db.inventory.find( { tags: { $in: [ /^be/, /^st/ ] } } )
+
+This query selects all documents in the inventory collection where the tags field holds either a 
+string that starts with be or st or an array with at least one element that starts with be or st.
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$lte
+
+---------------------------------------------------------------------------------------------------------------------
+
+Matches values that are less than or equal to a specified value.
+
+cmd: { field: { $lte: value} }
+
+Example
+---------
+
+db.inventory.find( { qty: { $lte: 20 } } )
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$ne
+
+---------------------------------------------------------------------------------------------------------------------
+
+Matches all values that are not equal to a specified value.
+
+cmd: { field: { $ne: value} }
+
+Example
+---------
+
+db.inventory.find( { qty: { $ne: 20 } } )
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$nin
+
+---------------------------------------------------------------------------------------------------------------------
+
+Matches none of the values specified in an array.
+
+cmd: { field: { $nin: [ <value1>, <value2> ... <valueN> ]} }
+
+Example
+---------
+
+db.inventory.find( { qty: { $nin: [ 5, 15 ] } } )

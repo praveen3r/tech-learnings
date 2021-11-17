@@ -1,0 +1,9 @@
+set serveroutput on
+DECLARE
+    TYPE deptnames IS TABLE OF VARCHAR2(100);
+    dept_names deptnames;
+BEGIN
+    dept_names := deptnames ('COMPUTER','MECHANICAL', 'ELCTRICAL');
+     dbms_output.put_line('First dept name is ' || dept_names(1)); 
+END;
+/

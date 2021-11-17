@@ -1,0 +1,11 @@
+CREATE OR REPLACE PROCEDURE display_emp_name(p_emp_id IN NUMBER )
+IS
+  v_emp_name employee.emp_name%TYPE;
+BEGIN
+  SELECT emp_name INTO v_emp_name FROM EMPLOYEE WHERE emp_id = p_emp_id;
+  dbms_output.put_line('v_empName ' || v_emp_name);
+EXCEPTION
+WHEN OTHERS THEN
+  DBMS_OUTPUT.PUT_LINE( SQLERRM );
+END;
+/

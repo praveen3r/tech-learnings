@@ -1,0 +1,12 @@
+set serveroutput on
+DECLARE
+    TYPE deptnames IS VARRAY(4) OF VARCHAR2(100);
+    dept_names deptnames;
+BEGIN
+    dept_names := deptnames ('COMPUTER','MECHANICAL', 'ELCTRICAL');
+    FOR i IN dept_names.FIRST .. dept_names.LAST
+    LOOP
+     dbms_output.put_line('dept name is ' || dept_names(i)); 
+    END LOOP;
+END;
+/

@@ -1,0 +1,2 @@
+select em.emp_name, dpt.dept_name 
+from employee em CROSS JOIN dept dpt;

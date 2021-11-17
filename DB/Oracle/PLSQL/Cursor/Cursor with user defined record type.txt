@@ -1,0 +1,15 @@
+set serveroutput on
+DECLARE
+TYPE emp_type IS RECORD 
+(emp_id NUMBER, 
+   emp_name  varchar(50));
+CURSOR cur_emp
+IS select emp_id, emp_name from employee;
+emp_rec emp_type; 
+BEGIN
+  FOR emp_rec IN cur_emp
+    LOOP
+      dbms_output.put_line('v_emp_id ' || emp_rec.emp_id || ' v_emp_name ' || emp_rec.emp_name);
+    END LOOP;
+END;
+/

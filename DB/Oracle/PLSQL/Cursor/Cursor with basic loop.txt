@@ -1,0 +1,17 @@
+set serveroutput on
+DECLARE
+v_emp_id EMPLOYEE.EMP_ID%TYPE;
+v_emp_name EMPLOYEE.EMP_NAME%TYPE;
+CURSOR cur_emp IS select emp_id, emp_name from employee ;
+BEGIN
+  OPEN cur_emp;
+    LOOP
+      FETCH cur_emp INTO v_emp_id, v_emp_name;
+      IF cur_emp%NOTFOUND THEN
+       EXIT;
+      END IF;
+      dbms_output.put_line('v_emp_id ' || v_emp_id || ' v_emp_name ' || v_emp_name);
+    END LOOP;
+  CLOSE cur_emp;
+END;
+/

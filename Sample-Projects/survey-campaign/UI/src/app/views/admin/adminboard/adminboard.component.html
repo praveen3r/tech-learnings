@@ -1,0 +1,28 @@
+<div class="col-12 p-4 row">
+    <h3 class="col-12 text-dark">Campaign Management System</h3>
+
+    <div class="col-12 col-sm-4 col-md-3">
+        <div class="card text-white bg-info m-3 cursor-pointer" routerLink="/admin/users">
+            <div class="card-body text-center">
+                <h4 class="card-title">{{activeUsers}}</h4>
+                <p class="card-text">Total Users</p>
+              </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-4 col-md-3">
+        <div class="card text-white bg-success m-3 cursor-pointer" routerLink="/admin/surveys">
+            <div class="card-body text-center">
+            <h4 class="card-title">{{activeCampaigns}}</h4>
+            <p class="card-text">Active Surveys</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-4 col-md-3">
+        <div class="card text-white bg-warning m-3 cursor-pointer" routerLink="/admin/surveys">
+            <div class="card-body text-center">
+            <h4 class="card-title">{{expiredCampaigns}}</h4>
+            <p class="card-text">Expired Surveys</p>
+            </div>
+        </div>
+    </div>
+</div>

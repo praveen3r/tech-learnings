@@ -1,0 +1,12 @@
+set serveroutput on
+DECLARE
+v_empName EMPLOYEE.EMP_NAME%TYPE;
+v_sql VARCHAR2(200) := 'GET_EMP_NAME';
+v_emp_id NUMBER := 1;
+P_EMP_NAME VARCHAR2(50);
+BEGIN
+execute immediate 'begin ' || v_sql || '(:emp_id,:P_EMP_NAME); end;'
+   using in v_emp_id, out P_EMP_NAME;
+   DBMS_OUTPUT.PUT_LINE( 'P_EMP_NAME ' || P_EMP_NAME);
+END;
+/

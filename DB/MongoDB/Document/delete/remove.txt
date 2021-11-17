@@ -1,0 +1,51 @@
+---------------------------------------------------------------------------------------------------------------------
+
+db.collection.remove(
+   <query>,
+   {
+     justOne: <boolean>,
+     writeConcern: <document>,
+     collation: <document>
+   }
+)
+
+By default, remove() removes all documents that match the query expression. Specify the justOne option to limit 
+the operation to removing a single document. To delete a single document sorted by a specified order, use the 
+findAndModify() method.
+---------------------------------------------------------------------------------------------------------------------	
+	
+	REMOVE ALL DOCUMENTS
+
+---------------------------------------------------------------------------------------------------------------------
+
+Example
+---------
+
+db.bios.remove( { } )
+
+
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	REMOVE ALL DOCUMENTS THAT MATCH A CONDITION
+
+---------------------------------------------------------------------------------------------------------------------
+
+Example
+---------
+
+db.products.remove( { qty: { $gt: 20 } } )
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	REMOVE A SINGLE DOCUMENT THAT MATCHES A CONDITION
+
+---------------------------------------------------------------------------------------------------------------------
+
+To remove the first document that match a deletion criteria, call the remove method with the query criteria 
+and the justOne parameter set to true or 1.
+
+Example
+---------
+
+db.products.remove( { qty: { $gt: 20 } }, true )

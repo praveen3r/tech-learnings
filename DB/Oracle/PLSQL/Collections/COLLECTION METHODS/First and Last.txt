@@ -1,0 +1,9 @@
+set serveroutput on
+DECLARE
+    TYPE deptnames IS ARRAY(5) OF VARCHAR2(100);
+   dept_names deptnames:= deptnames ('COMPUTER','MECHANICAL', 'ELCTRICAL');
+BEGIN
+     dbms_output.put_line(' first INDEX is ' || dept_names.FIRST);
+     dbms_output.put_line(' last INDEX is ' || dept_names.LAST);
+END;
+/

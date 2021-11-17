@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  my-jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: praveen12rajan/pravasini:latest
+    volumes:
+      - test_vol:/usr/local/prav
+    restart: unless-stopped
+    
+    ports:
+      - "8081:8080"
+    
+    container_name: my-jenkins-container
+volumes:
+  test_vol:
+    driver: local

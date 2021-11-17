@@ -1,0 +1,66 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" default-autowire-candidates="">
+    <!--default-autowire="byName"-->
+    <!--default-autowire-candidates=""-->
+
+
+    <!--example 1-->
+    <!--<bean id="a" class="A" autowire="byName"></bean>-->
+    <!--<bean id="b" class="B"></bean>-->
+    <!--<bean id="b1" class="C"></bean>-->
+    <!--<bean id="b2" class="C"></bean>-->
+    <!-- TODO: it throws casting error for user defined class if auto wire takes place wrongly.  -->
+
+    <!--example 2 = byName auto wiring mode -->
+    <!--<bean id="b1" class="B"></bean>-->
+    <!--<bean id="a"  class="A" primary="true" autowire="byType" scope="prototype"></bean>-->
+    <!--<bean id="c" class="C" primary="true" autowire="byType">-->
+    <!--<qualifier value="C" />-->
+    <!--</bean>-->
+
+
+    <!--Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException:
+    No qualifying bean of type 'Alphabet' available: expected single matching bean but found 2: b1,a-->
+
+
+    <!--example 3 = byType auto wiring mode-->
+    <!--<bean id="b1" class="B"></bean>-->
+    <!--<bean id="b2" class="B"></bean>-->
+    <!--<bean id="a" class="A" autowire="byName"></bean>-->
+
+    <!--example 4 = constructor auto wiring mode-->
+    <!--<bean id="a1" class="A"></bean>-->
+    <!--<bean id="c" class="C"></bean>-->
+    <!--<bean id="b" class="B"></bean>-->
+    <!--<bean id="a" class="A" autowire="constructor">-->
+    <!--<property name="b" ref="b"/>-->
+    <!--</bean>-->
+
+    <!-- example 4= no auto wiring mode-->
+    <bean id="b" class="ioc.autowiring.B"></bean>
+    <bean id="a" class="ioc.autowiring.A" autowire="no"></bean>
+
+    <!--OTHERS-->
+    <!--<bean id="employee" class="ioc.autowiring.example1.EmployeeBean" autowire="constructor">-->
+    <!--<property name="fullName" value="Lokesh Gupta"/>-->
+    <!--</bean>-->
+    <!---->
+    <!--<bean id="department" class="ioc.autowiring.example1.DepartmentBean">-->
+    <!--<property name="name" value="Human Resource"/>-->
+    <!--</bean>-->
+
+    <!--
+
+     If you are NOT using autowire="constructor" in bean definition, then you will have to pass the constructor-arg as follows to inject department bean in employee bean:
+
+     <bean id="employee" class="ioc.autowiring.pureannotations.example1.EmployeeBean">
+         <property name="fullName" value="Lokesh Gupta"/>
+         <constructor-arg>
+             <ref bean="department" />
+         </constructor-arg>
+     </bean>
+
+     -->
+</beans>

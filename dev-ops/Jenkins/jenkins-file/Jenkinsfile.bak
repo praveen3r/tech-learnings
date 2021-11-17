@@ -1,0 +1,33 @@
+@Library('first-shared-lib@master') _
+
+pipeline {
+    agent any
+    
+    
+    stages {
+        stage('load') { 
+	   steps {
+	     welcome('Abdul Kalam')
+	      
+	    }
+        }
+        stage('build') { 
+	  steps {
+	     script{
+              echo 'building the app'
+	    }
+	  }
+        }
+	stage('test') { 
+	 steps {
+	        echo 'testing the app'   
+            }
+        }
+	stage('deploy') { 
+            steps {
+	       echo 'deploying the app'
+                    
+            }
+        }
+    }
+ }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+
+	<!-- <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml" /> -->
+	<!-- <property name="LOG_FILE" value="${LOG_PATH}/utbicorp-admin.log" /> -->
+	<property name="LOG_FILE" value="F:/logs/partnerFeedAPI.log" />
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FILE}</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>F:/logs/archived/partnerFeedAPI.%d.%i.log</fileNamePattern>
+			<maxHistory>10</maxHistory>
+			<maxFileSize>1KB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+     		<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p   --- [%t] %-40.40logger{39} : %m%n</pattern>
+   		</encoder>
+	</appender>
+	
+
+	<logger name="com.demo" level="ERROR" />
+	<logger name="javax.activation" level="WARN" />
+	<logger name="javax.xml.bind" level="WARN" />
+	<logger name="ch.qos.logback" level="WARN" />
+	<logger name="com.codahale.metrics" level="WARN" />
+	<logger name="com.ryantenney" level="WARN" />
+	<logger name="com.sun.xml.internal.bind" level="WARN" />
+	<logger name="com.zaxxer" level="INFO" />
+	<logger name="org.apache" level="WARN" />
+	<logger name="org.apache.catalina.startup.DigesterFactory"
+		level="OFF" />
+	<logger name="org.hibernate.validator" level="WARN" />
+	<logger name="org.hibernate" level="WARN" />
+	<logger name="org.hibernate.ejb.HibernatePersistence" level="OFF" />
+	<logger name="org.atmosphere" level="WARN" />
+	<logger name="org.springframework" level="WARN" />
+	<logger name="org.springframework.web" level="INFO" />
+	<logger name="org.springframework.boot" level="INFO" />
+	<logger name="org.springframework.security" level="WARN" />
+	<logger name="org.springframework.cache" level="WARN" />
+	<logger name="org.thymeleaf" level="WARN" />
+	<logger name="jndi" level="INFO" />
+	<logger name="sun.rmi" level="INFO" />
+	<logger name="com.mangofactory.swagger" level="ERROR" />
+	<logger name="com.wordnik.swagger" level="ERROR" />
+	<logger name="org.eclipse.jetty" level="INFO" />
+
+	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+		<resetJUL>true</resetJUL>
+	</contextListener>
+
+
+	<root level="INFO">
+		<appender-ref ref="FILE" />
+	</root>
+
+</configuration>

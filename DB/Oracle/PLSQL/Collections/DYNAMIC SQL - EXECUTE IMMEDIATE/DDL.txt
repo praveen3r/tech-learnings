@@ -1,0 +1,6 @@
+BEGIN
+EXECUTE IMMEDIATE 'create table dummy (test NUMBER)';
+EXECUTE IMMEDIATE 'drop table dummy';
+EXECUTE IMMEDIATE 'create table dummy1 (test VARCHAR2(10))';
+END;
+

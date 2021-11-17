@@ -1,0 +1,108 @@
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$all
+
+---------------------------------------------------------------------------------------------------------------------
+
+Matches arrays that contain all elements specified in the query.
+
+cmd: { <field>: { $all: [ <value1> , <value2> ... ] } }
+
+
+Example
+---------
+
+Equivalent to $and Operation
+------------------------------
+
+{ tags: { $all: [ "ssl" , "security" ] } }
+
+is equivalent to:
+
+{ $and: [ { tags: "ssl" }, { tags: "security" } ] }
+
+Nested Array
+----------------
+
+When passed an array of a nested array (e.g. [ [ "A" ] ] ), $all matches documents where the field contains 
+the nested array as an element (e.g. field: [ [ "A" ], ... ]), or the field equals the nested array (e.g. field: [ "A" ]).
+
+For example, consider the following query [1]:
+
+db.articles.find( { tags: { $all: [ [ "ssl", "security" ] ] } } )
+
+The query is equivalent to:
+
+db.articles.find( { $and: [ { tags: [ "ssl", "security" ] } ] } )
+
+which is equivalent to:
+
+db.articles.find( { tags: [ "ssl", "security" ] } )
+
+As such, the $all expression matches documents where the tags field is an array that contains the 
+nested array [ "ssl", "security" ] or is an array that equals the nested array:
+
+tags: [ [ "ssl", "security" ], ... ]
+tags: [ "ssl", "security" ]
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$elemMatch
+
+---------------------------------------------------------------------------------------------------------------------
+
+{ _id: 1, results: [ 82, 85, 88 ] }
+{ _id: 2, results: [ 75, 88, 89 ] }
+
+Selects documents if element in the array field matches all the specified $elemMatch conditions.
+
+cmd: { <field>: { $elemMatch: { <query1>, <query2>, ... } } }
+
+Example
+---------
+
+db.scores.find(
+   { results: { $elemMatch: { $gte: 80, $lt: 85 } } }
+)
+
+Array of Embedded Documents
+----------------------------
+
+{ _id: 1, results: [ { product: "abc", score: 10 }, { product: "xyz", score: 5 } ] }
+{ _id: 2, results: [ { product: "abc", score: 8 }, { product: "xyz", score: 7 } ] }
+{ _id: 3, results: [ { product: "abc", score: 7 }, { product: "xyz", score: 8 } ] }
+
+db.survey.find(
+   { results: { $elemMatch: { product: "xyz", score: { $gte: 8 } } } }
+)
+
+Single Query Condition
+-------------------------
+
+db.survey.find(
+   { results: { $elemMatch: { product: "xyz" } } }
+)
+Since the $elemMatch only specifies a single condition, the $elemMatch expression is not necessary, 
+and instead you can use the following query:
+
+db.survey.find(
+   { "results.product": "xyz" }
+)
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$size
+
+---------------------------------------------------------------------------------------------------------------------
+
+Selects documents if the array field is a specified size.
+
+
+db.collection.find( { field: { $size: 2 } } );
+
+returns all documents in collection where field is an array with 2 elements. For instance, the above expression 
+will return { field: [ red, green ] } and { field: [ apple, lime ] } but not { field: fruit } or 
+{ field: [ orange, lemon, grapefruit ] }. To match fields with only one element within an array use 
+$size with a value of 1, as follows:
+
+db.collection.find( { field: { $size: 1 } } );

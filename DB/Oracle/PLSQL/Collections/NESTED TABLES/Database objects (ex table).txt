@@ -1,0 +1,32 @@
+--------------------------------------------------------------------------
+
+	CREATE TYPE
+
+---------------------------------------------------------------------------
+
+CREATE OR REPLACE TYPE empType IS VARRAY(4) OF VARCHAR2(100);
+
+
+---------------------------------------------------------------------------
+
+	CREATE TABLE
+
+---------------------------------------------------------------------------
+
+CREATE TABLE EMPLOYEE_NESTED_COLL (
+emp_id NUMBER,
+emp_type empNestedType 
+)NESTED TABLE emp_type STORE AS emp_nes_mem;
+
+---------------------------------------------------------------------------
+
+	INSERT DATA INTO TABLE
+
+---------------------------------------------------------------------------
+
+
+INSERT INTO EMPLOYEE_NESTED_COLL (emp_id,emp_type) 
+values (1, empNestedType('Oracle, Java, Javascript'));
+
+
+

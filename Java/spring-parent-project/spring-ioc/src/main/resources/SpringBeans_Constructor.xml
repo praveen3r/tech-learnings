@@ -1,0 +1,63 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!-- Constructor-->
+    <bean id="foo_" class="ioc.constructor.Foo">
+        <constructor-arg ref="bar"/>
+        <constructor-arg ref="baz"/>
+    </bean>
+
+    <bean id="foo_2" class="ioc.constructor.Foo">
+        <constructor-arg index="0" ref="bar"/>
+        <constructor-arg index="1" ref="baz"/>
+    </bean>
+
+
+    <bean id="foo_1" class="ioc.constructor.Foo">
+        <constructor-arg value="1" type="int"/>
+    </bean>
+
+    <bean id="bar" class="ioc.constructor.Bar">
+        <property name="name" value="bar"/>
+    </bean>
+
+    <bean id="baz" class="ioc.constructor.Baz">
+        <property name="name" value="baz"/>
+    </bean>
+
+    <bean id="exampleBean" class="ioc.constructor.ExampleBean">
+        <constructor-arg type="int" value="7500000"/>
+        <constructor-arg type="java.lang.String" value="42"/>
+        <constructor-arg type="Double" value="42"/>
+    </bean>
+
+    <bean id="exampleBean_1" class="ioc.constructor.ExampleBean">
+        <constructor-arg index="0" value="7500000"/>
+        <constructor-arg index="1" value="42"/>
+    </bean>
+
+    <bean id="exampleBean_2" class="ioc.constructor.ExampleBean">
+        <constructor-arg name="years" value="7500000"/>
+        <constructor-arg name="ultimateAnswer" value="42"/>
+    </bean>
+
+    <!--ambiguities-->
+    <bean id="CustomerBean" class="ioc.constructor.ambiguities.Customer">
+        <constructor-arg>
+            <value>John</value>
+        </constructor-arg>
+
+        <constructor-arg>
+            <value>28</value>
+        </constructor-arg>
+
+        <constructor-arg>
+            <value>188</value>
+        </constructor-arg>
+    </bean>
+
+</beans>
+
+

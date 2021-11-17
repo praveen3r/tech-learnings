@@ -1,0 +1,12 @@
+set serveroutput on
+DECLARE
+v_empName EMPLOYEE.EMP_NAME%TYPE;
+BEGIN
+SELECT EMP_NAME INTO v_empName FROM EMPLOYEE WHERE emp_id =101;
+EXCEPTION 
+   WHEN no_data_found THEN 
+      dbms_output.put_line('No such customer!'); 
+   WHEN others THEN 
+      dbms_output.put_line('Error!'); 
+END;
+/

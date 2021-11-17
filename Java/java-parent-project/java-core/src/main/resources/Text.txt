@@ -1,0 +1,1 @@
+These are ways to search of a string "are";

@@ -1,0 +1,34 @@
+def gv
+
+pipeline {
+    agent any
+    
+    
+    stages {
+        stage('load') { 
+	   steps {
+	     script{
+	      gv = load 'jenkins-file/test.groovy';
+	      }
+	    }
+        }
+        stage('build') { 
+	  steps {
+	     script{
+              gv.buildApp()
+	    }
+	  }
+        }
+	stage('test') { 
+	 steps {
+	        echo 'testing the app'   
+            }
+        }
+	stage('deploy') { 
+            steps {
+	       echo 'deploying the app'
+                    
+            }
+        }
+    }
+ }

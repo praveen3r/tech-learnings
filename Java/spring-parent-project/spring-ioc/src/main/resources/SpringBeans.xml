@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+    <!--<import resource="SpringBeans_Food.xml"/>-->
+
+    <bean id="helloBean" name="helloBean" class="ioc.HelloWorld" scope="singleton" autowire="byType">
+        <property name="name" value="Spring Master!!-helloBean"/>
+    </bean>
+
+    <bean id="helloBean1" name="helloBean1" class="ioc.HelloWorld" autowire="byType">
+        <property name="name" value="Spring Master1! helloBean1"/>
+        <property name="test" ref="test2"/>
+    </bean>
+
+    <bean id="test1" name="test2" class="ioc.staticfactory.Test">
+        <property name="name" value="Spring Master Test 1!!!"/>
+    </bean>
+
+    <bean id="test3" name="test4" class="ioc.staticfactory.Test">
+        <property name="name">
+            <null/>
+        </property>
+        <!--<property name="test" ref="test1"/>-->
+    </bean>
+
+    <bean class="ioc.staticfactory.Test">
+        <property name="name">
+            <null/>
+        </property>
+        <property name="test" ref="test1"/>
+    </bean>
+
+    <bean id="null" class="ioc.HelloWorld" scope="singleton" lazy-init="default">
+        <property name="name" value="EMPTY!!!!!!!!!!!"/>
+        <!--<property name="test" ref="empty"/>-->
+    </bean>
+
+    <alias name="helloBean" alias="hello"/>
+
+</beans>

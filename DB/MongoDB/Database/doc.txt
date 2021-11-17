@@ -1,0 +1,41 @@
+---------------------------------------------------------------------------------------------------------------------
+	
+	DISPLAY THE DATABASE
+
+---------------------------------------------------------------------------------------------------------------------
+
+cmd: db
+
+The operation should return local, which is the default database.
+
+---------------------------------------------------------------------------------------------------------------------
+	
+	CREATE/SWITCH DATABASE
+
+----------------------------------------------------------------------------------------------------------------------
+
+cmd: use <database>
+
+If a database does not exist, MongoDB creates the database when you first store data for that database. 
+As such, you can switch to a non-existent database and perform the following operation in the mongo shell:
+
+---------------------------------------------------------------------------------------------------------------------
+	
+	VIEW DATABASES LIST
+
+---------------------------------------------------------------------------------------------------------------------
+
+cmd: show dbs
+
+Print a list of all databases on the server.
+
+
+---------------------------------------------------------------------------------------------------------------------
+	
+	DROP DATABASE
+
+---------------------------------------------------------------------------------------------------------------------
+
+cmd: db.dropDatabase()
+
+The dropDatabase command drops the current database, deleting the associated data files.

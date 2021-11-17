@@ -1,0 +1,30 @@
+<nav *ngIf="user.isLoggedIn" class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="javascript:;">Campaign</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li *ngIf="user.role=='user'" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/user">Dashboard</a>
+        </li>
+        <li *ngIf="user.role=='user'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/user/surveys">Surveys</a>
+        </li>
+        <li *ngIf="user.role=='admin'" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/admin">Dashboard</a>
+        </li>
+        <li *ngIf="user.role=='admin'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/surveys">Surveys List</a>
+        </li>
+        <li *ngIf="user.role=='admin'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/users">Users List</a>
+        </li>
+      </ul>
+      <div class="form-inline my-2 my-lg-0 text-light">
+        <label>{{user.emailId}}</label>
+        <a class="nav-link text-light" href="javascript:;" (click)="logout()">Logout</a>
+      </div>
+    </div>
+  </nav>

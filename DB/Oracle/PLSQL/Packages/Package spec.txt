@@ -1,0 +1,7 @@
+CREATE OR REPLACE PACKAGE employee_pck AS
+
+  FUNCTION get_emp_name_fn(p_emp_id NUMBER) RETURN VARCHAR2;
+  PROCEDURE get_emp_name(p_emp_id IN NUMBER, p_emp_name OUT employee.emp_name%TYPE );
+
+END employee_pck;
+

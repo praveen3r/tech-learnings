@@ -1,0 +1,16 @@
+SET serveroutput ON
+DECLARE
+  c_employees SYS_REFCURSOR;
+  v_emp_id employee.emp_id%type;
+  v_emp_name employee.emp_name%type;
+BEGIN
+  c_employees := get_employees(1); -- get the ref cursor from
+  -- function
+  LOOP
+    FETCH c_employees INTO v_emp_id, v_emp_name;
+    EXIT
+  WHEN c_employees%NOTFOUND;
+    dbms_output.put_line('v_emp_id ' || v_emp_id || ' v_emp_name ' || v_emp_name);
+  END LOOP;
+END;
+/

@@ -1,0 +1,3 @@
+select em.emp_name, dpt.dept_name 
+from employee em LEFT JOIN dept dpt 
+ON em.dept_id = dpt.dept_id;

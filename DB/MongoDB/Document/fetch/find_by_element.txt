@@ -1,0 +1,61 @@
+---------------------------------------------------------------------------------------------------------------------
+
+{ _id: 1, item: { name: "ab", code: "123" }, qty: 15, tags: [ "A", "B", "C" ] },
+{ _id: 2, item: { name: "cd", code: "123" }, qty: 20, tags: [ "B" ] },
+{ _id: 3, item: { name: "ij", code: "456" }, qty: 25, tags: [ "A", "B" ] },
+{ _id: 4, item: { name: "xy", code: "456" }, qty: 30, tags: [ "B", "A" ] },
+{ _id: 5, item: { name: "mn", code: "000" }, qty: 20, tags: [ [ "A", "B" ], "C" ] }
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$exists
+
+---------------------------------------------------------------------------------------------------------------------
+
+Matches documents that have the specified field.
+
+cmd: { field: { $exists: <boolean> } }
+
+When <boolean> is true, $exists matches the documents that contain the field, including documents where
+the field value is null. If <boolean> is false, the query returns only the documents that do not contain the field.
+
+Example
+---------
+
+db.records.find( { a: { $exists: true } } )
+
+The results consist of those documents that contain the field a, including the document 
+whose field a contains a null value
+
+db.inventory.find( { qty: { $exists: true, $nin: [ 5, 15 ] } } )
+
+This query will select all documents in the inventory collection where the qty field exists 
+and its value does not equal 5 or 15.
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	$type
+
+---------------------------------------------------------------------------------------------------------------------
+
+{ "_id" : 1, address : "2030 Martian Way", zipCode : "90698345" },
+{ "_id" : 2, address: "156 Lunar Place", zipCode : 43339374 },
+{ "_id" : 3, address : "2324 Pluto Place", zipCode: NumberLong(3921412) },
+{ "_id" : 4, address : "55 Saturn Ring" , zipCode : NumberInt(88602117) },
+{ "_id" : 5, address : "104 Venus Drive", zipCode : ["834847278", "1893289032"]}
+
+Selects documents if a field is of the specified type.
+
+cmd: { field: { $type: <BSON type> } }
+
+Example
+---------
+
+db.addressBook.find( { "zipCode" : { $type : 2 } } );
+db.addressBook.find( { "zipCode" : { $type : "string" } } );
+
+db.addressBook.find( { "zipCode" : { $type : 1 } } )
+db.addressBook.find( { "zipCode" : { $type : "double" } } )
+
+db.grades.find( { "classAverage" : { $type : [ 2 , 1 ] } } );
+db.grades.find( { "classAverage" : { $type : [ "string" , "double" ] } } );

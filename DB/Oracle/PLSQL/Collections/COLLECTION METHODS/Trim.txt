@@ -1,0 +1,18 @@
+set serveroutput on
+DECLARE
+    TYPE deptnames IS ARRAY(5) OF VARCHAR2(100);
+   dept_names deptnames:= deptnames ('COMPUTER','MECHANICAL', 'ELCTRICAL');
+   c NUMBER;
+BEGIN
+    For i in dept_names.first..dept_names.last 
+    Loop
+         dbms_output.put_line( 'dept_names(' || i  || ') = ' || dept_names(i) ) ;
+    End loop ;
+    dbms_output.put_line( ' Remove the last element ' ) ;
+    dept_names.TRIM ;
+    For i in dept_names.first..dept_names.last 
+    Loop
+         dbms_output.put_line( 'dept_names(' || i  || ') = ' || dept_names(i) ) ;
+    End loop ;
+END;
+/

@@ -1,0 +1,113 @@
+
+-------------------------------------------------------------------------------------------------------------------
+					OUT
+
+-------------------------------------------------------------------------------------------------------------------
+
+SET SERVEROUTPUT ON
+DECLARE
+  n NUMBER;
+BEGIN
+  EXECUTE immediate 'begin :1 := 42; end;' USING OUT n;
+  dbms_output.put_line('n: ' || n);
+END;
+/
+
+
+-------------------------------------------------------------------------------------------------------------------
+					OUT
+
+-------------------------------------------------------------------------------------------------------------------
+
+set serveroutput on
+DECLARE
+  n NUMBER;
+BEGIN
+  EXECUTE immediate 'declare l number; begin l := 42; :1 := l; end;' USING OUT n;
+  dbms_output.put_line('n: ' || n);
+END;
+/
+
+-------------------------------------------------------------------------------------------------------------------
+					ROWTYPE
+
+-------------------------------------------------------------------------------------------------------------------
+set serveroutput on
+DECLARE
+  emp_val employee%rowtype;
+BEGIN
+  EXECUTE immediate 'select * from employee where emp_id = 1' INTO emp_val;
+  dbms_output.put_line('emp name is ' || emp_val.emp_name);
+END;
+/
+
+-------------------------------------------------------------------------------------------------------------------
+					IN/OUT
+
+-------------------------------------------------------------------------------------------------------------------
+
+set serveroutput on
+DECLARE
+  n NUMBER := 21;
+BEGIN
+  EXECUTE immediate 'begin :1 := :1 * 2; end;' USING IN OUT n;
+  dbms_output.put_line('n: ' || n);
+END;
+/
+
+
+-------------------------------------------------------------------------------------------------------------------
+					IN OUT NESTED TYPE EXTEND
+
+-------------------------------------------------------------------------------------------------------------------
+
+SET serveroutput ON
+CREATE type tq84_number_t
+AS
+  TABLE OF NUMBER;
+  /
+  DECLARE
+    number_t tq84_number_t;
+  BEGIN
+    EXECUTE immediate
+    --
+    --    Note the space between `:1` and the space.
+    --    Otherwise, the
+    --      PLS-00110: bind variable '1.EXTEND' not allowed in this context
+    --    error is raised.
+    --
+    'begin :1 := tq84_number_t(); ' || '  :1 .extend; :1(:1 .count) := 22;' || '  :1 .extend; :1(:1 .count) := 33;' || 'end;'
+    --
+    --    Not the IN OUT.
+    --    With an OUT only, an
+    --      ORA-06537: OUT bind variable bound to an IN position
+    --    will be raised.
+    --
+    USING IN OUT number_t;
+    FOR i IN 1 .. number_t.count
+    LOOP
+      dbms_output.put_line('i: ' || number_t(i));
+    END LOOP;
+  END;
+  /
+  DROP type tq84_number_t;
+
+-------------------------------------------------------------------------------------------------------------------
+					OUT NESTED TYPE EXTEND
+
+-------------------------------------------------------------------------------------------------------------------
+
+DECLARE
+  number_t tq84_number_t;
+BEGIN
+  EXECUTE immediate 'begin :1 := tq84_number_t(42,null,-1.2, 1e7); end;' USING OUT number_t;
+  FOR i IN 1 .. number_t.count
+  LOOP
+    dbms_output.put_line('i: ' || number_t(i));
+  END LOOP;
+END;
+/
+DROP type tq84_number_t;
+
+
+

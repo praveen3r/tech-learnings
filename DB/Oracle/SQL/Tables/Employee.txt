@@ -1,0 +1,24 @@
+--------------------------------------------------------
+--  DDL for Table EMPLOYEE
+--------------------------------------------------------
+
+CREATE TABLE "EMPLOYEE"
+  (
+    "EMP_ID"   NUMBER,
+    "EMP_NAME" VARCHAR2(40 BYTE),
+    "DEPT_ID"  NUMBER
+  );
+
+
+--------------------------------------------------------
+--  DDL for Table EMPLOYEE
+--------------------------------------------------------
+
+Insert into CPHPORTAL.EMPLOYEE (EMP_ID,EMP_NAME,DEPT_ID) values (1,'Rohit Sharma',1);
+Insert into CPHPORTAL.EMPLOYEE (EMP_ID,EMP_NAME,DEPT_ID) values (2,'Shikar Dhawan',1);
+Insert into CPHPORTAL.EMPLOYEE (EMP_ID,EMP_NAME,DEPT_ID) values (3,'Hardik Pandya',2);
+Insert into CPHPORTAL.EMPLOYEE (EMP_ID,EMP_NAME,DEPT_ID) values (4,'Kedhar Jadhav',2);
+Insert into CPHPORTAL.EMPLOYEE (EMP_ID,EMP_NAME,DEPT_ID) values (5,'Bumrah',3);
+Insert into CPHPORTAL.EMPLOYEE (EMP_ID,EMP_NAME,DEPT_ID) values (7,'Dhoni',4);
+Insert into CPHPORTAL.EMPLOYEE (EMP_ID,EMP_NAME,DEPT_ID) values (6,'Chahal',3);
+COMMIT;

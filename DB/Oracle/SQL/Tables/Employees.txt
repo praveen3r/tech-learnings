@@ -1,0 +1,22 @@
+--------------------------------------------------------
+--  DDL for Table EMPLOYEES
+--------------------------------------------------------
+CREATE TABLE "EMPLOYEES"
+  (
+    "EMP_ID"     NUMBER,
+    "FIRST_NAME" VARCHAR2(50 BYTE),
+    "LAST_NAME"  VARCHAR2(50 BYTE),
+    "MGR_ID"     NUMBER
+  );
+
+
+--------------------------------------------------------
+--  DML for Table EMPLOYEES
+--------------------------------------------------------
+
+  
+Insert into CPHPORTAL.EMPLOYEES (EMP_ID,FIRST_NAME,LAST_NAME,MGR_ID) values (1,'Tom','Moody',0);
+Insert into CPHPORTAL.EMPLOYEES (EMP_ID,FIRST_NAME,LAST_NAME,MGR_ID) values (2,'David','Warner',1);
+Insert into CPHPORTAL.EMPLOYEES (EMP_ID,FIRST_NAME,LAST_NAME,MGR_ID) values (3,'Johny','Bairstow',1);
+COMMIT;
+

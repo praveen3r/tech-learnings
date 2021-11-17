@@ -1,0 +1,53 @@
+<div class="col-12 p-4 row">
+    <h3 class="col-12 col-sm-12 col-md-6 text-dark">Survey's List</h3>
+    <div class="col-12">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Survey Name</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let camp of compaigns;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{camp.title}}</td>
+                    <td>{{camp.startDate}}</td>
+                    <td>{{camp.endDate}}</td>
+                    <td>
+                        <i class="fa fa-sign-in mr-2 cursor-pointer" [routerLink]="['/user/participateSurvey',camp.campaignId]" title="Attend Survey"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12" *ngIf="compaigns.length==0">
+        <label class="text-danger">No Campaigns Found!</label>
+    </div>
+
+    <h3 class="col-12 col-sm-12 col-md-6 text-dark mt-4">Completed Survey's List</h3>
+    <div class="col-12">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Survey Name</th>
+                <th scope="col">Attended Date</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let camp of attendCampaigns;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{camp.title}}</td>
+                    <td>{{camp.attemptList[0].attendDate}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12" *ngIf="attendCampaigns.length==0">
+        <label class="text-danger">No Campaigns Found!</label>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!--CONSTANTS-->
+
+    <bean id="str0" class="java.lang.Integer">
+        <!--<bean id="str0" class="java.lang.String">-->
+        <constructor-arg value="1002"/>
+    </bean>
+
+    <bean id="str1" class="java.lang.String">
+        <constructor-arg value="JOHN"/>
+    </bean>
+
+    <bean id="str2" class="java.lang.String" factory-method="valueOf">
+        <constructor-arg value="MIND TREE PVT LTD., BANGALORE. "/>
+    </bean>
+
+
+    <!--Example 1 Inheritance-->
+    <!--
+
+    Exception in thread "main" org.springframework.beans.factory.BeanCreationException:
+    Error creating bean with name 'baseCompanyBean' defined in class path resource [SpringBeans_Inheritance.xml]: Instantiation of bean failed;
+    nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [Company]: Specified class is an interface
+
+     -->
+    <!--TODO : Can't create the bean for interfaces-->
+    <!--<bean id="baseCompanyBean" class="Company">-->
+        <!--<property name="NAME" value="MINDTREE"/>-->
+    <!--</bean>-->
+
+    <!--
+
+    Caused by: org.springframework.beans.NotWritablePropertyException:
+    Invalid property 'NAME' of bean class [Employee]:
+    Bean property 'NAME' is not writable or has an invalid setter method.
+    Does the parameter type of the setter match the return type of the getter.
+
+    -->
+
+    <bean id="baseEmployeeBean1" class="ioc.inheritance.Employee" abstract="true">
+        <property name="NAME" value="MINDTREE"/>
+        <property name="company" ref="str1"/>
+    </bean>
+<!---->
+    <bean id="myEmployeeBean1" parent="baseEmployeeBean1">
+        <property name="empId" value="1001"/>
+        <property name="name" value="JORGE"/>
+        <property name="company" value="ORACLE PVT LTD., CHENNAI."/>
+    </bean>
+
+    <!--<bean id="supervisorBean1" class="Supervisor">-->
+        <bean id="supervisorBean1" class="ioc.inheritance.Supervisor" parent="myEmployeeBean1">
+        <!--<bean id="supervisorBean1" class="Supervisor"  parent="baseEmployeeBean1"> -->
+        <!--<property name="empId" ref="str0"/>-->
+        <property name="name" ref="str1"/>
+        <property name="company" ref="str2"/>
+    </bean>
+
+
+    <!--Example 2 Abstract -->
+    <!--<bean id="baseEmployeeBean2" class="Employee" abstract="true">-->
+        <!--<property name="company" value="Java2novice"/>-->
+    <!--</bean>-->
+
+    <!--Exception in thread "main" org.springframework.beans.factory.BeanIsAbstractException:
+                        Error creating bean with name 'baseEmployeeBean2': Bean definition is abstract-->
+    <!--<bean id="myEmployeeBean2" parent="baseEmployeeBean2">-->
+        <!--<property name="empId" value="1011"/>-->
+        <!--<property name="name" value="John"/>-->
+    <!--</bean>-->
+
+    <!--Example 3 Parent-->
+    <!--<bean id="baseEmployeeBean3" abstract="true">-->
+        <!--<property name="company" value="Java2novice"/>-->
+    <!--</bean>-->
+    <!--<bean id="myEmployeeBean3" parent="baseEmployeeBean3"-->
+          <!--class="Employee">-->
+        <!--<property name="empId" value="1016"/>-->
+        <!--<property name="name" value="John"/>-->
+    <!--</bean>-->
+
+
+    <!--Example 4 -->
+    <!--Abstract & Interface -->
+    <!--<bean id="inheritedTestBean" abstract="true"-->
+          <!--class="TestBean">-->
+        <!--<property name="name" value="parent"/>-->
+        <!--<property name="age" value="1"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="inheritsWithDifferentClass"-->
+          <!--class="DerivedTestBean"-->
+          <!--parent="inheritedTestBean" init-method="initialize">-->
+        <!--<property name="name" value="override"/>-->
+         <!--the age property value of 1 will be inherited from parent-->
+    <!--</bean>-->
+
+</beans>

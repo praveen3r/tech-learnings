@@ -1,0 +1,12 @@
+set serveroutput on
+DECLARE
+    TYPE deptnames IS VARRAY(4) OF VARCHAR2(100);
+   dept_names deptnames:= deptnames ('COMPUTER','MECHANICAL', 'ELCTRICAL');
+BEGIN
+    If dept_names.EXISTS(3) Then
+     dbms_output.put_line('VALUE EXISTS and it is ' || dept_names(3)); 
+    else
+     dbms_output.put_line('VALUE not EXISTS'); 
+    END IF;
+END;
+/

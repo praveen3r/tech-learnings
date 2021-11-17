@@ -1,0 +1,78 @@
+---------------------------------------------------------------------------------------------------------------------
+
+db.collection.deleteOne(
+   <filter>,
+   {
+      writeConcern: <document>,
+      collation: <document>
+   }
+)
+
+Example: 
+
+try {
+   db.orders.deleteOne( { "_id" : ObjectId("563237a41a4d68582c2509da") } );
+} catch (e) {
+   print(e);
+}
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	DELETE MANY
+
+---------------------------------------------------------------------------------------------------------------------
+
+db.collection.deleteMany(
+   <filter>,
+   {
+      writeConcern: <document>,
+      collation: <document>
+   }
+)
+
+Example 1
+---------
+
+try {
+   db.orders.deleteMany( { "client" : "Crude Traders Inc." } );
+} catch (e) {
+   print (e);
+}
+
+Example 2
+---------
+
+The following operation deletes all documents where stock : "Brent Crude Futures" and limit is greater than 48.88:
+
+try {
+   db.orders.deleteMany( { "stock" : "Brent Crude Futures", "limit" : { $gt : 48.88 } } );
+} catch (e) {
+   print (e);
+}
+
+
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	REMOVE ALL DOCUMENTS THAT MATCH A CONDITION
+
+---------------------------------------------------------------------------------------------------------------------
+
+Example
+---------
+
+db.products.remove( { qty: { $gt: 20 } } )
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	REMOVE A SINGLE DOCUMENT THAT MATCHES A CONDITION
+
+---------------------------------------------------------------------------------------------------------------------
+
+To remove the first document that match a deletion criteria, call the remove method with the query criteria 
+and the justOne parameter set to true or 1.
+
+Example
+---------
+
+db.products.remove( { qty: { $gt: 20 } }, true )

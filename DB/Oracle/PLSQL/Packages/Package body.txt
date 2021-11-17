@@ -1,0 +1,23 @@
+CREATE OR REPLACE PACKAGE BODY employee_pck
+AS
+
+    FUNCTION get_emp_name_fn(
+            p_emp_id NUMBER)
+        RETURN VARCHAR2
+    IS
+        v_emp_name VARCHAR2(50);
+    BEGIN
+       SELECT emp_name INTO v_emp_name FROM EMPLOYEE where emp_id = p_emp_id;
+        RETURN v_emp_name;
+    END get_emp_name_fn;
+    
+    PROCEDURE get_emp_name(p_emp_id IN NUMBER, p_emp_name OUT employee.emp_name%TYPE )
+    IS
+    BEGIN
+      SELECT emp_name INTO p_emp_name FROM EMPLOYEE WHERE emp_id = p_emp_id;
+    EXCEPTION
+    WHEN OTHERS THEN
+      DBMS_OUTPUT.PUT_LINE( SQLERRM );
+    END get_emp_name;
+
+END employee_pck;

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+    <context:annotation-config/>
+
+    <!--<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>-->
+
+    <context:component-scan base-package="">
+
+    </context:component-scan>
+
+
+    <bean id="customer" class="annotations.xml.example1.Customer">
+        <!--<constructor-arg ref="PersonBean0"/>-->
+        <property name="action" value="BUY"/>
+        <property name="type" value="1"/>
+
+        <!--<qualifier type="person" value="PersonBean2"/>-->
+    </bean>
+
+    <bean id="PersonBean0" name="PersonBean00" class="annotations.xml.example1.Person">
+        <property name="name" value="JOHN0"/>
+        <property name="address" value="address 0"/>
+        <property name="age" value="00"/>
+    </bean>
+
+    <bean id="PersonBean1" class="annotations.xml.example1.Person">
+        <property name="name" value="JOHN1"/>
+        <property name="address" value="address 1"/>
+        <property name="age" value="11"/>
+    </bean>
+
+    <bean id="PersonBean2" class="annotations.xml.example1.Person">
+        <property name="name" value="JOHN2"/>
+        <property name="address" value="address 2"/>
+        <property name="age" value="22"/>
+    </bean>
+
+    <!--Expression Language -->
+    <bean id="engine" class="annotations.xml.example2.Engine">
+        <property name="capacity" value="3200"/>
+        <property name="horsePower" value="250"/>
+        <property name="numberOfCylinders" value="6"/>
+    </bean>
+    <bean id="someCar" class="annotations.xml.example2.Car">
+        <property name="make" value="Some make"/>
+        <property name="model" value="Some model"/>
+        <property name="engine" value="#{engine}"/>
+        <property name="horsePower" value="#{engine.horsePower}"/>
+    </bean>
+
+    <bean id="spelOperators" class="annotations.xml.example2.SpelOperators">
+        <property name="equal" value="#{1 == 1}"/>
+        <property name="notEqual" value="#{1 lt 1}"/>
+        <property name="greaterThanOrEqual" value="#{someCar.engine.numberOfCylinders >= 6}"/>
+        <property name="and" value="#{someCar.horsePower == 250 and someCar.engine.capacity lt 4000}"/>
+        <property name="or" value="#{someCar.horsePower > 300 or someCar.engine.capacity > 3000}"/>
+        <property name="addString" value="#{someCar.model + ' manufactured by ' + someCar.make}"/>
+    </bean>
+
+
+</beans>

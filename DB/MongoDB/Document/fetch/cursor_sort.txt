@@ -1,0 +1,81 @@
+---------------------------------------------------------------------------------------------------------------------
+
+cursor.sort(sort)
+
+The sort parameter contains field and value pairs, in the following form:
+
+{ field: value }
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	ASCENDING/DESCENDING SORT
+
+---------------------------------------------------------------------------------------------------------------------
+
+Specify in the sort parameter the field or fields to sort by and a value of 1 or -1 to specify an 
+ascending or descending sort respectively.
+
+Example
+---------
+
+The following sample document specifies a descending sort by the age field and then an ascending sort by the posts field:
+
+{ age : -1, posts: 1 }
+
+
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	RESTRICTIONS
+
+---------------------------------------------------------------------------------------------------------------------
+
+When unable to obtain the sort order from an index, MongoDB will sort the results in memory, which requires 
+that the result set being sorted is less than 32 megabytes.
+
+When the sort operation consumes more than 32 megabytes, MongoDB returns an error. To avoid this error, either 
+create an index supporting the sort operation (see Sort and Index Use) or use sort() in conjunction with limit()
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	INTERACTION WITH PROJECTION
+
+---------------------------------------------------------------------------------------------------------------------
+
+{ _id: 1, item: { category: "cake", type: "chiffon" }, amount: 10 }
+{ _id: 2, item: { category: "cookies", type: "chocolate chip" }, amount: 50 }
+{ _id: 3, item: { category: "cookies", type: "chocolate chip" }, amount: 15 }
+{ _id: 4, item: { category: "cake", type: "lemon" }, amount: 30 }
+{ _id: 5, item: { category: "cake", type: "carrot" }, amount: 20 }
+{ _id: 6, item: { category: "brownies", type: "blondie" }, amount: 10 }
+
+
+Example 1
+---------
+
+The following query specifies a sort on the amount field in descending order.
+
+db.orders.find().sort( { amount: -1 } )
+
+Example 2
+---------
+
+
+The following query specifies the sort order using the fields from an embedded document item. 
+The query sorts first by the category field in ascending order, and then within each category, by the type field in 
+ascending order.
+
+db.orders.find().sort( { "item.category": 1, "item.type": 1 } )
+
+---------------------------------------------------------------------------------------------------------------------	
+	
+	RETURN IN NATURAL ORDER
+
+---------------------------------------------------------------------------------------------------------------------
+
+The $natural parameter returns items according to their natural order within the database. 
+This ordering is an internal implementation feature, and you should not rely on any particular structure within it.
+
+NOTE
+
+You cannot specify a $natural sort on a view.

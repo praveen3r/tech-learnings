@@ -1,0 +1,51 @@
+<div class="col-12 p-4 row">
+    <h3 class="col-12 text-dark">Survey Details</h3>
+    <div class="col-12">
+        <label class="col-6 col-md-2">Survey Name: </label>
+        <label class="text-dark">{{campaign.title}}</label>
+    </div>
+    <div class="col-12">
+        <label class="col-6 col-md-2">Start Date: </label>
+        <label class="text-dark">{{campaign.startDate}}</label>
+    </div>
+    <div class="col-12">
+        <label class="col-6 col-md-2">End Date: </label>
+        <label class="text-dark" [ngClass]="{'text-danger': campaign.expired}">{{campaign.endDate}}</label>
+    </div>
+    <div class="col-12" *ngFor="let qstn of campaign.questionList;let index=index">
+        <h4>Question {{index+1}}</h4>
+        <div class="col-12">
+            <label class="col-6 col-md-2">Question: </label>
+            <label class="text-dark">{{qstn.question}}</label>
+        </div>
+        <div class="col-12">
+            <label class="col-6 col-md-2">Answer Type: </label>
+            <label class="text-dark">{{qstn.answerType}}</label>
+        </div>
+        <div class="col-12" *ngIf="qstn.fieldType">
+            <label class="col-6 col-md-2">Field Type: </label>
+            <label class="text-dark">{{qstn.fieldType}}</label>
+        </div>
+        <div class="col-12" *ngIf="qstn.choice1">
+            <label class="col-6 col-md-2">Choice 1: </label>
+            <label class="text-dark">{{qstn.choice1}}</label>
+        </div>
+        <div class="col-12" *ngIf="qstn.choice2">
+            <label class="col-6 col-md-2">Choice 2: </label>
+            <label class="text-dark">{{qstn.choice2}}</label>
+        </div>
+        <div class="col-12" *ngIf="qstn.choice3">
+            <label class="col-6 col-md-2">Choice 3: </label>
+            <label class="text-dark">{{qstn.choice3}}</label>
+        </div>
+        <div class="col-12" *ngIf="qstn.choice4">
+            <label class="col-6 col-md-2">Choice 4: </label>
+            <label class="text-dark">{{qstn.choice4}}</label>
+        </div>
+    </div>
+    <div class="col-12 my-2">
+        <button type="button" class="btn btn-danger mr-2" (click)="removeCampaign(campaign.campaignId)">Remove</button>
+        <button type="button" class="btn btn-secondary" routerLink="/admin/surveys">Cancel</button>
+    </div>
+    
+</div>

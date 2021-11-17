@@ -1,0 +1,62 @@
+<div class="col-12 p-4 row">
+    <h3 class="col-12">{{campaign.title}}</h3>
+    <form class="col-12 col-md-6" [formGroup]="answerForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="error" class="form-group text-center">
+            <label class="text-danger">{{error}}</label>
+        </div>
+        <div *ngFor="let qstn of t.controls;let index=index;" class="form-group">
+            <div [formGroup]="qstn">
+                <label class="font-weight-bold">{{index+1}}.&nbsp;{{campaign.questionList[index].question}}</label>
+                <div *ngIf="campaign.questionList[index].answerType=='Single Line'">
+                    <input *ngIf="campaign.questionList[index].fieldType=='text'" type="text" class="form-control" formControlName="answer" required/>
+                    <input *ngIf="campaign.questionList[index].fieldType=='number'" type="number" class="form-control" formControlName="answer" required/>
+                    <input *ngIf="campaign.questionList[index].fieldType=='email'" type="email" class="form-control" formControlName="answer" required/>
+                    <input *ngIf="campaign.questionList[index].fieldType=='date'" type="date" class="form-control" formControlName="answer" required/>
+                </div>
+                <div *ngIf="campaign.questionList[index].answerType=='Multi Line'">
+                    <textarea class="col-12 p-2 form-control" formControlName="answer"></textarea>
+                </div>
+                <div *ngIf="campaign.questionList[index].answerType=='Radio Button'">
+                    <div *ngIf="campaign.questionList[index].choice1">
+                        <input type="radio" id="answer1{{index+1}}" value="{{campaign.questionList[index].choice1}}" formControlName="answer"/>
+                        <label class="ml-2" for="answer1{{index+1}}">{{campaign.questionList[index].choice1}}</label>
+                    </div>
+                    <div *ngIf="campaign.questionList[index].choice2">
+                        <input type="radio" id="answer2{{index+1}}" value="{{campaign.questionList[index].choice2}}" formControlName="answer"/>
+                        <label class="ml-2" for="answer2{{index+1}}">{{campaign.questionList[index].choice2}}</label>
+                    </div>
+                    <div *ngIf="campaign.questionList[index].choice3">
+                        <input type="radio" id="answer3{{index+1}}" value="{{campaign.questionList[index].choice3}}" formControlName="answer"/>
+                        <label class="ml-2" for="answer3{{index+1}}">{{campaign.questionList[index].choice3}}</label>
+                    </div>
+                    <div *ngIf="campaign.questionList[index].choice4">
+                        <input type="radio" id="answer4{{index+1}}" value="{{campaign.questionList[index].choice4}}" formControlName="answer"/>
+                        <label class="ml-2" for="answer4{{index+1}}">{{campaign.questionList[index].choice4}}</label>
+                    </div>
+                </div>
+                <div *ngIf="campaign.questionList[index].answerType=='Check Box'">
+                    <div *ngIf="campaign.questionList[index].choice1">
+                        <input type="checkbox" id="answer1{{index+1}}" formControlName="answer1"/>
+                        <label class="ml-2" for="answer1{{index+1}}">{{campaign.questionList[index].choice1}}</label>
+                    </div>
+                    <div *ngIf="campaign.questionList[index].choice2">
+                        <input type="checkbox" id="answer2{{index+1}}" formControlName="answer2"/>
+                        <label class="ml-2" for="answer2{{index+1}}">{{campaign.questionList[index].choice2}}</label>
+                    </div>
+                    <div *ngIf="campaign.questionList[index].choice3">
+                        <input type="checkbox" id="answer3{{index+1}}" formControlName="answer3"/>
+                        <label class="ml-2" for="answer3{{index+1}}">{{campaign.questionList[index].choice3}}</label>
+                    </div>
+                    <div *ngIf="campaign.questionList[index].choice4">
+                        <input type="checkbox" id="answer4{{index+1}}" formControlName="answer4"/>
+                        <label class="ml-2" for="answer4{{index+1}}">{{campaign.questionList[index].choice4}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary mr-2" [disabled]="!answerForm.valid">Submit</button>
+            <button type="button" class="btn btn-secondary" routerLink="/user/surveys">Cancel</button>
+        </div>
+    </form>
+</div>

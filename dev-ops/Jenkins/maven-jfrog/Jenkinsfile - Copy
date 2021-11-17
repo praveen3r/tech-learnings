@@ -1,0 +1,28 @@
+pipeline {
+    agent any 
+    stages {
+        stage('clean install') { 
+            steps {
+                dir("maven-jfrog/demo-proj"){
+				bat "mvn clean install"
+                }
+                    
+            }
+        }
+		stage('deploy') { 
+            steps {
+				rtUpload (
+				   serverId: 'artifactory',
+				   spec: ''' {
+				      "files": [
+					  {
+					   "pattern": "demo-proj/target/*.jar*,
+					   "target" : "test"
+					  }
+					  ]
+				   }'''
+				)
+			}
+			}
+   }
+}

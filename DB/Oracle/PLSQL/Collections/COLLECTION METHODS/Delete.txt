@@ -1,0 +1,15 @@
+set serveroutput on
+DECLARE
+    TYPE deptnames IS TABLE  OF VARCHAR2(100);
+   dept_names deptnames:= deptnames ('COMPUTER','MECHANICAL', 'ELCTRICAL',' MECHOTRONICS', 'TEST');
+   c NUMBER;
+BEGIN
+   dbms_output.put_line( 'COUNT = ' || dept_names.COUNT) ;
+   dbms_output.put_line( 'Suppression of the 2nd element' ) ;
+   dept_names.DELETE(2) ;
+   dbms_output.put_line( 'COUNT = ' || dept_names.COUNT) ;
+   dbms_output.put_line( 'Suppression of all element' ) ;
+   dept_names.DELETE;
+   dbms_output.put_line( 'COUNT = ' || dept_names.COUNT) ; 
+END;
+/

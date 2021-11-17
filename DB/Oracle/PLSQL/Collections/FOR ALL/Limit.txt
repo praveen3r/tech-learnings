@@ -1,0 +1,41 @@
+-------------------------------------------------------------------------------------------------------
+set serveroutput on
+DECLARE
+type employee_record_type is table of employee%rowtype;
+cust_array  employee_record_type;
+CURSOR cur_emp IS select * from employee ;
+BEGIN
+  OPEN cur_emp;
+  LOOP
+     FETCH cur_emp bulk collect INTO cust_array limit 3;
+     exit when cust_array.COUNT = 0;
+    FORALL i IN cust_array.FIRST .. cust_array.LAST
+     INSERT INTO employee_copy (emp_name) values(cust_array(i).emp_name);
+     COMMIT;
+   END LOOP;
+  CLOSE cur_emp;
+END;
+/
+
+-------------------------------------------------------------------------------------------------------
+
+set serveroutput on
+DECLARE
+type emp_id_type is varray(100) of number;
+type emp_name_type is varray(100) of varchar2(100);
+emp_id_arr emp_id_type;
+emp_name_arr emp_name_type;
+CURSOR cur_emp IS select emp_id, emp_name from employee ;
+BEGIN
+  OPEN cur_emp;
+  LOOP
+     FETCH cur_emp bulk collect INTO emp_id_arr, emp_name_arr limit 3;
+      exit when emp_id_arr.COUNT = 0;
+      FORALL i IN emp_name_arr.FIRST .. emp_name_arr.LAST
+     INSERT INTO employee_copy (emp_name) values(emp_name_arr(i));
+     COMMIT;
+  
+   END LOOP;
+  CLOSE cur_emp;
+ END;
+/

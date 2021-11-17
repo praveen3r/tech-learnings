@@ -1,0 +1,24 @@
+
+$sort (aggregation)
+
+-----------------------------------------
+
+Ascending/Descending Sort
+---------------------------
+
+For the field or fields to sort by, set the sort order to 1 or -1 to specify an 
+ascending or descending sort respectively, as in the following example:
+
+db.users.aggregate(
+   [
+     { $sort : { age : -1, posts: 1 } }
+   ]
+)
+
+$sort and Memory Restrictions
+-------------------------------
+
+The $sort stage has a limit of 100 megabytes of RAM. By default, if the stage exceeds this 
+limit, $sort will produce an error. To allow for the handling of large datasets, set the 
+allowDiskUse option to true to enable $sort operations to write to temporary files. See the 
+allowDiskUse option in db.collection.aggregate() method and the aggregate command for details.
