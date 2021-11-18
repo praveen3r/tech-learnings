@@ -1,0 +1,32 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: spring-boot-app
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: spring-boot-app
+  template: 
+    metadata: 
+      labels: 
+        app: spring-boot-app
+    spec: 
+      volumes:
+        - name: spring-ext-conf
+          configMap:
+            name: spring-app-config
+      containers: 
+        - 
+          image: praveen12rajan/spring-boot
+          name: spring-boot-app
+          ports: 
+            - 
+              containerPort: 8080
+          volumeMounts:
+            - name: spring-ext-conf
+              mountPath: /usr/local/config/app
+          env:
+          - name: SPRING_CONFIG_LOCATION
+            value:  file:/usr/local/config/app/application.yml
