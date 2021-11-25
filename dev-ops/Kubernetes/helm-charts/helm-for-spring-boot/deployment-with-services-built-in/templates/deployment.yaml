@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "deployment-with-services-built-in.fullname" . }}
+  labels:
+    {{- include "deployment-with-services-built-in.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "deployment-with-services-built-in.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "deployment-with-services-built-in.selectorLabels" . | nindent 8 }}
+    spec:
+      volumes:
+        - name: spring-ext-conf
+          configMap:
+            name: spring-app-config
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name: spring-ext-conf
+              mountPath: /usr/local/config/app
+          env:
+          - name: SPRING_CONFIG_LOCATION
+            value:  file:/usr/local/config/app/application.yml   
