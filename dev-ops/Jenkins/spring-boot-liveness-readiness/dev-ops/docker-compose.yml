@@ -1,0 +1,8 @@
+version: "3.7"
+services:
+  spring-boot-actuate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: praveen12rajan/spring-boot-actuate:latest
+    restart: unless-stopped
