@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "deployment-with-liveness-readiness.fullname" . }}
+  labels:
+    {{- include "deployment-with-liveness-readiness.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "deployment-with-liveness-readiness.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "deployment-with-liveness-readiness.selectorLabels" . | nindent 8 }}
+    spec:
+      volumes:
+        - name: spring-ext-conf
+          configMap:
+            name: spring-app-config
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          {{ if .Values.probe.enabled -}}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.probe.liveness.path }}
+              port: 8080
+            initialDelaySeconds: {{ .Values.probe.liveness.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.probe.timeoutSeconds }}
+            periodSeconds: {{ .Values.probe.liveness.periodSeconds }}
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.probe.readiness.path }}
+              port: 8080
+            initialDelaySeconds: {{ .Values.probe.readiness.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.probe.timeoutSeconds }}
+            periodSeconds: {{ .Values.probe.readiness.periodSeconds }}
+            successThreshold: 1
+            failureThreshold: 10
+          {{ end -}}
+          volumeMounts:
+            - name: spring-ext-conf
+              mountPath: /usr/local/config/app
+          env:
+          - name: SPRING_CONFIG_LOCATION
+            value:  file:/usr/local/config/app/application.yml

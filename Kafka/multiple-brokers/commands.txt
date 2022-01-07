@@ -1,0 +1,9 @@
+kafka-server-start.bat "..\..\config\server - 1.properties"
+
+kafka-server-start.bat "..\..\config\server - 2.properties"
+
+kafka-server-start.bat "..\..\config\server - 3.properties"
+
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 3 --partitions 2 --topic sampleTopic
+
+kafka-topics.bat --describe --topic sampleTopic --zookeeper localhost:2181
