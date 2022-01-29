@@ -15,12 +15,15 @@ import './App.css';
 // import FieldLevelValidation from './components/validation/FieldLevelValidation'
 // import ManualValidation from './components/validation/ManualValidation'
 // import LoadSavedData from './components/load-saved-data/LoadSavedData'
-import ResetForm from './components/reset-form/ResetForm'
+/// import ResetForm from './components/reset-form/ResetForm'
+ // import FormikContainer from './components/formik-controls/FormikContainer'
+
+ import LoginForm from './components/sample-forms/LoginForm'
 
 function App() {
   return (
     <div className="App">
-      <ResetForm/>
+      <LoginForm/>
     </div>
   );
 }

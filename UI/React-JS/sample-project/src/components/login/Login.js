@@ -1,44 +1,58 @@
-import React from 'react'
+import React from 'react';
+import { Formik, Form, Field } from 'formik'
+import * as Yup from 'yup'
+import FormikComponent from '../formik-control/FormikComponent'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../util/Auth';
+
+const initialValues = {
+  username: '',
+  password: '',
+}
+
+const validationSchema = Yup.object({
+  username: Yup.string().required("username is required"),
+  password: Yup.string().required("password is required")
+})
+
+// const onSubmit = values => {
+//   console.log(values);
+// }
 
 function Login() {
-    return (
-        <>
-            
-    <form >
-    <div class="form-group">
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-          <label for="userid" >User Id</label>
-        </div>
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-            <input type="text" 
-              id="userId" name="userId" required
-              class="form-control" 
-              maxlength="15" autocomplete="off"
-              placeholder="Enter userid" />
-          </div>
-        </div>
-      
-        <div class="form-group">
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-              <label for="pwd" >Pwd</label>
-            </div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                <input type="password" 
-                  id="pwd" name="pwd" required
-                  class="form-control" 
-                  maxlength="15" autocomplete="off"
-                  placeholder="Enter pwd" />
-              </div>
-            </div>
-      
-      <div class="form-group" align="left">
-        <button type="submit" class="btn btn-primary" >Submit</button>
-        <button type="button" class="btn btn-default " > Clear</button >
-      </div >
-    
-    </form >
-        </>
-    )
+
+  const navigate = useNavigate();
+  const auth = useAuth();
+
+  const onSubmit = values => {
+    console.log(values);
+    auth.login(values);
+    navigate('/dashboard')
+  }
+
+  return (
+    <>
+        <Formik initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}>
+            {
+                formik =>
+                    <Form>
+                        <FormikComponent control="input" label="Username" type="text" id="username"
+                         name="username" maxLength="15" />
+                        
+                        <FormikComponent control="input" label="Password" type="password" id="password" 
+                        name="password" maxLength="15" />
+
+                        <button type="submit" variant="primary">Submit</button>
+                        <button type="button" variant="secondary" >Clear</button>
+                    </Form >
+
+            }
+
+        </Formik>
+    </>
+)
 }
 
 export default Login

@@ -1,14 +1,22 @@
 import React from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-
-import Login from './components/login/Login'
+import MenuBar from './components/layout/MenuBar';
+import { AuthProvider } from './util/Auth';
+import { routes } from './util/Routes'
 
 
 function App() {
+  const routeComponents = routes.map(({ path, component }, key) => <Route path={path} element={component} key={key} />);
   return (
-    <div className="App">
-      <Login/>
-    </div>
+    <>
+      <AuthProvider>
+        <MenuBar />
+        <Routes>
+          {routeComponents}
+        </Routes>
+      </AuthProvider>
+    </>
   );
 }
 
