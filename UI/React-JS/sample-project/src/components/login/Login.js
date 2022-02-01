@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import FormikComponent from '../formik-control/FormikComponent'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../util/Auth';
+import Button from 'react-bootstrap/Button'
 
 const initialValues = {
   username: '',
@@ -15,19 +16,14 @@ const validationSchema = Yup.object({
   password: Yup.string().required("password is required")
 })
 
-// const onSubmit = values => {
-//   console.log(values);
-// }
-
 function Login() {
 
   const navigate = useNavigate();
   const auth = useAuth();
 
   const onSubmit = values => {
-    console.log(values);
     auth.login(values);
-    navigate('/dashboard')
+    navigate('/grid')
   }
 
   return (
@@ -44,8 +40,8 @@ function Login() {
                         <FormikComponent control="input" label="Password" type="password" id="password" 
                         name="password" maxLength="15" />
 
-                        <button type="submit" variant="primary">Submit</button>
-                        <button type="button" variant="secondary" >Clear</button>
+                        <Button type="submit">Submit</Button>
+                        <Button type="button" variant="secondary">Clear</Button>
                     </Form >
 
             }
