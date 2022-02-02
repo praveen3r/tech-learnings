@@ -34,6 +34,7 @@ function MenuBar() {
                                     <NavLink to='/search'>Search</NavLink>
                                     <NavLink to='/others'>Others</NavLink>
                                     <NavLink to='/bootstrap-comp'>Bootstrap comp</NavLink>
+                                    <NavLink to='/material-ui-comp'>Material UI comp</NavLink>
                                     <NavLink to='/api-call'>API call</NavLink>
                                 </nav>
                             </div>
