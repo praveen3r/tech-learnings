@@ -19,7 +19,7 @@ export const routes = [
     { path: 'grid', component: <RouteAuth><Grid/> </RouteAuth>},
     { path: 'form', component: <RouteAuth><Forms/></RouteAuth> },
     { path: 'search', component: <Search/>},
-    { path: 'others', component: <RouteAuth><Others/> </RouteAuth>},
+    { path: 'others', component: <Others/>},
     { path: 'bootstrap-comp', component: <RouteAuth><BootstrapComp/> </RouteAuth>},
     { path: 'material-ui-comp', component: <RouteAuth><MaterialUiComp/> </RouteAuth>},
     { path: 'api-call', component: <RouteAuth><ApiCall/> </RouteAuth>},

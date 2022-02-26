@@ -11,20 +11,21 @@ public class TryLockExample {
 		int threadCount = 3;
 		ExecutorService es = Executors.newFixedThreadPool(threadCount);
 		final ReentrantLock reentrantLock = new ReentrantLock();
-		for (int i=0; i< threadCount; i++) {
+		for (int i=0; i< 15; i++) {
+			System.out.println(i);
 			es.submit(new Runnable() {
 				
 				@Override
 				public void run() {
 					try {
-						//boolean flag = reentrantLock.tryLock();
+						boolean flag = reentrantLock.tryLock();
 						//boolean flag = reentrantLock.tryLock(100, TimeUnit.MILLISECONDS);
 						//reentrantLock.lockInterruptibly();
-						reentrantLock.lock();
+						//reentrantLock.lock();
 						   //if it is not able to acquire lock because of other threads interrupts,
 						   //it will throw InterruptedException and control will go to catch block.
-						//if (flag) {
-						if (true) {
+						if (flag) {
+						//if (true) {
 						    try {
 								System.out.println(Thread.currentThread().getName() +": Lock acquired.");
 								System.out.println("Performing task...");
@@ -43,6 +44,12 @@ public class TryLockExample {
 			});
 		}
 		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		es.shutdownNow();
 	}
 }
