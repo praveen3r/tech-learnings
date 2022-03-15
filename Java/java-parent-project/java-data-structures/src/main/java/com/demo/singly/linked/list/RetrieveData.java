@@ -2,7 +2,7 @@ package com.demo.singly.linked.list;
 
 public class RetrieveData {
 	
-	static SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+	static SinglyLinkedList<Integer> singlyLinkedList = new SinglyLinkedList<>();
 
 	public static void main(String[] args) {
 		populateData();
@@ -13,10 +13,10 @@ public class RetrieveData {
 	static void populateData() {
 
 		
-		SinglyLinkedList.ListNode headNode = new SinglyLinkedList.ListNode(10);
-		SinglyLinkedList.ListNode secondNode = new SinglyLinkedList.ListNode(12);
-		SinglyLinkedList.ListNode thirdNode = new SinglyLinkedList.ListNode(14);
-		SinglyLinkedList.ListNode fourthNode = new SinglyLinkedList.ListNode(16);
+		SinglyLinkedList.ListNode<Integer> headNode = new SinglyLinkedList.ListNode<>(10);
+		SinglyLinkedList.ListNode<Integer> secondNode = new SinglyLinkedList.ListNode<>(12);
+		SinglyLinkedList.ListNode<Integer> thirdNode = new SinglyLinkedList.ListNode<>(16);
+		SinglyLinkedList.ListNode<Integer> fourthNode = new SinglyLinkedList.ListNode<>(16);
 		
 		singlyLinkedList.setHead(headNode);
 		
@@ -28,7 +28,7 @@ public class RetrieveData {
 	}
 
 	static void displayData() {
-		SinglyLinkedList.ListNode current = singlyLinkedList.getHead();
+		SinglyLinkedList.ListNode<Integer> current = singlyLinkedList.getHead();
 		while(current != null) {
 			System.out.println("value is "+ current.getData());
 			current = current.getNext();

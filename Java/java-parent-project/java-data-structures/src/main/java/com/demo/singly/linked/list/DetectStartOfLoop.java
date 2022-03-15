@@ -1,10 +1,8 @@
 package com.demo.singly.linked.list;
 
-import com.demo.singly.linked.list.SinglyLinkedList.ListNode;
-
 public class DetectStartOfLoop {
 	
-	static SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+	static SinglyLinkedList<Integer> singlyLinkedList = new SinglyLinkedList<>();
 
 	public static void main(String[] args) {
 		populateData();
@@ -16,13 +14,13 @@ public class DetectStartOfLoop {
 	static void populateData() {
 
 		
-		SinglyLinkedList.ListNode headNode = new SinglyLinkedList.ListNode(10);
-		SinglyLinkedList.ListNode secondNode = new SinglyLinkedList.ListNode(12);
-		SinglyLinkedList.ListNode thirdNode = new SinglyLinkedList.ListNode(14);
-		SinglyLinkedList.ListNode fourthNode = new SinglyLinkedList.ListNode(16);
-		SinglyLinkedList.ListNode fifthNode = new SinglyLinkedList.ListNode(18);
-		SinglyLinkedList.ListNode sixthNode = new SinglyLinkedList.ListNode(20);
-		SinglyLinkedList.ListNode seventhNode = new SinglyLinkedList.ListNode(22);
+		SinglyLinkedList.ListNode<Integer> headNode = new SinglyLinkedList.ListNode<>(10);
+		SinglyLinkedList.ListNode<Integer> secondNode = new SinglyLinkedList.ListNode<>(12);
+		SinglyLinkedList.ListNode<Integer> thirdNode = new SinglyLinkedList.ListNode<>(16);
+		SinglyLinkedList.ListNode<Integer> fourthNode = new SinglyLinkedList.ListNode<>(16);
+		SinglyLinkedList.ListNode<Integer> fifthNode = new SinglyLinkedList.ListNode<>(18);
+		SinglyLinkedList.ListNode<Integer> sixthNode = new SinglyLinkedList.ListNode<>(20);
+		SinglyLinkedList.ListNode<Integer> seventhNode = new SinglyLinkedList.ListNode<>(22);
 		
 		singlyLinkedList.setHead(headNode);
 		
@@ -37,9 +35,9 @@ public class DetectStartOfLoop {
 	}
 
 	static void detectLoop() {
-		SinglyLinkedList.ListNode head = singlyLinkedList.getHead();
-		SinglyLinkedList.ListNode slowPtr = head;
-		SinglyLinkedList.ListNode fastPtr = head;
+		SinglyLinkedList.ListNode<Integer> head = singlyLinkedList.getHead();
+		SinglyLinkedList.ListNode<Integer> slowPtr = head;
+		SinglyLinkedList.ListNode<Integer> fastPtr = head;
 		while(fastPtr!=null && fastPtr.getNext()!=null) {
 			slowPtr = slowPtr.getNext();
 			fastPtr = fastPtr.getNext().getNext();
@@ -51,8 +49,8 @@ public class DetectStartOfLoop {
 		System.out.println("end of method");
 	}
 	
-	static void getStartOfLoop(SinglyLinkedList.ListNode head, SinglyLinkedList.ListNode slowPtr) {
-		SinglyLinkedList.ListNode temp = head;
+	static void getStartOfLoop(SinglyLinkedList.ListNode<Integer> head, SinglyLinkedList.ListNode<Integer> slowPtr) {
+		SinglyLinkedList.ListNode<Integer> temp = head;
 		while(temp != slowPtr) {
 			temp = temp.getNext();
 			slowPtr = slowPtr.getNext();

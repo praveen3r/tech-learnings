@@ -2,7 +2,7 @@ package com.demo.singly.linked.list;
 
 public class FindNodeFromEnd {
 
-	static SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+	static SinglyLinkedList<Integer> singlyLinkedList = new SinglyLinkedList<>();
 
 	public static void main(String[] args) {
 		populateData();
@@ -14,12 +14,12 @@ public class FindNodeFromEnd {
 	static void populateData() {
 
 		
-		SinglyLinkedList.ListNode headNode = new SinglyLinkedList.ListNode(10);
-		SinglyLinkedList.ListNode secondNode = new SinglyLinkedList.ListNode(11);
-		SinglyLinkedList.ListNode thirdNode = new SinglyLinkedList.ListNode(12);
-		SinglyLinkedList.ListNode fourthNode = new SinglyLinkedList.ListNode(13);
-		SinglyLinkedList.ListNode fifthNode = new SinglyLinkedList.ListNode(14);
-		SinglyLinkedList.ListNode sixthNode = new SinglyLinkedList.ListNode(15);
+		SinglyLinkedList.ListNode<Integer> headNode = new SinglyLinkedList.ListNode<>(10);
+		SinglyLinkedList.ListNode<Integer> secondNode = new SinglyLinkedList.ListNode<>(11);
+		SinglyLinkedList.ListNode<Integer> thirdNode = new SinglyLinkedList.ListNode<>(12);
+		SinglyLinkedList.ListNode<Integer> fourthNode = new SinglyLinkedList.ListNode<>(13);
+		SinglyLinkedList.ListNode<Integer> fifthNode = new SinglyLinkedList.ListNode<>(14);
+		SinglyLinkedList.ListNode<Integer> sixthNode = new SinglyLinkedList.ListNode<>(15);
 		
 		singlyLinkedList.setHead(headNode);
 		
@@ -32,9 +32,9 @@ public class FindNodeFromEnd {
 	}
 
 	static void findNode(int position) {
-		SinglyLinkedList.ListNode head = singlyLinkedList.getHead();
-		SinglyLinkedList.ListNode headPtr = head;
-		SinglyLinkedList.ListNode refPtr = head;
+		SinglyLinkedList.ListNode<Integer> head = singlyLinkedList.getHead();
+		SinglyLinkedList.ListNode<Integer> headPtr = head;
+		SinglyLinkedList.ListNode<Integer> refPtr = head;
 		int count = 0;
 		while(count < position) {
 			refPtr = refPtr.getNext();

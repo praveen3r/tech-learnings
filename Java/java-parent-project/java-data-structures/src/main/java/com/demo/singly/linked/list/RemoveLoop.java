@@ -1,6 +1,6 @@
 package com.demo.singly.linked.list;
 
-public class DetectLoop {
+public class RemoveLoop {
 	
 	static SinglyLinkedList<Integer> singlyLinkedList = new SinglyLinkedList<>();
 
@@ -36,16 +36,24 @@ public class DetectLoop {
 
 	static void detectLoop() {
 		SinglyLinkedList.ListNode<Integer> head = singlyLinkedList.getHead();
-		SinglyLinkedList.ListNode<Integer> slowItr = head;
-		SinglyLinkedList.ListNode<Integer> fastItr = head;
-		while(fastItr!=null && fastItr.getNext()!=null) {
-			slowItr = slowItr.getNext();
-			fastItr = fastItr.getNext().getNext();
-			if(slowItr == fastItr) {
-				System.out.println("detected loop");
-				return;
+		SinglyLinkedList.ListNode<Integer> slowPtr = head;
+		SinglyLinkedList.ListNode<Integer> fastPtr = head;
+		while(fastPtr!=null && fastPtr.getNext()!=null) {
+			slowPtr = slowPtr.getNext();
+			fastPtr = fastPtr.getNext().getNext();
+			if(slowPtr == fastPtr) {
+				removeLoop(head, slowPtr);
 			}
 		}
-		System.out.println("end of method");
+		System.out.println(singlyLinkedList);
+	}
+	
+	static void removeLoop(SinglyLinkedList.ListNode<Integer> head, SinglyLinkedList.ListNode<Integer> slowPtr) {
+		SinglyLinkedList.ListNode<Integer> temp = head;
+		while(temp.getNext() != slowPtr.getNext()) {
+			temp = temp.getNext();
+			slowPtr = slowPtr.getNext();
+		}
+		slowPtr.setNext(null);
 	}
 }

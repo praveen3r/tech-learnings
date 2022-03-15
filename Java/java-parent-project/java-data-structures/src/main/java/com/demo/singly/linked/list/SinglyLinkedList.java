@@ -1,38 +1,38 @@
 package com.demo.singly.linked.list;
 
-public class SinglyLinkedList {
+public class SinglyLinkedList<T> {
 	
-	private ListNode head;
+	private ListNode<T> head;
 	
-	static class ListNode {
-		private int data;
-		private ListNode next;
+	static class ListNode<T> {
+		private T data;
+		private ListNode<T> next;
 		
-		public ListNode(int data) {
+		public ListNode(T data) {
 			this.data = data;
 			this.next = null;
 		}
 		
-		public int getData() {
+		public T getData() {
 			return data;
 		}
 
-		public ListNode getNext() {
+		public ListNode<T> getNext() {
 			return next;
 		}
 
-		public void setNext(ListNode next) {
+		public void setNext(ListNode<T> next) {
 			this.next = next;
 		}
 		
 		
 	}
 
-	public ListNode getHead() {
+	public ListNode<T> getHead() {
 		return head;
 	}
 
-	public void setHead(ListNode head) {
+	public void setHead(ListNode<T> head) {
 		this.head = head;
 	}
 	

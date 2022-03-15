@@ -4,12 +4,12 @@ import com.demo.singly.linked.list.SinglyLinkedList.ListNode;
 
 public class InsertNodeAtTheBeginning {
 	
-	static SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+	static SinglyLinkedList<Integer> singlyLinkedList = new SinglyLinkedList<>();
 
 	public static void main(String[] args) {
 		populateData();
 		
-		SinglyLinkedList.ListNode newNode = new SinglyLinkedList.ListNode(1);
+		SinglyLinkedList.ListNode<Integer> newNode = new SinglyLinkedList.ListNode<>(1);
 		insertNodeAtTheBeginning(newNode);
 
 	}
@@ -17,10 +17,10 @@ public class InsertNodeAtTheBeginning {
 	static void populateData() {
 
 		
-		SinglyLinkedList.ListNode headNode = new SinglyLinkedList.ListNode(10);
-		SinglyLinkedList.ListNode secondNode = new SinglyLinkedList.ListNode(12);
-		SinglyLinkedList.ListNode thirdNode = new SinglyLinkedList.ListNode(14);
-		SinglyLinkedList.ListNode fourthNode = new SinglyLinkedList.ListNode(16);
+		SinglyLinkedList.ListNode<Integer> headNode = new SinglyLinkedList.ListNode<>(10);
+		SinglyLinkedList.ListNode<Integer> secondNode = new SinglyLinkedList.ListNode<>(12);
+		SinglyLinkedList.ListNode<Integer> thirdNode = new SinglyLinkedList.ListNode<>(16);
+		SinglyLinkedList.ListNode<Integer> fourthNode = new SinglyLinkedList.ListNode<>(16);
 		
 		singlyLinkedList.setHead(headNode);
 		
@@ -30,8 +30,8 @@ public class InsertNodeAtTheBeginning {
 		
 	}
 
-	static void insertNodeAtTheBeginning(ListNode newNode) {
-		SinglyLinkedList.ListNode head = singlyLinkedList.getHead();
+	static void insertNodeAtTheBeginning(ListNode<Integer> newNode) {
+		SinglyLinkedList.ListNode<Integer> head = singlyLinkedList.getHead();
 		newNode.setNext(head);
 		singlyLinkedList.setHead(newNode);
 		
