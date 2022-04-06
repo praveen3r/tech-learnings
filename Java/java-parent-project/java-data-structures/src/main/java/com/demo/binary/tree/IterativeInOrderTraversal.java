@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class IterativeInOrderTraversal {
 
-	static BinaryTree binaryTree = new BinaryTree();
+	static BinaryTree<Integer> binaryTree = new BinaryTree<>();
 
 	public static void main(String[] args) {
 

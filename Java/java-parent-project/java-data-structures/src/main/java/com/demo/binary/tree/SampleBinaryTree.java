@@ -4,7 +4,7 @@ import com.demo.singly.linked.list.SinglyLinkedList;
 
 public class SampleBinaryTree {
 
-	static BinaryTree binaryTree = new BinaryTree();
+	static BinaryTree<Integer> binaryTree = new BinaryTree<>();
 
 	public static void main(String[] args) {
 

@@ -4,7 +4,7 @@ public class BinaryTree<T> {
 
 	private TreeNode<T> root;
 
-	static class TreeNode<T> {
+	public static class TreeNode<T> {
 		private TreeNode<T> left;
 		private TreeNode<T> right;
 		private T data;

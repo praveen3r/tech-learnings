@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class LevelOrderTraversal {
 
-	static BinaryTree binaryTree = new BinaryTree();
+	static BinaryTree<Integer> binaryTree = new BinaryTree<>();
 
 	public static void main(String[] args) {
 

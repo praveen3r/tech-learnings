@@ -7,7 +7,7 @@ public class DeleteNodeAtTheLast {
 	public static void main(String[] args) {
 		populateData();
 		
-		deleteNodeAtTheBeginning();
+		deleteNodeAtTheLast();
 
 	}
 	
@@ -27,7 +27,7 @@ public class DeleteNodeAtTheLast {
 		
 	}
 
-	static void deleteNodeAtTheBeginning() {
+	static void deleteNodeAtTheLast() {
 		SinglyLinkedList.ListNode<Integer> head = singlyLinkedList.getHead();
 		SinglyLinkedList.ListNode<Integer> previous = head;
 		SinglyLinkedList.ListNode<Integer> current = head;

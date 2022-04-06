@@ -2,7 +2,7 @@ package com.demo.binary.tree;
 
 public class RecursivePostOrderTraversal {
 
-	static BinaryTree binaryTree = new BinaryTree();
+	static BinaryTree<Integer> binaryTree = new BinaryTree<>();
 
 	public static void main(String[] args) {
 
