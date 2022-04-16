@@ -1,0 +1,147 @@
+/*
+Files import
+@import forms.less - this will copy all the properties of css
+@import (less, optional) "custom.css"; // pass arguments to import options
+
+below are arguments that can be passed
+
+reference - It uses a LESS file only as reference and will not output it.
+inline - It enables you to copy your CSS into the output without being processed.
+less - It will treat the imported file as the regular LESS file, despite whatever may be the file extension.
+css - It will treat the imported file as the regular CSS file, despite whatever may be the file extension.
+once - It will import the file only one time.
+multiple - It will import the file multiple times.
+optional - It continues compiling even though the file to import is not found.
+
+*/
+body {
+  background: red;
+  /*variables - refering to background  color variable */
+}
+.panel {
+  border: 2px solid blue;
+  margin: 10px;
+}
+.little-panel {
+  border: 2px solid blue;
+  margin: 10px;
+  /*mixins - refering to panel  class */
+  font-size: 20px;
+}
+.high-panel {
+  border: 2px solid blue;
+  margin: 10px;
+  font-size: 40px;
+}
+/* nested rules */
+.side-nav {
+  background: blue;
+}
+.side-nav a:link {
+  color: white;
+  padding: 8px;
+}
+.side-nav a:hover {
+  color: green;
+}
+/* nested conditionals */
+.welcome-banner {
+  font-size: 32px;
+  background: lightgreen;
+}
+@media screen and (max-width: 768px) {
+  .welcome-banner {
+    font-size: 10px;
+    background: lightblue;
+  }
+}
+/* simple operations */
+.button {
+  background: #006699;
+  color: #fff;
+  padding: 5px;
+  display: inline-block;
+}
+.light-button {
+  color: #fff;
+  padding: 5px;
+  display: inline-block;
+  background: #006699;
+  padding: 15px;
+}
+.jumbo-button {
+  background: #006699;
+  color: #fff;
+  padding: 5px;
+  display: inline-block;
+  padding: 35px;
+}
+/*File paths */
+.demo {
+  height: 500px;
+  width: 400px;
+  background: url("images/test.jpg") /* images is a file path * not a variable*/;
+}
+/* functions */
+.demo1 {
+  width: 100%;
+}
+/* parametric mixins */
+.myheader {
+  border: 2px dashed green;
+}
+/* logical mixins - guards */
+.myclass21 {
+  color: red;
+  color: blue;
+  font-size: 20px;
+}
+/* type checking */
+.myclass22 {
+  color: red;
+  color: blue;
+  font-size: 20px;
+}
+/* loops */
+.myclass33 {
+  width: 25px;
+  width: 50px;
+  width: 75px;
+  width: 100px;
+  width: 125px;
+  width: 150px;
+  width: 175px;
+}
+/* merge with comma*/
+.class {
+  box-shadow: 5px 5px 5px grey, 0 0 5px #f78181;
+}
+/* merge with space*/
+.class {
+  transform: scale(1) rotate(2deg);
+}
+.testclass {
+  transform: scale(1);
+}
+/* selectors */
+.header .menu {
+  border-radius: 5px;
+  border: 1px solid red;
+  padding-left: 200px;
+}
+a {
+  color: #5882FA;
+}
+a:hover {
+  background-color: #A9F5F2;
+}
+/* less functions - check the website for full list */
+/*  length - It will take a comma or space separated list of values as parameter and returns an integer representing the number of elements in a list.*/
+.test123 {
+  font-size: 12;
+}
+/* extract - It will return the value at a specified position in a list. It takes list (list of values separated by a comma or space) and index (integer specifying a position of an element to return) as parameters.*/
+.test321 {
+  font-size: 20px;
+  color: #F79F81;
+}

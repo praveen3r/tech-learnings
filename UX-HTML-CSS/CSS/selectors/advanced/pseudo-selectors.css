@@ -1,0 +1,15 @@
+h1 + a {
+  color:  blue;
+} /* anchor tag immediately after h1 tag*/
+
+textarea ~ button {
+  color:  red;
+} /* button tag immediately after textarea tag within same parent*/
+
+ul li {
+	color:  blue;
+}/*all li that are immediate descendant of ul */
+
+ul > li {
+	color:  red;
+}/*all li that are family of ul at all levels - child within a child, etc */

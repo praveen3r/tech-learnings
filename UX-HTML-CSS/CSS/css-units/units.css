@@ -1,0 +1,16 @@
+h1 {
+	/*font-size: 2cm;
+	font-size: 1 in;
+	font-size: 40pt;*/
+	font-size: 2em;
+}
+
+div {
+	/*height: 200px;
+	width:  200px;
+	height: 200px;
+	width:  50%;*/
+	height: 20vh;
+	width:  50vw;
+	background:  blue;
+}

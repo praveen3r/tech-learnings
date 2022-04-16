@@ -1,0 +1,41 @@
+.test1 {
+	height: 150px;
+	width: 150px;
+	border:  10px solid red;
+	/*padding:  20px;
+	padding-top:  20px;
+	padding-right:  20px;*/
+	padding:  20px 20px 20px 0; /*top right bottom left*/
+	/*margin:  40px;
+	margin-top:  40px;
+	margin-right:  40px;*/
+	margin:  20px 20px 20px 0; /*top right bottom left*/
+	float: right;
+}
+
+span.a {
+  display: inline; /* the default for span */
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid blue;  
+  background-color: yellow; /* doesn't respect height and width*/
+}
+
+span.b {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid blue;    
+  background-color: yellow; /* respect height and width*/
+}
+
+span.c {
+  display: block;
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid blue;    
+  background-color: yellow; /* creates new lineo*/
+}

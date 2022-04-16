@@ -1,0 +1,33 @@
+.test1 {
+	color:#2acf21 ;
+}
+
+.test2 {
+	color: rgb(19, 135, 12);
+}
+
+body {
+	/*background: blue;
+	background-color: blue;
+	background: url("bg.jfif");*/
+	
+}
+
+#test3 {
+	height: 200px;
+	width: 200px;
+	background-image: url("bg.jfif");
+	background-size: cover;
+}
+
+.test4 {
+	color: rgba(19, 135, 12, 0.3);
+}
+
+#test5 {
+	height: 200px;
+	width: 400px;
+	/*background: linear-gradient(to right, red, blue);
+	background: linear-gradient(145deg, red, blue);*/
+	background: radial-gradient(circle, red, blue, green);
+}

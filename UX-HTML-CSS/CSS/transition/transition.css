@@ -1,0 +1,24 @@
+.submit-button {
+  background: green;
+  height:  50px;
+  width: 150px;
+  margin-top: 20px;
+  color: white;
+  /*transition: background 2s ease;
+  transition: background 2s linear;
+  transition: background 2s ease-in-out 1s;*/ /*1s delay*/
+  -webkit-transition: background 2s ease; /* Chrome and IE */
+  -moz-transition: background 2s ease; /* Mozilla */
+  -o-transition: background 2s ease; /* Opera */
+}
+
+.submit-button:hover {
+  background: blue;
+  padding:  40px 50px;
+  /*transform:  translate(20px, 30px);*/ /* move by X and Y */
+ /* transform:  scale(2.5);
+  transform:  rotate(90deg)
+  transform:  skewX(45deg);
+  transform:  skewY(45deg);*/
+  transform: matrix(1, -0.3, 0.3, 1, 10, 50); /* matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY()) */
+}

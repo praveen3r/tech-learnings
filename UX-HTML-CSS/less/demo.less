@@ -1,0 +1,216 @@
+@background-color: red;
+@button-background: #006699;
+@button-color: #fff;
+@button-padding: 5px;
+@images: "images/";
+@width:1.0;
+/*
+Files import
+@import forms.less - this will copy all the properties of css
+@import (less, optional) "custom.css"; // pass arguments to import options
+
+below are arguments that can be passed
+
+reference - It uses a LESS file only as reference and will not output it.
+inline - It enables you to copy your CSS into the output without being processed.
+less - It will treat the imported file as the regular LESS file, despite whatever may be the file extension.
+css - It will treat the imported file as the regular CSS file, despite whatever may be the file extension.
+once - It will import the file only one time.
+multiple - It will import the file multiple times.
+optional - It continues compiling even though the file to import is not found.
+
+*/
+
+body {
+  background: @background-color; /*variables - refering to background  color variable */
+}
+
+.panel {
+  border: 2px solid blue;
+  margin: 10px;
+}
+
+.little-panel {
+  .panel;          /*mixins - refering to panel  class */
+  font-size:20px;
+}
+
+.high-panel {
+  .panel;
+  font-size:40px;
+}
+
+/* nested rules */
+.side-nav {
+  background: ~"blue"; //escaping - converts strings to properties
+
+  a:link {
+    color: white;
+    padding: 8px;
+  }
+
+  a:hover {
+    color: green;
+  }
+}
+
+/* nested conditionals */
+
+.welcome-banner {
+  font-size: 32px;
+  background: lightgreen;
+
+  @media screen {
+   @media (max-width: 768px) {
+   font-size: 10px;
+    background: lightblue;
+   }
+  }
+}
+
+/* simple operations */
+.button {
+  background: @button-background;
+  color: @button-color;
+  padding: @button-padding;
+  display: inline-block;
+}
+
+.light-button {
+  .button;
+  background: @button-background * 1.0;
+  padding: @button-padding + 10;
+}
+
+.jumbo-button {
+  .button;
+  padding: @button-padding + 30;
+}
+
+/*File paths */
+
+.demo {
+  height: 500px;
+  width: 400px;
+  background: url("@{images}test.jpg") /* images is a file path * not a variable*/
+}
+
+/* functions */
+
+.demo1 {
+   width: percentage(@width);
+}
+
+/* parametric mixins */
+
+.border(@width; @style; @color) {
+   border: @width @style @color;
+}
+
+.myheader {
+   .border(2px; dashed; green);
+}
+
+/* logical mixins - guards */
+
+.mixin (@a) when (@a = 20px){
+color:red;
+}
+
+.mixin (@a) when (@a < 20px) {
+   color:blue;
+}
+
+.mixin (@a) {
+   font-size: @a;
+}
+
+.myclass21 { .mixin(20px) }
+
+/* type checking */
+
+.mixin (@a; @b: red) when (iscolor(@b)){
+   color:blue;
+}
+
+.mixin (@a) {
+   font-size: @a;
+}
+
+.myclass22 { .mixin(20px) }
+
+/* loops */
+
+.cont(@count) when (@count > 0) {
+   .cont((@count - 1));
+   width: (25px * @count);
+}
+
+.myclass33 {
+   .cont(7);
+}
+
+/* merge with comma*/
+
+.myfunc() {
+   box-shadow+: 5px 5px 5px grey;
+}
+
+.class {
+   .myfunc();
+   box-shadow+: 0 0 5px #f78181;
+}
+
+/* merge with space*/
+
+.mixin() {
+   transform+_: scale(1);
+}
+
+.class {
+   .mixin();
+   transform+_: rotate(2deg);
+}
+
+.testclass {
+  .mixin();
+}
+
+/* selectors */
+
+.header {
+   .menu {
+      border-radius: 5px;
+      border: 1px solid red;
+      & {
+         padding-left: 200px;
+      }
+   }
+}
+
+a {
+   color: #5882FA;
+   &:hover {
+      background-color: #A9F5F2;
+   }
+}
+
+/* less functions - check the website for full list */
+
+/*  length - It will take a comma or space separated list of values as parameter and returns an integer representing the number of elements in a list.*/
+
+.test123 {
+   @list: "audi", "benz", "toyota","honda", "mahindra", "suzuki","volkswagen",
+   "renault","bmw","tata","ford","skoda";
+   @val: length(@list);
+   font-size:@val;
+}
+
+/* extract - It will return the value at a specified position in a list. It takes list (list of values separated by a comma or space) and index (integer specifying a position of an element to return) as parameters.*/
+
+.test321 {
+   @list: 10px, 20px, 30px, 40px;
+   @val: extract(@list, 2);
+   font-size:@val;
+   color:#F79F81;
+}

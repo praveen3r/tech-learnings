@@ -1,0 +1,25 @@
+h1[class=test1] {
+	color:  blue;
+} /* Selects all h1 elements with class="test" */
+
+h1[class~=test2] {
+	color:  red;
+} /* Selects all h1 elements with a class attribute containing the word "test1". This is used when there 
+     are multiple class attributes */
+
+
+h1[class^=test3] {
+	color:  green;
+} /* Selects all h1 elements with a class attribute begins with "test3" */
+
+h1[class$=test4] {
+	color:  yellow;
+} /* Selects all h1 elements with a class attribute ends with "test4" */
+
+h1[class*=test5] {
+	color:  orange;
+} /* Selects all h1 elements with a class attribute that contains "test5" */
+
+h1[class!=test6] {
+	color:  green;
+} /* Selects all h1 elements with a class attribute value equal to "test6" or starting with "test6-" */

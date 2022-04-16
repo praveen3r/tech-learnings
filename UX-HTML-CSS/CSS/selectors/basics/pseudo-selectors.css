@@ -1,0 +1,39 @@
+#test-id {
+	background: green;
+}
+
+/* tr:first-child {
+	color: blue;
+} 
+
+tbody tr:last-child {
+	color: blue;
+}
+
+tbody tr:nth-child(2) {
+	color: blue;
+}
+
+tbody tr:only-child {
+	color: blue;
+}*/
+
+tbody tr:nth-last-child(2) {
+	color: blue;
+}
+
+/* thead tr:first-child {
+	color: blue;
+}
+
+tbody tr:first-child {
+	color: blue;
+}*/
+
+a:link {
+	color: red;
+}
+
+a:visited {
+	color: blue;
+}

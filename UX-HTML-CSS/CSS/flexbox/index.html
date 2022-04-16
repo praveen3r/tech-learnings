@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	
+	<link rel="stylesheet" type="text/css" href="./flexbox.css">
+	<title>Hello World</title>
+</head>
+<body>
+	<div class="container">
+		<div class="container-item">A</div>
+		<div class="container-item">B</div>
+		<div class="container-item">C</div>
+		<div class="container-item">D</div>
+		<div class="container-item">E</div>
+		<div class="container-item">F</div>
+		<div class="container-item">G</div>
+		<div class="container-item">H</div>
+	</div>
+	<br/>
+	<h1>Flex grow, shrink and basis</h1>
+	<div class="container">
+		<!-- <div class="container-item"  style="flex-basis: 100px;flex-grow: 1; flex-shrink: 1;">A</div>
+		<div class="container-item" style="flex-basis: 100px;flex-grow: 1; flex-shrink: 1;">B</div>
+		<div class="container-item" style="flex-basis: 100px;flex-grow: 1; flex-shrink: 1;">C</div>
+		<div class="container-item" style="flex-basis: 100px;flex-grow: 1; flex-shrink: 3;">D</div>
+		<div class="container-item" style="flex-basis: 100px;flex-grow: 5; flex-shrink: 1;">E</div> -->
+
+		<div class="container-item"  style="flex: 1 1 100px;">A</div>
+		<div class="container-item" style="flex: 1 1 100px;">B</div>
+		<div class="container-item" style="flex: 1 1 100px;">C</div>
+		<div class="container-item" style="flex: 1 1 100px;">D</div>
+		<div class="container-item" style="flex: 5 1 100px;">E</div>
+	</div>
+
+	<h1>Align self</h1>
+
+	<div class="container">
+		<div class="container-item"  style="align-self: flex-start;">A</div>
+		<div class="container-item" style="align-self: center;">B</div>
+		<div class="container-item" style="align-self: flex-end">C</div>
+		<div class="container-item" style="align-self: center;">D</div>
+		<div class="container-item" style="align-self: flex-start;">E</div>
+	</div>
+
+</body>
+</html>

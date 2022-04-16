@@ -1,0 +1,23 @@
+a {
+	text-decoration: none;
+}
+
+p {
+	text-transform: uppercase;
+	text-align: justify;
+}
+
+.test1 {
+	font-size: 1.2em;
+	font-weight: 600;
+	font-style: italic;
+}
+
+.test2 {
+	/*font-family: "Times New Roman", sans-serif;*/
+	font-family: "Arial", sans-serif;
+}
+
+.test3 {
+	font-family: 'Beau Rivage', cursive;
+}
