@@ -1,0 +1,8 @@
+$colors: (
+  "red": red,
+  "blue": blue
+);
+
+body {
+  background-color: map-get($colors, "blue");
+}
