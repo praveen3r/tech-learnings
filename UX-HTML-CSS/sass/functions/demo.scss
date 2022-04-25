@@ -1,0 +1,14 @@
+$bg-color: red;
+
+$colors: (
+  "red": red,
+  "blue": blue
+);
+
+@function getColor($color-name: "green") {
+  @return map-get($colors, $color-name);
+}
+
+body {
+  background-color: getColor("red");
+}

@@ -1,0 +1,14 @@
+.test1 {
+  &:hover {
+    color: red;
+  }
+
+  &:last-child {
+    color: blue;
+  }
+
+  &:nth-child(2) {
+    color: blue;
+  }
+}
+

@@ -1,0 +1,7 @@
+$bg-color: red;
+
+body {
+  @debug "Hello world";
+  width: calc(80% - 40%);
+}
+

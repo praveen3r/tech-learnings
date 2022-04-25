@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        aside {
+            width: 30%;
+            padding-left: 15px;
+            margin-left: 15px;
+            font-style: italic;
+            background-color: lightgray;
+        }
+
+        article {
+            display: grid;
+            grid-template-columns: 10% 1fr 10%;
+            grid-column-gap: 20px;
+            padding-bottom: 100px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <header style="background-color:blue; text-align:center; height: 50px;">
+        <p style="color: white;"">Header</p>
+        <nav>
+            Navigation
+        </nav>
+    </header>
+    <section>
+        <main>
+            <article>
+                <table>
+                    <th>Name</th>
+                    <!-- <th>Profession</th>
+                    <th>Sex</th> -->
+                    <th colspan="2">Profession & Sex</th>
+
+                    <!-- <tr>
+                        <td >Sachin</td>
+                        <td>Cricket</td>
+                        <td>Male</td>
+                    </tr>
+                    <tr>
+                        <td>Yuvraj</td>
+                        <td>Cricket</td>
+                        <td>Male</td>
+                    </tr>
+                    <tr>
+                        <td>Dhoni</td>
+                        <td>Cricket</td>
+                        <td>Male</td>
+                    </tr> -->
+
+                    <tr>
+                        <td rowspan="3">Sachin</td>
+                        <td>Cricket</td>
+                        <td>Male</td>
+                    </tr>
+                    <tr>
+                        <td>Cricket</td>
+                        <td>Male</td>
+                    </tr>
+                    <tr>
+                        <td>Cricket</td>
+                        <td>Male</td>
+                    </tr>
+                </table>
+        </article>
+        <article>
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Profession</th>
+                    <th>Sex</th> 
+                </thead>
+                <tbody>
+                    <colgroup>
+                        <col style="background-color: blue;">
+                    </colgroup>
+                    <colgroup>
+                        <col style="background-color: lightgrey;"span="2">
+                    </colgroup>
+                    <tr>
+                        <td >Sachin</td>
+                        <td>Cricket</td>
+                        <td>Male</td>
+                    </tr>
+                    <tr>
+                        <td>Yuvraj</td>
+                        <td>Cricket</td>
+                        <td>Male</td>
+                    </tr>
+                    <tr>
+                        <td>Dhoni</td>
+                        <td>Cricket</td>
+                        <td>Male</td>
+                    </tr> 
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td >Last Name</td>
+                        <td>Cricket</td>
+                        <td>Male</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </article>
+        </main>
+        <aside>
+            <p>
+                Aside
+            </p>
+        </aside>
+
+        </section>
+        <footer style=" background-color:green; text-align:center; height: 50px;">
+        <p style="color: white;"">Footer</p>
+    </footer>
+</body>
+</html>

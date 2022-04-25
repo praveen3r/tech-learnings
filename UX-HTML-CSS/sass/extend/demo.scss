@@ -1,0 +1,21 @@
+$bg-color: red;
+
+.demo {
+  background-color: $bg-color;
+}
+
+.demo1 {
+  @extend .demo;
+
+  a:hover {
+    background-color: blue;
+  }
+}
+
+%demo2 {
+  background-color: blue;
+}
+
+.demo3 {
+  @extend %demo2;
+}

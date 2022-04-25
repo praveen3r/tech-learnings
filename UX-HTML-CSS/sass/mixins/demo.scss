@@ -1,0 +1,32 @@
+$bg-color: red;
+$mobile-max-width: 800px;
+
+@mixin bodyStyle($direction) {
+  background-color: $bg-color;
+  text-align: $direction;
+}
+
+@mixin light-theme($theme: true) {
+  @if $theme {
+    background-color: green;
+  }
+}
+
+@mixin mobile{
+  @media (max-width: $mobile-max-width) {
+    @content;
+  }
+}
+body {
+  @include bodyStyle(left);
+}
+
+div {
+  @include light-theme(true);
+}
+
+p {
+  @include mobile {
+    background-color: blue;
+  }
+}
