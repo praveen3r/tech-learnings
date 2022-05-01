@@ -1,0 +1,14 @@
+gradle init
+-----------------
+
+gradle build
+----------------
+
+gradle clean
+----------------
+
+gradle run
+-----------------
+
+gradle tasks
+-----------------
