@@ -7,6 +7,9 @@ const connectDB = require('../config/dbConfig');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const cors = require('cors');
+const busboy = require('busboy');
+
 
 const port = process.env.PORT || 5005;
 
@@ -21,6 +24,7 @@ db.once("open", function () {
 });*/
 
 app.use(helmet());
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
