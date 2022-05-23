@@ -1,0 +1,9 @@
+show databases;
+use test; //create if not there
+
+-----------------------------------------
+
+db.test.deleteMany({"id" : "11"}, //where condition
+    
+db.test.deleteOne({"id" : "13"});
+

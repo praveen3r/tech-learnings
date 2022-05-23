@@ -1,0 +1,10 @@
+show databases;
+use test; //create if not there
+
+-----------------------------------------
+
+var pipeline = [{
+    $sort: {"id" :1}},
+    {$limit: 3}
+];
+db.test.aggregate(pipeline); //list all

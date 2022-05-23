@@ -1,0 +1,74 @@
+show databases;
+use test; //create if not there
+
+-----------------------------------------
+
+db.test.find(); //list all
+
+db.test.find({"id":"1"}); //list with id 1
+
+db.test.find({"id":"14", "name" : "extra field"}); //and condition
+
+db.test.find({"id": { $lte: "14"}, "name" : "extra field"}); //id less than or equal to 14
+
+db.test.find({"id": { $gte: "14"}, "name" : "extra field"}); //id less than 14
+
+db.test.find({$and : [{"name" : "extra field"}, {"id": { $lte: "14"}}]}); // And condition
+
+db.test.find({$or : [{"name" : "extra field"}, {"id": { $lte: "14"}}]}); //or condition
+
+db.test.find( { id: { $in: [ "11", "12" ] } }, { _id: 0 } );// list of where cdtn
+
+db.test.find({ "name": /^extra/  }); field starts with the word extra (or is "LIKE extra%")
+
+db.test.find( {id: { $gt: "14" }, death: { $exists: false }} ); // id field is greater than 14 and death field does not exists
+
+db.test.find( { id: { $all: [ "11", "12" ] } } ); // contains both the elements "11" and "12"
+
+db.test.find({ },{ _id: 0}); //all row without :id field
+
+db.test.find({"id":"14"}, {"name" : 1}); // show name
+
+db.test.find({"id":"14"}, {"name" : 0}); // don't want name
+
+db.test.find({"id": { $lte: "14"}}, {"name" : 0}); // Don't show names where id less than 14
+
+db.test.find( { id: { $gt: "11", $lt: "14" } } );
+
+db.test.find().sort( {  name: 1 } ); //sorted in ascending order by the name field
+
+db.test.find().sort( {  id:-1, name: 1 } );//sorted in ascending order by the id field in ascending field and name field in descending field
+
+db.test.find().limit( 5 ); //returns at most 2
+
+db.test.find().skip( 5 ); //skips the first 5 documents
+
+db.test.find().size(); //count
+
+db.test.findAndModify({query: { id: "12", name: "extra field" },
+    update:  { id: "13", name: "extra field"} ,
+});
+
+db.test.findAndModify({query: { id: "12", name: "extra field" },
+    update: { $inc: { id: 1 } },
+}); //find and modify it [inc works only with integer]
+
+db.test.findOneAndReplace({"id": "1"}, {"id":"1", "name" : "Different field"}); //Find it and replace it with new object
+
+db.test.findOneAndReplace({"name" : "Different field"}, {"id":"1", "name" : "Different field"});
+
+-----------------------------------------------------------------------------------------------------------
+
+
+db.test.find( { contribs: { $size: 4 } } ) // array size
+
+db.test.find({ "awards.award": "Turing Award" }) // awards array contains an element with award field equals "Turing Award":
+
+db.test.find({ awards: { $elemMatch: { award: "Turing Award", year: { $gt: 1980 } } } }) 
+
+//the awards array contains at least one element with both the award field equals "Turing Award" 
+and the year field greater than 1980
+
+db.test.find({ awards: { $elemMatch: { award: "Turing Award", year: { $gt: 1980 } } } }) 
+/returns the last field in the name embedded document and the first two elements in the contribs array
+

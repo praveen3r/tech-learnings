@@ -1,0 +1,36 @@
+show databases;
+use test; //create if not there
+
+-----------------------------------------
+
+db.test.update(
+    {"id" : "1"}, //where condition
+    
+    {
+        $set:{
+            "id" : "12",
+            "name" : "extra field"
+        }
+    },
+    {
+        multi: true ////updates only one row by default but will update multiple if this is set to true
+    }); 
+
+db.test.updateMany({"id" : "2"}, //where condition
+    
+    {
+        $set:{
+            "id" : "14",
+            "name" : "extra field"
+        }
+    });
+
+db.test.updateOne({"id" : "12"}, //where condition
+    
+    {
+        $set:{
+            "id" : "11",
+            "name" : "extra field"
+        }
+    });
+

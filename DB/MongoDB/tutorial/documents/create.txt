@@ -1,0 +1,12 @@
+show databases;
+use test; //create if not there
+
+-----------------------------------------
+
+db.test.insert({"id" : "1"}); //either object or an array
+db.test.insert([{"id" : "1"}, {"id" : "2"}]);
+
+db.test.insertMany([{"id" : "1"}, {"id" : "2"}]);
+
+db.test.insertOne({"id" : "1"});
+

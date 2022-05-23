@@ -1,0 +1,3 @@
+show databases;
+use test; //create if not there
+db.dropDatabase();

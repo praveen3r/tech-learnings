@@ -1,0 +1,5 @@
+show databases;
+use test; //create if not there
+
+-----------------------------------------
+show collections;
