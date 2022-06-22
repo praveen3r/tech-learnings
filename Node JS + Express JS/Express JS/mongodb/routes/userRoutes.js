@@ -1,5 +1,5 @@
 const express = require('express');
-const {getUser, saveUser, updateUser, deleteUser, handleUpload} = require('../controller/userController')
+const {getUser, saveUser, updateUser, deleteUser, handleUpload} = require('../controller/UserController')
 const router = express.Router();
 
 router.route("/").get(getUser).post(saveUser);
