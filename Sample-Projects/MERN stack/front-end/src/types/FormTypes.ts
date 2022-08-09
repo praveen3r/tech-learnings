@@ -29,3 +29,11 @@ export type InputType = GenericFieldHTMLAttributes & {
     username: string;
     keyword: string;
   };
+
+  export type SearchBarType = {
+    label: string;
+    placeholder: string;
+    setInput?: (value: string) => void;
+    searchInput?: string;
+    setSearchInput?: (value: string) => void;
+  }

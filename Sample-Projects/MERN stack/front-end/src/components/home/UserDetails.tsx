@@ -10,8 +10,10 @@ import { dropdownOptions } from "../../types/FormTypes";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
-  age: Yup.number().positive("Age must be greater than zero")
-          .typeError("Enter a valid number").required("Age is required"),
+  age: Yup.number()
+    .positive("Age must be greater than zero")
+    .typeError("Enter a valid number")
+    .required("Age is required"),
   gender: Yup.string().required("Gender is required"),
 });
 
@@ -68,14 +70,14 @@ const UserDetails = ({
                   dataType="number"
                   formik={formik}
                 />
-
-                <DropdownComponent
-                  label="Gender"
-                  id="gender"
-                  name="gender"
-                  options={genderOptions}
-                />
-
+                <div style={{width:'40%'}}>
+                  <DropdownComponent
+                    label="Gender"
+                    id="gender"
+                    name="gender"
+                    options={genderOptions}
+                  />
+                </div>
                 {/* <InputComponent
                   label="Gender"
                   type="text"

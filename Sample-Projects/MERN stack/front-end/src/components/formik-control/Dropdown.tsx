@@ -8,9 +8,8 @@ function Dropdown(props: DropdownType) {
 
   return (
     <>
-      <div>
         <label htmlFor={name}>{label}:</label>
-        <Field as="select" id={id} name={name} {...rest}>
+        <Field as="select" id={id} name={name} {...rest} className="classic">
           <option key="" value="">
             Select {label}
           </option>
@@ -24,7 +23,6 @@ function Dropdown(props: DropdownType) {
         </Field>
 
         <ErrorMessage name={name} component={TextError} />
-      </div>
     </>
   );
 }

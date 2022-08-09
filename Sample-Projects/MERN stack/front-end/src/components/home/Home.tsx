@@ -178,7 +178,6 @@ function Home() {
                       <td> {user.sNo}</td>
                       <td>
                         <a href="#" onClick={() => onClickUser(user)}>
-                          {" "}
                           {user.name}
                         </a>
                       </td>

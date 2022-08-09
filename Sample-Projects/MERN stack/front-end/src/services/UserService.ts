@@ -1,3 +1,4 @@
+import { AddRes, DeleteRes, EditRes } from "../types/HttpResType";
 import {User, UserRes} from "../types/User";
 import httpClient from "../util/HttpClient";
 
@@ -6,15 +7,15 @@ const getUsers = ()  => {
 }
 
 const addUser = (user: User)  => {
-      return httpClient.post('/users/user', user);
+      return httpClient.post<AddRes>('/users/user', user);
 }
 
 const editUser = (user: User, id: string)  => {
-      return httpClient.put(`/users/user/${id}`, user);
+      return httpClient.put<EditRes>(`/users/user/${id}`, user);
 }
 
 const deleteUser = (id: string)  => {
-      return httpClient.delete(`/users/user/${id}`);
+      return httpClient.delete<DeleteRes>(`/users/user/${id}`);
 }
 
 export {getUsers, addUser, editUser, deleteUser};
