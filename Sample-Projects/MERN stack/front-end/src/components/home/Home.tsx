@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { isEqual } from "lodash";
 import { Spinner } from "react-bootstrap";
 import LoadingOverlay from "react-loading-overlay-ts";
+import DisplayMessage from "../i18n/DisplayMessage";
 
 function Home() {
   const defaultUser: User = {
@@ -159,15 +160,15 @@ function Home() {
         <>
           <LoadingOverlay active={overlay} spinner>
             <Button onClick={onClickAdd} className="homeBtn">
-              Add User
+            <DisplayMessage id="add"/> <DisplayMessage id="user"/>
             </Button>
             <table>
               <thead>
                 <tr>
-                  <th>S.No.</th>
-                  <th>Name</th>
-                  <th>Age</th>
-                  <th>Gender</th>
+                  <th><DisplayMessage id="serialNo"/></th>
+                  <th><DisplayMessage id="name"/></th>
+                  <th><DisplayMessage id="age"/></th>
+                  <th><DisplayMessage id="gender"/></th>
                   <th></th>
                 </tr>
               </thead>
@@ -177,9 +178,9 @@ function Home() {
                     <tr key={user._id}>
                       <td> {user.sNo}</td>
                       <td>
-                        <a href="#" onClick={() => onClickUser(user)}>
-                          {user.name}
-                        </a>
+                      <Button variant="link" onClick={() => onClickUser(user)}>
+                              {user.name}
+                            </Button>
                       </td>
                       <td> {user.age}</td>
                       <td> {user.gender}</td>

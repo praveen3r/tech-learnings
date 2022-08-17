@@ -9,6 +9,7 @@ import { authenticate } from "../services/LoginService";
 import { AxiosError } from "axios";
 import Constants from "../util/Constants";
 import LoadingOverlay from 'react-loading-overlay-ts';
+import DisplayMessage from "../components/i18n/DisplayMessage";
 
 const initialValues: LoginType = {
   username: "",
@@ -64,7 +65,7 @@ function Login() {
               ) : null}
               <div className="form-group">
                 <InputComponent
-                  label="Username"
+                  label="username"
                   type="text"
                   id="username"
                   name="username"
@@ -73,7 +74,7 @@ function Login() {
                 />
 
                 <InputComponent
-                  label="Password"
+                  label="password"
                   type="password"
                   id="keyword"
                   name="keyword"
@@ -81,9 +82,9 @@ function Login() {
                   dataType="password"
                 />
 
-                <Button type="submit">Submit</Button>
+                <Button type="submit"><DisplayMessage id="submit"/></Button>
                 <Button type="button" variant="secondary" onClick={e => formik.resetForm()}>
-                  Clear
+                <DisplayMessage id="clear"/>
                 </Button>
               </div>
             </Form>

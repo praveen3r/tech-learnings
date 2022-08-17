@@ -1,6 +1,7 @@
 import { ErrorMessage, Field } from "formik";
 import React from "react";
 import { InputType } from "../../types/FormTypes";
+import DisplayMessage from "../i18n/DisplayMessage";
 import TextError from "./TextError";
 
 function TextInput(props: InputType) {
@@ -9,7 +10,8 @@ function TextInput(props: InputType) {
   return (
     <>
       <div>
-        <label htmlFor={name}>{label}:</label>
+        {/* <label htmlFor={name}>{label}:</label> */}
+        <label htmlFor={name}> <DisplayMessage id={label}/>:</label>
         <Field
           type={type}
           id={id}

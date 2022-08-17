@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Provider from './components/i18n/Provider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,7 +23,10 @@ root.render(
     draggable
     pauseOnHover
     />
-    <App />
+    <Provider locale='de'>
+        <App/>
+    </Provider>
+    {/* <App /> */}
   </React.StrictMode>
 );
 

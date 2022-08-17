@@ -33,6 +33,8 @@ import {
   showEditSuccessMessage,
   showUnexpectedErrorMessage,
 } from "../../util/MessageUtils";
+import ExpandableTableRow from "../table/ExpandableTableRow";
+import DisplayMessage from "../i18n/DisplayMessage";
 
 const defaultUser: User = {
   sNo: 0,
@@ -55,6 +57,7 @@ function HomeWithGrid() {
   const [loading, setLoading] = useState<boolean>(true);
   const [overlay, setOverlay] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
+  
 
   useEffect(() => {
     fetchUsers();
@@ -206,7 +209,6 @@ function HomeWithGrid() {
         (val) =>
           val!.toString().toLowerCase().indexOf(searchInput.toLowerCase()) >= 0
       );
-      console.log(newData);
 
       return newData;
     }
@@ -224,7 +226,7 @@ function HomeWithGrid() {
             {userData?.length ? (
               <div className="inline-style">
                 <Button onClick={onClickAdd} className="homeBtn">
-                  Add User
+                <DisplayMessage id="add"/> <DisplayMessage id="user"/>
                 </Button>
                 <div className="inline-block-style right-align">
                   <SearchBar
@@ -239,17 +241,18 @@ function HomeWithGrid() {
               <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>S.No</TableCell>
-                    <TableCell align="left">Name</TableCell>
+                  <TableCell></TableCell>
+                    <TableCell><DisplayMessage id="serialNo"/></TableCell>
+                    <TableCell align="left"><DisplayMessage id="name"/></TableCell>
                     <TableCell align="left" onClick={handleSortRequest}>
                       <TableSortLabel
                         active={true}
                         direction={orderDirection === "asc" ? "asc" : "desc"}
                       >
-                        Age
+                        <DisplayMessage id="age"/>
                       </TableSortLabel>
                     </TableCell>
-                    <TableCell align="left">Gender</TableCell>
+                    <TableCell align="left"><DisplayMessage id="gender"/></TableCell>
                     <TableCell align="left"></TableCell>
                   </TableRow>
                 </TableHead>
@@ -262,7 +265,11 @@ function HomeWithGrid() {
                         page * rowsPerPage + rowsPerPage
                       )
                       .map((user) => (
-                        <TableRow key={user.sNo}>
+                        <ExpandableTableRow
+              key={user.sNo}
+              expandComponent={<TableCell colSpan={5}>{user.name}</TableCell>}
+            >
+                        {/* <TableRow key={user.sNo}> */}
                           <TableCell component="th" scope="row">
                             {user.sNo}
                           </TableCell>
@@ -280,7 +287,8 @@ function HomeWithGrid() {
                           >
                             <FaTrash />
                           </TableCell>
-                        </TableRow>
+                        {/* </TableRow> */}
+                        </ExpandableTableRow>
                       ))
                   ) : (
                     <TableRow>
@@ -298,7 +306,7 @@ function HomeWithGrid() {
                         onPageChange={handleChangePage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
                         rowsPerPageOptions={[1, 2, 3, 4]}
-                        labelRowsPerPage={<span>Rows:</span>}
+                        labelRowsPerPage={<span><DisplayMessage id="rows"/>:</span>}
                         labelDisplayedRows={({ page: number }) => {
                           return `Page: ${page}`;
                         }}

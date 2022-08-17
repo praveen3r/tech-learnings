@@ -1,4 +1,5 @@
 import { GenericFieldHTMLAttributes } from "formik";
+import React from "react";
 
 export type InputType = GenericFieldHTMLAttributes & {
     label: string;
@@ -36,4 +37,9 @@ export type InputType = GenericFieldHTMLAttributes & {
     setInput?: (value: string) => void;
     searchInput?: string;
     setSearchInput?: (value: string) => void;
+  }
+
+  export type LocaleProvideType = {
+    children: React.ReactNode,
+    locale: string
   }

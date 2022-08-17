@@ -1,6 +1,7 @@
 import { ErrorMessage, Field } from "formik";
 import React from "react";
 import { DropdownType } from "../../types/FormTypes";
+import DisplayMessage from "../i18n/DisplayMessage";
 import TextError from "./TextError";
 
 function Dropdown(props: DropdownType) {
@@ -8,7 +9,7 @@ function Dropdown(props: DropdownType) {
 
   return (
     <>
-        <label htmlFor={name}>{label}:</label>
+        <label htmlFor={name}><DisplayMessage id={label}/>:</label>
         <Field as="select" id={id} name={name} {...rest} className="classic">
           <option key="" value="">
             Select {label}

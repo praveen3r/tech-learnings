@@ -7,6 +7,7 @@ import { Formik, Form, FormikHelpers } from "formik";
 import InputComponent from "../formik-control/InputComponent";
 import DropdownComponent from "../formik-control/DropdownComponent";
 import { dropdownOptions } from "../../types/FormTypes";
+import DisplayMessage from "../i18n/DisplayMessage";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -53,7 +54,7 @@ const UserDetails = ({
             <Form>
               <div className="form-group">
                 <InputComponent
-                  label="Name"
+                  label="name"
                   type="text"
                   id="name"
                   name="name"
@@ -62,7 +63,7 @@ const UserDetails = ({
                 />
 
                 <InputComponent
-                  label="Age"
+                  label="age"
                   type="text"
                   id="age"
                   name="age"
@@ -72,25 +73,18 @@ const UserDetails = ({
                 />
                 <div style={{width:'40%'}}>
                   <DropdownComponent
-                    label="Gender"
+                    label="gender"
                     id="gender"
                     name="gender"
                     options={genderOptions}
                   />
                 </div>
-                {/* <InputComponent
-                  label="Gender"
-                  type="text"
-                  id="gender"
-                  name="gender"
-                  maxLength="15"
-                /> */}
               </div>
               <Button type="submit" variant="danger">
-                Submit
+              <DisplayMessage id="submit"/>
               </Button>
               <Button variant="default" onClick={hideModal}>
-                Cancel
+              <DisplayMessage id="cancel"/>
               </Button>
             </Form>
           )}
