@@ -1,11 +1,9 @@
-import { ErrorMessage, Field } from "formik";
-import React from "react";
+import { ErrorMessage } from "formik";
+import React, { ChangeEvent } from "react";
 import { InputType } from "../../types/FormTypes";
 import TextError from "./TextError";
 
-const setFieldValue = (event: any, handleChange:any) => {
-  console.log(`coming here`);
-  
+const setFieldValue = (event: ChangeEvent<HTMLInputElement>, handleChange:any) => {
   const value = event.target.value;
   const transformedInput = value.replace(/[^0-9]*/gi, "");
   event.target.value = transformedInput;

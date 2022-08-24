@@ -1,12 +1,12 @@
 import { IconButton, TextField } from "@mui/material";
 import { GridSearchIcon } from "@mui/x-data-grid";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { SearchBarType } from "../../types/FormTypes";
 
 function SearchBar(props: SearchBarType) {
     const [searchInput, setSearchInput] = useState<string>('');
 
-    const onChangeInput = (event: any) => {
+    const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchInput(event.target.value);
     }
 

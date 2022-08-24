@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Provider from './components/i18n/Provider';
+import { LangProvider } from './components/context/LangContent';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -23,9 +24,11 @@ root.render(
     draggable
     pauseOnHover
     />
-    <Provider locale='de'>
+    <LangProvider>
+    <Provider>
         <App/>
     </Provider>
+    </LangProvider>
     {/* <App /> */}
   </React.StrictMode>
 );

@@ -41,5 +41,4 @@ export type InputType = GenericFieldHTMLAttributes & {
 
   export type LocaleProvideType = {
     children: React.ReactNode,
-    locale: string
   }

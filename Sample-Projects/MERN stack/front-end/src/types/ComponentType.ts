@@ -35,3 +35,16 @@ export type DeleteConfirmationType = DefaultModalType & {
     message: string;
   };
 
+  export type LanguageState = {
+    locale:string;
+  }
+
+  export type LanguageAction = {
+    type:string;
+    lang:string;
+  }
+
+  export type LanguageContext = {
+    state: LanguageState;
+    dispatch: React.Dispatch<LanguageAction>;
+  }

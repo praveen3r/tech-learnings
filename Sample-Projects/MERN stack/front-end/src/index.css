@@ -365,3 +365,9 @@ tbody tr:nth-child(even) {
   float: right;
 }
 
+.lang-dropdown{
+  color: blue;
+  appearance: none;
+  width: 125px;
+}
+

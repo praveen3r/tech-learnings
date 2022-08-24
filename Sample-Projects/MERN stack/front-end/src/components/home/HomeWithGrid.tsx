@@ -223,7 +223,6 @@ function HomeWithGrid() {
       ) : (
         <>
           <LoadingOverlay active={overlay} spinner>
-            {userData?.length ? (
               <div className="inline-style">
                 <Button onClick={onClickAdd} className="homeBtn">
                 <DisplayMessage id="add"/> <DisplayMessage id="user"/>
@@ -236,7 +235,6 @@ function HomeWithGrid() {
                   />
                 </div>
               </div>
-            ) : null}
             <TableContainer component={Paper}>
               <Table aria-label="simple table">
                 <TableHead>

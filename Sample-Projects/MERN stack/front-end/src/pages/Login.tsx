@@ -39,10 +39,10 @@ function Login() {
         const status = error.response?.status;
         if (status) {
           if (!Constants.global_error_codes.includes(status)) {
-            setLoading(false);
             setError(true);
-            submitProps.resetForm();
           }
+          setLoading(false);
+          submitProps.resetForm();
         }
       });
   };
