@@ -10,6 +10,7 @@ import { AxiosError } from "axios";
 import Constants from "../util/Constants";
 import LoadingOverlay from 'react-loading-overlay-ts';
 import DisplayMessage from "../components/i18n/DisplayMessage";
+import { useTranslation } from 'react-i18next';
 
 const initialValues: LoginType = {
   username: "",
@@ -26,6 +27,7 @@ function Login() {
   const [isError, setError] = useState(false);
   const navigate = useNavigate();
   //const auth = useAuth();
+  const { t, i18n } = useTranslation();
 
   const onSubmit = (values: LoginType, submitProps: FormikHelpers<LoginType>) => {
     //auth.login(values);
@@ -49,6 +51,7 @@ function Login() {
 
   return (
     <>
+    {/* <h1>{t('Welcome to React')}</h1> */}
      <LoadingOverlay active={loading} spinner>
       <Formik
         initialValues={initialValues}

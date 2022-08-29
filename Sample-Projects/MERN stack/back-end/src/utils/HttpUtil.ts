@@ -1,4 +1,5 @@
 import { NextFunction, Response } from "express";
+import { StatusCodes } from "http-status-codes";
 import HttpException from "./HttpException";
 
 class HttpUtil {
@@ -11,7 +12,7 @@ class HttpUtil {
   }
 
   public static getResponse(res: Response): Response{
-    return res.status(200);
+    return res.status(StatusCodes.OK);
   }
 }
 

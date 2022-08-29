@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Provider from './components/i18n/Provider';
 import { LangProvider } from './components/context/LangContent';
+import './components/i18n/i18n-next';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

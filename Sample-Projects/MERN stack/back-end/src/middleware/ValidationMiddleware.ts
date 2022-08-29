@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import Joi from 'joi';
 
 const validationMiddleware = (schema: Joi.Schema): RequestHandler => {
@@ -25,7 +26,7 @@ const validationMiddleware = (schema: Joi.Schema): RequestHandler => {
             e.details.forEach((error: Joi.ValidationErrorItem) => {
                 errors.push(error.message);
             });
-            res.status(400).send({ errors: errors });
+            res.status(StatusCodes.BAD_REQUEST).send({ errors: errors });
         }
     };
 };

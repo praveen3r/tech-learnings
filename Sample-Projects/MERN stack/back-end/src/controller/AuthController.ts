@@ -3,6 +3,7 @@ import AuthService from "../service/AuthService";
 import Auth from "../types/Auth";
 import AuthError from "../utils/AuthError";
 import HttpException from "../utils/HttpException";
+import { StatusCodes } from "http-status-codes";
 
 class AuthController {
   private authService = new AuthService();
@@ -15,7 +16,7 @@ class AuthController {
     try {
       const auth: Auth = req.body;
       await this.authService.authenticate(auth);
-      res.status(200).json({ success: "true" });
+      res.status(StatusCodes.OK).json({ success: "true" });
     } catch (error) {
       if (typeof error === "string") {
         next(new HttpException(400, error.toUpperCase()));

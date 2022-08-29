@@ -3,6 +3,7 @@ import { Query, UpdateWriteOpResult } from "mongoose";
 import AuthModel from "../model/AuthModel";
 import Auth from "../types/Auth";
 import AuthError from "../utils/AuthError";
+import { generateToken } from "../utils/JwtUtils";
 
 class AuthService {
 
@@ -17,6 +18,10 @@ class AuthService {
       }else if(authNew.keyword !== auth.keyword){
         throw new AuthError("Unsuccessful authentication");
       }
+      console.log("coming here");
+      
+      const token = generateToken({username});
+      console.log(token);
     } catch (error) {
       throw error;
     }
