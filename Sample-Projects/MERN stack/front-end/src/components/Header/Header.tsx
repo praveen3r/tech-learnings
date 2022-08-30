@@ -1,14 +1,15 @@
 import { FaSignInAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom'
 
-import React, { ChangeEvent, ChangeEventHandler, useState } from 'react'
-import DisplayMessage from '../i18n/DisplayMessage';
+import React, { ChangeEvent, useState } from 'react'
 import { dropdownOptions } from '../../types/FormTypes';
 import { useLang } from '../context/LangContent';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
 
   const [value, setValue] = useState('en');
+  const navigate = useNavigate();
 
   const langContext = useLang();
   const dispatch = langContext!.dispatch;
@@ -26,10 +27,14 @@ const Header = () => {
     
   };
 
+  const logOut = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  }
+
   return (
   <header className='header'>
       <div className='logo'>
-        <Link to='/dashboard'><DisplayMessage id="home"/></Link>
       </div>
       <ul>
         <li>
@@ -44,9 +49,9 @@ const Header = () => {
         </select>
         </li>
         <li>
-            <Link to='/login'>
-            <FaSignInAlt /> <DisplayMessage id="logout"/>
-            </Link>
+            <FaSignInAlt style={{marginTop:10}}/><Button variant="link" onClick={() => logOut()}>Logout</Button>
+                              
+                            
         </li>
       </ul>
     </header>

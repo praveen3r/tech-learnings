@@ -7,6 +7,7 @@ import User from "../types/User";
 import AuthError from "../utils/AuthError";
 import HttpException from "../utils/HttpException";
 import HttpUtil from "../utils/HttpUtil";
+import { ResponseData } from "../model/ResponseData";
 
 class UserController {
   private userService = new UserService();
@@ -33,8 +34,7 @@ class UserController {
     try {
       const user = <User> req.body;
       await this.userService.addUser(user);
-      
-      HttpUtil.getResponse(res).json({success: true});
+      HttpUtil.postResponse(res);
     } catch (error) {
       HttpUtil.handleError(<Error>error, next);
     }
@@ -50,7 +50,7 @@ class UserController {
       const user = <User> req.body;
       await this.userService.editUser(id, user);
       
-      HttpUtil.getResponse(res).json({success: true});
+      HttpUtil.putResponse(res);
     } catch (error) {
       HttpUtil.handleError(<Error>error, next);
     }
@@ -65,7 +65,7 @@ class UserController {
       const id:ObjectId = new ObjectId(req.params.id);
       await this.userService.deleteUser(id);
       
-      HttpUtil.getResponse(res).json({success: true});
+      HttpUtil.deleteResponse(res);
       
     } catch (error) {
       HttpUtil.handleError(<Error>error, next);

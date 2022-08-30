@@ -9,7 +9,7 @@ class AuthService {
 
   private auth = AuthModel;
 
-  authenticate = async (auth: Auth) : Promise<void> => {
+  authenticate = async (auth: Auth) : Promise<string> => {
     try {
       const username: string = auth.username;
       const authNew: Auth | null = await this.auth.findOne({username});
@@ -18,10 +18,9 @@ class AuthService {
       }else if(authNew.keyword !== auth.keyword){
         throw new AuthError("Unsuccessful authentication");
       }
-      console.log("coming here");
       
       const token = generateToken({username});
-      console.log(token);
+      return token;
     } catch (error) {
       throw error;
     }

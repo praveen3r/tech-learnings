@@ -15,8 +15,9 @@ class AuthController {
   ): Promise<Response | void> => {
     try {
       const auth: Auth = req.body;
-      await this.authService.authenticate(auth);
-      res.status(StatusCodes.OK).json({ success: "true" });
+      const token = await this.authService.authenticate(auth);
+      //res.cookie('token', token, { httpOnly: true });
+      res.status(StatusCodes.OK).json({ token});
     } catch (error) {
       if (typeof error === "string") {
         next(new HttpException(400, error.toUpperCase()));

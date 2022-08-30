@@ -34,6 +34,9 @@ function Login() {
     setLoading(true);
     authenticate(values)
       .then((response) => {
+        if(response?.data?.token){
+          localStorage.setItem("token", response?.data?.token);
+        }
         setLoading(false);
         navigate("/dashboard");
       })
