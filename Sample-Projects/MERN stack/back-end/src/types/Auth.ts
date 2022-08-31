@@ -1,4 +1,5 @@
 interface Auth {
+    id: string;
     username: string;
     keyword: string;
 }

@@ -8,9 +8,10 @@ import { LoginType } from "../types/FormTypes";
 import { authenticate } from "../services/LoginService";
 import { AxiosError } from "axios";
 import Constants from "../util/Constants";
-import LoadingOverlay from 'react-loading-overlay-ts';
+import LoadingOverlay from "react-loading-overlay-ts";
 import DisplayMessage from "../components/i18n/DisplayMessage";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { ResponseData } from "../types/ResponseData";
 
 const initialValues: LoginType = {
   username: "",
@@ -29,12 +30,15 @@ function Login() {
   //const auth = useAuth();
   const { t, i18n } = useTranslation();
 
-  const onSubmit = (values: LoginType, submitProps: FormikHelpers<LoginType>) => {
+  const onSubmit = (
+    values: LoginType,
+    submitProps: FormikHelpers<LoginType>
+  ) => {
     //auth.login(values);
     setLoading(true);
     authenticate(values)
       .then((response) => {
-        if(response?.data?.token){
+        if (response?.data?.token) {
           localStorage.setItem("token", response?.data?.token);
         }
         setLoading(false);
@@ -43,60 +47,72 @@ function Login() {
       .catch((error: AxiosError) => {
         const status = error.response?.status;
         if (status) {
-          if (!Constants.global_error_codes.includes(status)) {
-            setError(true);
+          if (error.response?.status === 401) {
+            console.log(`coming here`);
+            
+            const errorCode = (error.response?.data as ResponseData<string>)
+              .statusCode;
+            if (errorCode === "CUSTOM001") {
+              setError(true);
+            }
           }
-          setLoading(false);
-          submitProps.resetForm();
         }
+        setLoading(false);
+        submitProps.resetForm();
       });
   };
 
   return (
     <>
-    {/* <h1>{t('Welcome to React')}</h1> */}
-     <LoadingOverlay active={loading} spinner>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      >
-        {(formik) => (
-          <div className="login">
-            <Form>
-              {isError ? (
-                <div style={{ color: "red", marginBottom: 15 }}>
-                  Invalid username/password
+      {/* <h1>{t('Welcome to React')}</h1> */}
+      <LoadingOverlay active={loading} spinner>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+        >
+          {(formik) => (
+            <div className="login">
+              <Form>
+                {isError ? (
+                  <div style={{ color: "red", marginBottom: 15 }}>
+                    Invalid username/password
+                  </div>
+                ) : null}
+                <div className="form-group">
+                  <InputComponent
+                    label="username"
+                    type="text"
+                    id="username"
+                    name="username"
+                    maxLength="15"
+                    dataType="text"
+                  />
+
+                  <InputComponent
+                    label="password"
+                    type="password"
+                    id="keyword"
+                    name="keyword"
+                    maxLength="15"
+                    dataType="password"
+                  />
+
+                  <Button type="submit">
+                    <DisplayMessage id="submit" />
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={(e) => formik.resetForm()}
+                  >
+                    <DisplayMessage id="clear" />
+                  </Button>
                 </div>
-              ) : null}
-              <div className="form-group">
-                <InputComponent
-                  label="username"
-                  type="text"
-                  id="username"
-                  name="username"
-                  maxLength="15"
-                  dataType="text"
-                />
-
-                <InputComponent
-                  label="password"
-                  type="password"
-                  id="keyword"
-                  name="keyword"
-                  maxLength="15"
-                  dataType="password"
-                />
-
-                <Button type="submit"><DisplayMessage id="submit"/></Button>
-                <Button type="button" variant="secondary" onClick={e => formik.resetForm()}>
-                <DisplayMessage id="clear"/>
-                </Button>
-              </div>
-            </Form>
-          </div>
-        )}
-      </Formik>
+              </Form>
+            </div>
+          )}
+        </Formik>
       </LoadingOverlay>
     </>
   );

@@ -1,9 +1,9 @@
 import { RequestHandler, Router } from "express";
 import AuthService from "../service/AuthService";
 import Auth from "../types/Auth";
-import AuthError from "../utils/AuthError";
 import HttpException from "../utils/HttpException";
 import { StatusCodes } from "http-status-codes";
+import HttpUtil from "../utils/HttpUtil";
 
 class AuthController {
   private authService = new AuthService();
@@ -19,15 +19,11 @@ class AuthController {
       //res.cookie('token', token, { httpOnly: true });
       res.status(StatusCodes.OK).json({ token});
     } catch (error) {
-      if (typeof error === "string") {
-        next(new HttpException(400, error.toUpperCase()));
-      } else if (error instanceof Error) {
-        if (error.name && error.name === AuthError.ERROR_NAME) {
-          next(new HttpException(401, error.message));
-        } else {
-          next(new HttpException(400, error.message));
-        }
-      }
+       if(error instanceof HttpException){
+        HttpUtil.handleHttpException(<HttpException>error, next);
+       }else{
+        HttpUtil.handleError(<Error>error, next);
+       }
     }
   };
 }

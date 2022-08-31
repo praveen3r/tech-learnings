@@ -4,7 +4,6 @@ import AuthModel from "../model/AuthModel";
 import UserModel from "../model/UserModel";
 import Auth from "../types/Auth";
 import User from "../types/User";
-import AuthError from "../utils/AuthError";
 
 class UserService {
 

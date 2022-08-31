@@ -50,6 +50,7 @@ function HomeWithGrid() {
   const [searchInput, setSearchInput] = useState<string>("");
 
   useEffect(() => {
+    setLoading(true);
     fetchUsers();
   }, []);
 
@@ -58,6 +59,7 @@ function HomeWithGrid() {
       UserService.getUsers()
         .then((response) => {
           setUserData(response?.data?.users);
+          setLoading(false);
           setOverlay(false);
         })
         .catch((error: AxiosError) => {
@@ -66,6 +68,7 @@ function HomeWithGrid() {
             if (!Constants.global_error_codes.includes(status)) {
               MessageUtils.showError(error);
             }
+            setLoading(false);
             setOverlay(false);
           }
         });

@@ -4,7 +4,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { dropdownOptions } from '../../types/FormTypes';
 import { useLang } from '../context/LangContent';
 import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
 
@@ -35,6 +35,7 @@ const Header = () => {
   return (
   <header className='header'>
       <div className='logo'>
+      <Link to='/dashboard'>Home</Link>
       </div>
       <ul>
         <li>

@@ -5,6 +5,7 @@ import {
   AxiosResponse,
 } from "axios";
 import "react-toastify/dist/ReactToastify.css";
+import { ResponseData } from "../types/ResponseData";
 import { MessageUtils } from "./MessageUtils";
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
@@ -21,7 +22,11 @@ const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
   //console.error(`[response error] [${JSON.stringify(error)}]`);
   if (error.response?.status === 401) {
-    MessageUtils.showError(error);
+    const errorCode = (error.response?.data as ResponseData<string>).statusCode;
+    if(errorCode !== "CUSTOM001"){
+      MessageUtils.showError(error);
+    }
+    
   }
   return Promise.reject(error);
 };

@@ -1,13 +1,16 @@
+import { Utilities } from "./Utilities";
+
 class HttpException extends Error {
     public status: number;
-    public statusCode: string | undefined;
-    public message: string;
+    public statusCode: string;
+    public statusMsg: string;
 
-    constructor(status: number, message: string, statusCode?: string) {
-        super(message);
+    constructor(status: number, statusMsg: string, message?: string) {
+        const errorMsg = message?message:"";
+        super(errorMsg);
         this.status = status;
-        this.message = message;
-        this.statusCode = statusCode;
+        this.statusMsg = statusMsg;
+        this.statusCode = Utilities.getErrorCode(statusMsg);
     }
 }
 

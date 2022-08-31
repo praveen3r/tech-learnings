@@ -1,6 +1,7 @@
 import { NextFunction, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { ObjectMapper } from "jackson-js";
+import { Errors } from "../model/Errors";
 import { ResponseData } from "../model/ResponseData";
 import HttpException from "./HttpException";
 import { Utilities } from "./Utilities";
@@ -8,11 +9,16 @@ import { Utilities } from "./Utilities";
 class HttpUtil {
   public static handleError(error: Error, next: NextFunction) {
     if (typeof error === "string") {
-      next(new HttpException(400, (<string>error).toUpperCase()));
+      next(new HttpException(StatusCodes.INTERNAL_SERVER_ERROR, Errors.CUSTOM503, (<string>error).toUpperCase()));
     } else if (error instanceof Error) {
-      next(new HttpException(400, error.message));
+      next(new HttpException(StatusCodes.INTERNAL_SERVER_ERROR, Errors.CUSTOM503, error.message));
     }
   }
+
+  public static handleHttpException(httpException: HttpException, next: NextFunction) {
+    next(new HttpException(httpException.status, httpException.statusMsg));
+  }
+  
 
   public static getResponse(res: Response): Response {
     const responseData = new ResponseData<string>();

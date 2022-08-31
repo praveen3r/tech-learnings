@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
+import { StatusCodes } from "http-status-codes";
+import { Errors } from "../model/Errors";
 import HttpException from "../utils/HttpException";
+import HttpUtil from "../utils/HttpUtil";
 import { JwtUtils } from "../utils/JwtUtils";
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
@@ -11,14 +14,14 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
       const decoded = JwtUtils.verifyToken(token);
       if (decoded) {
         next();
-      }else{
-        next(new HttpException(401, "Unauthorized access", "CUSTOM002"));
+      } else {
+        next(new HttpException(StatusCodes.UNAUTHORIZED, Errors.CUSTOM002));
       }
     } else {
       next();
     }
   } catch (error) {
-    next(new HttpException(401, "Unauthorized access", "CUSTOM002"));
+    HttpUtil.handleError(<Error>error, next);
   }
 };
 
