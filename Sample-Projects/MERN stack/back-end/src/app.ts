@@ -4,6 +4,7 @@ import errorMiddleWare from "./middleware/ErrorMiddleware";
 import AppRouter from "./router/AppRouter";
 import mongoose, { ConnectOptions } from "mongoose";
 import "dotenv/config";
+import authMiddleware from "./middleware/AuthMiddleware";
 
 class App {
   private express: Application;
@@ -21,6 +22,7 @@ class App {
   private initializeMiddleware(): void {
     this.express.use(cors());
     this.express.use(express.json());
+    this.express.use(authMiddleware);
   }
 
   private initializeRoutes(routes: AppRouter[]): void {

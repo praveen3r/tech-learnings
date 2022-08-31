@@ -1,13 +1,8 @@
 import { RequestHandler, Router } from "express";
 import { ObjectId } from "mongodb";
-import AuthService from "../service/AuthService";
 import UserService from "../service/UserService";
-import Auth from "../types/Auth";
 import User from "../types/User";
-import AuthError from "../utils/AuthError";
-import HttpException from "../utils/HttpException";
 import HttpUtil from "../utils/HttpUtil";
-import { ResponseData } from "../model/ResponseData";
 
 class UserController {
   private userService = new UserService();
@@ -18,8 +13,8 @@ class UserController {
     next
   ): Promise<Response | void> => {
     try {
-      const users = await this.userService.getUsers();
       
+      const users = await this.userService.getUsers();
       HttpUtil.getResponse(res).json({ users: users });
     } catch (error) {
       HttpUtil.handleError(<Error>error, next);

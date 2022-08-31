@@ -2,10 +2,7 @@ import { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import {
-  getUsers,
-  addUser,
-  editUser,
-  deleteUser,
+  UserService,
 } from "../../services/UserService";
 import { User, UserRes } from "../../types/User";
 import Button from "react-bootstrap/Button";
@@ -40,7 +37,7 @@ function Home() {
 
   const fetchUsers = () => {
     setTimeout(() => {
-      getUsers()
+      UserService.getUsers()
         .then((response) => {
           setLoading(false);
           setOverlay(false);
@@ -73,7 +70,7 @@ function Home() {
     setDisplayConfirmationModal(false);
     setOverlay(true);
     setTimeout(() => {
-      deleteUser(id)
+      UserService.deleteUser(id)
         .then((response) => {
           toast.success(`User deleted successfully`, {
             position: toast.POSITION.TOP_RIGHT,
@@ -102,7 +99,7 @@ function Home() {
   const processAddUser = (userNew: User) => {
     setOverlay(true);
     setTimeout(() => {
-      addUser(userNew)
+      UserService.addUser(userNew)
         .then((response) => {
           toast.success(`User added successfully`, {
             position: toast.POSITION.TOP_RIGHT,
@@ -123,7 +120,7 @@ function Home() {
     if (isEqual(user, userNew)) {
       toast.info(`No changes to save`, { position: toast.POSITION.TOP_RIGHT });
     } else {
-      editUser(userNew, userNew._id!)
+      UserService.editUser(userNew, userNew._id!)
         .then((response) => {
           toast.success(`User updated successfully`, {
             position: toast.POSITION.TOP_RIGHT,

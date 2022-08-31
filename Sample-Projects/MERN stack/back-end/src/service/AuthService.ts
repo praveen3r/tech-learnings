@@ -3,7 +3,7 @@ import { Query, UpdateWriteOpResult } from "mongoose";
 import AuthModel from "../model/AuthModel";
 import Auth from "../types/Auth";
 import AuthError from "../utils/AuthError";
-import { generateToken } from "../utils/JwtUtils";
+import { JwtUtils } from "../utils/JwtUtils";
 
 class AuthService {
 
@@ -19,7 +19,7 @@ class AuthService {
         throw new AuthError("Unsuccessful authentication");
       }
       
-      const token = generateToken({username});
+      const token = JwtUtils.generateToken({username});
       return token;
     } catch (error) {
       throw error;

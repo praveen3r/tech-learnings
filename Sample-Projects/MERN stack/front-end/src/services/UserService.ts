@@ -1,21 +1,21 @@
-import { AddRes, DeleteRes, EditRes } from "../types/HttpResType";
-import {User, UserRes} from "../types/User";
+import { ResponseData } from "../types/ResponseData";
+import { User, UserRes } from "../types/User";
 import httpClient from "../util/HttpClient";
 
-const getUsers = ()  => {
-      return httpClient.get<UserRes>('/users');
-}
+export class UserService {
+  static getUsers = () => {
+    return httpClient.get<UserRes>("/users");
+  };
 
-const addUser = (user: User)  => {
-      return httpClient.post<AddRes>('/users/user', user);
-}
+  static addUser = (user: User) => {
+    return httpClient.post<ResponseData<string>>("/users/user", user);
+  };
 
-const editUser = (user: User, id: string)  => {
-      return httpClient.put<EditRes>(`/users/user/${id}`, user);
-}
+  static editUser = (user: User, id: string) => {
+    return httpClient.put<ResponseData<string>>(`/users/user/${id}`, user);
+  };
 
-const deleteUser = (id: string)  => {
-      return httpClient.delete<DeleteRes>(`/users/user/${id}`);
+  static deleteUser = (id: string) => {
+    return httpClient.delete(`/users/user/${id}`);
+  };
 }
-
-export {getUsers, addUser, editUser, deleteUser};

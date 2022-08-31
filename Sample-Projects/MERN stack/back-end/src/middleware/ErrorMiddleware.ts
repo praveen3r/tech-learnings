@@ -8,7 +8,7 @@ const errorMiddleWare = ( error: HttpException, req:Request , res: Response, nex
     console.log(`error in middleware is ${error.message}`);
     const status = error.status || StatusCodes.INTERNAL_SERVER_ERROR;
     const responseData = new ResponseData<string>();
-    responseData._statusCode = "CUSTOM001";
+    responseData._statusCode = error.statusCode || "CUSTOM001";
     responseData._statusMsg = error.message || 'Something went wrong';
     responseData._success = false;
     const jsonData = Utilities.convertObjectToJson(responseData);

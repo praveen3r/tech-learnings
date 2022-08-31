@@ -4,9 +4,8 @@ import {
   AxiosRequestConfig,
   AxiosResponse,
 } from "axios";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ErrorResponse } from "../types/ComponentType";
+import { MessageUtils } from "./MessageUtils";
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   //console.info(`[request] [${JSON.stringify(config)}]`);
@@ -22,9 +21,7 @@ const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
   //console.error(`[response error] [${JSON.stringify(error)}]`);
   if (error.response?.status === 401) {
-    toast.error((error.response?.data as ErrorResponse).message, {
-      position: toast.POSITION.TOP_RIGHT,
-    });
+    MessageUtils.showError(error);
   }
   return Promise.reject(error);
 };

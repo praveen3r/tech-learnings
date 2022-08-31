@@ -8,10 +8,6 @@ export type ErrorType = {
   children: JSX.Element;
 };
 
-export type ErrorResponse = {
-  message: string;
-};
-
 export type RouteType = {
   path: string;
   component: React.ReactNode;

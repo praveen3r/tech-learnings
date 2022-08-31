@@ -2,10 +2,7 @@ import { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import {
-  getUsers,
-  addUser,
-  editUser,
-  deleteUser,
+  UserService
 } from "../../../services/UserService";
 import { User, UserRes } from "../../../types/User";
 import {
@@ -73,7 +70,7 @@ function HomeWithGrid() {
 
   const fetchUsers = () => {
     setTimeout(() => {
-      getUsers()
+      UserService.getUsers()
         .then((response) => {
           setUserData(response?.data?.users);
           setLoading(false);
@@ -126,7 +123,7 @@ function HomeWithGrid() {
     setDisplayConfirmationModal(false);
     setOverlay(true);
     setTimeout(() => {
-      deleteUser(id)
+      UserService.deleteUser(id)
         .then((response) => {
           toast.success(`User deleted successfully`, {
             position: toast.POSITION.TOP_RIGHT,
@@ -169,7 +166,7 @@ function HomeWithGrid() {
   const processAddUser = (userNew: User) => {
     setOverlay(true);
     setTimeout(() => {
-      addUser(userNew)
+      UserService.addUser(userNew)
         .then((response) => {
           toast.success(`User added successfully`, {
             position: toast.POSITION.TOP_RIGHT,
@@ -190,7 +187,7 @@ function HomeWithGrid() {
     if (isEqual(user, userNew)) {
       toast.info(`No changes to save`, { position: toast.POSITION.TOP_RIGHT });
     } else {
-      editUser(userNew, userNew._id!)
+      UserService.editUser(userNew, userNew._id!)
         .then((response) => {
           if (response?.data?.success) {
             toast.success(`User updated successfully`, {

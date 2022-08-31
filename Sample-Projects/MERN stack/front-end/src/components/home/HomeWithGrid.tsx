@@ -1,12 +1,7 @@
 import { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
-import {
-  getUsers,
-  addUser,
-  editUser,
-  deleteUser,
-} from "../../services/UserService";
+import { UserService } from "../../services/UserService";
 import { User } from "../../types/User";
 import {
   Paper,
@@ -27,14 +22,10 @@ import LoadingOverlay from "react-loading-overlay-ts";
 import DeleteConfirmation from "../modal/DeleteConfirmation";
 import UserDetails from "./UserDetails";
 import SearchBar from "../search/SearchBar";
-import {
-  showAddSuccessMessage,
-  showDeleteSuccessMessage,
-  showEditSuccessMessage,
-  showUnexpectedErrorMessage,
-} from "../../util/MessageUtils";
 import ExpandableTableRow from "../table/ExpandableTableRow";
 import DisplayMessage from "../i18n/DisplayMessage";
+import { MessageUtils } from "../../util/MessageUtils";
+import Constants from "../../util/Constants";
 
 const defaultUser: User = {
   sNo: 0,
@@ -54,10 +45,9 @@ function HomeWithGrid() {
     useState(false);
   const [displayUserDetails, setUserDetails] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [overlay, setOverlay] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
-  
 
   useEffect(() => {
     fetchUsers();
@@ -65,15 +55,19 @@ function HomeWithGrid() {
 
   const fetchUsers = () => {
     setTimeout(() => {
-      getUsers()
+      UserService.getUsers()
         .then((response) => {
           setUserData(response?.data?.users);
-          setLoading(false);
           setOverlay(false);
         })
         .catch((error: AxiosError) => {
-          setLoading(false);
-          setOverlay(false);
+          const status = error.response?.status;
+          if (status) {
+            if (!Constants.global_error_codes.includes(status)) {
+              MessageUtils.showError(error);
+            }
+            setOverlay(false);
+          }
         });
     }, 1500);
   };
@@ -115,14 +109,19 @@ function HomeWithGrid() {
     setDisplayConfirmationModal(false);
     setOverlay(true);
     setTimeout(() => {
-      deleteUser(id)
+      UserService.deleteUser(id)
         .then((response) => {
-          showDeleteSuccessMessage("User");
+          MessageUtils.showDeleteSuccessMessage("User");
           fetchUsers();
         })
         .catch((error: AxiosError) => {
-          showUnexpectedErrorMessage();
-          setOverlay(false);
+          const status = error.response?.status;
+          if (status) {
+            if (!Constants.global_error_codes.includes(status)) {
+              MessageUtils.showUnexpectedErrorMessage();
+            }
+            setOverlay(false);
+          }
         });
     }, 1500);
   };
@@ -154,19 +153,24 @@ function HomeWithGrid() {
   const processAddUser = (userNew: User) => {
     setOverlay(true);
     setTimeout(() => {
-      addUser(userNew)
+      UserService.addUser(userNew)
         .then((response) => {
           if (response?.data?.success) {
-            showAddSuccessMessage("User");
+            MessageUtils.showAddSuccessMessage("User");
             fetchUsers();
           } else {
-            showUnexpectedErrorMessage();
+            MessageUtils.showUnexpectedErrorMessage();
             setOverlay(false);
           }
         })
         .catch((error: AxiosError) => {
-          showUnexpectedErrorMessage();
-          setOverlay(false);
+          const status = error.response?.status;
+          if (status) {
+            if (!Constants.global_error_codes.includes(status)) {
+              MessageUtils.showUnexpectedErrorMessage();
+            }
+            setOverlay(false);
+          }
         });
     }, 1500);
   };
@@ -176,18 +180,23 @@ function HomeWithGrid() {
     if (isEqual(user, userNew)) {
       toast.info(`No changes to save`, { position: toast.POSITION.TOP_RIGHT });
     } else {
-      editUser(userNew, userNew._id!)
+      UserService.editUser(userNew, userNew._id!)
         .then((response) => {
           if (response?.data?.success) {
-            showEditSuccessMessage("User");
+            MessageUtils.showEditSuccessMessage("User");
             fetchUsers();
           } else {
-            showUnexpectedErrorMessage();
+            MessageUtils.showUnexpectedErrorMessage();
           }
         })
         .catch((error: AxiosError) => {
-          showUnexpectedErrorMessage();
-          setOverlay(false);
+          const status = error.response?.status;
+          if (status) {
+            if (!Constants.global_error_codes.includes(status)) {
+              MessageUtils.showUnexpectedErrorMessage();
+            }
+            setOverlay(false);
+          }
         });
     }
   };
@@ -223,34 +232,40 @@ function HomeWithGrid() {
       ) : (
         <>
           <LoadingOverlay active={overlay} spinner>
-              <div className="inline-style">
-                <Button onClick={onClickAdd} className="homeBtn">
-                <DisplayMessage id="add"/> <DisplayMessage id="user"/>
-                </Button>
-                <div className="inline-block-style right-align">
-                  <SearchBar
-                    label="Seach Users"
-                    placeholder="Search"
-                    setInput={setInput}
-                  />
-                </div>
+            <div className="inline-style">
+              <Button onClick={onClickAdd} className="homeBtn">
+                <DisplayMessage id="add" /> <DisplayMessage id="user" />
+              </Button>
+              <div className="inline-block-style right-align">
+                <SearchBar
+                  label="Seach Users"
+                  placeholder="Search"
+                  setInput={setInput}
+                />
               </div>
+            </div>
             <TableContainer component={Paper}>
               <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                  <TableCell></TableCell>
-                    <TableCell><DisplayMessage id="serialNo"/></TableCell>
-                    <TableCell align="left"><DisplayMessage id="name"/></TableCell>
+                    <TableCell></TableCell>
+                    <TableCell>
+                      <DisplayMessage id="serialNo" />
+                    </TableCell>
+                    <TableCell align="left">
+                      <DisplayMessage id="name" />
+                    </TableCell>
                     <TableCell align="left" onClick={handleSortRequest}>
                       <TableSortLabel
                         active={true}
                         direction={orderDirection === "asc" ? "asc" : "desc"}
                       >
-                        <DisplayMessage id="age"/>
+                        <DisplayMessage id="age" />
                       </TableSortLabel>
                     </TableCell>
-                    <TableCell align="left"><DisplayMessage id="gender"/></TableCell>
+                    <TableCell align="left">
+                      <DisplayMessage id="gender" />
+                    </TableCell>
                     <TableCell align="left"></TableCell>
                   </TableRow>
                 </TableHead>
@@ -264,15 +279,20 @@ function HomeWithGrid() {
                       )
                       .map((user) => (
                         <ExpandableTableRow
-              key={user.sNo}
-              expandComponent={<TableCell colSpan={5}>{user.name}</TableCell>}
-            >
-                        {/* <TableRow key={user.sNo}> */}
+                          key={user.sNo}
+                          expandComponent={
+                            <TableCell colSpan={5}>{user.name}</TableCell>
+                          }
+                        >
+                          {/* <TableRow key={user.sNo}> */}
                           <TableCell component="th" scope="row">
                             {user.sNo}
                           </TableCell>
                           <TableCell align="left">
-                          <Button variant="link" onClick={() => onClickUser(user)}>
+                            <Button
+                              variant="link"
+                              onClick={() => onClickUser(user)}
+                            >
                               {user.name}
                             </Button>
                           </TableCell>
@@ -285,7 +305,7 @@ function HomeWithGrid() {
                           >
                             <FaTrash />
                           </TableCell>
-                        {/* </TableRow> */}
+                          {/* </TableRow> */}
                         </ExpandableTableRow>
                       ))
                   ) : (
@@ -304,7 +324,11 @@ function HomeWithGrid() {
                         onPageChange={handleChangePage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
                         rowsPerPageOptions={[1, 2, 3, 4]}
-                        labelRowsPerPage={<span><DisplayMessage id="rows"/>:</span>}
+                        labelRowsPerPage={
+                          <span>
+                            <DisplayMessage id="rows" />:
+                          </span>
+                        }
                         labelDisplayedRows={({ page: number }) => {
                           return `Page: ${page}`;
                         }}
