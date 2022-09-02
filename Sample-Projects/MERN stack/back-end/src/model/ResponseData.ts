@@ -15,11 +15,15 @@ export class ResponseData<T> {
     @JsonProperty()
     private data: T | null;
 
+    @JsonProperty()
+    private list: T[] | null;
+
     constructor() {
         this.statusCode = null;
         this.statusMsg = null;
         this.success = true;
         this.data = null;
+        this.list = null;
     }
 
     @JsonIgnore()
@@ -56,6 +60,15 @@ export class ResponseData<T> {
 
     set _data(data: T | null) {
         this.data=data; 
+    }
+
+    @JsonIgnore()
+    get _list(): T[] | null{
+        return this.list;
+    }
+
+    set _list(list: T[] | null) {
+        this.list=list; 
     }
 
 }

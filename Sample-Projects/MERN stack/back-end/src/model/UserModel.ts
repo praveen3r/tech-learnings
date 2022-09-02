@@ -5,19 +5,19 @@ import Auth from '../types/Auth'
 export const UserSchema = new Schema({
     name: {
         type: String,
-        minLength: [1, 'Name should be greater than 1 chars'],
-        required: [true, 'Name is mandatory']
+        /*minLength: [1, 'name|CUSTOM003'],
+        required: [true, 'name|CUSTOM003']*/
     },
     age : {
         type: Number,
-        minLength: [2, 'age should be greater than 2 chars'],
-        required: [true, 'age is mandatory'],
-        min: [15, 'Min age should be 15'],
+        /*minLength: [1, 'name|CUSTOM003'],
+        required: [true, 'name|CUSTOM003'],
+        min: [15, 'name|CUSTOM003'],*/
     },
     gender : {
         type: String,
-        minLength: [1, 'gender should be greater than 1 chars'],
-        required: [true, 'gender is mandatory']
+        /*minLength: [1, 'name|CUSTOM003'],
+        required: [true, 'name|CUSTOM003']*/
     }
 }, {
     timestamps: true

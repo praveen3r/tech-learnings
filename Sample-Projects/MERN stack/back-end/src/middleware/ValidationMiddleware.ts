@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import Joi from 'joi';
+import { ResponseData } from '../model/ResponseData';
+import HttpException from '../utils/HttpException';
+import HttpUtil from '../utils/HttpUtil';
+import { Utilities } from '../utils/Utilities';
 
 const validationMiddleware = (schema: Joi.Schema): RequestHandler => {
     return async (
@@ -22,11 +26,19 @@ const validationMiddleware = (schema: Joi.Schema): RequestHandler => {
             req.body = value;
             next();
         } catch (e: any) {
-            const errors: string[] = [];
+            const errors: HttpException[] = [];
             e.details.forEach((error: Joi.ValidationErrorItem) => {
-                errors.push(error.message);
+                
+                //console.log(`error is ${error.type}`);
+                const errorMsg = error.message;
+                const httpException = HttpUtil.getException(errorMsg);
+                errors.push(httpException);
             });
-            res.status(StatusCodes.BAD_REQUEST).send({ errors: errors });
+            
+            const jsonData = HttpUtil.getErrorJsonList(errors);
+            console.log(`error in validation is ${jsonData}`);
+            
+            res.status(StatusCodes.BAD_REQUEST).send(jsonData);
         }
     };
 };

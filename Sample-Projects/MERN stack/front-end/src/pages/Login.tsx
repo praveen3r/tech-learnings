@@ -48,7 +48,6 @@ function Login() {
         const status = error.response?.status;
         if (status) {
           if (error.response?.status === 401) {
-            console.log(`coming here`);
             
             const errorCode = (error.response?.data as ResponseData<string>)
               .statusCode;
