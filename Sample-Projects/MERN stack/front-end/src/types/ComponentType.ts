@@ -44,3 +44,10 @@ export type DeleteConfirmationType = DefaultModalType & {
     state: LanguageState;
     dispatch: React.Dispatch<LanguageAction>;
   }
+
+
+  export type AuthenticationContext = {
+    isAuthenticated: boolean;
+    login: (isAuthenticated: boolean, token: string) => void;
+    logout: () => void;
+  }

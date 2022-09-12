@@ -15,7 +15,8 @@ class HttpException extends Error {
 
     //public list: HttpException[] | null;
 
-    constructor(status?: number, statusMsg?: string, message?: string, list?:HttpException[]) {
+    //constructor(status?: number, statusMsg?: string, message?: string, list?:HttpException[]) {
+        constructor(status?: number, statusMsg?: string, message?: string) {
         const errorMsg = message?message:"";
         super(errorMsg);
         this.status = status?status:null;

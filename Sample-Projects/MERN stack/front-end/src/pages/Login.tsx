@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import InputComponent from "../components/formik-control/InputComponent";
 import { LoginType } from "../types/FormTypes";
-import { authenticate } from "../services/LoginService";
+import { AuthService } from "../services/AuthService";
 import { AxiosError } from "axios";
-import Constants from "../util/Constants";
 import LoadingOverlay from "react-loading-overlay-ts";
 import DisplayMessage from "../components/i18n/DisplayMessage";
 import { useTranslation } from "react-i18next";
 import { ResponseData } from "../types/ResponseData";
+import { useAuth } from "../components/context/Auth";
 
 const initialValues: LoginType = {
   username: "",
@@ -27,22 +27,21 @@ function Login() {
   const [loading, setLoading] = useState<boolean>(false);
   const [isError, setError] = useState(false);
   const navigate = useNavigate();
-  //const auth = useAuth();
+  const auth = useAuth();
   const { t, i18n } = useTranslation();
 
   const onSubmit = (
     values: LoginType,
     submitProps: FormikHelpers<LoginType>
   ) => {
-    //auth.login(values);
     setLoading(true);
-    authenticate(values)
+    AuthService.authenticate(values)
       .then((response) => {
         if (response?.data?.token) {
-          localStorage.setItem("token", response?.data?.token);
+          auth?.login(true, response?.data?.token);
+          navigate("/dashboard");
         }
         setLoading(false);
-        navigate("/dashboard");
       })
       .catch((error: AxiosError) => {
         const status = error.response?.status;

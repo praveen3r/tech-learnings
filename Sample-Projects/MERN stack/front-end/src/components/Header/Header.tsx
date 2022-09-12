@@ -28,7 +28,7 @@ const Header = () => {
   };
 
   const logOut = () => {
-    localStorage.removeItem("token");
+    
     navigate("/login");
   }
 

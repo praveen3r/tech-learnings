@@ -5,6 +5,9 @@ import AppRouter from "./router/AppRouter";
 import mongoose, { ConnectOptions } from "mongoose";
 import "dotenv/config";
 import authMiddleware from "./middleware/AuthMiddleware";
+import { StatusCodes } from "http-status-codes";
+import { HTTPErrors } from "./model/HTTPErrors";
+import methodNotAllowedMiddleWare from "./middleware/MethodNotAllowedMiddleware";
 
 class App {
   private express: Application;
@@ -29,9 +32,16 @@ class App {
     routes.forEach((route: AppRouter) => {
       this.express.use("/api", route.router);
     });
+    routes.forEach((route: AppRouter) => {
+      this.express.all('*', methodNotAllowedMiddleWare);
+    });
+    this.express.all('*', (req, res) => {
+      res.status(StatusCodes.NOT_FOUND).send(HTTPErrors.NOT_FOUND);
+    });
   }
 
   private initialiseErrorHandling(): void {
+    //this.express.use(methodNotAllowedMiddleWare);
     this.express.use(errorMiddleWare);
   }
 
