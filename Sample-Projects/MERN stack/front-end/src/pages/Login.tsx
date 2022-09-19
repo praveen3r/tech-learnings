@@ -9,9 +9,10 @@ import { AuthService } from "../services/AuthService";
 import { AxiosError } from "axios";
 import LoadingOverlay from "react-loading-overlay-ts";
 import DisplayMessage from "../components/i18n/DisplayMessage";
-import { useTranslation } from "react-i18next";
+//import { useTranslation } from "react-i18next";
 import { ResponseData } from "../types/ResponseData";
 import { useAuth } from "../components/context/Auth";
+import CryptoJS from "crypto-js";
 
 const initialValues: LoginType = {
   username: "",
@@ -28,14 +29,18 @@ function Login() {
   const [isError, setError] = useState(false);
   const navigate = useNavigate();
   const auth = useAuth();
-  const { t, i18n } = useTranslation();
+  //const { t, i18n } = useTranslation();
 
   const onSubmit = (
     values: LoginType,
     submitProps: FormikHelpers<LoginType>
   ) => {
     setLoading(true);
-    AuthService.authenticate(values)
+    
+    const hash = CryptoJS.AES.encrypt(values.keyword, 'my-secret-key@123').toString();
+    let valuesNew = values;
+    valuesNew.keyword = hash;
+    AuthService.authenticate(valuesNew)
       .then((response) => {
         if (response?.data?.token) {
           auth?.login(true, response?.data?.token);
