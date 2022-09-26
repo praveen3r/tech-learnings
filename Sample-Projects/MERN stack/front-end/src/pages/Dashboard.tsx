@@ -1,16 +1,20 @@
-import React from 'react'
-import Header from '../components/Header/Header'
-import Home from '../components/home/Home'
-import HomeWithGrid from '../components/home/HomeWithGrid'
+import React from "react";
+import { useAuth } from "../components/context/Auth";
+import Header from "../components/Header/Header";
+import NavMenu from "../components/nav/NavMenu";
 
 function Dashboard() {
-  return (
-    <>
-    <Header />
-    {/* <Home/> */}
-    <HomeWithGrid/>
-    </>
-  )
+  const auth = useAuth();
+  if (auth?.isAuthenticated) {
+    return (
+      <>
+        <Header />
+        <NavMenu />
+      </>
+    );
+  }
+  return <></>;
+  
 }
 
-export default Dashboard
+export default Dashboard;

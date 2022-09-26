@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./components/context/Auth";
+import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import GuardedRoute from "./pages/route/GuardedRoute";
 import { routes } from "./pages/route/Routes";
@@ -18,7 +19,9 @@ function App() {
     <>
       {
         <AuthProvider>
+          
         <Router>
+          <Dashboard/>
           <Routes>
             <Route path="" element={<Login />} />
             <Route path="login" element={<Login />} />

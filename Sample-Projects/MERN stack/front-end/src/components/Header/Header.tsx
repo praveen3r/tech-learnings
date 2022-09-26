@@ -4,12 +4,14 @@ import React, { ChangeEvent, useState } from 'react'
 import { dropdownOptions } from '../../types/FormTypes';
 import { useLang } from '../context/LangContent';
 import { Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/Auth';
 
 const Header = () => {
 
   const [value, setValue] = useState('en');
   const navigate = useNavigate();
+  const auth = useAuth();
 
   const langContext = useLang();
   const dispatch = langContext!.dispatch;
@@ -28,14 +30,17 @@ const Header = () => {
   };
 
   const logOut = () => {
-    
+    auth!.logout();
     navigate("/login");
   }
 
   return (
   <header className='header'>
-      <div className='logo'>
+      {/* <div className='logo'>
       <Link to='/dashboard'>Home</Link>
+      </div> */}
+      <div className='logo'>
+        
       </div>
       <ul>
         <li>
