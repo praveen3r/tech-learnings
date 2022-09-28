@@ -26,6 +26,12 @@ export type InputType = GenericFieldHTMLAttributes & {
     
   };
 
+  export type  UserSearchType = {
+    name: string;
+    fromDate: string;
+    toDate: string;
+  }
+
   export type LoginType = {
     username: string;
     keyword: string;

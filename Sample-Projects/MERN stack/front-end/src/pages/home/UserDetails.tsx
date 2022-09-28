@@ -4,10 +4,10 @@ import { FormModalType } from "../../types/ComponentType";
 import { User } from "../../types/User";
 import * as Yup from "yup";
 import { Formik, Form, FormikHelpers } from "formik";
-import InputComponent from "../formik-control/InputComponent";
-import DropdownComponent from "../formik-control/DropdownComponent";
+import InputComponent from "../../components/formik-control/InputComponent";
+import DropdownComponent from "../../components/formik-control/DropdownComponent";
 import { dropdownOptions } from "../../types/FormTypes";
-import DisplayMessage from "../i18n/DisplayMessage";
+import DisplayMessage from "../../components/i18n/DisplayMessage";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),

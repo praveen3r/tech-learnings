@@ -19,11 +19,11 @@ import { toast } from "react-toastify";
 import { isEqual } from "lodash";
 import { Button, Spinner } from "react-bootstrap";
 import LoadingOverlay from "react-loading-overlay-ts";
-import DeleteConfirmation from "../modal/DeleteConfirmation";
+import DeleteConfirmation from "../../components/modal/DeleteConfirmation";
 import UserDetails from "./UserDetails";
-import SearchBar from "../search/SearchBar";
-import ExpandableTableRow from "../table/ExpandableTableRow";
-import DisplayMessage from "../i18n/DisplayMessage";
+import SearchBar from "../../components/search/SearchBar";
+import ExpandableTableRow from "../../components/table/ExpandableTableRow";
+import DisplayMessage from "../../components/i18n/DisplayMessage";
 import { MessageUtils } from "../../util/MessageUtils";
 import Constants from "../../util/Constants";
 

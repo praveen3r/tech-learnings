@@ -1,7 +1,8 @@
 import { Form, Formik, FormikHelpers } from 'formik';
 import React from 'react'
 import { UserSearchType } from '../../types/FormTypes';
-import InputComponent from '../formik-control/InputComponent';
+import InputComponent from '../../components/formik-control/InputComponent';
+import DatePickerComponent from '../../components/formik-control/DatePickerComponent';
 
 const initialValues: UserSearchType = {
   name: "",
@@ -33,27 +34,25 @@ function UserSearch() {
             name="name"
             maxLength="15"
             dataType="text"
-            width="20%"
+            style={{width: '20%'}}
           />
 
-          <InputComponent
+          <DatePickerComponent
             label="fromDate"
             type="text"
             id="fromDate"
             name="fromDate"
             maxLength="15"
             dataType="text"
-            width="20%"
           />
 
-          <InputComponent
+          <DatePickerComponent
             label="toDate"
             type="text"
             id="toDate"
             name="toDate"
             maxLength="15"
             dataType="text"
-            width="20%"
           />
         </div>
       </Form>

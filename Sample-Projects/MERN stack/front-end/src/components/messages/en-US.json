@@ -13,6 +13,8 @@
     "logout": "Logout",
     "clear": "Clear",
     "rows": "Rows",
-    "page": "Page"
+    "page": "Page",
+    "fromDate": "From Date",
+    "toDate": "To Date"
         
 }

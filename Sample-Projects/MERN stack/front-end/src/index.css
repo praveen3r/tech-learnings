@@ -371,3 +371,6 @@ tbody tr:nth-child(even) {
   width: 125px;
 }
 
+.react-datepicker__input-container input {
+  width: 20%;
+}

@@ -1,27 +1,30 @@
 import React from "react";
 import TextInput from "./TextInput";
 import { InputType } from "../../types/FormTypes";
+import { ErrorMessage, Field } from "formik";
+import TextError from "./TextError";
+import DateView from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import DisplayMessage from "../i18n/DisplayMessage";
 
-function InputComponent(props: InputType) {
-  const { dataType } = props;
-  switch (dataType) {
-    case "password":
-      return (
-        <TextInput
-          {...props}
-          className="form-control"
-          onPaste={(e: React.ClipboardEvent) => {
-            e.preventDefault();
-            return false;
-          }}
-        />
-      );
-    case "number":
-      return <TextInput {...props} className="form-control" />
-      //return <NumberInput {...props} className="form-control"/>
-    default:
-      return <TextInput {...props} className="form-control" />;
-  }
+function DatePickerComponent(props: any) {
+  const { label, name, ...rest } = props;
+    return (
+
+        <div>
+            <label htmlFor={name}><DisplayMessage id={label}/>:</label>
+            <Field name={name}>
+                {
+                    ({ form, field } : any) => {
+                        const { setFieldValue } = form
+                        const { value } = field
+                        return <DateView id={name} {...field} {...rest} selected={value}
+                         onChange={(val: any) => setFieldValue(name, val)}/>
+                    }
+                }
+            </Field>
+            <ErrorMessage name={name} component={TextError} />
+        </div>);
 }
 
-export default InputComponent;
+export default DatePickerComponent;

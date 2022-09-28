@@ -6,13 +6,13 @@ import {
 } from "../../services/UserService";
 import { User, UserRes } from "../../types/User";
 import Button from "react-bootstrap/Button";
-import DeleteConfirmation from "../modal/DeleteConfirmation";
+import DeleteConfirmation from "../../components/modal/DeleteConfirmation";
 import UserDetails from "./UserDetails";
 import { toast } from "react-toastify";
 import { isEqual } from "lodash";
 import { Spinner } from "react-bootstrap";
 import LoadingOverlay from "react-loading-overlay-ts";
-import DisplayMessage from "../i18n/DisplayMessage";
+import DisplayMessage from "../../components/i18n/DisplayMessage";
 
 function Home() {
   const defaultUser: User = {
