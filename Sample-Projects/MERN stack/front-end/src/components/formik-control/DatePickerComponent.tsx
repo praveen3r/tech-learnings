@@ -1,14 +1,16 @@
 import React from "react";
-import TextInput from "./TextInput";
-import { InputType } from "../../types/FormTypes";
+import { DatePickerType,} from "../../types/FormTypes";
 import { ErrorMessage, Field } from "formik";
 import TextError from "./TextError";
 import DateView from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import DisplayMessage from "../i18n/DisplayMessage";
+import { useIntl } from "react-intl";
 
-function DatePickerComponent(props: any) {
+function DatePickerComponent(props: DatePickerType) {
   const { label, name, ...rest } = props;
+  const intl  = useIntl();
+  const placeholder = intl.formatMessage({id: 'enter'}) + ' ' + intl.formatMessage({id: label});
     return (
 
         <div>
@@ -18,8 +20,9 @@ function DatePickerComponent(props: any) {
                     ({ form, field } : any) => {
                         const { setFieldValue } = form
                         const { value } = field
-                        return <DateView id={name} {...field} {...rest} selected={value}
-                         onChange={(val: any) => setFieldValue(name, val)}/>
+                        return <DateView {...field} {...rest} id={name} selected={value}
+                         onChange={(val: any) => setFieldValue(name, val)} placeholderText={placeholder}
+                         />
                     }
                 }
             </Field>

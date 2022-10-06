@@ -1,0 +1,40 @@
+.upperBorder{
+    height: 3rem;
+    background-color: rgba(88, 172, 240, 0.4);
+}
+
+button{
+    font-size: 40px;
+    margin-right: 5px;
+    float: right;
+    /* position: ; */
+}
+
+.frame{
+    height: 100%;
+    background-color: rgba(88, 172, 240, 0.4);
+}
+
+mat-sidenav{
+    width: 18%;
+    /* height: 40% */
+  }
+  
+  mat-sidenav-container{
+    height: 80%;
+  }
+  
+  .li{
+    padding: 20px;
+    background-color: rgba(135, 216, 135, 0.15);
+    border-bottom: rgba(88, 172, 240, 0.2) solid 1px;
+  }
+
+  a{
+      color: rgba(88, 172, 240, 0.8);
+      text-decoration: none;
+  }
+
+  a:hover{
+    color: rgba(88, 172, 240, 1);
+  }

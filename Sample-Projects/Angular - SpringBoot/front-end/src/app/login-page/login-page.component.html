@@ -1,0 +1,26 @@
+<div class="body">
+    <mat-card class="myCard">
+        <mat-card-title>Welcome to login page</mat-card-title>
+        <div class="outerFrame">
+            <mat-card-content class="content">
+                <matForm [formGroup] = "loginForm" >
+                    <div class="formDiv">
+                        <mat-form-field appearance="fill" floatLabel="always">
+                            <!-- <label>Username</label> -->
+                            <input matInput type='text' name='uname' placeholder="Username" formControlName = "userName" [value] = "userName">
+                        </mat-form-field>
+                    </div>
+                    <div class="formDiv">
+                        <mat-form-field appearance="fill" floatLabel="always">
+                            <input matInput type='password' name='pswd' placeholder="Password" formControlName = "password" [value] = "pswd">
+                        </mat-form-field>
+                    </div>
+                </matForm>
+                
+                
+                <button mat-raised-button type="button"  (click)="submitAction()">Submit</button>
+            </mat-card-content>
+        </div>
+        
+    </mat-card>
+</div>

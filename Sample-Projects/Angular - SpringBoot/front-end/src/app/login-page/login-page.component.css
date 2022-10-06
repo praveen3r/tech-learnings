@@ -1,0 +1,35 @@
+.myCard{
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 10%;
+    /* background-color:rgba(157, 175, 241, 0.6); */
+    background-color: rgba(88, 172, 240, 0.4);;
+    /* display: inline-flexbox !important; */
+}
+
+.content{
+    margin-left: 28%;
+    /* position: center; */
+    place-items: center;
+}
+
+mat-form-field{
+    background-color: rgba(248, 217, 204, 0.1);
+    border: 1px groove rgba(157, 175, 241, 0.6);
+}
+
+mat-card-title{
+    margin-left: 25%;
+}
+
+.outerFrame{
+    align-items: center;
+}
+
+.formDiv{
+    padding-bottom: 10px;
+}
+
+button{
+    background-color:rgba(20, 208, 255,0.2);
+}

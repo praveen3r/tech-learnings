@@ -13,5 +13,8 @@
     "logout": "Logout (French)",
     "clear": "Clear (French)",
     "rows": "Rows (French)",
-    "page": "Page (French)"
+    "page": "Page (French)",
+    "fromDate": "From Date (German)",
+    "toDate": "To Date (German)",
+    "enter": "Enter (German)"
 }

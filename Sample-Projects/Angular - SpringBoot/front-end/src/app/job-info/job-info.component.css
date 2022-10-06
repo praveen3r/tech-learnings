@@ -1,0 +1,16 @@
+.jobDiv{
+    display: flex;
+    /* margin-left: 2rem; */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* font-size: ; */
+}
+
+h4{
+    /* margin-left: 40px; */
+}
+
+img{
+    flex-shrink: 3;
+}

@@ -13,5 +13,8 @@
     "logout": "Logout (German)",
     "clear": "Clear (German)",
     "rows": "Rows (German)",
-    "page": "Page (German)"
+    "page": "Page (German)",
+    "fromDate": "From Date (German)",
+    "toDate": "To Date (German)",
+    "enter": "Enter (German)"
 }

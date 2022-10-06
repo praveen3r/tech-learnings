@@ -36,8 +36,11 @@ function Login() {
     submitProps: FormikHelpers<LoginType>
   ) => {
     setLoading(true);
-    
-    const hash = CryptoJS.AES.encrypt(values.keyword, 'my-secret-key@123').toString();
+
+    const hash = CryptoJS.AES.encrypt(
+      values.keyword,
+      "my-secret-key@123"
+    ).toString();
     let valuesNew = values;
     valuesNew.keyword = hash;
     AuthService.authenticate(valuesNew)
@@ -52,7 +55,6 @@ function Login() {
         const status = error.response?.status;
         if (status) {
           if (error.response?.status === 401) {
-            
             const errorCode = (error.response?.data as ResponseData<string>)
               .statusCode;
             if (errorCode === "CUSTOM001") {
@@ -76,7 +78,7 @@ function Login() {
         >
           {(formik) => (
             <div className="login">
-              <Form>
+              <Form autoComplete="false">
                 {isError ? (
                   <div style={{ color: "red", marginBottom: 15 }}>
                     Invalid username/password
