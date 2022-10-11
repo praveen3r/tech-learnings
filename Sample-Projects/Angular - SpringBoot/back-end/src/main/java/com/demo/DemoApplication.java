@@ -15,7 +15,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class DemoApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
-		SpringApplication springApplication = new SpringApplication(DemoApplication.class);
+		var springApplication = new SpringApplication(DemoApplication.class);
 		springApplication.setBannerMode(Banner.Mode.OFF);
 		springApplication.run(args);
 
