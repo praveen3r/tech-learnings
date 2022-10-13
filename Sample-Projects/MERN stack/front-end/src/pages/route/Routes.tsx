@@ -1,7 +1,7 @@
 import React from 'react';
 import InvalidRoute from './InvalidRoute';
 import { RouteType } from '../../types/ComponentType';
-import UserSearch from '../home/UserSearch';
+import UserSearch from '../search/UserSearch';
 import HomeWithGrid from '../home/HomeWithGrid';
 
 

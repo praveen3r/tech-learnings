@@ -27,6 +27,7 @@ function DateRangePickerComponent(props: DateRangePickerType) {
         minDate={props.minDate}
         maxDate={props.maxDate}
         placeholderText={placeholder}
+        dateFormat={props.dateFormat}
       />
     </div>
   );
