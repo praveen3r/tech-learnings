@@ -18,20 +18,20 @@ export class AppComponent {
   title = 'my-learning-app';
 
   check(event){
-    console.log('came',event)
     this.isLoggedIn = event
   }
 
 
   logout(): void {
-    const dialogRef = this.dialog.open(DialogBodyComponent, {
-      width: '250px',
-    });
+    this.router.navigate([]);
+    // const dialogRef = this.dialog.open(DialogBodyComponent, {
+    //   width: '250px',
+    // });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.isLoggedIn = false;
-      // this.router.navigate([])
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   this.isLoggedIn = false;
+    //   // this.router.navigate([])
+    // });
   }
 
 }
