@@ -1,0 +1,11 @@
+{
+  "search.exclude": {
+    "**/*.css": true
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "html.format.wrapAttributes": "force-expand-multiline",
+  "peacock.color": "#af020270"
+}

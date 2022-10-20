@@ -1,0 +1,9 @@
+server:
+    servlet:
+        context-path: /api
+spring:
+    jackson:
+        deserialization:
+            FAIL_ON_UNKNOWN_PROPERTIES: true
+    profiles:
+        active: dev

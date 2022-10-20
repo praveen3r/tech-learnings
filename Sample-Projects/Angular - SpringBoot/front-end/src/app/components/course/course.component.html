@@ -1,0 +1,26 @@
+<div>
+  <h4>Courses</h4>
+</div>
+<div>
+  <a href="javascript:;" title="Add New" uiSref="">
+    <h5 class="text-secondary"><span class="fa fa-plus mr-2"></span>Add New</h5>
+  </a>
+</div>
+<div>
+  <table class="cyc-table">
+    <thead>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Author</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of courses">
+        <td>{{ course.id }}</td>
+        <td>{{ course.name }}</td>
+        <td>{{ course.type }}</td>
+        <td>{{ course.author }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

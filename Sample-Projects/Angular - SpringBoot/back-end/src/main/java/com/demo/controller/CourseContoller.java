@@ -5,17 +5,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demo.service.UserService;
+import com.demo.dto.CourseDto;
+import com.demo.dto.DemoResponse;
+import com.demo.service.CourseService;
 
 @RestController
-@RequestMapping(value = "/v1/users/")
-public class UserContoller {
+@RequestMapping(value = "/v1/courses/")
+public class CourseContoller {
 
 	@Autowired
-	private UserService userService;
+	private CourseService courseService;
 	
 	@RequestMapping(value = "", method = {RequestMethod.GET})
-	public String getUsers() throws Exception{
-		return userService.getUsers();
+	public DemoResponse<CourseDto> getCourses() throws Exception{
+		return courseService.getCourses();
 	}
 }

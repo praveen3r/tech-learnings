@@ -1,40 +1,41 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { MatCardModule } from '@angular/material/card';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
-import { HomeComponent } from './home/home.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { ObjectiveComponent } from './objective/objective.component';
-import { JobInfoComponent } from './job-info/job-info.component';
-import { HobbiesComponent } from './hobbies/hobbies.component';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
-import { DialogBodyComponent } from './lib/dialog-body/dialog-body.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { CourseSearchComponent } from './components/course-search/course-search.component';
+import { CourseComponent } from './components/course/courses.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { DialogBodyComponent } from './lib/dialog-body/dialog-body.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     HomeComponent,
-    ObjectiveComponent,
-    JobInfoComponent,
-    HobbiesComponent,
+    CourseComponent,
+    CourseSearchComponent,
     AboutComponent,
     ContactComponent,
-    DialogBodyComponent
+    DialogBodyComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,10 +51,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatExpansionModule,
     MatDialogModule,
     MatTooltipModule,
-    BrowserAnimationsModule
-    
+    BrowserAnimationsModule,
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

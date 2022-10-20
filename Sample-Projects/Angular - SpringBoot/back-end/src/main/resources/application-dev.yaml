@@ -1,0 +1,24 @@
+connection:
+    pool:
+        max_size: 20
+        timeout: 1800
+logging:
+    path: C:/logs
+spring:
+    cache:
+        type: simple
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        pwd: User@1234
+        testWhileIdle: 'true '
+        url: jdbc:postgresql://localhost:5432/cybercert
+        username: cyc_user
+        validationQuery: SELECT 1 from dual
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+        generate-ddl: false
+        properties:
+            hibernate:
+                temp:
+                    use_jdbc_metadata_defaults: false
+        show-sql: true
