@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Course } from '../../model/Course';
-import { CourseService } from './course.service';
+import { CourseService } from '../../services/course/course.service';
+import { AddCourseComponent } from './add-course.component';
 
 @Component({
   templateUrl: './course.component.html',
-  styleUrls: ['./course.component.css'],
 })
 export class CourseComponent implements OnInit {
   courses: Course[];
+  private modalRef: BsModalRef;
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private modalService: BsModalService
+  ) {}
 
   ngOnInit(): void {
     this.courseService.getCourses().subscribe((response) => {
@@ -18,4 +23,10 @@ export class CourseComponent implements OnInit {
       }
     });
   }
+
+  onClickAdd = () => {
+    this.modalRef = this.modalService.show(AddCourseComponent, {
+      class: 'modal-lg',
+    });
+  };
 }

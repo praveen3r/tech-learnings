@@ -1,9 +1,11 @@
 import { DeleteResult, ObjectId, UpdateResult } from "mongodb";
 import { Query, UpdateWriteOpResult } from "mongoose";
-import AuthModel from "../model/AuthModel";
 import UserModel from "../model/UserModel";
-import Auth from "../types/Auth";
 import User from "../types/User";
+import { FileUtil } from "../utils/FileUtil";
+import { Response } from "express";
+import { Constants } from "../utils/Constants";
+
 
 class UserService {
 
@@ -49,6 +51,33 @@ class UserService {
       if (result.deletedCount !== 1) {
         throw new Error("No documents matched the query. Deleted 0 documents");
       }
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  getUserSearch = async (user: User) : Promise<User[]> => {
+    try {
+      const users: Array<User> = await this.user.find({"name": { $regex : '.*'+ user.name + '.*' , $options: 'i'} })
+      if (users) {
+        users.forEach((user, index) => {
+          user.sNo = index+1;
+        })
+      }
+      
+      return users;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  download = async (res: Response) : Promise<void> => {
+    try {
+      const users: User[] = await this.user.find().select({ "updatedAt": 0, "createdAt": 0, "__v": 0, "_id":0}).lean();
+      
+      const stream = FileUtil.createXLSXFile(users, Constants.EXCEL_HEADER);
+      stream.pipe(res);
+      
     } catch (error) {
       throw error;
     }

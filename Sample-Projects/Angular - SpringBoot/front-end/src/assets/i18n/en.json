@@ -1,0 +1,16 @@
+{
+  "id": "ID",
+  "name": "Name",
+  "type": "Type",
+  "author": "Author",
+  "actions": "Actions",
+  "select": "Select",
+  "option": "Option",
+  "lang": "Language",
+  "home": "Home",
+  "course": "Course",
+  "search": "Search",
+  "contact": "Contact",
+  "about": "About",
+  "signout": "Sign Out"
+}

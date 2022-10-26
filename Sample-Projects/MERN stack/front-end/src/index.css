@@ -371,6 +371,15 @@ tbody tr:nth-child(even) {
   width: 125px;
 }
 
-.react-datepicker__input-container input {
-  width: 20%;
+.search-form{
+  width: 370px;
+  margin: auto;
+}
+
+.search-results{
+  margin-top: 30px;
+}
+
+.center-align {
+  text-align: center;
 }

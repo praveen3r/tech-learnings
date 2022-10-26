@@ -12,8 +12,9 @@ import {
 } from "@mui/material";
 import DisplayMessage from "../../components/i18n/DisplayMessage";
 import ExpandableTableRow from "../../components/table/ExpandableTableRow";
+import { SearchResultsType } from "../../types/FormTypes";
 
-function UserSearchResults(props: any) {
+function UserSearchResults(props: SearchResultsType) {
   const { userData } = props;
   const [rowsPerPage, setRowsPerPage] = useState<number>(3);
   const [page, setPage] = useState<number>(0);
@@ -72,7 +73,7 @@ function UserSearchResults(props: any) {
               ))
           ) : (
             <TableRow>
-              <TableCell colSpan={5}>No data to display</TableCell>
+              <TableCell colSpan={5} sx={{textAlign: "center"}}>No data to display</TableCell>
             </TableRow>
           )}
         </TableBody>

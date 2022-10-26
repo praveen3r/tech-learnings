@@ -36,9 +36,7 @@ const Header = () => {
 
   return (
   <header className='header'>
-      {/* <div className='logo'>
-      <Link to='/dashboard'>Home</Link>
-      </div> */}
+     
       <div className='logo'>
         
       </div>

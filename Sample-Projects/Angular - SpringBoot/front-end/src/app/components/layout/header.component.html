@@ -1,0 +1,18 @@
+<header class="header">
+  <div class="logo"></div>
+  <ul>
+    <li>
+      <select
+        class="form-control m-1 m-md-2 col-3 col-lg-2"
+        (change)="onChangeLanguage($event)"
+      >
+        <option *ngFor="let option of optionList" [value]="option?.id">
+          {{ option.value }}
+        </option>
+      </select>
+    </li>
+    <li>
+      <a>{{ "signout" | translate }}</a>
+    </li>
+  </ul>
+</header>

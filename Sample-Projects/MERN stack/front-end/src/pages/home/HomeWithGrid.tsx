@@ -22,7 +22,6 @@ import LoadingOverlay from "react-loading-overlay-ts";
 import DeleteConfirmation from "../../components/modal/DeleteConfirmation";
 import UserDetails from "./UserDetails";
 import SearchBar from "../../components/search/SearchBar";
-import ExpandableTableRow from "../../components/table/ExpandableTableRow";
 import DisplayMessage from "../../components/i18n/DisplayMessage";
 import { MessageUtils } from "../../util/MessageUtils";
 import Constants from "../../util/Constants";
@@ -251,7 +250,6 @@ function HomeWithGrid() {
               <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell></TableCell>
                     <TableCell>
                       <DisplayMessage id="serialNo" />
                     </TableCell>
@@ -281,13 +279,7 @@ function HomeWithGrid() {
                         page * rowsPerPage + rowsPerPage
                       )
                       .map((user) => (
-                        <ExpandableTableRow
-                          key={user.sNo}
-                          expandComponent={
-                            <TableCell colSpan={5}>{user.name}</TableCell>
-                          }
-                        >
-                          {/* <TableRow key={user.sNo}> */}
+                        <TableRow>
                           <TableCell component="th" scope="row">
                             {user.sNo}
                           </TableCell>
@@ -308,12 +300,11 @@ function HomeWithGrid() {
                           >
                             <FaTrash />
                           </TableCell>
-                          {/* </TableRow> */}
-                        </ExpandableTableRow>
+                        </TableRow>
                       ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={5}>No data to display</TableCell>
+                      <TableCell colSpan={5} sx={{textAlign: "center"}}>No data to display</TableCell>
                     </TableRow>
                   )}
                 </TableBody>

@@ -1,18 +1,19 @@
 <div>
   <h4>Courses</h4>
 </div>
-<div>
-  <a href="javascript:;" title="Add New" uiSref="">
+<div class="my-2 col-12">
+  <a href="javascript:;" title="Add New" (click)="onClickAdd()">
     <h5 class="text-secondary"><span class="fa fa-plus mr-2"></span>Add New</h5>
   </a>
 </div>
-<div>
-  <table class="cyc-table">
+<div class="my-2 col-12">
+  <table class="demo-table">
     <thead>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Author</th>
+      <th>{{ "id" | translate }}</th>
+      <th>{{ "name" | translate }}</th>
+      <th>{{ "type" | translate }}</th>
+      <th>{{ "author" | translate }}</th>
+      <th>{{ "actions" | translate }}</th>
     </thead>
     <tbody>
       <tr *ngFor="let course of courses">
@@ -20,6 +21,14 @@
         <td>{{ course.name }}</td>
         <td>{{ course.type }}</td>
         <td>{{ course.author }}</td>
+        <td>
+          <a href="javascript:;" title="Edit"
+            ><span class="fa fa-edit mr-2"></span
+          ></a>
+          <a href="javascript:;" title="Delete" style="padding-left: 15px"
+            ><span class="fa fa-trash"></span
+          ></a>
+        </td>
       </tr>
     </tbody>
   </table>

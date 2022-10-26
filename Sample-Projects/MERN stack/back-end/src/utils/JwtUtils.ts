@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import { JSONType } from "../model/JSONType";
+import { JSONType } from "../types/JSONType";
 
 export class JwtUtils {
   static generateToken(payload: JSONType) {

@@ -16,6 +16,8 @@
     "page": "Page",
     "fromDate": "From Date",
     "toDate": "To Date",
-    "enter": "Enter"
+    "enter": "Enter",
+    "reset": "Reset",
+    "download": "Download"
         
 }

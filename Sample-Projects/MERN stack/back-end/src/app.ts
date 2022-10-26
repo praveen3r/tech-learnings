@@ -41,7 +41,6 @@ class App {
   }
 
   private initialiseErrorHandling(): void {
-    //this.express.use(methodNotAllowedMiddleWare);
     this.express.use(errorMiddleWare);
   }
 

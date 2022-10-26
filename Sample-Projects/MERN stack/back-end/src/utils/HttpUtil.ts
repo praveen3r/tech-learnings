@@ -133,6 +133,11 @@ class HttpUtil {
   public static deleteResponse(res: Response): Response {
     return res.status(StatusCodes.NO_CONTENT);
   }
+
+  public static getEmptyResponse(res: Response): Response {
+    const responseData = new ResponseData<string>();
+    return res.status(StatusCodes.OK).json({success:true});
+  }
 }
 
 export default HttpUtil;

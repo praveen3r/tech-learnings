@@ -18,4 +18,8 @@ export class UserService {
   static deleteUser = (id: string) => {
     return httpClient.delete(`/users/user/${id}`);
   };
+
+  static download = () => {
+    return httpClient.get<BlobPart>(`/users/download`,{responseType: "arraybuffer"});
+  };
 }

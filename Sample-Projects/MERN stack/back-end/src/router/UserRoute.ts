@@ -20,6 +20,8 @@ class UserRoute implements AppRouter {
     this.router.post(`${this.path}/user`, validationMiddleware(validate), this.userController.addUser);
     this.router.put(`${this.path}/user/:id`, validationMiddleware(validate), this.userController.editUser);
     this.router.delete(`${this.path}/user/:id`, this.userController.deleteUser);
+    this.router.get(`${this.path}/search`, this.userController.getUsersSearch);
+    this.router.get(`${this.path}/download`, this.userController.download);
   }
 
   

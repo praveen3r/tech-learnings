@@ -66,6 +66,33 @@ class UserController {
       HttpUtil.handleError(<Error>error, next);
     }
   };
+
+  getUsersSearch: RequestHandler = async (
+    req,
+    res,
+    next
+  ): Promise<Response | void> => {
+    try {
+      const user = req.query as Object as User;
+      const users = await this.userService.getUserSearch(user);
+      HttpUtil.getResponse(res).json({ users: users });
+    } catch (error) {
+      HttpUtil.handleError(<Error>error, next);
+    }
+  };
+
+  download: RequestHandler = async (
+    req,
+    res,
+    next
+  ): Promise<Response | void> => {
+    try {
+      await this.userService.download(res);
+      HttpUtil.getResponse(res);
+    } catch (error) {
+      HttpUtil.handleError(<Error>error, next);
+    }
+  };
 }
 
 export default UserController;

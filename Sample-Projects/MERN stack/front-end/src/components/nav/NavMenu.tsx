@@ -12,6 +12,7 @@ function NavMenu() {
           <Nav className="me-auto">
           <Link to="/dashboard">Home</Link>
           <Link to="/search" style={{paddingLeft: 20}}>Search</Link>
+          <Link to="/download" style={{paddingLeft: 20}}>Download</Link>
             
           </Nav>
         </Navbar.Collapse>

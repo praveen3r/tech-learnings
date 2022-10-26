@@ -14,7 +14,9 @@
     "clear": "Clear (French)",
     "rows": "Rows (French)",
     "page": "Page (French)",
-    "fromDate": "From Date (German)",
-    "toDate": "To Date (German)",
-    "enter": "Enter (German)"
+    "fromDate": "From Date (French)",
+    "toDate": "To Date (French)",
+    "enter": "Enter (French)",
+    "reset": "Reset (French)",
+    "download": "Download (French)"
 }

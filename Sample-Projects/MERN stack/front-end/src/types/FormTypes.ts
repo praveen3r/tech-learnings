@@ -1,5 +1,6 @@
 import { GenericFieldHTMLAttributes } from "formik";
 import React, { ChangeEvent, ChangeEventHandler } from "react";
+import { User } from "./User";
 
 export type InputType = GenericFieldHTMLAttributes & {
   label: string;
@@ -53,12 +54,6 @@ export type UserSearchType = {
   toDate: Date | null;
 };
 
-export type UserSearchSubmitType = {
-  name: string;
-  fromDate: string;
-  toDate: string;
-};
-
 export type LoginType = {
   username: string;
   keyword: string;
@@ -70,6 +65,10 @@ export type SearchBarType = {
   setInput?: (value: string) => void;
   searchInput?: string;
   setSearchInput?: (value: string) => void;
+};
+
+export type SearchResultsType = {
+  userData: User[] | null;
 };
 
 export type LocaleProvideType = {

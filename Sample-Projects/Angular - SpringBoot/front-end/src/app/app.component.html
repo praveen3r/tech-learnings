@@ -1,24 +1,27 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<div class="upperBorder">
-    <button matTooltip="logout" matTooltipPosition="left" mat-icon-button *ngIf="isLoggedIn">
-        <mat-icon (click) = "logout()" type>perm_identity</mat-icon>
-    </button>
-    
-</div>
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+<Header *ngIf="isLoggedIn"></Header>
 
 <div *ngIf="!isLoggedIn">
-    <app-login-page (loginFlag)="check($event)"></app-login-page>
+  <app-login-page (loginFlag)="login($event)"></app-login-page>
 </div>
 
 <div *ngIf="isLoggedIn" class="frame">
-    <mat-sidenav-container>
-        <mat-sidenav opened mode="side" role="navigation">
-                <div *ngFor = "let item of list" class = "li">
-                    <a [routerLink]="item">{{item}}</a>
-                </div>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+  <mat-sidenav-container>
+    <mat-sidenav opened mode="side" role="navigation">
+      <div *ngFor="let route of routes" class="li">
+        <a [routerLink]="route.route">{{ route.name | translate }}</a>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
+<ngx-spinner
+  type="ball-clip-rotate-multiple"
+  size="medium"
+  *ngIf="isValidBrowser"
+></ngx-spinner>

@@ -18,6 +18,7 @@ public class CourseContoller {
 	
 	@RequestMapping(value = "", method = {RequestMethod.GET})
 	public DemoResponse<CourseDto> getCourses() throws Exception{
+		Thread.sleep(1500);
 		return courseService.getCourses();
 	}
 }
