@@ -1,15 +1,48 @@
 {
   "id": "ID (German)",
-  "name": "Name (German)",
-  "type": "Type (German)",
-  "author": "Author (German)",
   "actions": "Actions (German)",
   "select": "Select (German)",
   "option": "Option (German)",
-  "home": "Home (German)",
-  "course": "Course (German)",
-  "search": "Search (German)",
-  "contact": "Contact (German)",
-  "about": "About (German)",
-  "signout": "Sign Out (German)"
+  "lang": "Language (German)",
+  "signout": "Sign Out (German)",
+  "plsFillManFields": "Please fill mandatory fields (German)",
+  "noRecords": "No Records Found! (German)",
+  "addMsg": "{{key}} Added successfully (German)",
+  "updateMsg": "{{key}} Updated successfully (German)",
+  "deleteMsg": "{{key}} Removed successfully (German)",
+  "add": "Add (German)",
+  "edit": "Edit (German)",
+  "enter": "Enter (German)",
+  "menu": {
+    "home": "Home (German)",
+    "course": "Course (German)",
+    "search": "Search (German)",
+    "contact": "Contact (German)",
+    "about": "About (German)"
+  },
+  "course": {
+    "name": "Name (German)",
+    "type": "Type (German)",
+    "author": "Author (German)"
+  },
+  "button": {
+    "submit": "Submit (German)",
+    "cancel": "Cancel (German)",
+    "reset": "Reset (German)",
+    "add": "Add (German)",
+    "edit": "Edit (German)",
+    "search": "Search (German)",
+    "login": "Login (German)",
+    "close": "Close (German)",
+    "clear": "Clear (German)",
+    "logout": "Logout (German)",
+    "back": "Back (German)"
+  },
+  "error": {
+    "sysError": "Unexpected error. Contact administrator (German)",
+    "connectionLost": "Connection not available (German)"
+  },
+  "msg": {
+    "noChangesToSave": "You have not made any changes to save (German)"
+  }
 }

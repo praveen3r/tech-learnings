@@ -3,6 +3,7 @@ package com.demo.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 
+import com.demo.validator.Required;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -21,10 +22,13 @@ public class CourseDto implements Serializable{
 	
 	private BigInteger id;
 	
+	@Required(fieldName = "name")
 	private String name;
 	
+	@Required(fieldName = "type")
 	private String type;
 	
+	@Required(fieldName = "author")
 	private String author;
 	
 }

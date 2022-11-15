@@ -14,7 +14,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   BrowserAnimationsModule,
@@ -24,17 +27,21 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { CourseSearchComponent } from './components/course-search/course-search.component';
-import { AddCourseComponent } from './components/course/add-course.component';
+import { CourseGridExpandableRowComponent } from './components/course/course-grid-expand-row.component';
+import { CourseGridComponent } from './components/course/course-grid.component';
+import { CourseInputComponent } from './components/course/course-input.component';
 import { CourseComponent } from './components/course/courses.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/layout/header.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { CustomInterceptor } from './interceptor/custom-interceptor';
-import { DialogBodyComponent } from './lib/dialog-body/dialog-body.component';
+import { ConfirmMessageComponent } from './lib/modal/confirm/confirm-message.component';
+import { MessageComponent } from './lib/modal/message/message.component';
 import { AppRoutingModule } from './modules/app-routing.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -47,12 +54,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginPageComponent,
     HomeComponent,
     CourseComponent,
+    CourseGridComponent,
+    CourseGridExpandableRowComponent,
     CourseSearchComponent,
     AboutComponent,
     ContactComponent,
-    DialogBodyComponent,
-    AddCourseComponent,
+    ConfirmMessageComponent,
+    CourseInputComponent,
     HeaderComponent,
+    MessageComponent,
+    CourseGridComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,11 +78,21 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatSidenavModule,
     MatExpansionModule,
     MatDialogModule,
+    MatInputModule,
+    MatTableModule,
     MatTooltipModule,
+    MatPaginatorModule,
+    MatSortModule,
     BrowserAnimationsModule,
     HttpClientModule,
     NgxSpinnerModule,
     ModalModule.forRoot(),
+    ToastrModule.forRoot({
+      closeButton: true,
+      preventDuplicates: true,
+      maxOpened: 4,
+      timeOut: 3000,
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -88,6 +109,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi: true,
     },
   ],
+  exports: [MatTableModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -6,30 +6,35 @@
     <h5 class="text-secondary"><span class="fa fa-plus mr-2"></span>Add New</h5>
   </a>
 </div>
-<div class="my-2 col-12">
+<div class="my-2 col-12" *ngIf="isLoadingComplete">
   <table class="demo-table">
     <thead>
-      <th>{{ "id" | translate }}</th>
-      <th>{{ "name" | translate }}</th>
-      <th>{{ "type" | translate }}</th>
-      <th>{{ "author" | translate }}</th>
+      <th>{{ "course.name" | translate }}</th>
+      <th>{{ "course.type" | translate }}</th>
+      <th>{{ "course.author" | translate }}</th>
       <th>{{ "actions" | translate }}</th>
     </thead>
     <tbody>
       <tr *ngFor="let course of courses">
-        <td>{{ course.id }}</td>
         <td>{{ course.name }}</td>
         <td>{{ course.type }}</td>
         <td>{{ course.author }}</td>
         <td>
-          <a href="javascript:;" title="Edit"
+          <a href="javascript:;" title="Edit" (click)="onClickEdit(course)"
             ><span class="fa fa-edit mr-2"></span
           ></a>
-          <a href="javascript:;" title="Delete" style="padding-left: 15px"
+          <a
+            href="javascript:;"
+            title="Delete"
+            style="padding-left: 15px"
+            (click)="onClickDelete(course)"
             ><span class="fa fa-trash"></span
           ></a>
         </td>
       </tr>
     </tbody>
   </table>
+  <p class="mt-3 text-center text-danger" *ngIf="courses.length == 0">
+    {{ "noRecords" | translate }}
+  </p>
 </div>

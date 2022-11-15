@@ -6,12 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-//import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableAspectJAutoProxy
 @EnableCaching
-//@EnableTransactionManagement
 public class DemoApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {

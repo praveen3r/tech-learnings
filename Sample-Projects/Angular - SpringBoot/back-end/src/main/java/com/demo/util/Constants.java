@@ -22,6 +22,7 @@ public interface Constants {
 	String DATA_TYPE_DATE = "DATE";
 	
 	String SPACE = " ";
+	String EMPTY = "";
 	
 	String DATE_PATTERN = "dd/MM/yyyy";
 	

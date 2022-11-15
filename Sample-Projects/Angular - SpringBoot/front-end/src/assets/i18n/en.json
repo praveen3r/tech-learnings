@@ -1,16 +1,49 @@
 {
   "id": "ID",
-  "name": "Name",
-  "type": "Type",
-  "author": "Author",
   "actions": "Actions",
   "select": "Select",
   "option": "Option",
   "lang": "Language",
-  "home": "Home",
-  "course": "Course",
-  "search": "Search",
-  "contact": "Contact",
-  "about": "About",
-  "signout": "Sign Out"
+  "signout": "Sign Out",
+  "plsFillManFields": "Please fill mandatory fields",
+  "noRecords": "No Records Found!",
+  "addMsg": "{{key}} Added successfully",
+  "updateMsg": "{{key}} Updated successfully",
+  "deleteMsg": "{{key}} Removed successfully",
+  "add": "Add",
+  "edit": "Edit",
+  "enter": "Enter ",
+  "menu": {
+    "home": "Home",
+    "course": "Course",
+    "expand-row": "Expand Row",
+    "search": "Search",
+    "contact": "Contact",
+    "about": "About"
+  },
+  "course": {
+    "name": "Name",
+    "type": "Type",
+    "author": "Author"
+  },
+  "button": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "add": "Add",
+    "edit": "Edit",
+    "search": "Search",
+    "login": "Login",
+    "close": "Close",
+    "clear": "Clear",
+    "logout": "Logout",
+    "back": "Back"
+  },
+  "error": {
+    "sysError": "Unexpected error. Contact administrator",
+    "connectionLost": "Connection not available"
+  },
+  "msg": {
+    "noChangesToSave": "You have not made any changes to save"
+  }
 }

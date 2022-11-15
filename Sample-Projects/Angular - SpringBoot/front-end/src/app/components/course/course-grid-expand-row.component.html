@@ -1,0 +1,67 @@
+<div [hidden]="!isLoadingComplete">
+  <mat-table
+    [dataSource]="
+      courseDataSource.data.length > 0 ? courseDataSource : emptyDataSource
+    "
+  >
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef>{{
+        "course.name" | translate
+      }}</mat-header-cell>
+      <mat-cell class="description-cell" *matCellDef="let element">
+        {{ element.name }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Type">
+      <mat-header-cell *matHeaderCellDef>{{
+        "course.type" | translate
+      }}</mat-header-cell>
+      <mat-cell class="description-cell" *matCellDef="let element">
+        {{ element.type }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Author">
+      <mat-header-cell *matHeaderCellDef>{{
+        "course.author" | translate
+      }}</mat-header-cell>
+      <mat-cell class="description-cell" *matCellDef="let element">
+        {{ element.author }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="empty-row">
+      <mat-cell *matCellDef="let element">{{
+        "noRecords" | translate
+      }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      *matRowDef="
+        let row;
+        columns: courseDataSource.data.length > 0
+          ? displayedColumns
+          : ['empty-row']
+      "
+    ></mat-row>
+  </mat-table>
+  <mat-paginator
+    #paginator
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    aria-label="Select page"
+    showFirstLastButtons
+    [hidden]="courseDataSource.data.length === 0"
+  >
+  </mat-paginator>
+  <!-- <mat-paginator
+  #paginator
+  [pageSizeOptions]="pageSizeOptions"
+  aria-label="Select page"
+  showFirstLastButtons
+  hidePageSize
+>
+</mat-paginator> -->
+</div>

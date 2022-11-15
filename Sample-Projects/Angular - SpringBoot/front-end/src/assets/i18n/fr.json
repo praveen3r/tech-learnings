@@ -1,15 +1,48 @@
 {
   "id": "ID (French)",
-  "name": "Name (French)",
-  "type": "Type (French)",
-  "author": "Author (French)",
   "actions": "Actions (French)",
   "select": "Select (French)",
   "option": "Option (French)",
-  "home": "Home (French)",
-  "course": "Course (French)",
-  "search": "Search (French)",
-  "contact": "Contact (French)",
-  "about": "About (French)",
-  "signout": "Sign Out (French)"
+  "lang": "Language (French)",
+  "signout": "Sign Out (French)",
+  "plsFillManFields": "Please fill mandatory fields (French)",
+  "noRecords": "No Records Found! (French)",
+  "addMsg": "{{key}} Added successfully (French)",
+  "updateMsg": "{{key}} Updated successfully (French)",
+  "deleteMsg": "{{key}} Removed successfully (French)",
+  "add": "Add (French)",
+  "edit": "Edit (French)",
+  "enter": "Enter (French)",
+  "menu": {
+    "home": "Home (French)",
+    "course": "Course (French)",
+    "search": "Search (French)",
+    "contact": "Contact (French)",
+    "about": "About (French)"
+  },
+  "course": {
+    "name": "Name (French)",
+    "type": "Type (French)",
+    "author": "Author (French)"
+  },
+  "button": {
+    "submit": "Submit (French)",
+    "cancel": "Cancel (French)",
+    "reset": "Reset (French)",
+    "add": "Add (French)",
+    "edit": "Edit (French)",
+    "search": "Search (French)",
+    "login": "Login (French)",
+    "close": "Close (French)",
+    "clear": "Clear (French)",
+    "logout": "Logout (French)",
+    "back": "Back (French)"
+  },
+  "error": {
+    "sysError": "Unexpected error. Contact administrator (French)",
+    "connectionLost": "Connection not available (French)"
+  },
+  "msg": {
+    "noChangesToSave": "You have not made any changes to save (French)"
+  }
 }

@@ -14,23 +14,27 @@ export class AppComponent implements OnInit {
   routes: RouteType[] = [
     {
       route: 'home',
-      name: 'home',
+      name: 'menu.home',
     },
     {
       route: 'course',
-      name: 'course',
+      name: 'menu.course',
+    },
+    {
+      route: 'course-expand-row',
+      name: 'menu.expand-row',
     },
     {
       route: 'course-search',
-      name: 'search',
+      name: 'menu.search',
     },
     {
       route: 'contact',
-      name: 'contact',
+      name: 'menu.contact',
     },
     {
       route: 'about',
-      name: 'about',
+      name: 'menu.about',
     },
   ];
 

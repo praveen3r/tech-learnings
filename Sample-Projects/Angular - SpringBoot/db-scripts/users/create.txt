@@ -1,0 +1,2 @@
+CREATE USER demo_admin WITH PASSWORD 'Admin@1234';
+CREATE USER demo_user WITH PASSWORD 'User@1234';

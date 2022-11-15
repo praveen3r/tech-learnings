@@ -6,10 +6,12 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { MatDialog } from '@angular/material/dialog';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { MessageComponent } from '../../app/lib/modal/message/message.component';
 import { TokenService } from '../services/common/token.service';
 
 @Injectable()
@@ -19,7 +21,7 @@ export class CustomInterceptor implements HttpInterceptor {
 
   constructor(
     private spinner: NgxSpinnerService,
-    private modalService: BsModalService,
+    private dialogService: MatDialog,
     private tokenService: TokenService
   ) {}
 
@@ -49,15 +51,32 @@ export class CustomInterceptor implements HttpInterceptor {
       }),
       catchError((err) => {
         this.decreaseRequests();
+        this.processError(err);
         throw err;
       })
     );
   }
 
-  private decreaseRequests() {
+  private processError = (err) => {
+    let errorMsg: string;
+
+    if (err && err.error) {
+      const statusCode: number = err.status;
+      if (statusCode <= 0) {
+        errorMsg = 'error.connectionLost';
+      } else {
+        errorMsg = 'error.sysError';
+      }
+      const dialogRef = this.dialogService.open(MessageComponent, {
+        data: errorMsg,
+      });
+    }
+  };
+
+  private decreaseRequests = () => {
     this.totalRequests--;
     if (this.totalRequests === 0) {
       this.spinner.hide();
     }
-  }
+  };
 }
