@@ -1,7 +1,6 @@
 package com.demo.service;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,5 +52,15 @@ public class CourseService {
 
 	public void deleteCourse(final BigInteger id) {
 		courseRepository.deleteCourse(id);
+	}
+	
+	public DemoResponse<CourseDto> getCourses(final String name, final String startDate, final String endDate) throws Exception{
+		DemoResponse<CourseDto> response = null;
+		
+		var courseList = courseRepository.getSearchData(name, startDate, endDate);
+		
+		response = new DemoResponse<CourseDto>(ResponseKeyConstants.COURSES, courseList);
+		return response;
+		
 	}
 }

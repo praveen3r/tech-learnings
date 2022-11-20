@@ -17,7 +17,7 @@ import { Constants } from '../../utils/Constants';
 import { GeneralUtils } from '../../utils/GeneralUtils';
 
 @Component({
-  templateUrl: './course-input.component.html',
+  templateUrl: 'course-input.component.html',
   styles: [],
 })
 export class CourseInputComponent implements OnInit {

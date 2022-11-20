@@ -1,0 +1,21 @@
+.example-detail-row {
+  height: 0;
+  min-height: auto;
+  display: inline-block;
+  width: 100%;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+}
+
+.detail-table {
+  background: #b7b7b773;
+  text-align: center;
+}

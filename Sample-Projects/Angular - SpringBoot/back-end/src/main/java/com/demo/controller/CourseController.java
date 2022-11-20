@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.dto.CourseDto;
@@ -46,5 +47,12 @@ public class CourseController {
 	@DeleteMapping("course/{id}")
 	public void deleteCourse(@PathVariable(name = "id") final BigInteger id) {
 		courseService.deleteCourse(id);
+	}
+	
+	@GetMapping(value = "course/search")
+	public DemoResponse<CourseDto> getCourseSearchData(@RequestParam(name = "name", required = true) final String name,
+			@RequestParam(name = "startDate", required = false) final String startDate,
+			@RequestParam(name = "endDate", required = false) final String endDate) throws Exception{
+		return courseService.getCourses(name, startDate, endDate);
 	}
 }

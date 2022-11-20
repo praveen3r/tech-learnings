@@ -8,7 +8,7 @@
   <app-login-page (loginFlag)="login($event)"></app-login-page>
 </div>
 
-<div *ngIf="isLoggedIn" class="frame">
+<div *ngIf="isLoggedIn">
   <mat-sidenav-container>
     <mat-sidenav opened mode="side" role="navigation">
       <div *ngFor="let route of routes" class="li">
@@ -16,7 +16,9 @@
       </div>
     </mat-sidenav>
     <mat-sidenav-content>
-      <router-outlet></router-outlet>
+      <div style="margin-left: 30px">
+        <router-outlet></router-outlet>
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

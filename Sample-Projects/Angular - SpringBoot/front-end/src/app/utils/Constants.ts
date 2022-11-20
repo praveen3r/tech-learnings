@@ -7,4 +7,6 @@ export class Constants {
 
   public static PAGE_SIZE = 2;
   public static PAGE_SIZE_OPTIONS = [2, 5, 10, 25, 100];
+
+  public static DATEFORMAT_DDMMYYYY = 'dd/MM/yyyy';
 }

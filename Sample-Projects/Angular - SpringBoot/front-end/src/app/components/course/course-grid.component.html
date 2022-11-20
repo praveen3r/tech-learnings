@@ -1,4 +1,24 @@
 <div [hidden]="!isLoadingComplete">
+  <div>
+    <h4>Courses</h4>
+  </div>
+  <div class="my-2 col-12">
+    <a href="javascript:;" title="Add New" (click)="onClickAdd()">
+      <h5 class="text-secondary">
+        <span class="fa fa-plus mr-2"></span>Add New
+      </h5>
+    </a>
+  </div>
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Search columns"
+      #input
+    />
+  </mat-form-field>
+
   <mat-table
     [dataSource]="
       courseDataSource.data.length > 0 ? courseDataSource : emptyDataSource
@@ -32,11 +52,35 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        {{ "actions" | translate }}
+      </mat-header-cell>
+      <mat-cell class="description-cell" *matCellDef="let element">
+        <a href="javascript:;" title="Edit" (click)="onClickEdit(element)"
+          ><span class="fa fa-edit mr-2"></span
+        ></a>
+        <a
+          href="javascript:;"
+          title="Delete"
+          style="padding-left: 15px"
+          (click)="onClickDelete(element)"
+          ><span class="fa fa-trash"></span
+        ></a>
+      </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="empty-row">
       <mat-cell *matCellDef="let element">{{
         "noRecords" | translate
       }}</mat-cell>
     </ng-container>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+        {{ "noRecords" | translate }}
+      </td>
+    </tr>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.demo.dto.CourseDto;
 import com.demo.entity.Course;
 
-public interface CourseRepository extends JpaRepository<Course, BigInteger> {
+public interface CourseRepository extends JpaRepository<Course, BigInteger>, CourseRepositoryCustom {
 
 	@Query("select new com.demo.dto.CourseDto(cs.id, cs.name, cs.type, cs.author) from Course cs ORDER BY cs.name")
 	List<CourseDto> getCourseList();

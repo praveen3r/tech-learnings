@@ -10,7 +10,7 @@ import { Constants } from './../../utils/Constants';
 import { CourseInputComponent } from './course-input.component';
 
 @Component({
-  templateUrl: './course.component.html',
+  templateUrl: 'course.component.html',
 })
 export class CourseComponent implements OnInit {
   public isLoadingComplete = false;

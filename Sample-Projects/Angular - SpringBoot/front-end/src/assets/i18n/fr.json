@@ -13,6 +13,8 @@
   "add": "Add (French)",
   "edit": "Edit (French)",
   "enter": "Enter (French)",
+  "startDate": "Start Date (French)",
+  "endDate": "End Date (French)",
   "menu": {
     "home": "Home (French)",
     "course": "Course (French)",
@@ -43,6 +45,7 @@
     "connectionLost": "Connection not available (French)"
   },
   "msg": {
-    "noChangesToSave": "You have not made any changes to save (French)"
+    "noChangesToSave": "You have not made any changes to save (French)",
+    "reqd": "is required(French)"
   }
 }

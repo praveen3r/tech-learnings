@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Course } from 'src/app/model/Course';
@@ -30,6 +30,12 @@ export class CourseService {
   deleteCourse(id: number): Observable<Object> {
     return this.http.delete(`${url.COURSE_MODIFY_SERVICE}/${id}`, {
       observe: 'response',
+    });
+  }
+
+  searchCourse(params: HttpParams): Observable<CourseType> {
+    return this.http.get<CourseType>(`${url.COURSE_SEARCH_SERVICE}`, {
+      params,
     });
   }
 }

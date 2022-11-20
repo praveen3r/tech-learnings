@@ -13,6 +13,8 @@
   "add": "Add (German)",
   "edit": "Edit (German)",
   "enter": "Enter (German)",
+  "startDate": "Start Date (German)",
+  "endDate": "End Date (German)",
   "menu": {
     "home": "Home (German)",
     "course": "Course (German)",
@@ -43,6 +45,7 @@
     "connectionLost": "Connection not available (German)"
   },
   "msg": {
-    "noChangesToSave": "You have not made any changes to save (German)"
+    "noChangesToSave": "You have not made any changes to save (German)",
+    "reqd": "is required(German)"
   }
 }

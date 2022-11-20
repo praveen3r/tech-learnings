@@ -13,6 +13,8 @@
   "add": "Add",
   "edit": "Edit",
   "enter": "Enter ",
+  "startDate": "Start Date",
+  "endDate": "End Date",
   "menu": {
     "home": "Home",
     "course": "Course",
@@ -44,6 +46,7 @@
     "connectionLost": "Connection not available"
   },
   "msg": {
-    "noChangesToSave": "You have not made any changes to save"
+    "noChangesToSave": "You have not made any changes to save",
+    "reqd": "is required"
   }
 }

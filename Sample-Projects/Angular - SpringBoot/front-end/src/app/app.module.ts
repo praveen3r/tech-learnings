@@ -1,33 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import {
-  HttpClient,
-  HttpClientModule,
-  HTTP_INTERCEPTORS,
-} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   BrowserAnimationsModule,
   NoopAnimationsModule,
 } from '@angular/platform-browser/animations';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { ToastrModule } from 'ngx-toastr';
+
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -39,14 +19,13 @@ import { CourseComponent } from './components/course/courses.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/layout/header.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
+import { DisableControlDirective } from './directives/disable-control.directive';
 import { CustomInterceptor } from './interceptor/custom-interceptor';
 import { ConfirmMessageComponent } from './lib/modal/confirm/confirm-message.component';
 import { MessageComponent } from './lib/modal/message/message.component';
 import { AppRoutingModule } from './modules/app-routing.module';
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+import { MaterialModule } from './modules/material.module';
+import { SharedModule } from './modules/shared.module';
 
 @NgModule({
   declarations: [
@@ -64,43 +43,17 @@ export function HttpLoaderFactory(http: HttpClient) {
     HeaderComponent,
     MessageComponent,
     CourseGridComponent,
+    DisableControlDirective,
   ],
   imports: [
     BrowserModule,
-    MatCardModule,
     NoopAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    AppRoutingModule,
     ReactiveFormsModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatExpansionModule,
-    MatDialogModule,
-    MatInputModule,
-    MatTableModule,
-    MatTooltipModule,
-    MatPaginatorModule,
-    MatSortModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxSpinnerModule,
-    ModalModule.forRoot(),
-    ToastrModule.forRoot({
-      closeButton: true,
-      preventDuplicates: true,
-      maxOpened: 4,
-      timeOut: 3000,
-    }),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
-      defaultLanguage: 'en',
-    }),
+    AppRoutingModule,
+    MaterialModule,
+    SharedModule,
   ],
   providers: [
     {
@@ -109,7 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi: true,
     },
   ],
-  exports: [MatTableModule],
+  exports: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
