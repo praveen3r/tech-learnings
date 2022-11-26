@@ -10,7 +10,7 @@ public class RequiredValidator implements ConstraintValidator<Required, Object> 
 	@Override
 	public boolean isValid(final Object value, final ConstraintValidatorContext context) {
 		if (value instanceof String) {
-			final String str = (String) value;
+			final var str = (String) value;
 			return CommonUtil.isNotEmpty(str);
 		}
 

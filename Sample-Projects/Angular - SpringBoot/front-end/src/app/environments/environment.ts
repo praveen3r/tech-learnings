@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  server:'http://localhost:8080',
-  idleTime:300, //5 minutes
+  server: 'http://localhost:8080/api',
+  idleTime: 300, //5 minutes
 };
 
 /*

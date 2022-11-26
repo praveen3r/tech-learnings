@@ -26,7 +26,7 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 	private Object responseBodyNotPresent(Object body, MethodParameter returnType, MediaType selectedContentType,
 			Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request,
 			ServerHttpResponse response) {
-		final HttpMethod requestMethod = request.getMethod();
+		final var requestMethod = request.getMethod();
 		if (HttpMethod.POST.equals(requestMethod)) {
 			response.setStatusCode(HttpStatus.CREATED);
 		} else if (HttpMethod.PUT.equals(requestMethod)) {

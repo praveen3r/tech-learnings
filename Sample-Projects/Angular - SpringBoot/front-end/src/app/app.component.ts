@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageComponent } from './lib/modal/message/message.component';
+import { AuthenticationService } from './services/common/authentication.service';
 import { Routes } from './utils/Routes';
 
 @Component({
@@ -18,17 +19,20 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private translate: TranslateService,
+    private authentication: AuthenticationService,
     private dialogService: MatDialog
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authentication.loggedInChange.subscribe((data) => {
+      this.isLoggedIn = data;
+    });
+  }
 
   //disable browser refresh for F5, ctrl+f5 and ctrl+r
   @HostListener('document:keydown', ['$event'])
   processKeyDown(event: KeyboardEvent) {
     var input_key = event.code;
-    console.log(input_key);
-
     if (
       input_key === 'F5' ||
       input_key === 'F10' ||
@@ -51,9 +55,5 @@ export class AppComponent implements OnInit {
     });
     event.preventDefault();
     event.stopPropagation();
-  }
-
-  login(event) {
-    this.isLoggedIn = event;
   }
 }

@@ -1,14 +1,6 @@
-<link
-  href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet"
-/>
-<Header *ngIf="isLoggedIn"></Header>
-
-<div *ngIf="!isLoggedIn">
-  <app-login (loginFlag)="login($event)"></app-login>
-</div>
-
 <div *ngIf="isLoggedIn">
+  <Header></Header>
+
   <mat-sidenav-container>
     <mat-sidenav opened mode="side" role="navigation">
       <div *ngFor="let route of routes" class="li">
@@ -21,6 +13,9 @@
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
+</div>
+<div *ngIf="!isLoggedIn">
+  <router-outlet></router-outlet>
 </div>
 <ngx-spinner
   type="ball-clip-rotate-multiple"

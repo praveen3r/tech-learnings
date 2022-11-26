@@ -34,7 +34,7 @@ public class CourseService {
 		CommonUtil.copyNonNullProperties(courseDto, course);
 		EntityUtil.populateDefaultColumns(course);
 		
-		CourseTypeMaster courseTypeMaster = new CourseTypeMaster();
+		var courseTypeMaster = new CourseTypeMaster();
 		courseTypeMaster.setId(courseDto.getTypeId());
 		course.setCourseTypeMaster(courseTypeMaster);
 		
@@ -57,12 +57,10 @@ public class CourseService {
 	}
 	
 	public DemoResponse<CourseDto> getCourses(final String name, final String startDate, final String endDate) throws Exception{
-		DemoResponse<CourseDto> response = null;
 		
 		var courseList = courseRepository.getSearchData(name, startDate, endDate);
 		
-		response = new DemoResponse<CourseDto>(ResponseKeyConstants.COURSES, courseList);
-		return response;
+		return  new DemoResponse<CourseDto>(ResponseKeyConstants.COURSES, courseList);
 		
 	}
 }

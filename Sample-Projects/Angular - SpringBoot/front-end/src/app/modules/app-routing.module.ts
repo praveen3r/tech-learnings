@@ -5,6 +5,7 @@ import { CourseSearchComponent } from '../components/course-search/course-search
 import { CourseGridExpandableRowComponent } from '../components/course/course-grid-expand-row.component';
 import { CourseGridComponent } from '../components/course/course-grid.component';
 import { HomeComponent } from '../components/home/home.component';
+import { LoginComponent } from '../components/login/login.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -12,6 +13,8 @@ const routes: Routes = [
   { path: 'course', component: CourseGridComponent },
   { path: 'course-expand-row', component: CourseGridExpandableRowComponent },
   { path: 'course-search', component: CourseSearchComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '**', component: LoginComponent },
 ];
 
 @NgModule({

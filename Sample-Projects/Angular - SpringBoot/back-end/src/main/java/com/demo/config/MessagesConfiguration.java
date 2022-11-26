@@ -13,7 +13,7 @@ public class MessagesConfiguration
    @Bean
    public MessageSource messageSource()
    {
-      final ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+      final var messageSource = new ReloadableResourceBundleMessageSource();
       messageSource.setBasename("classpath:messages");
       messageSource.setDefaultEncoding("UTF-8");
       return messageSource;
@@ -22,7 +22,7 @@ public class MessagesConfiguration
    @Bean
    public LocalValidatorFactoryBean validator()
    {
-      final LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+      final var bean = new LocalValidatorFactoryBean();
       bean.setValidationMessageSource(messageSource());
       return bean;
    }

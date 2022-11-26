@@ -13,7 +13,7 @@ public class DemoConfig
    @Bean
    public ObjectMapper complianceMapper()
    {
-      final ObjectMapper objectMapper = new ObjectMapper();
+      final var objectMapper = new ObjectMapper();
       objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
       return objectMapper;
 
