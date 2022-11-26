@@ -9,7 +9,10 @@
       </h5>
     </a>
   </div>
-  <mat-form-field appearance="standard">
+  <mat-form-field
+    appearance="standard"
+    [hidden]="courseDataSource.data.length === 0"
+  >
     <mat-label>Filter</mat-label>
     <input
       matInput

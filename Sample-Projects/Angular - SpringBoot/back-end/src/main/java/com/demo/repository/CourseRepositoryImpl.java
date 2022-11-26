@@ -19,7 +19,7 @@ public class CourseRepositoryImpl implements CourseRepositoryCustom{
 	public List<CourseDto> getSearchData(String name, String startDate, String endDate) {
 		List<CourseDto> queryResult = null;
 		
-		final StringBuilder queryStr = new StringBuilder("select new com.demo.dto.CourseDto(cs.id, cs.name, cs.type, cs.author) from Course cs where 1=1 and ");
+		final StringBuilder queryStr = new StringBuilder("select new com.demo.dto.CourseDto(cs.id, cs.name, ctm.value, ctm.id, cs.author) from Course cs JOIN cs.courseTypeMaster ctm where 1=1 and ");
 		
 		if (CommonUtil.isNotEmpty(name)) {
 			queryStr.append("LOWER(name) LIKE LOWER(:name)");

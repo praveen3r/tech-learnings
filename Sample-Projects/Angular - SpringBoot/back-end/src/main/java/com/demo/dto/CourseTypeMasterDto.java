@@ -1,9 +1,7 @@
 package com.demo.dto;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 
-import com.demo.validator.Required;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -16,21 +14,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class CourseDto implements Serializable{
+public class CourseTypeMasterDto implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 	
-	private BigInteger id;
-	
-	@Required(fieldName = "name")
-	private String name;
-	
-	private String type;
-	
-	@Required(fieldName = "typeId")
-	private Integer typeId;
-	
-	@Required(fieldName = "author")
-	private String author;
-	
+	private String value;
+
 }

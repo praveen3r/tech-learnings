@@ -22,6 +22,10 @@
     "contact": "Contact (French)",
     "about": "About (French)"
   },
+  "login": {
+    "username": "Username (French)",
+    "keyword": "Password (French)"
+  },
   "course": {
     "name": "Name (French)",
     "type": "Type (French)",
@@ -46,6 +50,7 @@
   },
   "msg": {
     "noChangesToSave": "You have not made any changes to save (French)",
-    "reqd": "is required(French)"
+    "reqd": "is required(French)",
+    "operationNotAllow": "This operation is not allowed(French)"
   }
 }

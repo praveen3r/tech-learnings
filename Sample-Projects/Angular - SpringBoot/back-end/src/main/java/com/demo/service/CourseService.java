@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.demo.dto.CourseDto;
 import com.demo.dto.DemoResponse;
 import com.demo.entity.Course;
+import com.demo.entity.CourseTypeMaster;
 import com.demo.repository.CourseRepository;
 import com.demo.util.CommonUtil;
 import com.demo.util.EntityUtil;
@@ -21,13 +22,9 @@ public class CourseService {
 	private CourseRepository courseRepository;
 
 	public DemoResponse<CourseDto> getCourses() throws Exception{
-		DemoResponse<CourseDto> response = null;
-		
 		var courseList = courseRepository.getCourseList();
 		
-		response = new DemoResponse<CourseDto>(ResponseKeyConstants.COURSES, courseList);
-		return response;
-		
+		return new DemoResponse<CourseDto>(ResponseKeyConstants.COURSES, courseList);
 	}
 	
 	@Transactional
@@ -36,6 +33,11 @@ public class CourseService {
 		var course = new Course();
 		CommonUtil.copyNonNullProperties(courseDto, course);
 		EntityUtil.populateDefaultColumns(course);
+		
+		CourseTypeMaster courseTypeMaster = new CourseTypeMaster();
+		courseTypeMaster.setId(courseDto.getTypeId());
+		course.setCourseTypeMaster(courseTypeMaster);
+		
 		courseRepository.save(course);
 		
 	}

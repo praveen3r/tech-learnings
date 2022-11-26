@@ -23,6 +23,10 @@
     "contact": "Contact",
     "about": "About"
   },
+  "login": {
+    "username": "Username",
+    "keyword": "Password"
+  },
   "course": {
     "name": "Name",
     "type": "Type",
@@ -47,6 +51,7 @@
   },
   "msg": {
     "noChangesToSave": "You have not made any changes to save",
-    "reqd": "is required"
+    "reqd": "is required",
+    "operationNotAllow": "This operation is not allowed"
   }
 }

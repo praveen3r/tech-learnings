@@ -15,6 +15,7 @@ import { MessageService } from '../../services/common/message.service';
 import { CourseService } from '../../services/course/course.service';
 import { Constants } from '../../utils/Constants';
 import { GeneralUtils } from '../../utils/GeneralUtils';
+import { CourseTypeMaster } from './../../model/CourseTypeMaster';
 
 @Component({
   templateUrl: 'course-input.component.html',
@@ -29,6 +30,7 @@ export class CourseInputComponent implements OnInit {
   public onClose: Observable<boolean>;
   public isAdd: boolean = false;
   public course: Course;
+  public courseTypeList: CourseTypeMaster[];
 
   constructor(
     private fb: FormBuilder,
@@ -43,31 +45,43 @@ export class CourseInputComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initForm();
+    this.fetchCourseTypes();
   }
 
   private initForm = () => {
     this.courseInputForm = this.fb.group({
       name: new FormControl(this.course.name, Validators.required),
-      type: new FormControl(this.course.type, Validators.required),
+      type: new FormControl(
+        this.course.typeId ? this.course.typeId : '',
+        Validators.required
+      ),
       author: new FormControl(this.course.author, Validators.required),
+    });
+  };
+
+  private fetchCourseTypes = () => {
+    this.courseService.getCourseTypes().subscribe((response) => {
+      if (response.course_types) {
+        this.courseTypeList = response.course_types;
+      }
     });
   };
 
   public onClickSubmit = () => {
     this.clearError();
     const name = this.courseInputForm.value.name;
-    const type = this.courseInputForm.value.type;
+    const typeId = this.courseInputForm.value.type;
     const author = this.courseInputForm.value.author;
     if (this.courseInputForm.invalid) {
       this.errMsg = this.translate.instant('plsFillManFields') + ': ';
-      this.validateFormData(name, type, author);
+      this.validateFormData(name, typeId, author);
       this.errMsg = GeneralUtils.removeLastChar(this.errMsg);
       this.isError = true;
     } else {
       const course: Course = {
         id: this.course.id,
         name,
-        type,
+        typeId,
         author,
       };
       this.processData(course);

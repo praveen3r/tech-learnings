@@ -81,6 +81,8 @@ export class CourseGridComponent implements OnInit {
   };
 
   public onClickEdit = (course: Course) => {
+    console.log(course);
+
     const initialState = {
       isAdd: false,
       course,

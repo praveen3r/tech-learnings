@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { RouteType } from './types/FormTypes';
+import { MessageComponent } from './lib/modal/message/message.component';
+import { Routes } from './utils/Routes';
 
 @Component({
   selector: 'app-root',
@@ -11,74 +13,44 @@ import { RouteType } from './types/FormTypes';
 export class AppComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public isValidBrowser: boolean = true;
-  routes: RouteType[] = [
-    {
-      route: 'home',
-      name: 'menu.home',
-    },
-    {
-      route: 'course',
-      name: 'menu.course',
-    },
-    {
-      route: 'course-expand-row',
-      name: 'menu.expand-row',
-    },
-    {
-      route: 'course-search',
-      name: 'menu.search',
-    },
-    {
-      route: 'contact',
-      name: 'menu.contact',
-    },
-    {
-      route: 'about',
-      name: 'menu.about',
-    },
-  ];
+  public routes = Routes;
 
-  constructor(private router: Router, private translate: TranslateService) {}
+  constructor(
+    private router: Router,
+    private translate: TranslateService,
+    private dialogService: MatDialog
+  ) {}
 
-  ngOnInit() {
-    this.checkValidBrowser();
-  }
+  ngOnInit() {}
 
-  checkValidBrowser() {
-    let nAgt = navigator.userAgent;
-    let fullVersion: string = '' + parseFloat(navigator.appVersion);
-    let nameOffset: any, verOffset: any, ix: any;
-    if (nAgt.indexOf('Trident') != -1 && nAgt.indexOf('MSIE') != -1) {
-      this.isValidBrowser = false;
-    } else if ((verOffset = nAgt.indexOf('Chrome')) != -1) {
-      fullVersion = nAgt.substring(verOffset + 7);
-      let fullVersionNumber = this.getBrowserFullVersion(fullVersion);
-      if (fullVersionNumber && fullVersionNumber < 44) {
-        this.isValidBrowser = false;
-      }
-    } else if ((verOffset = nAgt.indexOf('Firefox')) != -1) {
-      fullVersion = nAgt.substring(verOffset + 8);
-      let fullVersionNumber = this.getBrowserFullVersion(fullVersion);
-      if (fullVersionNumber && fullVersionNumber < 36) {
-        this.isValidBrowser = false;
+  //disable browser refresh for F5, ctrl+f5 and ctrl+r
+  @HostListener('document:keydown', ['$event'])
+  processKeyDown(event: KeyboardEvent) {
+    var input_key = event.code;
+    console.log(input_key);
+
+    if (
+      input_key === 'F5' ||
+      input_key === 'F10' ||
+      input_key === 'F11' ||
+      input_key === 'F12'
+    ) {
+      //F5, F10, F11, F12
+      this.disableKeyboardNavigation(event);
+    } else if (event.ctrlKey) {
+      // Ctrl + R, Ctrl + Shift + R
+      if (input_key === 'KeyR') {
+        this.disableKeyboardNavigation(event);
       }
     }
   }
 
-  getBrowserFullVersion(fullVersion: string) {
-    let majorVersion: number, ix: number;
-    // trim the fullVersion string at semicolon/space if present
-    if ((ix = fullVersion.indexOf(';')) != -1)
-      fullVersion = fullVersion.substring(0, ix);
-    if ((ix = fullVersion.indexOf(' ')) != -1)
-      fullVersion = fullVersion.substring(0, ix);
-
-    majorVersion = parseInt('' + fullVersion, 10);
-    if (isNaN(majorVersion)) {
-      fullVersion = '' + parseFloat(navigator.appVersion);
-      majorVersion = parseInt(navigator.appVersion, 10);
-    }
-    return majorVersion;
+  disableKeyboardNavigation(event: KeyboardEvent) {
+    const dialogRef = this.dialogService.open(MessageComponent, {
+      data: this.translate.instant('msg.operationNotAllow'),
+    });
+    event.preventDefault();
+    event.stopPropagation();
   }
 
   login(event) {

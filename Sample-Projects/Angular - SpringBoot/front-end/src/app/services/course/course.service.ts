@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Course } from 'src/app/model/Course';
 import { url } from '../../conf/_url';
-import { CourseType } from '../../types/response-types';
+import { CourseType, CourseTypeMasterRes } from '../../types/response-types';
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +37,9 @@ export class CourseService {
     return this.http.get<CourseType>(`${url.COURSE_SEARCH_SERVICE}`, {
       params,
     });
+  }
+
+  getCourseTypes(): Observable<CourseTypeMasterRes> {
+    return this.http.get<CourseTypeMasterRes>(url.COURSE_TYPES_SERVICE);
   }
 }

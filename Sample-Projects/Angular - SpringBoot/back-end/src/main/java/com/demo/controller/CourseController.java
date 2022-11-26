@@ -28,7 +28,7 @@ public class CourseController {
 	@Autowired
 	private CourseService courseService;
 	
-	@GetMapping(value = "")
+	@GetMapping
 	public DemoResponse<CourseDto> getCourses() throws Exception{
 		Thread.sleep(1500);
 		return courseService.getCourses();

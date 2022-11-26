@@ -1,0 +1,44 @@
+<div class="login">
+  <mat-card>
+    <mat-card-title class="text-center">Login</mat-card-title>
+    <div class="login-form">
+      <form [formGroup]="loginForm">
+        <div class="mb-3 w-75">
+          <label class="form-label">{{ "login.username" | translate }}*</label>
+
+          <input
+            type="text"
+            placeholder="{{ 'enter' | translate }}{{
+              'login.username' | translate
+            }}"
+            class="form-control"
+            formControlName="userName"
+            allowChar="AN"
+          />
+        </div>
+        <div class="mb-3 w-75">
+          <label class="form-label">{{ "login.keyword" | translate }}*</label>
+
+          <input
+            type="password"
+            placeholder="{{ 'enter' | translate }}{{
+              'login.keyword' | translate
+            }}"
+            class="form-control"
+            formControlName="keyword"
+            (paste)="(false)"
+          />
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">
+            {{ "button.submit" | translate }}
+          </button>
+          <button type="button" class="btn btn-default ml-2">
+            {{ "button.reset" | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</div>

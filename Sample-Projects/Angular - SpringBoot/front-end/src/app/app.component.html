@@ -5,7 +5,7 @@
 <Header *ngIf="isLoggedIn"></Header>
 
 <div *ngIf="!isLoggedIn">
-  <app-login-page (loginFlag)="login($event)"></app-login-page>
+  <app-login (loginFlag)="login($event)"></app-login>
 </div>
 
 <div *ngIf="isLoggedIn">

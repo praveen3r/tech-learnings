@@ -22,6 +22,10 @@
     "contact": "Contact (German)",
     "about": "About (German)"
   },
+  "login": {
+    "username": "Username (German)",
+    "keyword": "Password (German)"
+  },
   "course": {
     "name": "Name (German)",
     "type": "Type (German)",
@@ -46,6 +50,7 @@
   },
   "msg": {
     "noChangesToSave": "You have not made any changes to save (German)",
-    "reqd": "is required(German)"
+    "reqd": "is required(German)",
+    "operationNotAllow": "This operation is not allowed(German)"
   }
 }

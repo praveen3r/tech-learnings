@@ -14,7 +14,7 @@ import com.demo.entity.Course;
 
 public interface CourseRepository extends JpaRepository<Course, BigInteger>, CourseRepositoryCustom {
 
-	@Query("select new com.demo.dto.CourseDto(cs.id, cs.name, cs.type, cs.author) from Course cs ORDER BY cs.name")
+	@Query("select new com.demo.dto.CourseDto(cs.id, cs.name, ctm.value, ctm.id, cs.author) from Course cs JOIN cs.courseTypeMaster ctm ORDER BY cs.name")
 	List<CourseDto> getCourseList();
 	
 	@Transactional

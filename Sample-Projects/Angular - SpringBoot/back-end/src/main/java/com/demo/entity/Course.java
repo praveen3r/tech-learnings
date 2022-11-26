@@ -5,9 +5,12 @@ import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -35,8 +38,13 @@ public class Course extends DefaultEntity implements Persistable<BigInteger>, Se
 	@Column(name = "NAME")
 	private String name;
 
-	@Column(name = "TYPE")
-	private String type;
+	/*
+	 * @Column(name = "TYPE") private String type;
+	 */
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TYPE")
+	private CourseTypeMaster courseTypeMaster;
 
 	@Column(name = "AUTHOR")
 	private String author;
