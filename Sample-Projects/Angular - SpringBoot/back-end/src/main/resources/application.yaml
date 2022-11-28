@@ -9,3 +9,6 @@ spring:
     active: dev
 token:
   secret: Xkx2axHkZIqVMFUfZRriBg==
+  expiry:
+    key: ":AABA:"
+    time: 3600

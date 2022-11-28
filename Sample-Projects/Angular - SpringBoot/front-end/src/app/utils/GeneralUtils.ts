@@ -1,3 +1,4 @@
+import CryptoJS from 'crypto-js';
 import * as _ from 'lodash';
 
 export class GeneralUtils {
@@ -41,5 +42,12 @@ export class GeneralUtils {
       transformedInput = transformedInput.replace(/\s+/g, '');
     }
     return transformedInput;
+  }
+
+  public static getEncryptedData(text: string, key: string): string {
+    return CryptoJS.AES.encrypt(text, CryptoJS.enc.Base64.parse(key), {
+      mode: CryptoJS.mode.ECB,
+      padding: CryptoJS.pad.Pkcs7,
+    }).toString();
   }
 }

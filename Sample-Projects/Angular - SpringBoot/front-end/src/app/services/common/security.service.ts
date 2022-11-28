@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { url } from '../../conf/_url';
@@ -21,5 +21,12 @@ export class SecurityService {
         responseType: 'text',
       });
     }
+  }
+
+  authenticate(params: HttpParams): Observable<any> {
+    return this.http.post(url.AUTH_SERVICE, params, {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      observe: 'response',
+    });
   }
 }

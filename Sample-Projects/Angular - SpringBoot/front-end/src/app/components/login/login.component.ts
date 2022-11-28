@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -6,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GeneralUtils } from 'src/app/utils/GeneralUtils';
 import { AuthenticationService } from './../../services/common/authentication.service';
 import { SecurityService } from './../../services/common/security.service';
 
@@ -37,17 +39,28 @@ export class LoginComponent implements OnInit {
   };
 
   public onClickSubmit = () => {
+    const keyword = this.loginForm.controls.keyword.value;
     this.isSubmitted = true;
     if (this.loginForm.valid) {
-      this.authenticate();
+      this.authenticate(keyword);
     }
   };
 
-  private authenticate = () => {
+  private authenticate = (keyword: string) => {
     this.securityService.getToken().subscribe((response) => {
-      console.log(response);
-      this.authentication.setIsLoggedIn(true);
-      this.router.navigate(['./home']);
+      const key = response;
+      let encrpted_keyword = GeneralUtils.getEncryptedData(keyword, key);
+      encrpted_keyword = encrpted_keyword.replace(/\+/g, 'AB1');
+
+      const userName = this.loginForm.controls.userName.value;
+      let queryParams = new HttpParams();
+      queryParams = queryParams.append('secure_username', userName);
+      queryParams = queryParams.append('secure_keyword', encrpted_keyword);
+
+      this.securityService.authenticate(queryParams).subscribe((response) => {
+        this.authentication.setIsLoggedIn(true);
+        this.router.navigate(['./home']);
+      });
     });
   };
 }
