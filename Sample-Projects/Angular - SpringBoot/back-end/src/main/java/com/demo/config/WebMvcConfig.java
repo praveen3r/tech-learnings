@@ -1,5 +1,6 @@
 package com.demo.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -11,6 +12,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer{
 
+	@Value("${cors.domain}")
+	private String domain;
+	
+	@Value("${cors.allow-methods}")
+	private String[] allowedMethods;
+	
+	@Value("${cors.allow-headers}")
+	private String[] allowedHeaders;
 	
 	@Override
 	public void configureContentNegotiation(final ContentNegotiationConfigurer configurer) {
@@ -21,6 +30,6 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	
 	@Override 
 	public void addCorsMappings(CorsRegistry registry) { 
-	registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("GET","POST","PUT","DELETE","OPTIONS");
+		registry.addMapping("/**").allowedOrigins(domain).allowedMethods(allowedMethods).allowedHeaders(allowedHeaders);
 	} 
 }

@@ -56,6 +56,15 @@ public class WebSecurityConfig {
 	@Value("${token.expiry.time}")
 	private Long expiryTime;
 	
+	@Value("${cors.allow-methods}")
+	private String[] allowedMethods;
+	
+	@Value("${cors.domain}")
+	private String domain;
+	
+	@Value("${cors.allow-headers}")
+	private String[] allowedHeaders;
+	
 	@Bean
 	public AuthenticationManager authManager(HttpSecurity http) 
 	  throws Exception {
@@ -98,9 +107,9 @@ public class WebSecurityConfig {
 	@Bean
 	CorsConfiguration corsConfiguration() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("*"));
-		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-		configuration.setAllowedHeaders(List.of("*"));
+		configuration.setAllowedOrigins(Arrays.asList(domain));
+		configuration.setAllowedMethods(Arrays.asList(allowedMethods));
+		configuration.setAllowedHeaders(List.of(allowedHeaders));
 		return configuration;
 	}
 	 

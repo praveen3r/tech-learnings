@@ -1,8 +1,11 @@
 package com.demo.service;
 
+import java.math.BigInteger;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 
 
@@ -26,9 +29,7 @@ public class AuthService {
 		String userId = authentication.getPrincipal().toString();
 		String encKeyWord = authentication.getCredentials().toString();
 		encKeyWord = encKeyWord.replaceAll("AB1", "+");
-		System.out.println(userId);
-		System.out.println(encKeyWord);
-		
+		authenticationNew = new UsernamePasswordAuthenticationToken(new BigInteger("123"), null, null);
 		/*UsernamePasswordAuthenticationToken authenticationNew = null;
 		String userId = authentication.getPrincipal() != null ? authentication.getPrincipal().toString().toUpperCase() : null;
 		String encKeyWord = authentication.getCredentials()!= null ? authentication.getCredentials().toString() : null ;
@@ -65,7 +66,7 @@ public class AuthService {
 			}
 
 		return authenticationNew;*/
-		return null;
+		return authenticationNew;
 	}
 	
 	

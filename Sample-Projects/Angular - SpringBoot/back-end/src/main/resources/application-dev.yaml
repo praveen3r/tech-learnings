@@ -2,6 +2,12 @@ connection:
     pool:
         max_size: 20
         timeout: 1800
+cors:
+  allow-headers: Origin, Content-Type, Accept, Authorization, X-Auth-Token
+  allow-methods: GET, POST, PUT, DELETE, OPTIONS
+  domain: http://localhost:4200
+  
+    
 logging:
     level:
       com:
@@ -9,8 +15,8 @@ logging:
       org:
         springframework: ERROR
     pattern:
-      console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
-      file: "%d %p %c{1.} [%t] %m%n"
+      console: '%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n'
+      file: '%d %p %c{1.} [%t] %m%n'
     file: app.log
 spring:
     cache:
@@ -18,7 +24,7 @@ spring:
     datasource:
         driver-class-name: org.postgresql.Driver
         pwd: User@1234
-        testWhileIdle: 'true '
+        testWhileIdle: true
         url: jdbc:postgresql://localhost:5432/demo
         username: demo_user
         validationQuery: SELECT 1 from dual
