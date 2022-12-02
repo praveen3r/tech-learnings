@@ -61,7 +61,7 @@ private static final String[] ENTITYMANAGER_PACKAGES_TO_SCAN = { "com.demo.entit
 		config.setMaximumPoolSize(connPoolMax);
 		config.setMinimumIdle(connPoolMax);
 
-		config.setPoolName("CYC-CONN-API-Pool");
+		config.setPoolName("DEMO-CONN-API-Pool");
 		config.setIdleTimeout(connPoolTimeout * 1000);
 		config.addDataSourceProperty("cachePrepStmts", "true");
 		config.addDataSourceProperty("prepStmtCacheSize", "250");
