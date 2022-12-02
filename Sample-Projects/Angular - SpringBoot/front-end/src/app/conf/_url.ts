@@ -3,7 +3,8 @@ import { environment } from '../environments/environment';
 const server = environment.server;
 
 export const url = {
-  TOKEN_SERVICE: `${server}/v1/sec/key/`,
+  TOKEN_SERVICE: `${server}/v1/sec/key`,
+  LOGOUT_SERVICE: `${server}/demo/authentication/logout`,
   AUTH_SERVICE: `${server}/demo/authentication`,
   COURSE_SERVICE: `${server}/v1/courses/`,
   COURSE_MODIFY_SERVICE: `${server}/v1/courses/course`,

@@ -47,7 +47,11 @@
   },
   "error": {
     "sysError": "Unexpected error. Contact administrator",
-    "connectionLost": "Connection not available"
+    "connectionLost": "Connection not available",
+    "login": {
+      "invaliduser": "Invalid User ID or Password!",
+      "exception": "Error in login, contact Admin"
+    }
   },
   "msg": {
     "noChangesToSave": "You have not made any changes to save",

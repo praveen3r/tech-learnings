@@ -46,7 +46,11 @@
   },
   "error": {
     "sysError": "Unexpected error. Contact administrator (French)",
-    "connectionLost": "Connection not available (French)"
+    "connectionLost": "Connection not available (French)",
+    "login": {
+      "invaliduser": "Invalid User ID or Password(French)!",
+      "exception": "Error in login, contact Admin(French)"
+    }
   },
   "msg": {
     "noChangesToSave": "You have not made any changes to save (French)",

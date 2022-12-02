@@ -15,6 +15,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.demo.service.CacheService;
+import com.demo.util.CommonUtil;
 import com.demo.util.Constants;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -56,14 +57,14 @@ public class TokenService {
 	}
 
 	String createToken(String key, AuthToken authToken) {
-		final StringBuilder sb = new StringBuilder(170);
+		final var sb = new StringBuilder(170);
 		try {
-			final byte[] tokenBytes = objectMapper.writeValueAsBytes(authToken);
-			final byte[] hash = createHmac(tokenBytes);
+			final var tokenBytes = objectMapper.writeValueAsBytes(authToken);
+			final var hash = createHmac(tokenBytes);
 			sb.append(toBase64(tokenBytes));
 			sb.append(SEPARATOR);
 			sb.append(toBase64(hash));
-			Long milliSecs = System.currentTimeMillis() + (expiryTime * 1000);
+			var milliSecs = System.currentTimeMillis() + (expiryTime * 1000);
 			sb.append(expiryKey);
 			sb.append(milliSecs);
 		} catch(Exception e) {
@@ -73,15 +74,15 @@ public class TokenService {
 	}
 	
 	public AuthToken buildAuthentication(final String token) throws Exception{
-		final String[] parts = token.split(SEPARATOR_SPLITTER);
+		final var parts = token.split(SEPARATOR_SPLITTER);
 		if (parts.length == 2 && parts[0].length() > 0 && parts[1].length() > 0) {
 			try {
-				final byte[] authenticationBytes = fromBase64(parts[0]);
-				final byte[] hash = fromBase64(parts[1]);
+				final var authenticationBytes = fromBase64(parts[0]);
+				final var hash = fromBase64(parts[1]);
 				final boolean validHash = Arrays.equals(createHmac(authenticationBytes), hash);
 				if (validHash) {
 					objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-					final AuthToken authToken = objectMapper.readValue(new ByteArrayInputStream(authenticationBytes), AuthToken.class);
+					final var authToken = objectMapper.readValue(new ByteArrayInputStream(authenticationBytes), AuthToken.class);
 						return authToken;
 				} else {
 					log.warn("Invalid token, may be tampered with...");
@@ -114,11 +115,13 @@ public class TokenService {
 	public void clearToken(final String id) {}
 	
 	public boolean validate(final String key, final String token) throws Exception{
-		boolean isValid = false;
+		boolean isValid = Boolean.FALSE;
 		if(StringUtils.isNotEmpty(key) && StringUtils.isNotEmpty(token)) {
-			String cachedToken = cacheService.getElementFromCache(Constants.SECURITY_TOKEN_KEY, key, String.class);
-			if(StringUtils.isNotEmpty(cachedToken) && cachedToken.equals(token)) {
-				isValid = true;
+			var cachedToken = cacheService.getElementFromCache(Constants.SECURITY_TOKEN_KEY, key, String.class);
+			var cachedTokenArr = cachedToken.split(expiryKey);
+			var tokenArr = token.split(expiryKey);
+			if(CommonUtil.isNotEmpty(cachedTokenArr[0]) && CommonUtil.compareValues(cachedTokenArr[0],tokenArr[0])) {
+				isValid = Boolean.TRUE;
 			}
 		}
 		

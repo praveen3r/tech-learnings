@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { DropDownOptions } from 'src/app/types/FormTypes';
+import { AuthenticationService } from '../../services/common/authentication.service';
+import { DropDownOptions } from './../../types/FormTypes';
 
 @Component({
   selector: 'Header',
@@ -23,7 +25,11 @@ export class HeaderComponent implements OnInit {
     },
   ];
 
-  constructor(private translate: TranslateService) {}
+  constructor(
+    private translate: TranslateService,
+    private router: Router,
+    private authentication: AuthenticationService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -31,4 +37,9 @@ export class HeaderComponent implements OnInit {
     const lang = (event.target as HTMLInputElement).value;
     this.translate.use(lang);
   };
+
+  onLogout() {
+    this.authentication.logout();
+    this.router.navigate(['./home']);
+  }
 }

@@ -2,7 +2,6 @@ package com.demo.security.handler;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigInteger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +33,11 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     	response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		response.setStatus(HttpServletResponse.SC_OK);
 		try(PrintWriter out = response.getWriter()){
-			BigInteger userId = (BigInteger)authentication.getPrincipal();
-			String token = tokenManager.createToken(userId.toString(), authentication);
-			AuthResponseDto authResponseDto = new AuthResponseDto();
-			authResponseDto.setSuccess(true);
+			var token = tokenManager.createToken(authentication);
+			var authResponseDto = new AuthResponseDto();
+			authResponseDto.setSuccess(Boolean.TRUE);
 			authResponseDto.setToken(token);
-			String responseVal = objectMapper.writeValueAsString(authResponseDto);
+			var responseVal = objectMapper.writeValueAsString(authResponseDto);
 			out.print(responseVal);
 			out.flush();
 		}

@@ -40,7 +40,7 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean supports(final MethodParameter arg0, final Class arg1) {
-		return true;
+		return Boolean.TRUE;
 	}
 
 	@Override

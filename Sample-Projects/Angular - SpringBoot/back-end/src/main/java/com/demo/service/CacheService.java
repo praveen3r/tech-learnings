@@ -21,7 +21,7 @@ public class CacheService {
 			final var cache = cacheManager.getCache(cacheName);
 			if (CommonUtil.isNotEmpty(cache)) {
 				final var wrapper = (SimpleValueWrapper) cache.get(key);
-				if (CommonUtil.isNotEmpty(cache)) {
+				if (CommonUtil.isNotEmpty(wrapper)) {
 					value = (T) wrapper.get();
 				}
 			}

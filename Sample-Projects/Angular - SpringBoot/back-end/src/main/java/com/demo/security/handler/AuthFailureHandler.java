@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import org.springframework.stereotype.Component;
 
 import com.demo.dto.AuthResponseDto;
+import com.demo.util.CommonUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
@@ -28,24 +29,18 @@ public class AuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
                                         AuthenticationException exception) throws IOException, ServletException {
     	
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-    	final String errorCode = exception.getMessage();
-		final Optional<String>	errorCodeOpt = Optional.ofNullable(errorCode);
+    	final var errorCode = exception.getMessage();
+		final var	errorCodeOpt = Optional.ofNullable(errorCode);
     	if(errorCodeOpt.isPresent()){
-    		if(errorCode.equals("2"))
+    		if(CommonUtil.compareValues(errorCode, "2"))
     			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); //Not valid credentials
-    		else if(errorCode.equals("3"))
-    			response.setStatus(423);  //Lock the user
-    		else if(errorCode.equals("4"))
-    			response.setStatus(420);  //Inactive user
-    		else if(errorCode.equals("8"))
-    			response.setStatus(424); //Error while processing
     		else
     			response.setStatus(424); //Error while processing
     	}
     	try(PrintWriter out = response.getWriter()){
-			AuthResponseDto authResponseDto = new AuthResponseDto();
+			var authResponseDto = new AuthResponseDto();
 			authResponseDto.setSuccess(false);
-			String responseVal = objectMapper.writeValueAsString(authResponseDto);
+			var responseVal = objectMapper.writeValueAsString(authResponseDto);
 			out.print(responseVal);
 			out.flush();
     	}

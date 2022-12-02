@@ -1,5 +1,6 @@
 package com.demo.util;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -7,6 +8,9 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.demo.dto.HeaderDto;
 
 public class CommonUtil
 {
@@ -31,27 +35,30 @@ public class CommonUtil
       return Optional.ofNullable(value).isPresent();
    }
 
-	/*
-	 * public static String getAuthorization() { final SecurityContext
-	 * securityContext = SecurityContextHolder.getContext(); final Authentication
-	 * authentication = securityContext.getAuthentication(); String authorization =
-	 * null;
-	 * 
-	 * if ((authentication != null) && (authentication.getDetails() instanceof
-	 * HeaderDto)) { final HeaderDto header = (HeaderDto)
-	 * authentication.getDetails(); authorization = header.getAuthorization(); }
-	 * return authorization; }
-	 */
+	
+	public static String getAuthorization() {
+		final var securityContext = SecurityContextHolder.getContext();
+		final var authentication = securityContext.getAuthentication();
+		String authorization = null;
 
-	/*
-	 * public static String getUserId() { final SecurityContext securityContext =
-	 * SecurityContextHolder.getContext(); final Authentication authentication =
-	 * securityContext.getAuthentication(); String userId = null;
-	 * 
-	 * if ((authentication != null) && (authentication.getDetails() instanceof
-	 * HeaderDto)) { final HeaderDto header = (HeaderDto)
-	 * authentication.getDetails(); userId = header.getUserId(); } return userId; }
-	 */
+		if (CommonUtil.isNotEmpty(authentication) && authentication.getDetails() instanceof HeaderDto) {
+			final var header = (HeaderDto) authentication.getDetails();
+			authorization = header.getAuthorization();
+		}
+		return authorization;
+	}
+
+	public static BigInteger getUserId() {
+		final var securityContext = SecurityContextHolder.getContext();
+		final var authentication = securityContext.getAuthentication();
+		BigInteger userId = null;
+
+		if (CommonUtil.isNotEmpty(authentication) && authentication.getDetails() instanceof HeaderDto) {
+			final var header = (HeaderDto) authentication.getDetails();
+			userId = header.getUserId();
+		}
+		return userId;
+	}
 
    public static boolean compareValues(final String value1, final String value2)
    {

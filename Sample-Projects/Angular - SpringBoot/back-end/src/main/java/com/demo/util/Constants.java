@@ -21,6 +21,9 @@ public interface Constants {
 	String DATA_TYPE_DECIMAL = "DECIMAL";
 	String DATA_TYPE_DATE = "DATE";
 	
+	String AUTH_HEADER="Authorization";
+    String BEARER_VAL="Bearer ";
+	
 	String SPACE = " ";
 	String EMPTY = "";
 	

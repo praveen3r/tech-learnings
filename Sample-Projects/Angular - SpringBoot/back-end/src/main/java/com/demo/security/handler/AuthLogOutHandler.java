@@ -13,6 +13,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.stereotype.Component;
 
 import com.demo.security.token.TokenManager;
+import com.demo.util.CommonUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,8 +27,8 @@ public class AuthLogOutHandler implements LogoutSuccessHandler {
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-		if (null!=authentication && authentication.getPrincipal() != null) {
-			BigInteger userId = (BigInteger)authentication.getPrincipal();
+		if (CommonUtil.isNotEmpty(authentication) && CommonUtil.isNotEmpty(authentication.getPrincipal())) {
+			var userId = (BigInteger)authentication.getPrincipal();
 			tokenManager.invalidateToken(userId.toString());
 		}else {
 			log.error("Unable to locate the principal");

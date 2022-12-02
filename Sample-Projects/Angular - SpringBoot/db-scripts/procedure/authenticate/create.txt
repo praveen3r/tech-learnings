@@ -1,0 +1,26 @@
+CREATE OR REPLACE FUNCTION AUTHENTICATE(
+ IN p_userId VARCHAR, 
+ IN p_credential VARCHAR,
+ OUT p_respCode INT)
+AS $$
+DECLARE 
+v_credential AUTH.CREDENTIAL%TYPE;
+p_param VARCHAR;
+BEGIN
+p_respCode := 1;
+
+	select CREDENTIAL into v_credential
+	          from AUTH where USERNAME = p_userId;
+	 IF NOT FOUND THEN
+	       p_respCode := 2;
+	 ELSIF p_credential <> v_credential THEN
+	     p_respCode := 2;
+	 END IF;
+ 
+ EXCEPTION
+  WHEN OTHERS THEN
+      p_respCode := 8;
+      p_param := 'P1='||p_userId||',P2='||p_credential||',P3='||p_instId;
+      insert into ERROR_LOG (APP_NAME, ERR_CODE, ERR_MSG, PARAM_DATA) values ('AUTH', SQLSTATE, SUBSTR(SQLERRM,1,999),p_param);
+END; $$ 
+ LANGUAGE plpgsql;

@@ -125,3 +125,8 @@ li {
   color: red;
   margin-top: 7px;
 }
+
+.anchor {
+  cursor: pointer;
+  text-decoration: none;
+}

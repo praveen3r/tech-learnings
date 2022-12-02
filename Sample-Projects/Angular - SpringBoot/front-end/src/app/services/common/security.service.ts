@@ -9,18 +9,11 @@ import { url } from '../../conf/_url';
 export class SecurityService {
   constructor(private http: HttpClient) {}
 
-  getToken(data?: string): Observable<string> {
-    if (data) {
-      return this.http.get(url.TOKEN_SERVICE + data, {
-        headers: { Accept: 'text/plain' },
-        responseType: 'text',
-      });
-    } else {
-      return this.http.get(url.TOKEN_SERVICE, {
-        headers: { Accept: 'text/plain' },
-        responseType: 'text',
-      });
-    }
+  getToken(id: string): Observable<string> {
+    return this.http.get(`${url.TOKEN_SERVICE}/${id}`, {
+      headers: { Accept: 'text/plain' },
+      responseType: 'text',
+    });
   }
 
   authenticate(params: HttpParams): Observable<any> {
@@ -28,5 +21,9 @@ export class SecurityService {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       observe: 'response',
     });
+  }
+
+  logout(): Observable<any> {
+    return this.http.post<any>(url.LOGOUT_SERVICE, {});
   }
 }

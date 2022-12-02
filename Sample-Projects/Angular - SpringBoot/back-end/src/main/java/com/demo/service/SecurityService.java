@@ -23,11 +23,6 @@ public class SecurityService {
 		return key;
 	}
 	
-	public String generateSecretKey() throws Exception{
-		final var key = EncryptionUtils.generateKey();
-		return key;
-	}
-	
 	public String getPlainKeyWord(final String id, final String encryptedPwd) throws Exception{
 		final var encryptionUtils = new EncryptionUtils();
 		final var key = getSecretKey(id);

@@ -24,7 +24,7 @@ public class EncryptionUtils {
 	private boolean encryptionEnabled;
 
 	public EncryptionUtils() {
-		this.encryptionEnabled = true;
+		this.encryptionEnabled = Boolean.TRUE;
 	}
 
 	public EncryptionUtils(final boolean encryptionEnabled) {

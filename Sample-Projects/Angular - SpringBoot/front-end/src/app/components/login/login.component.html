@@ -1,6 +1,9 @@
 <div class="login">
   <mat-card>
     <mat-card-title class="text-center">Login</mat-card-title>
+    <div class="alert alert-danger" role="alert" *ngIf="isError">
+      <p>{{ errorMsg | translate }}</p>
+    </div>
     <div class="login-form">
       <form [formGroup]="loginForm">
         <div class="mb-3 w-75">
@@ -50,7 +53,11 @@
           >
             {{ "button.submit" | translate }}
           </button>
-          <button type="button" class="btn btn-default ml-2">
+          <button
+            type="button"
+            class="btn btn-default ml-2"
+            (click)="onClickReset()"
+          >
             {{ "button.reset" | translate }}
           </button>
         </div>

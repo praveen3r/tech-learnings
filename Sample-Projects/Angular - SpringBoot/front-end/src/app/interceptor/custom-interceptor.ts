@@ -1,4 +1,5 @@
 import {
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
@@ -12,6 +13,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { MessageComponent } from '../../app/lib/modal/message/message.component';
+import { url } from '../conf/_url';
 import { TokenService } from '../services/common/token.service';
 
 @Injectable()
@@ -57,19 +59,30 @@ export class CustomInterceptor implements HttpInterceptor {
     );
   }
 
-  private processError = (err) => {
+  private processError = (err: HttpErrorResponse) => {
     let errorMsg: string;
+    let isValidError = true;
 
     if (err && err.error) {
       const statusCode: number = err.status;
-      if (statusCode <= 0) {
+      const authUrl = url.AUTH_SERVICE;
+      console.log(statusCode);
+
+      if (statusCode === 401 && err.url === authUrl) {
+        isValidError = false;
+      } else if (statusCode === 424) {
+        isValidError = false;
+      } else if (statusCode <= 0) {
         errorMsg = 'error.connectionLost';
       } else {
         errorMsg = 'error.sysError';
       }
-      const dialogRef = this.dialogService.open(MessageComponent, {
-        data: errorMsg,
-      });
+
+      if (isValidError) {
+        const dialogRef = this.dialogService.open(MessageComponent, {
+          data: errorMsg,
+        });
+      }
     }
   };
 

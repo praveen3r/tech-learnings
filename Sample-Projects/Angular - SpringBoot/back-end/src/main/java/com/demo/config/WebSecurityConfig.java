@@ -15,8 +15,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
+import com.demo.filter.AuthenticationFilter;
 import com.demo.security.handler.AuthFailureHandler;
 import com.demo.security.handler.AuthLogOutHandler;
 import com.demo.security.handler.AuthSuccessHandler;
@@ -73,20 +75,13 @@ public class WebSecurityConfig {
 	      .build();
 	}
 	
-	/*
-	 * @Bean public WebSecurityCustomizer webSecurityCustomizer() { return (web) ->
-	 * web.ignoring() .antMatchers("/webjars/**") .antMatchers("/swagger-ui.html")
-	 * .antMatchers("/v2/**") .antMatchers("/swagger-resources/**"); }
-	 */
-	
 	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.cors().configurationSource(request -> {
 			return corsConfiguration();
         }).and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-		//.addFilterBefore(new AuthenticationFilter(tokenManager, expiryKey, expiryTime), LogoutFilter.class)
-		//.addFilterBefore(new CorsFilter(), UsernamePasswordAuthenticationFilter.class)
+		.addFilterBefore(new AuthenticationFilter(tokenManager, expiryKey, expiryTime), LogoutFilter.class)
 		
 		.authorizeRequests()
 		.antMatchers(HttpMethod.GET, "/v1/sec/key/**").permitAll()
@@ -106,7 +101,7 @@ public class WebSecurityConfig {
 	
 	@Bean
 	CorsConfiguration corsConfiguration() {
-		CorsConfiguration configuration = new CorsConfiguration();
+		var configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(Arrays.asList(domain));
 		configuration.setAllowedMethods(Arrays.asList(allowedMethods));
 		configuration.setAllowedHeaders(List.of(allowedHeaders));

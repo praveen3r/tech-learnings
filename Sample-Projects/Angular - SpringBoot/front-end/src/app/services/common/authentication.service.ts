@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { User } from './../../model/User';
+import { SecurityService } from './security.service';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +14,10 @@ export class AuthenticationService {
   private loggedInSubject = new Subject<boolean>();
   private userDetailsSubject = new Subject<User>();
 
-  constructor() {
-    // private tokenService: TokenService // private httpService: HttpService,
-    /*this.loggedInChange = new Observable((observer: Observer<boolean>) {
-      this.loggedInChangeObserver = observer;
-    });*/
+  constructor(
+    private securityService: SecurityService,
+    private tokenService: TokenService
+  ) {
     this.loggedInChange = this.loggedInSubject.asObservable();
     this.userDetails = this.userDetailsSubject.asObservable();
   }
@@ -29,9 +30,9 @@ export class AuthenticationService {
     this.loggedInSubject.next(false);
     this.user = new User();
     this.userDetailsSubject.next(this.user);
-    /*this.httpService.logout().subscribe(() => {
+    this.securityService.logout().subscribe(() => {
       this.tokenService.signOut();
-    });*/
+    });
   }
 
   public setUserDetails(user: User): void {

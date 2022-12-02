@@ -46,7 +46,11 @@
   },
   "error": {
     "sysError": "Unexpected error. Contact administrator (German)",
-    "connectionLost": "Connection not available (German)"
+    "connectionLost": "Connection not available (German)",
+    "login": {
+      "invaliduser": "Invalid User ID or Password(German)!",
+      "exception": "Error in login, contact Admin(German)"
+    }
   },
   "msg": {
     "noChangesToSave": "You have not made any changes to save (German)",

@@ -1,0 +1,3 @@
+INSERT INTO DEMO_USER (ID, FIRST_NAME, LAST_NAME, EMAIL_ID) values (nextval('USER_SEQ'), 'Sachin', 'Tendulkar', 'sachin.tendulkar@gmail.com');
+INSERT INTO DEMO_USER (ID, FIRST_NAME, LAST_NAME, EMAIL_ID) values (nextval('USER_SEQ'), 'MS', 'Dhoni', 'ms.dhoni@gmail.com');
+COMMIT;
