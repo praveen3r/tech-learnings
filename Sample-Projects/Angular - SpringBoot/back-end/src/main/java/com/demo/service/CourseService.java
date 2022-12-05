@@ -28,7 +28,7 @@ public class CourseService {
 	}
 	
 	@Transactional
-	public void addCourse(final CourseDto courseDto) throws Exception{
+	public Boolean addCourse(final CourseDto courseDto) throws Exception{
 		
 		var course = new Course();
 		CommonUtil.copyNonNullProperties(courseDto, course);
@@ -40,20 +40,24 @@ public class CourseService {
 		
 		courseRepository.save(course);
 		
+		return Boolean.TRUE;
 	}
 	
 	@Transactional
-	public void modifyCourse(final CourseDto courseDto) throws Exception{
+	public Boolean modifyCourse(final CourseDto courseDto) throws Exception{
 		
 		var course = new Course();
 		CommonUtil.copyNonNullProperties(courseDto, course);
 		EntityUtil.populateDefaultColumns(course);
 		courseRepository.save(course);
 		
+		return Boolean.TRUE;
+		
 	}
 
-	public void deleteCourse(final BigInteger id) {
+	public Boolean deleteCourse(final BigInteger id) {
 		courseRepository.deleteCourse(id);
+		return Boolean.TRUE;
 	}
 	
 	public DemoResponse<CourseDto> getCourses(final String name, final String startDate, final String endDate) throws Exception{

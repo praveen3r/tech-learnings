@@ -1,9 +1,11 @@
+
 package com.demo.controller;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,8 +32,8 @@ import com.demo.service.CourseService;
 import com.demo.util.GeneralUtil;
 import com.demo.util.ResponseKeyConstants;
 
+@SpringBootTest(classes = { CourseController.class, DemoConfig.class, WebMvcConfig.class })
 
-@SpringBootTest(classes = {CourseController.class, DemoConfig.class, WebMvcConfig.class})
 @AutoConfigureMockMvc(addFilters = false)
 public class CourseControllerTest {
 
@@ -40,15 +42,15 @@ public class CourseControllerTest {
 
 	@MockBean
 	private CourseService courseServiceMock;
-	
+
 	@Test
 	public void testGetCourses() throws Exception {
-		CourseDto courseDto1 = new CourseDto();
+		var courseDto1 = new CourseDto();
 		courseDto1.setId(new BigInteger("1"));
 		courseDto1.setAuthor("Test1");
 		courseDto1.setName("Angular");
 
-		CourseDto courseDto2 = new CourseDto();
+		var courseDto2 = new CourseDto();
 		courseDto2.setId(new BigInteger("2"));
 		courseDto2.setAuthor("Test2");
 		courseDto2.setName("ReactJS");
@@ -57,7 +59,7 @@ public class CourseControllerTest {
 		courseList.add(courseDto1);
 		courseList.add(courseDto2);
 
-		DemoResponse<CourseDto> demoResponse = new DemoResponse<CourseDto>(ResponseKeyConstants.COURSES, courseList);
+		var demoResponse = new DemoResponse<CourseDto>(ResponseKeyConstants.COURSES, courseList);
 
 		when(courseServiceMock.getCourses()).thenReturn(demoResponse);
 
@@ -71,7 +73,7 @@ public class CourseControllerTest {
 	@Test
 	public void testAddCourse() throws Exception {
 
-		CourseDto courseDto = new CourseDto();
+		var courseDto = new CourseDto();
 		courseDto.setId(new BigInteger("1"));
 		courseDto.setTypeId(1);
 		courseDto.setAuthor("Test1");
@@ -81,11 +83,11 @@ public class CourseControllerTest {
 				.content(GeneralUtil.convertObjectToJsonBytes(courseDto))).andExpect(status().isOk())
 				.andDo(MockMvcResultHandlers.print());
 	}
-	
+
 	@Test
 	public void testUpdateCourse() throws Exception {
 
-		CourseDto courseDto = new CourseDto();
+		var courseDto = new CourseDto();
 		courseDto.setId(new BigInteger("1"));
 		courseDto.setTypeId(1);
 		courseDto.setAuthor("Test1");
@@ -96,5 +98,11 @@ public class CourseControllerTest {
 				.andDo(MockMvcResultHandlers.print());
 	}
 
-	
+	@Test
+	public void testDeleteCourse() throws Exception {
+
+		mockMvc.perform(delete("/v1/courses/course/{id}", new BigInteger("1"))).andExpect(status().isOk())
+				.andDo(MockMvcResultHandlers.print());
+	}
+
 }
