@@ -2,8 +2,10 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { IdlePopupComponent } from './components/idle-popup/idle-popup.component';
 import { MessageComponent } from './lib/modal/message/message.component';
 import { AuthenticationService } from './services/common/authentication.service';
+import { IdleService } from './services/common/idle.service';
 import { Routes } from './utils/Routes';
 
 @Component({
@@ -20,12 +22,20 @@ export class AppComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private authentication: AuthenticationService,
-    private dialogService: MatDialog
+    private dialogService: MatDialog,
+    private idleService: IdleService
   ) {}
 
   ngOnInit() {
     this.authentication.loggedInChange.subscribe((data) => {
       this.isLoggedIn = data;
+      if (this.isLoggedIn) {
+        this.idleService.startWatching().subscribe((response) => {
+          if (response) {
+            const dialogRef = this.dialogService.open(IdlePopupComponent);
+          }
+        });
+      }
     });
   }
 

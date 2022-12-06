@@ -22,16 +22,21 @@ export class AuthenticationService {
     this.userDetails = this.userDetailsSubject.asObservable();
   }
 
+  public logIn(token: string): void {
+    this.loggedInSubject.next(true);
+    this.tokenService.saveToken(token);
+  }
+
   public setIsLoggedIn(isLoggedInVal: boolean): void {
     this.loggedInSubject.next(isLoggedInVal);
   }
 
-  public logout() {
-    this.loggedInSubject.next(false);
-    this.user = new User();
-    this.userDetailsSubject.next(this.user);
+  public logOut() {
     this.securityService.logout().subscribe(() => {
       this.tokenService.signOut();
+      this.loggedInSubject.next(false);
+      this.user = new User();
+      this.userDetailsSubject.next(this.user);
     });
   }
 

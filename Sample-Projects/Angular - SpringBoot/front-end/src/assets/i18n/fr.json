@@ -42,7 +42,8 @@
     "close": "Close (French)",
     "clear": "Clear (French)",
     "logout": "Logout (French)",
-    "back": "Back (French)"
+    "back": "Back (French)",
+    "continue": "Continue (French)"
   },
   "error": {
     "sysError": "Unexpected error. Contact administrator (French)",

@@ -1,0 +1,16 @@
+<div class="modal-body">
+  <div class="col-12">
+    <h3>You're Idle. Do Something!</h3>
+    <small
+      >You'll be logged out in {{ timer | number : "1.0-0" }} second(s).</small
+    >
+    <div class="col-12 text-center my-3">
+      <button type="submit" class="btn btn-primary" (click)="onCancel()">
+        {{ "button.continue" | translate }}
+      </button>
+      <button type="button" class="btn btn-second ml-2" (click)="onLogout()">
+        {{ "button.logout" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

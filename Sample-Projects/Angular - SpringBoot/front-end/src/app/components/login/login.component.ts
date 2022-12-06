@@ -9,7 +9,6 @@ import {
 import { Router } from '@angular/router';
 import { AuthenticationService } from './../../services/common/authentication.service';
 import { SecurityService } from './../../services/common/security.service';
-import { TokenService } from './../../services/common/token.service';
 import { GeneralUtils } from './../../utils/GeneralUtils';
 
 @Component({
@@ -27,8 +26,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private authentication: AuthenticationService,
-    private securityService: SecurityService,
-    private tokenService: TokenService
+    private securityService: SecurityService
   ) {}
 
   public ngOnInit(): void {
@@ -70,8 +68,7 @@ export class LoginComponent implements OnInit {
       this.securityService.authenticate(queryParams).subscribe(
         (response) => {
           if (response.body.success === true) {
-            this.tokenService.saveToken(response.body.token);
-            this.authentication.setIsLoggedIn(true);
+            this.authentication.logIn(response.body.token);
             this.router.navigate(['./home']);
           } else {
             this.isError = true;

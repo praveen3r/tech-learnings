@@ -43,7 +43,8 @@
     "close": "Close",
     "clear": "Clear",
     "logout": "Logout",
-    "back": "Back"
+    "back": "Back",
+    "continue": "Continue"
   },
   "error": {
     "sysError": "Unexpected error. Contact administrator",

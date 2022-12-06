@@ -42,7 +42,8 @@
     "close": "Close (German)",
     "clear": "Clear (German)",
     "logout": "Logout (German)",
-    "back": "Back (German)"
+    "back": "Back (German)",
+    "continue": "Continue (German)"
   },
   "error": {
     "sysError": "Unexpected error. Contact administrator (German)",

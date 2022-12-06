@@ -15,8 +15,8 @@ import { CourseGridComponent } from './components/course/course-grid.component';
 import { CourseInputComponent } from './components/course/course-input.component';
 import { CourseComponent } from './components/course/courses.component';
 import { HomeComponent } from './components/home/home.component';
+import { IdlePopupComponent } from './components/idle-popup/idle-popup.component';
 import { HeaderComponent } from './components/layout/header.component';
-// import { LoginPageComponent } from './components/login-page/login-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { InputCharDirective } from './directives/input.char.directive';
 import { CustomInterceptor } from './interceptor/custom-interceptor';
@@ -40,6 +40,7 @@ import { SharedModule } from './modules/shared.module';
     HeaderComponent,
     MessageComponent,
     CourseGridComponent,
+    IdlePopupComponent,
     InputCharDirective,
   ],
   imports: [
