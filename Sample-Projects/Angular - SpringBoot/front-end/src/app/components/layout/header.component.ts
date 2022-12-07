@@ -43,6 +43,6 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.authentication.logOut();
     this.idleService.stopWatching();
-    this.router.navigate(['./home']);
+    this.router.navigate(['login']);
   }
 }

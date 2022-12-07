@@ -34,12 +34,12 @@ public class CourseController {
 		return courseService.getCourses();
 	}
 	
-	@PostMapping(value = "course")
+	@PostMapping("course")
 	public void addCourse(@Valid @RequestBody final CourseDto courseDto) throws Exception{
 		courseService.addCourse(courseDto);
 	}
 	
-	@PutMapping(value = "course/{id}")
+	@PutMapping("course/{id}")
 	public void modifyCourse(@Valid @RequestBody final CourseDto courseDto, @PathVariable(name = "id") final BigInteger id) throws Exception{
 		courseService.modifyCourse(courseDto);
 	}

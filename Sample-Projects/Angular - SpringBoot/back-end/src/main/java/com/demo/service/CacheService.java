@@ -1,5 +1,7 @@
 package com.demo.service;
 
+import java.util.Objects;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
@@ -36,6 +38,17 @@ public class CacheService {
 					cache.put(key, value);
 				}
 			} 
+	}
+	
+	public void clearCache(){
+		cacheManager.getCacheNames().forEach(cacheName -> Objects.requireNonNull(cacheManager.getCache(cacheName)).clear());
+	}
+	
+	public void clearCache(final String cacheName){
+		final var cache = cacheManager.getCache(cacheName);
+		if (CommonUtil.isNotEmpty(cache)) {
+			cache.clear();
+		}
 	}
 	
 	public void clearCache(final String cacheName, final String key){

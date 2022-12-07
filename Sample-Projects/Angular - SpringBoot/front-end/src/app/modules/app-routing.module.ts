@@ -6,19 +6,29 @@ import { CourseGridExpandableRowComponent } from '../components/course/course-gr
 import { CourseGridComponent } from '../components/course/course-grid.component';
 import { HomeComponent } from '../components/home/home.component';
 import { LoginComponent } from '../components/login/login.component';
+import { AuthGuard } from './../guard/AuthGuard';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   //{ path: 'course', component: CourseComponent },
-  { path: 'course', component: CourseGridComponent },
-  { path: 'course-expand-row', component: CourseGridExpandableRowComponent },
-  { path: 'course-search', component: CourseSearchComponent },
+  { path: 'course', component: CourseGridComponent, canActivate: [AuthGuard] },
+  {
+    path: 'course-expand-row',
+    component: CourseGridExpandableRowComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'course-search',
+    component: CourseSearchComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'login', component: LoginComponent },
   { path: '**', component: LoginComponent },
 ];
 
 @NgModule({
   declarations: [],
+  providers: [AuthGuard],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })

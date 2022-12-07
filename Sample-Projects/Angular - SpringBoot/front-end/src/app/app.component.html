@@ -1,22 +1,19 @@
 <div *ngIf="isLoggedIn">
   <Header></Header>
+</div>
 
-  <mat-sidenav-container>
-    <mat-sidenav opened mode="side" role="navigation">
-      <div *ngFor="let route of routes" class="li">
-        <a [routerLink]="route.route">{{ route.name | translate }}</a>
-      </div>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div style="margin-left: 30px">
-        <router-outlet></router-outlet>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
-<div *ngIf="!isLoggedIn">
-  <app-login></app-login>
-</div>
+<mat-sidenav-container>
+  <mat-sidenav opened mode="side" role="navigation" [(opened)]="isLoggedIn">
+    <div *ngFor="let route of routes" class="li">
+      <a [routerLink]="route.route">{{ route.name | translate }}</a>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="margin-left: 30px">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 <ngx-spinner
   type="ball-clip-rotate-multiple"
   size="medium"

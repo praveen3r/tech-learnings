@@ -48,4 +48,8 @@ export class AuthenticationService {
   public getUserDetails(): User {
     return this.user;
   }
+
+  public isAuthenticated(): boolean {
+    return this.tokenService.getToken() != null;
+  }
 }

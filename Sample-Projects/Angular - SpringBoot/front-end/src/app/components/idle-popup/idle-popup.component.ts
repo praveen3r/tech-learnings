@@ -39,7 +39,7 @@ export class IdlePopupComponent implements OnInit {
     this.authentication.logOut();
     this.idleService.stopWatching();
     this.dialogRef.close();
-    this.router.navigate(['./login']);
+    this.router.navigate(['login']);
   }
 
   onCancel() {

@@ -17,7 +17,7 @@ public class SecurityController {
 	@Autowired
 	SecurityService securityService;
 
-	@GetMapping(value = {"key/{id}" })
+	@GetMapping("key/{id}" )
 	public String getSecretKey(@PathVariable final String id, Principal principal) throws Exception{
 		final String key = securityService.generateSecretKey(id);
 		return key;

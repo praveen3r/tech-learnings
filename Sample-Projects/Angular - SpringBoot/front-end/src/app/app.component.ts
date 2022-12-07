@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public isValidBrowser: boolean = true;
   public routes = Routes;
+  browserRefresh: boolean;
 
   constructor(
     private router: Router,
@@ -32,11 +33,21 @@ export class AppComponent implements OnInit {
       if (this.isLoggedIn) {
         this.idleService.startWatching().subscribe((response) => {
           if (response) {
-            const dialogRef = this.dialogService.open(IdlePopupComponent);
+            this.dialogService.open(IdlePopupComponent);
           }
         });
       }
     });
+  }
+
+  //Logout on refresh or browser close
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnloadFunction(event: Event) {
+    if (this.isLoggedIn) {
+      this.authentication.logOut();
+      this.idleService.stopWatching();
+      this.router.navigate(['./login']);
+    }
   }
 
   //disable browser refresh for F5, ctrl+f5 and ctrl+r

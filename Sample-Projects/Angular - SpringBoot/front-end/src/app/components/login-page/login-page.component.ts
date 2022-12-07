@@ -1,36 +1,31 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatCard } from '@angular/material/card';
 import { Router } from '@angular/router';
 // import { label } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css']
+  styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent implements OnInit {
   // private loginForm: FormsModule;
   @Output() loginFlag = new EventEmitter<boolean>();
-  pswd: String = "";
-  userName: String = "";
-  loginForm = new FormGroup(
-    {
-      userName: new FormControl(),
-      password: new FormControl()
-    }
-  );
+  pswd: String = '';
+  userName: String = '';
+  loginForm = new FormGroup({
+    userName: new FormControl(),
+    password: new FormControl(),
+  });
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  submitAction(){
+  submitAction() {
     // let loggedIn = true
-    console.log('hii',this.loginForm.get('userName').value)
+    console.log('hii', this.loginForm.get('userName').value);
     this.loginFlag.emit(true);
-    this.router.navigate(['/home']);
+    this.router.navigate(['home']);
   }
-
 }

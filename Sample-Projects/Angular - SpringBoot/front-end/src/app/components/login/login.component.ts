@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
         (response) => {
           if (response.body.success === true) {
             this.authentication.logIn(response.body.token);
-            this.router.navigate(['./home']);
+            this.router.navigate(['home']);
           } else {
             this.isError = true;
             this.errorMsg = 'error.login.invaliduser';
