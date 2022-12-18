@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { FormModalType } from "../../types/ComponentType";
 import { User } from "../../types/User";
@@ -6,8 +6,12 @@ import * as Yup from "yup";
 import { Formik, Form, FormikHelpers } from "formik";
 import InputComponent from "../../components/formik-control/InputComponent";
 import DropdownComponent from "../../components/formik-control/DropdownComponent";
-import { dropdownOptions } from "../../types/FormTypes";
+import { DropdownOptions } from "../../types/FormTypes";
 import DisplayMessage from "../../components/i18n/DisplayMessage";
+import { AxiosError } from "axios";
+import Constants from "../../util/Constants";
+import { MessageUtils } from "../../util/MessageUtils";
+import { GenderService } from "../../services/GenderService";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -24,14 +28,12 @@ const UserDetails = ({
   confirmModal,
   data,
 }: FormModalType<User>) => {
+  
   const onSubmit = (values: User, submitProps: FormikHelpers<User>) => {
     confirmModal(values);
   };
 
-  const genderOptions: dropdownOptions[] = [
-    { key: "Male", value: "Male" },
-    { key: "Female", value: "Female" },
-  ];
+  const genderOptions: DropdownOptions[] = data.genderOptions!;
 
   return (
     <Modal
@@ -71,7 +73,7 @@ const UserDetails = ({
                   dataType="number"
                   formik={formik}
                 />
-                <div style={{width:'40%'}}>
+                <div style={{ width: "40%" }}>
                   <DropdownComponent
                     label="gender"
                     id="gender"
@@ -81,10 +83,10 @@ const UserDetails = ({
                 </div>
               </div>
               <Button type="submit" variant="danger">
-              <DisplayMessage id="submit"/>
+                <DisplayMessage id="submit" />
               </Button>
               <Button variant="default" onClick={hideModal}>
-              <DisplayMessage id="cancel"/>
+                <DisplayMessage id="cancel" />
               </Button>
             </Form>
           )}

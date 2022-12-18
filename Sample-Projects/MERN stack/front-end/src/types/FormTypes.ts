@@ -35,7 +35,7 @@ export type DateRangePickerType = GenericFieldHTMLAttributes & {
   maxDate?: Date
 };
 
-export type dropdownOptions = {
+export type DropdownOptions = {
   key: string;
   value: string;
 };
@@ -44,7 +44,7 @@ export type DropdownType = {
   label: string;
   id: string;
   name: string;
-  options: dropdownOptions[];
+  options: DropdownOptions[];
   className?: string;
 };
 

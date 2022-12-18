@@ -19,7 +19,6 @@ function Download() {
         document.body.removeChild(downloadLink);
       })
       .catch((error: AxiosError) => {
-        console.log(error);
       });
   };
   return (

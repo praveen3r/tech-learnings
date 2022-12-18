@@ -1,7 +1,7 @@
 import { FaSignInAlt } from 'react-icons/fa';
 
 import React, { ChangeEvent, useState } from 'react'
-import { dropdownOptions } from '../../types/FormTypes';
+import { DropdownOptions } from '../../types/FormTypes';
 import { useLang } from '../context/LangContent';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -16,7 +16,7 @@ const Header = () => {
   const langContext = useLang();
   const dispatch = langContext!.dispatch;
 
-  const languageOptions: dropdownOptions[] = [
+  const languageOptions: DropdownOptions[] = [
     { key: "en", value: "English" },
     { key: "de", value: "Germany" },
     { key: "fr", value: "French" },

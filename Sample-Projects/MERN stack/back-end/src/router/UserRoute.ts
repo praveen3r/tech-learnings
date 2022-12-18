@@ -1,7 +1,6 @@
 
-import { RequestHandler, Router } from "express";
+import { Router } from "express";
 import AppRouter from "./AppRouter";
-import AuthController from "../controller/AuthController";
 import validationMiddleware from '../middleware/ValidationMiddleware';
 import validate from '../validation/UserValidation'
 import UserController from "../controller/UserController";

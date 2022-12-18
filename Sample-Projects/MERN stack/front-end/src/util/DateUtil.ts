@@ -7,7 +7,6 @@ export class DateUtil {
       };
 
     static formatDate = (date: Date | null, dateFormat: string): string => {
-        console.log(`date is ${date}`);
         
         return format(
             date ? date : DateUtil.getTodayDate(),

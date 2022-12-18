@@ -25,12 +25,14 @@ import SearchBar from "../../components/search/SearchBar";
 import DisplayMessage from "../../components/i18n/DisplayMessage";
 import { MessageUtils } from "../../util/MessageUtils";
 import Constants from "../../util/Constants";
+import { GenderService } from "../../services/GenderService";
 
-const defaultUser: User = {
+let defaultUser: User = {
   sNo: 0,
   name: "",
   age: undefined,
   gender: "",
+  genderOptions: []
 };
 
 function HomeWithGrid() {
@@ -133,14 +135,29 @@ function HomeWithGrid() {
     setDisplayConfirmationModal(false);
   };
 
+  const fetchGendersAndLoadUser = (user: User) => {
+    GenderService.getGenders()
+      .then((response) => {
+        user.genderOptions = response?.data?.genders;
+        setUser(user);
+        setUserDetails(true);
+      })
+      .catch((error: AxiosError) => {
+        const status = error.response?.status;
+        if (status) {
+          if (!Constants.global_error_codes.includes(status)) {
+            MessageUtils.showError(error);
+          }
+        }
+      });
+  };
+
   const onClickAdd = () => {
-    setUser(defaultUser);
-    setUserDetails(true);
+    fetchGendersAndLoadUser(defaultUser);
   };
 
   const onClickUser = (user: User) => {
-    setUser(user);
-    setUserDetails(true);
+    fetchGendersAndLoadUser(user);
   };
 
   const processUser = (userNew: User) => {
