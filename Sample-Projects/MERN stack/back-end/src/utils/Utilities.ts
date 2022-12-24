@@ -24,4 +24,5 @@ export class Utilities {
         const compiled = _.template(value);
         return compiled({ 'field': field });
     }
+
 }

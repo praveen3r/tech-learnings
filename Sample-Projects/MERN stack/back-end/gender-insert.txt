@@ -1,0 +1,14 @@
+{
+  "_id": {
+    "$oid": "639cac36676d172dd1951517"
+  },
+  "key": "Male",
+  "value": "Male"
+},
+{
+  "_id": {
+    "$oid": "639cac6b676d172dd1951518"
+  },
+  "key": "Female",
+  "value": "Female"
+}
