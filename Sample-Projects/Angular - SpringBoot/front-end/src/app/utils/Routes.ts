@@ -17,4 +17,8 @@ export const Routes: RouteType[] = [
     route: 'course-search',
     name: 'menu.search',
   },
+  {
+    route: 'course-server-pagination',
+    name: 'menu.server-pagination',
+  },
 ];

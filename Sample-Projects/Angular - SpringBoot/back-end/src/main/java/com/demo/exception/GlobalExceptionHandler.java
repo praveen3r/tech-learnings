@@ -3,6 +3,7 @@ package com.demo.exception;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -39,17 +40,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 		final List<ErrorDetail> errorDetailList = new ArrayList<>();
 		ex.getBindingResult().getFieldErrors().forEach(ExceptionWrapper.throwException(fieldError -> {
-			if (CommonUtil.isNotEmpty(fieldError.getDefaultMessage())) {
+			if (CommonUtil.isNotEmpty(fieldError.getDefaultMessage())) {  
 				var code = fieldError.getDefaultMessage();
 				var message = messageSource.getMessage(code, fieldError.getArguments(),
-							LocaleContextHolder.getLocale());
+						LocaleContextHolder.getLocale());
 				var errorDetail = new ErrorDetail(code, message, fieldError.getField());
 				errorDetailList.add(errorDetail);
-			}
-
+			} 
 		}));
-		var errorResponse = new ErrorResponse(APIErrorTitle.SERVER_VALIDATION.getTitle(),
-				errorDetailList);
+		var errorResponse = new ErrorResponse(APIErrorTitle.SERVER_VALIDATION.getTitle(), errorDetailList);
 		return new ResponseEntity<>(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY);
 	}
 

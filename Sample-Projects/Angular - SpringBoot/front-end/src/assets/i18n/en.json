@@ -21,7 +21,8 @@
     "expand-row": "Expand Row",
     "search": "Search",
     "contact": "Contact",
-    "about": "About"
+    "about": "About",
+    "server-pagination": "Server Pagination"
   },
   "login": {
     "username": "Username",

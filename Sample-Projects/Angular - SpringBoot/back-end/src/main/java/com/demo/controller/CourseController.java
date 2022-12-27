@@ -6,8 +6,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.demo.dto.CourseDto;
 import com.demo.dto.DemoResponse;
 import com.demo.service.CourseService;
+import com.demo.validator.CourseValidator;
 
 @RestController
 @RequestMapping(value = "/v1/courses/")
@@ -27,6 +30,15 @@ public class CourseController {
 
 	@Autowired
 	private CourseService courseService;
+	
+	@Autowired
+	private CourseValidator courseValidator;
+	
+	@InitBinder()
+    protected void initBinder(final WebDataBinder binder)
+    {
+      binder.setValidator(courseValidator);
+    }
 	
 	@GetMapping
 	public DemoResponse<CourseDto> getCourses() throws Exception{

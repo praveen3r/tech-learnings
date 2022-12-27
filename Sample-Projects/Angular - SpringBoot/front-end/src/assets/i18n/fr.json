@@ -18,9 +18,11 @@
   "menu": {
     "home": "Home (French)",
     "course": "Course (French)",
+    "expand-row": "Expand Row(French)",
     "search": "Search (French)",
     "contact": "Contact (French)",
-    "about": "About (French)"
+    "about": "About (French)",
+    "server-pagination": "Server Pagination(French)"
   },
   "login": {
     "username": "Username (French)",

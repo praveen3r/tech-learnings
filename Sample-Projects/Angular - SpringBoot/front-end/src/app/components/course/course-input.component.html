@@ -18,7 +18,7 @@
 </div>
 <div class="col-12">
   <form [formGroup]="courseInputForm">
-    <div class="mb-3 w-25">
+    <div class="mb-3 w-50">
       <label class="form-label">{{ "course.name" | translate }}*</label>
 
       <input
@@ -28,15 +28,9 @@
         formControlName="name"
       />
     </div>
-    <div class="mb-3 w-25">
+    <div class="mb-3 w-50">
       <label class="form-label">{{ "course.type" | translate }}*</label>
 
-      <!-- <input
-        type="text"
-        placeholder="{{ 'enter' | translate }}{{ 'course.type' | translate }}"
-        class="form-control"
-        formControlName="type"
-      /> -->
       <select
         class="form-control m-1 m-md-2 col-3 col-lg-2"
         formControlName="type"
@@ -49,7 +43,7 @@
         </option>
       </select>
     </div>
-    <div class="mb-3 w-25">
+    <div class="mb-3 w-50">
       <label class="form-label">{{ "course.author" | translate }}*</label>
       <input
         type="text"

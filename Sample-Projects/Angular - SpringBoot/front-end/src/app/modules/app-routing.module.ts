@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CourseSearchComponent } from '../components/course-search/course-search.component';
 import { CourseGridExpandableRowComponent } from '../components/course/course-grid-expand-row.component';
+import { CourseGridServerPaginationComponent } from '../components/course/course-grid-server-pagination.component';
 import { CourseGridComponent } from '../components/course/course-grid.component';
 import { HomeComponent } from '../components/home/home.component';
 import { LoginComponent } from '../components/login/login.component';
@@ -20,6 +21,11 @@ const routes: Routes = [
   {
     path: 'course-search',
     component: CourseSearchComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'course-server-pagination',
+    component: CourseGridServerPaginationComponent,
     canActivate: [AuthGuard],
   },
   { path: 'login', component: LoginComponent },

@@ -18,9 +18,11 @@
   "menu": {
     "home": "Home (German)",
     "course": "Course (German)",
+    "expand-row": "Expand Row(German)",
     "search": "Search (German)",
     "contact": "Contact (German)",
-    "about": "About (German)"
+    "about": "About (German)",
+    "server-pagination": "Server Pagination(German)"
   },
   "login": {
     "username": "Username (German)",

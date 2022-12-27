@@ -11,6 +11,7 @@ import {
 import { AppComponent } from './app.component';
 import { CourseSearchComponent } from './components/course-search/course-search.component';
 import { CourseGridExpandableRowComponent } from './components/course/course-grid-expand-row.component';
+import { CourseGridServerPaginationComponent } from './components/course/course-grid-server-pagination.component';
 import { CourseGridComponent } from './components/course/course-grid.component';
 import { CourseInputComponent } from './components/course/course-input.component';
 import { CourseComponent } from './components/course/courses.component';
@@ -34,6 +35,7 @@ import { SharedModule } from './modules/shared.module';
     CourseComponent,
     CourseGridComponent,
     CourseGridExpandableRowComponent,
+    CourseGridServerPaginationComponent,
     CourseSearchComponent,
     ConfirmMessageComponent,
     CourseInputComponent,
