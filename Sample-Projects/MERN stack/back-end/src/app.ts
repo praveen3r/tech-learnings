@@ -8,10 +8,13 @@ import authMiddleware from "./middleware/AuthMiddleware";
 import { StatusCodes } from "http-status-codes";
 import { HTTPErrors } from "./model/HTTPErrors";
 import methodNotAllowedMiddleWare from "./middleware/MethodNotAllowedMiddleware";
+import LogManager from "./log/LogManager";
+import { LoggerLevel } from "mongodb";
 
 class App {
   private express: Application;
   private port: number;
+  private log = LogManager.getInstance();
 
   constructor(routes: AppRouter[], port: number) {
     this.express = express();
@@ -49,32 +52,34 @@ class App {
     try {
       const options: ConnectOptions = {
         autoIndex: false, // Don't build indexes
-        maxPoolSize: 10, // Maintain up to 10 socket connections
-        serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
-        socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+        maxPoolSize: +(process.env.CONNECTION_POOL_MAX_SIZE!), // Maintain up to 10 socket connections
+        serverSelectionTimeoutMS: +(process.env.CONNECTION_POOL_IDLE_TIMEOUT!), // Keep trying to send operations for 5 seconds
+        socketTimeoutMS: +(process.env.CONNECTION_POOL_SOCKET_TIMEOUT!), // Close sockets after 45 seconds of inactivity
         family: 4, // Use IPv4, skip trying IPv6,
-        connectTimeoutMS: 5000,
-        loggerLevel: "debug",
+        connectTimeoutMS: +(process.env.CONNECTION_POOL_TIMEOUT!),
+        loggerLevel: LoggerLevel.DEBUG,
       };
       mongoose.connect(process.env.MONGO_URI!, options, () => {
-        console.log(`connected to mongo db`);
+        this.log.info(`connected to mongo db`);
       });
       mongoose.connection.on("error", function () {
-        console.error(
+        const log = LogManager.getInstance();
+        
+        log.error(
           "MongoDB Connection Error. Make sure MongoDB is running."
         );
       });
       mongoose.set("debug", true); //debug queries
       
     } catch (error) {
-      console.log(`error is ${error}`);
+      this.log.error(`error is ${error}`);
       process.exit(1);
     }
   }
 
   public listen(): void {
     this.express.listen(this.port, () => {
-      console.log(`App listening on the port ${this.port}`);
+      this.log.debug(`App listening on the port ${this.port}`);
     });
   }
 }

@@ -7,6 +7,7 @@ import { JwtUtils } from "../utils/JwtUtils";
 import bcrypt from "bcryptjs";
 import CryptoJS from "crypto-js";
 
+
 class AuthService {
   private auth = AuthModel;
 
