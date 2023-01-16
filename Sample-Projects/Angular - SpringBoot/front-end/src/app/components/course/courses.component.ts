@@ -41,6 +41,7 @@ export class CourseComponent implements OnInit {
     const initialState = {
       isAdd: true,
       course,
+      courses: [],
     };
     const modalRef = this.modalService.show(CourseInputComponent, {
       class: 'modal-md',

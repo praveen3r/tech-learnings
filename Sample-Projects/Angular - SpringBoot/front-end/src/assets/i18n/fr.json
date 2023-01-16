@@ -15,6 +15,7 @@
   "enter": "Enter (French)",
   "startDate": "Start Date (French)",
   "endDate": "End Date (French)",
+  "seconds": "second(s) (French)",
   "menu": {
     "home": "Home (French)",
     "course": "Course (French)",
@@ -58,6 +59,8 @@
   "msg": {
     "noChangesToSave": "You have not made any changes to save (French)",
     "reqd": "is required(French)",
-    "operationNotAllow": "This operation is not allowed(French)"
+    "operationNotAllow": "This operation is not allowed(French)",
+    "idleTitle": "You're Idle. Do Something!(French)",
+    "idleBody": "You'll be logged out in (French)"
   }
 }

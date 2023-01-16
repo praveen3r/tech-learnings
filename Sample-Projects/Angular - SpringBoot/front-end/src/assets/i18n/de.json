@@ -15,6 +15,7 @@
   "enter": "Enter (German)",
   "startDate": "Start Date (German)",
   "endDate": "End Date (German)",
+  "seconds": "second(s) (German)",
   "menu": {
     "home": "Home (German)",
     "course": "Course (German)",
@@ -58,6 +59,8 @@
   "msg": {
     "noChangesToSave": "You have not made any changes to save (German)",
     "reqd": "is required(German)",
-    "operationNotAllow": "This operation is not allowed(German)"
+    "operationNotAllow": "This operation is not allowed(German)",
+    "idleTitle": "You're Idle. Do Something!(German)",
+    "idleBody": "You'll be logged out in (German)"
   }
 }

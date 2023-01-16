@@ -8,7 +8,6 @@ import {
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject } from 'rxjs';
 import { Course } from 'src/app/model/Course';
 import { MessageService } from '../../services/common/message.service';
@@ -36,7 +35,6 @@ export class CourseInputComponent implements OnInit {
     private fb: FormBuilder,
     private courseService: CourseService,
     private translate: TranslateService,
-    private toastr: ToastrService,
     private modalRef: BsModalRef,
     private msgService: MessageService
   ) {

@@ -51,3 +51,9 @@ export type DeleteConfirmationType = DefaultModalType & {
     login: (isAuthenticated: boolean, token: string) => void;
     logout: () => void;
   }
+
+  export type IdleTimeOutType =  {
+    showModal: boolean;
+    handleContinue: () => void;
+    handleLogout: () => void;
+  };

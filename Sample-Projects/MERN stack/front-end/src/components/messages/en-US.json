@@ -18,6 +18,12 @@
     "toDate": "To Date",
     "enter": "Enter",
     "reset": "Reset",
-    "download": "Download"
-        
+    "download": "Download",
+    "delete": "Delete",
+    "continue": "Continue",
+    "confirmation": "Confirmation",
+    "noChangesToSave": "You have not made any changes to save",
+    "operationNotAllow": "This operation is not allowed",
+    "idleTitle": "You're Idle. Do Something!",
+    "idleBody": "You'll be logged out in "
 }

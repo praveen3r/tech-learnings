@@ -18,5 +18,11 @@
     "toDate": "To Date (German)",
     "enter": "Enter (German)",
     "reset": "Reset (German)",
-    "download": "Download (German)"
+    "download": "Download (German)",
+    "continue": "Continue (German)",
+    "confirmation": "Confirmation (German)",
+    "noChangesToSave": "You have not made any changes to save (German)",
+    "operationNotAllow": "This operation is not allowed (German)",
+    "idleTitle": "You're Idle. Do Something! (German)",
+    "idleBody": "You'll be logged out in (German)"
 }

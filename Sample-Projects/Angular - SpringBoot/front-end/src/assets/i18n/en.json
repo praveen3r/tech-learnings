@@ -15,6 +15,7 @@
   "enter": "Enter ",
   "startDate": "Start Date",
   "endDate": "End Date",
+  "seconds": "second(s)",
   "menu": {
     "home": "Home",
     "course": "Course",
@@ -58,6 +59,8 @@
   "msg": {
     "noChangesToSave": "You have not made any changes to save",
     "reqd": "is required",
-    "operationNotAllow": "This operation is not allowed"
+    "operationNotAllow": "This operation is not allowed",
+    "idleTitle": "You're Idle. Do Something!",
+    "idleBody": "You'll be logged out in "
   }
 }
