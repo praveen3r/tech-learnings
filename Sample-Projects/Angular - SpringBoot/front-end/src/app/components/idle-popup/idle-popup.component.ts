@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { interval } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { environment } from './../../environments/environment';
 import { AuthenticationService } from './../../services/common/authentication.service';
 import { IdleService } from './../../services/common/idle.service';
 
@@ -14,7 +15,7 @@ import { IdleService } from './../../services/common/idle.service';
 export class IdlePopupComponent implements OnInit {
   private secondsCounter = interval(1000).pipe(take(10));
   private subscription: any;
-  public timer: number = 10;
+  public timer: number = environment.idleWarning;
 
   constructor(
     public dialogRef: MatDialogRef<IdlePopupComponent>,
@@ -25,7 +26,7 @@ export class IdlePopupComponent implements OnInit {
 
   ngOnInit() {
     this.subscription = this.secondsCounter.subscribe((val) => {
-      if (val == 9) {
+      if (this.timer === 1) {
         this.subscription.unsubscribe();
         this.onLogout();
       } else {

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { interceptor } from './Interceptor';
 
 const httpClient = axios.create({
-    baseURL: 'http://localhost:5000/api',
+    baseURL: process.env.REACT_APP_API_HOST,
     timeout: 5000,
     headers: {
         "Accept": "application/json",

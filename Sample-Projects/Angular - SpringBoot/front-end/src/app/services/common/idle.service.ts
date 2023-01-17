@@ -36,7 +36,7 @@ export class IdleService {
       fromEvent(window, 'mousemove'),
       fromEvent(window, 'resize')
     );
-    this.timeOutMilliSeconds = this.idleTime * 1000;
+    this.timeOutMilliSeconds = this.idleTime * this.timeOutMilliSeconds;
     this.idleSubscription = this.idle.subscribe((res) => {
       this.resetTimer();
     });

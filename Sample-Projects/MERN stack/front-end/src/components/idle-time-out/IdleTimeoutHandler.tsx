@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/Auth";
 import { IdleTimeOutModal } from "../modal/IdleTimeOutModal";
 
+const timeOut = +(process.env.REACT_APP_IDLE_WARNING!) * 1000;
+
 const IdleTimeOutHandler = (props: any) => {
   const intervalRef = useRef<NodeJS.Timer>();
 
@@ -11,6 +13,7 @@ const IdleTimeOutHandler = (props: any) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const auth = useAuth();
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     startWatching();
@@ -23,14 +26,14 @@ const IdleTimeOutHandler = (props: any) => {
   const startTimer = () => {
     intervalRef.current = setTimeout(() => {
       setShowModal(true);
-    }, 10000);
+    }, timeOut);
   };
 
   const resetTimer = () => {
     clearTimeout(intervalRef.current);
     intervalRef.current = setTimeout(() => {
       setShowModal(true);
-    }, 10000);
+    }, timeOut);
   };
 
   const startWatching = () => {

@@ -4,10 +4,12 @@ import Button from "react-bootstrap/Button";
 import { IdleTimeOutType } from "../../types/ComponentType";
 import DisplayMessage from "../i18n/DisplayMessage";
 
+const timeOut = +(process.env.REACT_APP_IDLE_WARNING!);
+
 export const IdleTimeOutModal = (props: IdleTimeOutType) => {
   const { showModal, handleContinue, handleLogout } = props;
 
-  const [count, setCount] = useState(20);
+  const [count, setCount] = useState(timeOut);
   const intervalRef = useRef<NodeJS.Timer>();
 
   const timerFunc = () => {
@@ -15,7 +17,6 @@ export const IdleTimeOutModal = (props: IdleTimeOutType) => {
   };
 
   useEffect(() => {
-    console.log(`coming here`);
 
     if(showModal){
       intervalRef.current = setInterval(timerFunc, 1000);
@@ -38,7 +39,7 @@ export const IdleTimeOutModal = (props: IdleTimeOutType) => {
   }, [count]);
 
   const onClickContinue = () => {
-    //setCount(20);
+    setCount(timeOut);
     clearInterval(intervalRef.current);
     handleContinue();
   };
