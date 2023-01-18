@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./components/context/Auth";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./components/context/Auth";
 import MessageModal from "./components/modal/MessageModal";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -13,18 +13,58 @@ function App() {
   const [message, setMessage] = useState<string>("");
 
   const intl  = useIntl();
+
+  const auth = useAuth();
   
+  
+  const displayModalPopUp = (event: MouseEvent | KeyboardEvent) => {
+    setDisplayModal(true);
+    setMessage(intl.formatMessage({id: 'operationNotAllow'}));
+    event.preventDefault();
+    event.stopPropagation();
+    
+  }
+  
+  const processContextmenu = (event: MouseEvent) => {
+    displayModalPopUp(event);
+  };
+
+  const processKeyDown = (event: KeyboardEvent) => {
+    var input_key = event.code;
+    if (
+      input_key === 'F5' ||
+      input_key === 'F10' ||
+      input_key === 'F11' ||
+      input_key === 'F12'
+    ) {
+      //F5, F10, F11, F12
+      displayModalPopUp(event);
+    } else if (event.ctrlKey) {
+      // Ctrl + R, Ctrl + Shift + R
+      if (input_key === 'KeyR') {
+        displayModalPopUp(event);
+      }
+    }
+  }
+
+  const processOnBeforeUnload = (event: Event) => {
+   if(auth?.isAuthenticated){
+    auth!.logout();
+    
+   }
+  }
 
   useEffect(() => {
-    const handleContextmenu = (event: MouseEvent) => {
-      setDisplayModal(true);
-      setMessage(intl.formatMessage({id: 'operationNotAllow'}));
-      event.preventDefault();
-    };
-    document.addEventListener("contextmenu", handleContextmenu);
+    
+    document.addEventListener("contextmenu", processContextmenu);
+    document.addEventListener('keydown', processKeyDown);
+    window.addEventListener("beforeunload", processOnBeforeUnload);
+
     return () => {
       hideModal();
-      document.removeEventListener("contextmenu", handleContextmenu);
+      document.removeEventListener("contextmenu", processContextmenu);
+      document.removeEventListener("keydown", processKeyDown);
+      window.removeEventListener("beforeunload", processOnBeforeUnload);
     };
   }, []);
 
@@ -44,14 +84,12 @@ function App() {
     <>
       {
         <AuthProvider>
-          <Router>
             <Dashboard />
             <Routes>
               <Route path="" element={<Login />} />
               <Route path="login" element={<Login />} />
               {routeComponents}
             </Routes>
-          </Router>
         </AuthProvider>
       }
       <MessageModal

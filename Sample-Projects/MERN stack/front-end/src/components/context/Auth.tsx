@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext, ChildrenType } from '../../types/ComponentType';
 
 // const initialContext: AuthenticationContext = {
@@ -12,9 +13,11 @@ import { AuthenticationContext, ChildrenType } from '../../types/ComponentType';
 // }
 const AuthContext = createContext<AuthenticationContext | null>(null);
 
+
 export const AuthProvider = ({ children }: ChildrenType) => {
 
     const [isAuthenticated, setAuthenticated] = useState(false);
+    const navigate = useNavigate();
 
     const login = (isAuthenticated: boolean, token: string) => {
         setAuthenticated(isAuthenticated);
@@ -24,6 +27,7 @@ export const AuthProvider = ({ children }: ChildrenType) => {
     const logout = () => {
         setAuthenticated(false);
         localStorage.removeItem("token");
+        navigate("/login");
     }
 
     return (

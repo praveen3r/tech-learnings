@@ -12,6 +12,7 @@ function InputComponent(props: InputType) {
           className="form-control"
           onPaste={(e: React.ClipboardEvent) => {
             e.preventDefault();
+            e.stopPropagation();
             return false;
           }}
         />

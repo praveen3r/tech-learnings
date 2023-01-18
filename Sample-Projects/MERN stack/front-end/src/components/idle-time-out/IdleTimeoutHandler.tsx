@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/Auth";
 import { IdleTimeOutModal } from "../modal/IdleTimeOutModal";
 
@@ -12,7 +11,6 @@ const IdleTimeOutHandler = (props: any) => {
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const auth = useAuth();
-  const navigate = useNavigate();
   
 
   useEffect(() => {
@@ -61,7 +59,6 @@ const IdleTimeOutHandler = (props: any) => {
 
   const handleLogout = () => {
     auth!.logout();
-    navigate("/login");
   };
 
   return (

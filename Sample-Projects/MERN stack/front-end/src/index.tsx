@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Provider from './components/i18n/Provider';
 import { LangProvider } from './components/context/LangContent';
 import './components/i18n/i18n-next';
+import { BrowserRouter, Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -27,7 +28,9 @@ root.render(
     />
     <LangProvider>
     <Provider>
+    <BrowserRouter>
         <App/>
+    </BrowserRouter>
     </Provider>
     </LangProvider>
     {/* <App /> */}
