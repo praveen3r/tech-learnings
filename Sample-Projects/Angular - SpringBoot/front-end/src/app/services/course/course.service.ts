@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Course } from 'src/app/model/Course';
+import { Course } from 'src/app/entity/Course';
 import { url } from '../../conf/_url';
 import { CourseType, CourseTypeMasterRes } from '../../types/response-types';
 

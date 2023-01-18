@@ -9,12 +9,12 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Observable, Subject } from 'rxjs';
-import { Course } from 'src/app/model/Course';
+import { Course } from 'src/app/entity/Course';
+import { CourseTypeMaster } from '../../entity/CourseTypeMaster';
 import { MessageService } from '../../services/common/message.service';
 import { CourseService } from '../../services/course/course.service';
 import { Constants } from '../../utils/Constants';
 import { GeneralUtils } from '../../utils/GeneralUtils';
-import { CourseTypeMaster } from './../../model/CourseTypeMaster';
 
 @Component({
   templateUrl: 'course-input.component.html',

@@ -24,5 +24,6 @@
     "noChangesToSave": "You have not made any changes to save (German)",
     "operationNotAllow": "This operation is not allowed (German)",
     "idleTitle": "You're Idle. Do Something! (German)",
-    "idleBody": "You'll be logged out in (German)"
+    "idleBody": "You'll be logged out in (German)",
+    "ok": "Ok (German)"
 }

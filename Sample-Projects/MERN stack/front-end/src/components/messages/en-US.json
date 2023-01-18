@@ -25,5 +25,6 @@
     "noChangesToSave": "You have not made any changes to save",
     "operationNotAllow": "This operation is not allowed",
     "idleTitle": "You're Idle. Do Something!",
-    "idleBody": "You'll be logged out in "
+    "idleBody": "You'll be logged out in ",
+    "ok": "Ok"
 }

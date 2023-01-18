@@ -31,6 +31,12 @@ export type DeleteConfirmationType = DefaultModalType & {
     message: string;
   };
 
+  export type MessageModalType = {
+    showModal: boolean;
+    hideModal: () => void;
+    message: string;
+  };
+
   export type LanguageState = {
     locale:string;
   }

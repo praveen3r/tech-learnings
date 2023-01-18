@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { User } from './../../model/User';
+import { User } from '../../entity/User';
 import { SecurityService } from './security.service';
 import { TokenService } from './token.service';
 

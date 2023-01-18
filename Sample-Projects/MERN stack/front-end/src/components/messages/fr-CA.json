@@ -21,8 +21,9 @@
     "download": "Download (French)",
     "continue": "Continue (French)",
     "confirmation": "Confirmation (French)",
-    "noChangesToSave": "You have not made any changes to save (German)",
-    "operationNotAllow": "This operation is not allowed (German)",
-    "idleTitle": "You're Idle. Do Something! (German)",
-    "idleBody": "You'll be logged out in (German)"
+    "noChangesToSave": "You have not made any changes to save (French)",
+    "operationNotAllow": "This operation is not allowed (French)",
+    "idleTitle": "You're Idle. Do Something! (French)",
+    "idleBody": "You'll be logged out in (French)",
+    "ok": "Ok (French)"
 }

@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDatepickerInput } from '@angular/material/datepicker';
-import { Course } from '../../model/Course';
+import { Course } from '../../entity/Course';
 import { Constants } from '../../utils/Constants';
 import { CourseService } from './../../services/course/course.service';
 import { DateUtil } from './../../utils/DateUtil';

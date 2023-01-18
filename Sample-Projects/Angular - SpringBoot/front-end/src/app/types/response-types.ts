@@ -1,5 +1,5 @@
-import { CourseTypeMaster } from '../model/CourseTypeMaster';
-import { Course } from './../model/Course';
+import { Course } from '../entity/Course';
+import { CourseTypeMaster } from '../entity/CourseTypeMaster';
 
 export type CourseType = {
   courses: Course[];
