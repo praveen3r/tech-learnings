@@ -8,10 +8,8 @@ import InputComponent from "../../components/formik-control/InputComponent";
 import DropdownComponent from "../../components/formik-control/DropdownComponent";
 import { DropdownOptions } from "../../types/FormTypes";
 import DisplayMessage from "../../components/i18n/DisplayMessage";
-import { AxiosError } from "axios";
-import Constants from "../../util/Constants";
-import { MessageUtils } from "../../util/MessageUtils";
-import { GenderService } from "../../services/GenderService";
+import { isEqual } from "lodash";
+import InfoMessage from "../../components/display/InfoMessage";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -28,9 +26,20 @@ const UserDetails = ({
   confirmModal,
   data,
 }: FormModalType<User>) => {
-  
-  const onSubmit = (values: User, submitProps: FormikHelpers<User>) => {
-    confirmModal(values);
+  const [isInfo, setInfo] = useState(false);
+
+  const onSubmit = (userNew: User, submitProps: FormikHelpers<User>) => {
+    if (data._id && isEqual(data, userNew)) {
+      setInfo(true);
+    } else {
+      setInfo(false);
+      confirmModal(userNew);
+    }
+  };
+
+  const onClickCancel = () => {
+    setInfo(false);
+    hideModal();
   };
 
   const genderOptions: DropdownOptions[] = data.genderOptions!;
@@ -42,11 +51,17 @@ const UserDetails = ({
       backdrop="static"
       keyboard={false}
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton onHide={() => setInfo(false)}>
         <Modal.Title>Add User</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
+        {isInfo && (
+          <InfoMessage>
+            <DisplayMessage id="noChangesToSave" />
+          </InfoMessage>
+        )}
+
         <Formik
           initialValues={data}
           validationSchema={validationSchema}
@@ -85,7 +100,7 @@ const UserDetails = ({
               <Button type="submit" variant="danger">
                 <DisplayMessage id="submit" />
               </Button>
-              <Button variant="default" onClick={hideModal}>
+              <Button variant="default" onClick={onClickCancel}>
                 <DisplayMessage id="cancel" />
               </Button>
             </Form>

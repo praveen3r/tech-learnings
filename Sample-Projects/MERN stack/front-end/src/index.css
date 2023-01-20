@@ -383,3 +383,7 @@ tbody tr:nth-child(even) {
 .center-align {
   text-align: center;
 }
+
+.message-margin {
+  margin-bottom: 10px;
+}

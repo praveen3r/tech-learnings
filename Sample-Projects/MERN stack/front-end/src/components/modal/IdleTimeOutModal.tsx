@@ -30,10 +30,7 @@ export const IdleTimeOutModal = (props: IdleTimeOutType) => {
   }, [showModal]);
 
   useEffect(() => {
-    console.log(`coming to timer ${count}`);
-    
     if (count === 1) {
-      console.log(`coming to logout`);
       handleLogout();
     }
   }, [count]);

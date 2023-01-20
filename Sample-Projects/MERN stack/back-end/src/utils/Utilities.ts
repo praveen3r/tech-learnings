@@ -6,7 +6,8 @@ export class Utilities {
 
     public static convertObjectToJson(object: Object ){
         const objectMapper = new ObjectMapper();
-        const jsonData = objectMapper.stringify(object);
+        const jsonString = objectMapper.stringify(object);
+        const jsonData = JSON.parse(jsonString);
         return jsonData;
     }
 

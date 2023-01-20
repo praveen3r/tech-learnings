@@ -15,8 +15,6 @@ import {
   TableRow,
   TableSortLabel,
 } from "@mui/material";
-import { toast } from "react-toastify";
-import { isEqual } from "lodash";
 import { Button, Spinner } from "react-bootstrap";
 import LoadingOverlay from "react-loading-overlay-ts";
 import DeleteConfirmation from "../../components/modal/DeleteConfirmation";
@@ -32,7 +30,7 @@ let defaultUser: User = {
   name: "",
   age: undefined,
   gender: "",
-  genderOptions: []
+  genderOptions: [],
 };
 
 function HomeWithGrid() {
@@ -196,28 +194,28 @@ function HomeWithGrid() {
 
   const processEditUser = (userNew: User) => {
     setOverlay(true);
-    if (isEqual(user, userNew)) {
-      toast.info(`No changes to save`, { position: toast.POSITION.TOP_RIGHT });
-    } else {
-      UserService.editUser(userNew, userNew._id!)
-        .then((response) => {
-          if (response?.data?.success) {
-            MessageUtils.showEditSuccessMessage("User");
-            fetchUsers();
-          } else {
+
+    UserService.editUser(userNew, userNew._id!)
+      .then((response) => {
+        console.log(response);
+        
+        if (response?.data?.success) {
+          MessageUtils.showEditSuccessMessage("User");
+          fetchUsers();
+        } else {
+          MessageUtils.showUnexpectedErrorMessage();
+          setOverlay(false);
+        }
+      })
+      .catch((error: AxiosError) => {
+        const status = error.response?.status;
+        if (status) {
+          if (!Constants.global_error_codes.includes(status)) {
             MessageUtils.showUnexpectedErrorMessage();
           }
-        })
-        .catch((error: AxiosError) => {
-          const status = error.response?.status;
-          if (status) {
-            if (!Constants.global_error_codes.includes(status)) {
-              MessageUtils.showUnexpectedErrorMessage();
-            }
-            setOverlay(false);
-          }
-        });
-    }
+          setOverlay(false);
+        }
+      });
   };
 
   // Hide the modal
@@ -321,7 +319,9 @@ function HomeWithGrid() {
                       ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={5} sx={{textAlign: "center"}}>No data to display</TableCell>
+                      <TableCell colSpan={5} sx={{ textAlign: "center" }}>
+                        No data to display
+                      </TableCell>
                     </TableRow>
                   )}
                 </TableBody>
