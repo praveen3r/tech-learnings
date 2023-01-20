@@ -4,7 +4,7 @@ import { IdleTimeOutModal } from "../modal/IdleTimeOutModal";
 
 const timeOut = +(process.env.REACT_APP_IDLE_WARNING!) * 1000;
 
-const IdleTimeOutHandler = (props: any) => {
+const IdleTimeOutHandler = () => {
   const intervalRef = useRef<NodeJS.Timer>();
 
   const events = ["click", "scroll", "load", "keydown"];
@@ -48,7 +48,7 @@ const IdleTimeOutHandler = (props: any) => {
     clearTimeout(intervalRef.current);
   };
 
-  const eventHandler = (eventType: any) => {
+  const eventHandler = (eventType: Event) => {
     resetTimer();
   };
 

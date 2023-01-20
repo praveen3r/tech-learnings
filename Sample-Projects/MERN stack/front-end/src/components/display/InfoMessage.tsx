@@ -1,6 +1,7 @@
 import React from "react";
+import { ChildrenType } from "../../types/ComponentType";
 
-const InfoMessage = (props: any) => {
+const InfoMessage = (props: ChildrenType) => {
     return (
       <div>
        <div className='text-info message-margin'> 
