@@ -1,8 +1,3 @@
-import { AxiosError } from "axios";
-import React, { useEffect, useState } from "react";
-import { FaTrash } from "react-icons/fa";
-import { UserService } from "../../services/UserService";
-import { User } from "../../types/User";
 import {
   Paper,
   Table,
@@ -15,15 +10,20 @@ import {
   TableRow,
   TableSortLabel,
 } from "@mui/material";
+import { AxiosError } from "axios";
+import { useEffect, useState } from "react";
 import { Button, Spinner } from "react-bootstrap";
+import { FaTrash } from "react-icons/fa";
 import LoadingOverlay from "react-loading-overlay-ts";
-import DeleteConfirmation from "../../components/modal/DeleteConfirmation";
-import UserDetails from "./UserDetails";
-import SearchBar from "../../components/search/SearchBar";
 import DisplayMessage from "../../components/i18n/DisplayMessage";
-import { MessageUtils } from "../../util/MessageUtils";
-import Constants from "../../util/Constants";
+import DeleteConfirmation from "../../components/modal/DeleteConfirmation";
+import SearchBar from "../../components/search/SearchBar";
 import { GenderService } from "../../services/GenderService";
+import { UserService } from "../../services/UserService";
+import { User } from "../../types/User";
+import Constants from "../../util/Constants";
+import { MessageUtils } from "../../util/MessageUtils";
+import UserDetails from "./UserDetails";
 
 let defaultUser: User = {
   sNo: 0,
@@ -197,8 +197,6 @@ function HomeWithGrid() {
 
     UserService.editUser(userNew, userNew._id!)
       .then((response) => {
-        console.log(response);
-        
         if (response?.data?.success) {
           MessageUtils.showEditSuccessMessage("User");
           fetchUsers();
