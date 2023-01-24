@@ -4,6 +4,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -71,9 +72,10 @@ export class CourseInputComponent implements OnInit {
     const typeId = this.courseInputForm.value.type;
     const author = this.courseInputForm.value.author;
     if (this.courseInputForm.invalid) {
-      this.errMsg = this.translate.instant('plsFillManFields') + ': ';
-      this.validateFormData(name, typeId, author);
-      this.errMsg = GeneralUtils.removeLastChar(this.errMsg);
+      this.getFormValidationErrors();
+      /*this.errMsg = this.translate.instant('plsFillManFields') + ': ';
+       this.validateFormData(name, typeId, author);
+       this.errMsg = GeneralUtils.removeLastChar(this.errMsg);*/
       this.isError = true;
     } else {
       const course: Course = {
@@ -86,7 +88,7 @@ export class CourseInputComponent implements OnInit {
     }
   };
 
-  private validateFormData = (...arrgs: string[]) => {
+  /*private validateFormData = (...arrgs: string[]) => {
     if (GeneralUtils.isEmpty(arrgs[0])) {
       this.errMsg =
         this.errMsg + ' ' + this.translate.instant('course.name') + ',';
@@ -99,7 +101,31 @@ export class CourseInputComponent implements OnInit {
       this.errMsg =
         this.errMsg + ' ' + this.translate.instant('course.author') + ',';
     }
-  };
+  };*/
+
+  getFormValidationErrors() {
+    let isReqdError = false;
+    console.log(`coming here`);
+
+    let reqdErrMsg = this.translate.instant('plsFillManFields') + ': ';
+    Object.keys(this.courseInputForm.controls).forEach((key) => {
+      const controlErrors: ValidationErrors =
+        this.courseInputForm.get(key).errors;
+      if (GeneralUtils.isNotEmptyObj(controlErrors)) {
+        Object.keys(controlErrors).forEach((keyError) => {
+          if (keyError === 'required') {
+            isReqdError = true;
+            reqdErrMsg =
+              reqdErrMsg + ' ' + this.translate.instant('course.' + key) + ',';
+          }
+        });
+      }
+    });
+    if (isReqdError) {
+      reqdErrMsg = GeneralUtils.removeLastChar(reqdErrMsg);
+      this.errMsg = reqdErrMsg;
+    }
+  }
 
   private processData = (course: Course) => {
     if (this.isAdd) {

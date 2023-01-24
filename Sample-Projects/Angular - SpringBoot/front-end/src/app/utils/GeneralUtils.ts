@@ -10,6 +10,20 @@ export class GeneralUtils {
     return value == '';
   };
 
+  public static isNotEmpty = (value: string) => {
+    if (value) {
+      return true;
+    }
+    return false;
+  };
+
+  public static isNotEmptyObj = (value: Object) => {
+    if (value) {
+      return true;
+    }
+    return false;
+  };
+
   public static isEqual = (obj1: Object, obj2: Object) => {
     return _.isEqual(obj1, obj2);
   };
