@@ -1,10 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 function TodoItem({ item }) {
   return (
     <TouchableOpacity>
-      <Text style={styles.item}>{item.name}</Text>
+      <View style={styles.item}> 
+      <Text style={styles.itemText}>{item.name}</Text>
+      <MaterialIcons name="delete" size={24} color="black" />
+      </View>
     </TouchableOpacity>
   );
 }
@@ -16,8 +20,12 @@ const styles = StyleSheet.create({
    borderWidth: 5,
    borderStyle: "solid",
    borderColor: "#bbb",
-   borderRadius: 10
+   borderRadius: 10,
+   flexDirection: 'row'
   },
+  itemText: {
+    marginRight: 10
+  }
 });
 
 export default TodoItem;

@@ -47,18 +47,18 @@ export default function App() {
   }
 
   return (
-    <Sandbox/>
-    // <TouchableWithoutFeedback onPress={handleOnPress}>
-    //   <SafeAreaView style={styles.container}>
-    //     <HeaderComponent />
-    //     <View>
-    //       <AddTodo submitHandler={submitHandler} />
-    //       <View style={styles.list}>
-    //         <TodoComponent item={todos} />
-    //       </View>
-    //     </View>
-    //   </SafeAreaView>
-    // </TouchableWithoutFeedback>
+    //<Sandbox/>
+    <TouchableWithoutFeedback onPress={handleOnPress}>
+      <SafeAreaView style={styles.container}>
+        <HeaderComponent />
+        <View style={styles.content}>
+          <AddTodo submitHandler={submitHandler} />
+          <View style={styles.list}>
+            <TodoComponent item={todos} />
+          </View>
+        </View>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -69,7 +69,14 @@ const styles = StyleSheet.create({
     //alignItems: 'center',
     //justifyContent: 'center',
   },
+  content: {
+    flex: 1,
+    padding: 40,
+    backgroundColor: "pink",
+  },
   list: {
+    flex: 1,
     padding: 20,
+    backgroundColor: "yellow"
   },
 });
