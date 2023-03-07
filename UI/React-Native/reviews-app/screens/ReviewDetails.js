@@ -1,10 +1,20 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, Text, View } from 'react-native'
 
-function ReviewDetails() {
+function ReviewDetails(props) {
+
+  const { navigation, route } = props;
+  const { item } = route.params;
+
+  const onPressHandler = () => {
+    navigation.goBack();
+  }
+
   return (
     <View style={styles.container}>
-    <Text>Review</Text>
+    <Text>Name: {item.name}</Text> 
+    <Text>Age: {item.age}</Text>
+    <Button title='Go back' onPress={onPressHandler}/>
   </View>
   )
 }

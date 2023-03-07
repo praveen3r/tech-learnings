@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import Home from './screens/Home';
+//import Home from './screens/Home';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
 import globalStyles from './styles/Global';
+import Routes from './routes/Routes'
+//import Home from './routes/Routes/Home';
 
 
 export default function App() {
@@ -24,7 +26,8 @@ export default function App() {
 
   return (
      <SafeAreaView style={globalStyles.container}>
-      <Home/>
+      {/* <Home/> */}
+      <Routes />
       </SafeAreaView>
     );
 }
