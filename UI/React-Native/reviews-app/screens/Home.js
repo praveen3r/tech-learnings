@@ -30,7 +30,7 @@ function Home(props) {
   }
 
   const onPressOpacity = (item) => {
-    navigation.navigate('ReviewDetails',{item});
+    navigation.navigate('ReviewDetails',{item}); //works for stack navigator only
   }
 
   return (

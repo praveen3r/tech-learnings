@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
 import globalStyles from './styles/Global';
 import Routes from './routes/Routes'
+import DrawerRoutes from './routes/Drawer';
 //import Home from './routes/Routes/Home';
 
 
@@ -27,7 +28,8 @@ export default function App() {
   return (
      <SafeAreaView style={globalStyles.container}>
       {/* <Home/> */}
-      <Routes />
+      {/* <Routes /> */}
+      <DrawerRoutes/>
       </SafeAreaView>
     );
 }
