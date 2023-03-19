@@ -9,10 +9,9 @@ const Routes = () => {
   return (
     <NavigationContainer>
     <Stack.Navigator initialRouteName={'Home'}>
-      {/* <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="ReviewDetails" component={ReviewDetails} /> */}
-      <Stack.Screen name="Home1" component={Home} />
-      <Stack.Screen name="ReviewDetails1" component={ReviewDetails} />
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="ReviewDetails" component={ReviewDetails} />
+      
     </Stack.Navigator>
     </NavigationContainer>
   );
