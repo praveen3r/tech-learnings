@@ -10,7 +10,11 @@ function AlertComp() {
         style: "cancel",
       },
       { text: "OK", onPress: () => console.log("OK Pressed") },
-    ]);
+    ],
+    {
+      cancelable: true,
+    onDismiss: () => console.warn('Alert dismissed!')
+    });
   };
 
   return <Button title="Submit" onPress={handleOnPress} />;

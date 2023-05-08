@@ -18,7 +18,11 @@ function TextInputComp() {
       <TextInput
         style={styles.input}
         placeholder="Enter age"
-        keyboardType="numeric"
+        // keyboardType="numeric"
+        keyboardType={Platform.OS === 'ios' ? 'number-pad' : 'numeric'} 
+        secureTextEntry
+        multiline
+        numberOfLines={4}
       />
     </>
   );
