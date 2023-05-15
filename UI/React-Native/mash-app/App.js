@@ -4,15 +4,22 @@ import SectionListComp from './basic/SectionListComp';
 import ScrollViewWithRefresh from './basic/ScrollViewWithRefresh';
 import TestPressable from './basic/TestPressable';
 import TestModal from './basic/TestModal';
+import BottomTabNav from './routes/BottomTabNav';
+import StackNav from './routes/StackNav';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-    {/* <ScrollViewWithRefresh/>
+    <>
+    {/*<SafeAreaView style={styles.container}>
+     <ScrollViewWithRefresh/>
     // <SectionListComp/>
-    <TestPressable/>*/}
+    <TestPressable/>
     <TestModal/>
+    
     </SafeAreaView>
+    <BottomTabNav/>*/}
+    <StackNav/>
+    </>
   );
 }
 
