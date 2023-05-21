@@ -1,0 +1,22 @@
+import { StackScreenProps } from "@react-navigation/stack";
+import { ImageStyle, TextStyle, ViewStyle } from "react-native/types";
+
+export type CustomButtonStyle = {
+  container: ViewStyle;
+  title: TextStyle;
+  icon: ImageStyle;
+};
+
+// export type CustomButtonType<T> = {
+//     style?: StyleSheet.NamedStyles<T>;
+//     onPressFunction: () => void;
+//     title: string;
+// }
+
+export type CustomButtonType = {
+  style?: any;
+  onPressFunction: () => void;
+  title: string;
+};
+
+export type StackNavigationProps = StackScreenProps<any>;
