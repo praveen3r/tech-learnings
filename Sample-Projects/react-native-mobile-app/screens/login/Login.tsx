@@ -1,81 +1,91 @@
 import { FontAwesome } from "@expo/vector-icons/";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect, useState } from "react";
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { ErrorMessage, Formik, FormikHelpers } from "formik";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import * as Yup from "yup";
 import CustomButton from "../../components/button/CustomButton";
 import InputComponentWithIcon from "../../components/formik/InputComponentWithIcon";
+import TextError from "../../components/formik/TextError";
 import { StackNavigationProps } from "../../types/ComponentType";
+import { LoginType } from "../../types/FormType";
+
+const initialValues: LoginType = {
+  userId: "",
+  keyword: "",
+};
+
+const validationSchema = Yup.object({
+  userId: Yup.string().required("User Id is required"),
+  keyword: Yup.string().required("Password is required"),
+});
 
 export default function Login({ navigation }: StackNavigationProps) {
-  const [userId, setUserId] = useState("");
-  const [keyword, setKeyword] = useState("");
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = () => {
+  const onSubmit = async (
+    values: LoginType,
+    submitProps: FormikHelpers<LoginType>
+  ) => {
     try {
-      AsyncStorage.getItem("UserData").then((value) => {
-        if (value != null) {
-          navigation.navigate("Home");
-        }
-      });
+      const user = {
+        name: values.userId,
+      };
+      await AsyncStorage.setItem("UserData", JSON.stringify(user));
+      navigation.navigate("Dashboard");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const setData = async () => {
-    if (userId.length == 0 || keyword.length == 0) {
-      Alert.alert("Warning!", "Please write your data.");
-    } else {
-      try {
-        var user = {
-          Name: userId,
-          Age: keyword,
-        };
-        await AsyncStorage.setItem("UserData", JSON.stringify(user));
-        navigation.navigate("Home");
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   return (
-    <View style={styles.body}>
-      {/* <Image
-                style={styles.logo}
-                source={require('../assets/asyncstorage.png')}
-            /> */}
+    <>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {({ handleChange, handleSubmit, values }) => (
+          <View style={styles.body}>
+            {/* <Image
+                  style={styles.logo}
+                  source={require('../assets/asyncstorage.png')}
+              /> */}
 
-      <Text style={styles.text}>Login to your account</Text>
-      <View style={styles.input}>
-        <FontAwesome name={"user"} size={28} style={styles.icon} />
+            <Text style={styles.text}>Login to your account</Text>
+            <View style={styles.input}>
+              <FontAwesome name={"user"} size={28} style={styles.icon} />
 
-        <InputComponentWithIcon
-          dataType="text"
-          placeholder="EMAIL OR PHONE"
-          onChangeText={(value) => setUserId(value)}
-        />
-      </View>
-      <View style={styles.input}>
-        <FontAwesome name={"lock"} size={28} style={styles.icon} />
+              <InputComponentWithIcon
+                dataType="text"
+                placeholder="EMAIL OR PHONE"
+                id="userId"
+                name="userId"
+                onChangeText={handleChange("userId")}
+                value={values.userId}
+              />
+            </View>
+            <ErrorMessage name="userId" component={TextError} />
+            <View style={styles.input}>
+              <FontAwesome name={"lock"} size={28} style={styles.icon} />
 
-        <InputComponentWithIcon
-          dataType="keyword"
-          placeholder="PASSWORD"
-          onChangeText={(value) => setKeyword(value)}
-        />
-      </View>
-
-      <CustomButton
-        title="Login"
-        onPressFunction={setData}
-        style={styles.button}
-      />
-    </View>
+              <InputComponentWithIcon
+                dataType="keyword"
+                placeholder="PASSWORD"
+                id="keyword"
+                name="keyword"
+                onChangeText={handleChange("keyword")}
+                value={values.keyword}
+              />
+            </View>
+            <ErrorMessage name="keyword" component={TextError} />
+            <CustomButton
+              title="Login"
+              onPressFunction={handleSubmit}
+              style={styles.button}
+            />
+          </View>
+        )}
+      </Formik>
+    </>
   );
 }
 

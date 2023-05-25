@@ -1,16 +1,29 @@
 import React from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { StyleSheet } from "react-native";
+import InputFieldWithoutError from "./InputFieldWithoutError";
 
 function InputComponentWithIcon(props: any) {
   const { dataType } = props;
   switch (dataType) {
     case "keyword":
-      return <TextInput {...props} style={styles.input} />;
+      return (
+        <InputFieldWithoutError
+          {...props}
+          style={styles.input}
+          secureTextEntry
+        />
+      );
     case "number":
-      return <TextInput {...props} style={styles.input} />;
+      return (
+        <InputFieldWithoutError
+          {...props}
+          style={styles.input}
+          keyboardType="numeric"
+        />
+      );
 
     default:
-      return <TextInput {...props} style={styles.input} />;
+      return <InputFieldWithoutError {...props} style={styles.input} />;
   }
 }
 

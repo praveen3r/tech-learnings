@@ -1,16 +1,19 @@
 import React from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { StyleSheet } from "react-native";
+import InputField from "./InputField";
 
 function InputComponent(props: any) {
   const { dataType } = props;
   switch (dataType) {
     case "keyword":
-      return <TextInput {...props} style={styles.input} />;
+      return <InputField {...props} style={styles.input} secureTextEntry />;
     case "number":
-      return <TextInput {...props} style={styles.input} />;
+      return (
+        <InputField {...props} style={styles.input} keyboardType="numeric" />
+      );
 
     default:
-      return <TextInput {...props} style={styles.input} />;
+      return <InputField {...props} style={styles.input} />;
   }
 }
 
