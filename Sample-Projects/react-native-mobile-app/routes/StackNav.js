@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import Dashboard from "../screens/dashboard/Dashboard";
-import Login from "../screens/login/Login";
+import LoginErrPopUp from "../screens/login/LoginErrPopUp";
 
 const Stack = createStackNavigator();
 
@@ -25,7 +25,7 @@ function StackNav() {
       >
         <Stack.Screen
           name="Login"
-          component={Login}
+          component={LoginErrPopUp}
           options={{
             headerShown: false,
           }}

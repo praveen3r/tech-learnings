@@ -6,8 +6,8 @@ import TextError from "./TextError";
 function InputField(props: any) {
   return (
     <>
-      <View>
-        <TextInput {...props} />
+      <TextInput {...props} />
+      <View style={styles.error}>
         <ErrorMessage name={props.name} component={TextError} />
       </View>
     </>
@@ -15,8 +15,8 @@ function InputField(props: any) {
 }
 
 const styles = StyleSheet.create({
-  input: {
-    flex: 1,
+  error: {
+    marginTop: 10,
   },
 });
 

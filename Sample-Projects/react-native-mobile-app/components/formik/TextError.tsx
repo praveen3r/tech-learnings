@@ -11,8 +11,9 @@ const TextError: React.ComponentType<{}> = (props: any) => {
 
 const styles = StyleSheet.create({
   error: {
-    color: "#ff0000",
+    color: "#8b0000",
     marginBottom: 25,
+    fontSize: 20,
   },
 });
 
