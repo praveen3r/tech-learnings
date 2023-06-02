@@ -8,6 +8,7 @@ import CustomButton from "../../components/button/CustomButton";
 import InputComponentWithIcon from "../../components/formik/InputComponentWithIcon";
 import { StackNavigationProps } from "../../types/ComponentType";
 import { LoginType } from "../../types/FormType";
+import { GeneralUtils } from "../../util/GeneralUtils";
 import { MessageUtils } from "../../util/MessageUtils";
 
 const initialValues: LoginType = {
@@ -23,7 +24,7 @@ const validationSchema = Yup.object({
 export default function LoginErrPopUp({ navigation }: StackNavigationProps) {
   const onSubmit = (values: LoginType) => {
     formik.validateForm(values).then(async (error) => {
-      if (error) {
+      if (GeneralUtils.isNotEmptyObj(error)) {
         MessageUtils.showErrorObjMessage(error);
       } else {
         try {
@@ -31,7 +32,7 @@ export default function LoginErrPopUp({ navigation }: StackNavigationProps) {
             name: values.userId,
           };
           await AsyncStorage.setItem("UserData", JSON.stringify(user));
-          navigation.navigate("Dashboard");
+          navigation.navigate("Mpin");
         } catch (error) {
           console.log(error);
         }
@@ -80,6 +81,7 @@ export default function LoginErrPopUp({ navigation }: StackNavigationProps) {
             value={formik.values.keyword}
           />
         </View>
+        <Text>Forgot Password?</Text>
         <CustomButton
           title="Login"
           onPressFunction={() => onSubmit(formik.values)}

@@ -14,9 +14,18 @@ export class GeneralUtils {
     return false;
   };
 
-  public static isNotEmptyObj = (value: Object) => {
+  public static isValidObj = (value: Object) => {
     if (value) {
       return true;
+    }
+    return false;
+  };
+
+  public static isNotEmptyObj = (value: Object) => {
+    if (GeneralUtils.isValidObj(value)) {
+      if (Object.keys(value).length !== 0) {
+        return true;
+      }
     }
     return false;
   };
@@ -54,6 +63,4 @@ export class GeneralUtils {
     }
     return transformedInput;
   }
-
-  
 }

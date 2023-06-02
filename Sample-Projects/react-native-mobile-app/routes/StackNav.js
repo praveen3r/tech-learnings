@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import Dashboard from "../screens/dashboard/Dashboard";
 import LoginErrPopUp from "../screens/login/LoginErrPopUp";
+import Mpin from "../screens/login/Mpin";
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,13 @@ function StackNav() {
         <Stack.Screen
           name="Login"
           component={LoginErrPopUp}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Mpin"
+          component={Mpin}
           options={{
             headerShown: false,
           }}

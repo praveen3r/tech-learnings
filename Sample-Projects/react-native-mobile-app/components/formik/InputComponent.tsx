@@ -6,7 +6,9 @@ function InputComponent(props: any) {
   const { dataType } = props;
   switch (dataType) {
     case "keyword":
-      return <InputField {...props} style={styles.input} secureTextEntry />;
+      return (
+        <InputField {...props} style={styles.input} secureTextEntry={true} />
+      );
     case "number":
       return (
         <InputField {...props} style={styles.input} keyboardType="numeric" />

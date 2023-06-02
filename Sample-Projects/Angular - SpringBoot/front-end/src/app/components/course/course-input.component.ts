@@ -105,7 +105,6 @@ export class CourseInputComponent implements OnInit {
 
   getFormValidationErrors() {
     let isReqdError = false;
-    console.log(`coming here`);
 
     let reqdErrMsg = this.translate.instant('plsFillManFields') + ': ';
     Object.keys(this.courseInputForm.controls).forEach((key) => {

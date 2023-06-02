@@ -30,7 +30,7 @@ export default function Login({ navigation }: StackNavigationProps) {
         name: values.userId,
       };
       await AsyncStorage.setItem("UserData", JSON.stringify(user));
-      navigation.navigate("Dashboard");
+      navigation.navigate("Mpin");
     } catch (error) {
       console.log(error);
     }
