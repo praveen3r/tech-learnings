@@ -1,32 +1,17 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import React from "react";
+import Home from "../Home/Home";
+import Profile from "../Home/Profile";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+
+const Tab = createMaterialBottomTabNavigator();
 
 function Dashboard() {
-  const [name, setName] = useState<String>(null);
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = () => {
-    try {
-      AsyncStorage.getItem("UserData").then((value) => {
-        if (value != null) {
-          const user = JSON.parse(value);
-          const name = user.name;
-          setName(name);
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <View>
-      <Text>Welcome to Dashboard {name}</Text>
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
   );
 }
 
