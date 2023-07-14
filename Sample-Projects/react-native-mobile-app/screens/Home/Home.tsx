@@ -1,12 +1,18 @@
 import React from "react";
-import { Text, View } from "react-native";
-
-function Home() {
+import { StyleSheet, Text, View } from "react-native";
+const Home = () => {
   return (
-    <View>
-      <Text>Welcome to Home</Text>
+    <View style={styles.body}>
+      <Text>Welcome User</Text>
     </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  body: {
+    flex: 1,
+    marginTop: 60,
+  },
+});
 
 export default Home;

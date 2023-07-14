@@ -19,4 +19,10 @@ export type CustomButtonType = {
   title: string;
 };
 
+export type CustomModalType = {
+  visible: boolean;
+  onRequestClose: (isOkClicked: boolean) => void;
+  data: string;
+};
+
 export type StackNavigationProps = StackScreenProps<any>;

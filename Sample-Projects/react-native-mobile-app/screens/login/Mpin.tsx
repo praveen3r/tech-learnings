@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import { StackNavigationProps } from "../../types/ComponentType";
 import { GeneralUtils } from "../../util/GeneralUtils";
 
-function Mpin({ navigation }: StackNavigationProps) {
+const Mpin = ({ navigation }: StackNavigationProps) => {
   const [pin, setPin] = useState<string[]>(["", "", "", ""]);
   const inputRefs = useRef([]);
 
@@ -43,12 +43,13 @@ function Mpin({ navigation }: StackNavigationProps) {
             onChangeText={(input) => handlePINChange(input, index)}
             keyboardType="numeric"
             maxLength={1}
+            secureTextEntry={true}
           />
         ))}
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   body: {
