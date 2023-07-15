@@ -6,6 +6,7 @@ import { StyleSheet, Text, View } from "react-native";
 import * as Yup from "yup";
 import CustomButton from "../../components/button/CustomButton";
 import InputComponentWithIcon from "../../components/formik/InputComponentWithIcon";
+import GlobalStyles from "../../components/style/GlobalStyles";
 import { StackNavigationProps } from "../../types/ComponentType";
 import { LoginType } from "../../types/FormType";
 import { GeneralUtils } from "../../util/GeneralUtils";
@@ -51,42 +52,45 @@ export default function LoginErrPopUp({ navigation }: StackNavigationProps) {
   return (
     <FormikProvider value={formik}>
       <View style={styles.body}>
-        {/* <Image
-                  style={styles.logo}
-                  source={require('../assets/asyncstorage.png')}
-              /> */}
+        <View style={styles.container}>
+          <Text style={styles.text}>Login to your account</Text>
+          <View style={styles.input}>
+            <FontAwesome name={"user"} size={28} style={styles.icon} />
 
-        <Text style={styles.text}>Login to your account</Text>
-        <View style={styles.input}>
-          <FontAwesome name={"user"} size={28} style={styles.icon} />
+            <InputComponentWithIcon
+              dataType="text"
+              placeholder="EMAIL OR PHONE"
+              id="userId"
+              name="userId"
+              onChangeText={formik.handleChange("userId")}
+              value={formik.values.userId}
+            />
+          </View>
+          <View style={styles.input}>
+            <FontAwesome name={"lock"} size={28} style={styles.icon} />
 
-          <InputComponentWithIcon
-            dataType="text"
-            placeholder="EMAIL OR PHONE"
-            id="userId"
-            name="userId"
-            onChangeText={formik.handleChange("userId")}
-            value={formik.values.userId}
+            <InputComponentWithIcon
+              dataType="keyword"
+              placeholder="PASSWORD"
+              id="keyword"
+              name="keyword"
+              onChangeText={formik.handleChange("keyword")}
+              value={formik.values.keyword}
+            />
+          </View>
+        </View>
+        <View style={GlobalStyles.footerContainer}>
+          <Text style={[GlobalStyles.footer, styles.footer]}>
+            Forgot password?
+          </Text>
+        </View>
+        <View style={styles.container}>
+          <CustomButton
+            title="Login"
+            onPressFunction={() => onSubmit(formik.values)}
+            style={styles.button}
           />
         </View>
-        <View style={styles.input}>
-          <FontAwesome name={"lock"} size={28} style={styles.icon} />
-
-          <InputComponentWithIcon
-            dataType="keyword"
-            placeholder="PASSWORD"
-            id="keyword"
-            name="keyword"
-            onChangeText={formik.handleChange("keyword")}
-            value={formik.values.keyword}
-          />
-        </View>
-        <Text>Forgot Password?</Text>
-        <CustomButton
-          title="Login"
-          onPressFunction={() => onSubmit(formik.values)}
-          style={styles.button}
-        />
       </View>
     </FormikProvider>
   );
@@ -95,8 +99,10 @@ export default function LoginErrPopUp({ navigation }: StackNavigationProps) {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    alignItems: "center",
     backgroundColor: "#0080ff",
+  },
+  container: {
+    alignItems: "center",
   },
   logo: {
     width: 100,
@@ -125,5 +131,8 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 50,
+  },
+  footer: {
+    marginTop: 10,
   },
 });

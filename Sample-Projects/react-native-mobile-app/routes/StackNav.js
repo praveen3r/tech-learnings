@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import Dashboard from "../screens/dashboard/Dashboard";
+import Helpdesk from "../screens/helpdesk/Helpdesk";
 import LoginErrPopUp from "../screens/login/LoginErrPopUp";
 import Mpin from "../screens/login/Mpin";
 
@@ -41,6 +42,13 @@ function StackNav() {
         <Stack.Screen
           name="Dashboard"
           component={Dashboard}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Helpdesk"
+          component={Helpdesk}
           options={{
             headerShown: false,
           }}

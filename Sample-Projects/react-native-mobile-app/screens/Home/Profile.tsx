@@ -9,8 +9,8 @@ import {
 
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { StackNavigationProps } from "../../types/ComponentType";
 import CustomModal from "../../components/modal/CustomModal";
+import { StackNavigationProps } from "../../types/ComponentType";
 
 const Profile = ({ navigation }: StackNavigationProps) => {
   const [logoutPopUpVisible, setLogoutPopUpVisible] = useState<boolean>(false);
@@ -26,9 +26,19 @@ const Profile = ({ navigation }: StackNavigationProps) => {
     }
   };
 
+  const onPressHelpdeskHandler = () => {
+    navigation.navigate("Helpdesk");
+  };
+
   return (
     <View style={styles.body}>
-      <View style={styles.card}>
+      <View style={[styles.card, styles.cardHeader]}>
+        <View style={styles.cardBody}>
+          <Text style={styles.headerText}>Praveen Rajan</Text>
+        </View>
+      </View>
+
+      <View style={[styles.card, styles.cardChild]}>
         <AntDesign name="user" size={30} color="gold" />
         <View style={styles.cardBody}>
           <Text style={styles.text}>Profile</Text>
@@ -40,7 +50,7 @@ const Profile = ({ navigation }: StackNavigationProps) => {
           style={styles.arrow}
         />
       </View>
-      <View style={styles.card}>
+      <View style={[styles.card, styles.cardChild]}>
         <Foundation name="key" size={30} color="gold" />
         <View style={styles.cardBody}>
           <Text style={styles.text}>Change Password</Text>
@@ -52,7 +62,7 @@ const Profile = ({ navigation }: StackNavigationProps) => {
           style={styles.arrow}
         />
       </View>
-      <View style={styles.card}>
+      <View style={[styles.card, styles.cardChild]}>
         <Feather name="lock" size={30} color="gold" />
         <View style={styles.cardBody}>
           <Text style={styles.text}>MPIN Setup</Text>
@@ -64,20 +74,22 @@ const Profile = ({ navigation }: StackNavigationProps) => {
           style={styles.arrow}
         />
       </View>
-      <View style={styles.card}>
-        <Ionicons name="information-circle-outline" size={30} color="gold" />
-        <View style={styles.cardBody}>
-          <Text style={styles.text}>Help Desk</Text>
+      <Pressable onPress={onPressHelpdeskHandler}>
+        <View style={[styles.card, styles.cardChild]}>
+          <Ionicons name="information-circle-outline" size={30} color="gold" />
+          <View style={styles.cardBody}>
+            <Text style={styles.text}>Help Desk</Text>
+          </View>
+          <MaterialIcons
+            name="keyboard-arrow-right"
+            size={30}
+            color="black"
+            style={styles.arrow}
+          />
         </View>
-        <MaterialIcons
-          name="keyboard-arrow-right"
-          size={30}
-          color="black"
-          style={styles.arrow}
-        />
-      </View>
+      </Pressable>
       <Pressable onPress={onPressLogoutHandler}>
-        <View style={styles.card}>
+        <View style={[styles.card, styles.cardChild]}>
           <SimpleLineIcons name="logout" size={30} color="gold" />
           <View style={styles.cardBody}>
             <Text style={styles.text}>Logout</Text>
@@ -110,20 +122,30 @@ const styles = StyleSheet.create({
   },
   card: {
     flexDirection: "row",
-    marginTop: 70,
+    marginTop: 40,
     marginLeft: 10,
     borderWidth: 1,
     borderColor: "black",
+    width: "95%",
+  },
+  cardHeader: {
+    height: 80,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  cardChild: {
+    height: 50,
     paddingLeft: 10,
     paddingTop: 10,
-    width: "95%",
-    height: 50,
   },
   cardBody: {
     flex: 1,
   },
   text: {
     marginLeft: 20,
+    fontSize: 20,
+  },
+  headerText: {
     fontSize: 20,
   },
   arrow: {

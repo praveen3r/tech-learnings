@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
+import GlobalStyles from "../../components/style/GlobalStyles";
 import { StackNavigationProps } from "../../types/ComponentType";
 import { GeneralUtils } from "../../util/GeneralUtils";
 
@@ -30,34 +31,43 @@ const Mpin = ({ navigation }: StackNavigationProps) => {
   };
 
   return (
-    <View style={styles.body}>
-      <Text style={styles.text}>Enter MPIN</Text>
+    <>
+      <View style={styles.body}>
+        <View style={styles.container}>
+          <Text style={styles.text}>Enter MPIN</Text>
 
-      <View style={styles.textInput}>
-        {pin.map((initVal, index) => (
-          <TextInput
-            key={index}
-            ref={(ref) => (inputRefs.current[index] = ref)}
-            style={styles.input}
-            value={initVal}
-            onChangeText={(input) => handlePINChange(input, index)}
-            keyboardType="numeric"
-            maxLength={1}
-            secureTextEntry={true}
-          />
-        ))}
+          <View style={styles.textInput}>
+            {pin.map((initVal, index) => (
+              <TextInput
+                key={index}
+                ref={(ref) => (inputRefs.current[index] = ref)}
+                style={styles.input}
+                value={initVal}
+                onChangeText={(input) => handlePINChange(input, index)}
+                keyboardType="numeric"
+                maxLength={1}
+                secureTextEntry={true}
+              />
+            ))}
+          </View>
+        </View>
+        <View style={GlobalStyles.footerContainer}>
+          <Text style={[GlobalStyles.footer,styles.footer]}>Forgot MPIN?</Text>
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
     backgroundColor: "#0080ff",
     justifyContent: "center",
+  },
+  container: {
+    flexDirection: "column",
+    alignItems: "center",
   },
   textInput: {
     flexDirection: "row",
@@ -77,6 +87,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
     textAlign: "center",
   },
+  footer: {
+    marginTop: 40
+  }
 });
 
 export default Mpin;
