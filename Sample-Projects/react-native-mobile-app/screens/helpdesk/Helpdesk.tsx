@@ -24,10 +24,8 @@ const Helpdesk = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 60,
     flex: 1,
     padding: 16,
-    backgroundColor: "#f2f2f2",
   },
   text: {
     fontSize: 16,

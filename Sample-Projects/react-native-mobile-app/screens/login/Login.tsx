@@ -20,7 +20,7 @@ const validationSchema = Yup.object({
   keyword: Yup.string().required("Password is required"),
 });
 
-export default function Login({ navigation }: StackNavigationProps) {
+const Login = ({ navigation }: StackNavigationProps) => {
   const onSubmit = async (
     values: LoginType,
     submitProps: FormikHelpers<LoginType>
@@ -87,13 +87,12 @@ export default function Login({ navigation }: StackNavigationProps) {
       </Formik>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   body: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#0080ff",
   },
   logo: {
     width: 100,
@@ -124,3 +123,5 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
 });
+
+export default Login;

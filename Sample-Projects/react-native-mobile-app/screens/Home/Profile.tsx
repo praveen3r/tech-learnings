@@ -26,8 +26,21 @@ const Profile = ({ navigation }: StackNavigationProps) => {
     }
   };
 
-  const onPressHelpdeskHandler = () => {
-    navigation.navigate("Helpdesk");
+  const onPressHandler = (screenIndicator: number) => {
+    switch (screenIndicator) {
+      case 1:
+        navigation.navigate("MyProfile");
+        break;
+      case 2:
+        navigation.navigate("ChangeKeyword");
+        break;
+      case 3:
+        navigation.navigate("MpinSetup");
+        break;
+      case 4:
+        navigation.navigate("Helpdesk");
+        break;
+    }
   };
 
   return (
@@ -38,43 +51,49 @@ const Profile = ({ navigation }: StackNavigationProps) => {
         </View>
       </View>
 
-      <View style={[styles.card, styles.cardChild]}>
-        <AntDesign name="user" size={30} color="gold" />
-        <View style={styles.cardBody}>
-          <Text style={styles.text}>Profile</Text>
+      <Pressable onPress={() => onPressHandler(1)}>
+        <View style={[styles.card, styles.cardChild]}>
+          <AntDesign name="user" size={30} color="gold" />
+          <View style={styles.cardBody}>
+            <Text style={styles.text}>Profile</Text>
+          </View>
+          <MaterialIcons
+            name="keyboard-arrow-right"
+            size={30}
+            color="black"
+            style={styles.arrow}
+          />
         </View>
-        <MaterialIcons
-          name="keyboard-arrow-right"
-          size={30}
-          color="black"
-          style={styles.arrow}
-        />
-      </View>
-      <View style={[styles.card, styles.cardChild]}>
-        <Foundation name="key" size={30} color="gold" />
-        <View style={styles.cardBody}>
-          <Text style={styles.text}>Change Password</Text>
+      </Pressable>
+      <Pressable onPress={() => onPressHandler(2)}>
+        <View style={[styles.card, styles.cardChild]}>
+          <Foundation name="key" size={30} color="gold" />
+          <View style={styles.cardBody}>
+            <Text style={styles.text}>Change Password</Text>
+          </View>
+          <MaterialIcons
+            name="keyboard-arrow-right"
+            size={30}
+            color="black"
+            style={styles.arrow}
+          />
         </View>
-        <MaterialIcons
-          name="keyboard-arrow-right"
-          size={30}
-          color="black"
-          style={styles.arrow}
-        />
-      </View>
-      <View style={[styles.card, styles.cardChild]}>
-        <Feather name="lock" size={30} color="gold" />
-        <View style={styles.cardBody}>
-          <Text style={styles.text}>MPIN Setup</Text>
+      </Pressable>
+      <Pressable onPress={() => onPressHandler(3)}>
+        <View style={[styles.card, styles.cardChild]}>
+          <Feather name="lock" size={30} color="gold" />
+          <View style={styles.cardBody}>
+            <Text style={styles.text}>MPIN Setup</Text>
+          </View>
+          <MaterialIcons
+            name="keyboard-arrow-right"
+            size={30}
+            color="black"
+            style={styles.arrow}
+          />
         </View>
-        <MaterialIcons
-          name="keyboard-arrow-right"
-          size={30}
-          color="black"
-          style={styles.arrow}
-        />
-      </View>
-      <Pressable onPress={onPressHelpdeskHandler}>
+      </Pressable>
+      <Pressable onPress={() => onPressHandler(4)}>
         <View style={[styles.card, styles.cardChild]}>
           <Ionicons name="information-circle-outline" size={30} color="gold" />
           <View style={styles.cardBody}>
@@ -102,7 +121,7 @@ const Profile = ({ navigation }: StackNavigationProps) => {
           />
         </View>
       </Pressable>
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={styles.modalContainer}>
         <CustomModal
           visible={logoutPopUpVisible}
           onRequestClose={onCloseModal}
@@ -116,7 +135,6 @@ const Profile = ({ navigation }: StackNavigationProps) => {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    marginTop: 60,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -150,6 +168,11 @@ const styles = StyleSheet.create({
   },
   arrow: {
     paddingRight: 20,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

@@ -9,10 +9,7 @@ const Home = () => {
 };
 
 const styles = StyleSheet.create({
-  body: {
-    flex: 1,
-    marginTop: 60,
-  },
+  body: {},
 });
 
 export default Home;

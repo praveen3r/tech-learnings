@@ -1,4 +1,3 @@
-import { FontAwesome } from "@expo/vector-icons/";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FormikProvider, useFormik } from "formik";
 import React from "react";
@@ -22,7 +21,7 @@ const validationSchema = Yup.object({
   keyword: Yup.string().required("Password is required"),
 });
 
-export default function LoginErrPopUp({ navigation }: StackNavigationProps) {
+const LoginErrPopUp = ({ navigation }: StackNavigationProps) => {
   const onSubmit = (values: LoginType) => {
     formik.validateForm(values).then(async (error) => {
       if (GeneralUtils.isNotEmptyObj(error)) {
@@ -54,30 +53,24 @@ export default function LoginErrPopUp({ navigation }: StackNavigationProps) {
       <View style={styles.body}>
         <View style={styles.container}>
           <Text style={styles.text}>Login to your account</Text>
-          <View style={styles.input}>
-            <FontAwesome name={"user"} size={28} style={styles.icon} />
-
-            <InputComponentWithIcon
-              dataType="text"
-              placeholder="EMAIL OR PHONE"
-              id="userId"
-              name="userId"
-              onChangeText={formik.handleChange("userId")}
-              value={formik.values.userId}
-            />
-          </View>
-          <View style={styles.input}>
-            <FontAwesome name={"lock"} size={28} style={styles.icon} />
-
-            <InputComponentWithIcon
-              dataType="keyword"
-              placeholder="PASSWORD"
-              id="keyword"
-              name="keyword"
-              onChangeText={formik.handleChange("keyword")}
-              value={formik.values.keyword}
-            />
-          </View>
+          <InputComponentWithIcon
+            dataType="text"
+            placeholder="EMAIL OR PHONE"
+            id="userId"
+            name="userId"
+            onChangeText={formik.handleChange("userId")}
+            value={formik.values.userId}
+            iconType="user"
+          />
+          <InputComponentWithIcon
+            dataType="keyword"
+            placeholder="PASSWORD"
+            id="keyword"
+            name="keyword"
+            onChangeText={formik.handleChange("keyword")}
+            value={formik.values.keyword}
+            isLeftIcon={true}
+          />
         </View>
         <View style={GlobalStyles.footerContainer}>
           <Text style={[GlobalStyles.footer, styles.footer]}>
@@ -94,12 +87,11 @@ export default function LoginErrPopUp({ navigation }: StackNavigationProps) {
       </View>
     </FormikProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    backgroundColor: "#0080ff",
   },
   container: {
     alignItems: "center",
@@ -115,24 +107,12 @@ const styles = StyleSheet.create({
     marginTop: 200,
     marginBottom: 30,
   },
-  input: {
-    flexDirection: "row",
-    width: 300,
-    borderWidth: 1,
-    borderColor: "#555",
-    borderRadius: 10,
-    backgroundColor: "#ffffff",
-    marginBottom: 25,
-    height: 50,
-  },
-  icon: {
-    paddingTop: 10,
-    paddingLeft: 10,
-  },
   button: {
-    marginTop: 50,
+    marginTop: 40,
   },
   footer: {
     marginTop: 10,
   },
 });
+
+export default LoginErrPopUp;

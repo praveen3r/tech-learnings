@@ -25,4 +25,13 @@ export type CustomModalType = {
   data: string;
 };
 
+export type CustomCardType = {
+  title: string;
+  data: string;
+};
+
+export type CustomCardWithChildrenType = {
+  title: string;
+  children?: JSX.Element;
+};
 export type StackNavigationProps = StackScreenProps<any>;

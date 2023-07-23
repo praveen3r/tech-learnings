@@ -52,7 +52,7 @@ const Mpin = ({ navigation }: StackNavigationProps) => {
           </View>
         </View>
         <View style={GlobalStyles.footerContainer}>
-          <Text style={[GlobalStyles.footer,styles.footer]}>Forgot MPIN?</Text>
+          <Text style={[GlobalStyles.footer, styles.footer]}>Forgot MPIN?</Text>
         </View>
       </View>
     </>
@@ -62,7 +62,6 @@ const Mpin = ({ navigation }: StackNavigationProps) => {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    backgroundColor: "#0080ff",
     justifyContent: "center",
   },
   container: {
@@ -88,8 +87,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   footer: {
-    marginTop: 40
-  }
+    marginTop: 40,
+  },
 });
 
 export default Mpin;
