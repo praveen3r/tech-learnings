@@ -79,7 +79,7 @@ const ChangeKeyword = () => {
         </View>
       </View>
       <View style={styles.container}>
-        <Text>
+        <Text style={styles.note}>
           password must include atleast one number, one special character, one
           upper case, one lowercase and atleast 8 characters
         </Text>
@@ -99,19 +99,26 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 40,
+    color: "#ffffff",
   },
   container: {
     alignItems: "center",
   },
-  button: {
-    marginTop: 50,
-  },
+
   input: {
     marginLeft: 20,
+  },
+  note: {
+    fontSize: 12,
+    color: "#ffffff",
+    marginBottom: 10,
+    marginTop: 30,
+    marginLeft: 15,
   },
   text: {
     marginBottom: 10,
     fontWeight: "bold",
+    color: "#ffffff",
   },
 });
 

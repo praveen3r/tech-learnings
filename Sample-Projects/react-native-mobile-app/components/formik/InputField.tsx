@@ -6,7 +6,7 @@ import TextError from "./TextError";
 function InputField(props: any) {
   return (
     <>
-      <TextInput {...props} />
+      <TextInput {...props} placeholderTextColor="#ffffff" />
       <View style={styles.error}>
         <ErrorMessage name={props.name} component={TextError} />
       </View>

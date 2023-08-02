@@ -9,7 +9,9 @@ import {
 
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import CircleText from "../../components/custom/CircleText";
 import CustomModal from "../../components/modal/CustomModal";
+import GlobalStyles from "../../components/style/GlobalStyles";
 import { StackNavigationProps } from "../../types/ComponentType";
 
 const Profile = ({ navigation }: StackNavigationProps) => {
@@ -44,84 +46,89 @@ const Profile = ({ navigation }: StackNavigationProps) => {
   };
 
   return (
-    <View style={styles.body}>
-      <View style={[styles.card, styles.cardHeader]}>
-        <View style={styles.cardBody}>
-          <Text style={styles.headerText}>Praveen Rajan</Text>
+    <View style={[GlobalStyles.body, GlobalStyles.background]}>
+      <View style={[GlobalStyles.card, GlobalStyles.cardHeader]}>
+        <View style={GlobalStyles.cardBody}>
+          <View style={styles.circleText}>
+            <CircleText text="PR" radius={20} />
+          </View>
+          <Text style={[styles.headerText, GlobalStyles.textColor]}>
+            Praveen Rajan
+          </Text>
         </View>
       </View>
 
       <Pressable onPress={() => onPressHandler(1)}>
-        <View style={[styles.card, styles.cardChild]}>
+        <View style={[GlobalStyles.card, GlobalStyles.cardChild]}>
           <AntDesign name="user" size={30} color="gold" />
-          <View style={styles.cardBody}>
-            <Text style={styles.text}>Profile</Text>
+          <View style={GlobalStyles.cardBody}>
+            <Text style={GlobalStyles.text}>Profile</Text>
           </View>
           <MaterialIcons
             name="keyboard-arrow-right"
             size={30}
             color="black"
-            style={styles.arrow}
+            style={GlobalStyles.arrow}
           />
         </View>
       </Pressable>
       <Pressable onPress={() => onPressHandler(2)}>
-        <View style={[styles.card, styles.cardChild]}>
+        <View style={[GlobalStyles.card, GlobalStyles.cardChild]}>
           <Foundation name="key" size={30} color="gold" />
-          <View style={styles.cardBody}>
-            <Text style={styles.text}>Change Password</Text>
+          <View style={GlobalStyles.cardBody}>
+            <Text style={GlobalStyles.text}>Change Password</Text>
           </View>
           <MaterialIcons
             name="keyboard-arrow-right"
             size={30}
             color="black"
-            style={styles.arrow}
+            style={GlobalStyles.arrow}
           />
         </View>
       </Pressable>
       <Pressable onPress={() => onPressHandler(3)}>
-        <View style={[styles.card, styles.cardChild]}>
+        <View style={[GlobalStyles.card, GlobalStyles.cardChild]}>
           <Feather name="lock" size={30} color="gold" />
-          <View style={styles.cardBody}>
-            <Text style={styles.text}>MPIN Setup</Text>
+          <View style={GlobalStyles.cardBody}>
+            <Text style={GlobalStyles.text}>MPIN Setup</Text>
           </View>
           <MaterialIcons
             name="keyboard-arrow-right"
             size={30}
             color="black"
-            style={styles.arrow}
+            style={GlobalStyles.arrow}
           />
         </View>
       </Pressable>
       <Pressable onPress={() => onPressHandler(4)}>
-        <View style={[styles.card, styles.cardChild]}>
+        <View style={[GlobalStyles.card, GlobalStyles.cardChild]}>
           <Ionicons name="information-circle-outline" size={30} color="gold" />
-          <View style={styles.cardBody}>
-            <Text style={styles.text}>Help Desk</Text>
+          <View style={GlobalStyles.cardBody}>
+            <Text style={GlobalStyles.text}>Help Desk</Text>
           </View>
           <MaterialIcons
             name="keyboard-arrow-right"
             size={30}
             color="black"
-            style={styles.arrow}
+            style={GlobalStyles.arrow}
           />
         </View>
       </Pressable>
       <Pressable onPress={onPressLogoutHandler}>
-        <View style={[styles.card, styles.cardChild]}>
+        <View style={[GlobalStyles.card, GlobalStyles.cardChild]}>
           <SimpleLineIcons name="logout" size={30} color="gold" />
-          <View style={styles.cardBody}>
-            <Text style={styles.text}>Logout</Text>
+          <View style={GlobalStyles.cardBody}>
+            <Text style={GlobalStyles.text}>Logout</Text>
           </View>
           <MaterialIcons
             name="keyboard-arrow-right"
             size={30}
             color="black"
-            style={styles.arrow}
+            style={GlobalStyles.arrow}
           />
         </View>
       </Pressable>
-      <View style={styles.modalContainer}>
+      <View style={GlobalStyles.modalContainer}>
         <CustomModal
           visible={logoutPopUpVisible}
           onRequestClose={onCloseModal}
@@ -133,46 +140,12 @@ const Profile = ({ navigation }: StackNavigationProps) => {
 };
 
 const styles = StyleSheet.create({
-  body: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  card: {
-    flexDirection: "row",
-    marginTop: 40,
+  circleText: {
     marginLeft: 10,
-    borderWidth: 1,
-    borderColor: "black",
-    width: "95%",
-  },
-  cardHeader: {
-    height: 80,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  cardChild: {
-    height: 50,
-    paddingLeft: 10,
-    paddingTop: 10,
-  },
-  cardBody: {
-    flex: 1,
-  },
-  text: {
-    marginLeft: 20,
-    fontSize: 20,
   },
   headerText: {
-    fontSize: 20,
-  },
-  arrow: {
-    paddingRight: 20,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    fontSize: 25,
+    marginLeft: 15,
   },
 });
 

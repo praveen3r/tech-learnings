@@ -94,11 +94,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 20,
     fontWeight: "bold",
+    color: "#ffffff",
   },
   headerInfo: {
     marginLeft: 10,
     marginTop: 15,
     marginBottom: 40,
+    color: "#ffffff",
   },
   container: {
     alignItems: "center",
