@@ -24,6 +24,7 @@ const Helpdesk = () => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 30,
     flex: 1,
     padding: 16,
   },

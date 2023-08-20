@@ -62,28 +62,32 @@ function StackNav() {
           name="MyProfile"
           component={MyProfile}
           options={{
-            headerShown: false,
+            headerShown: true,
+            headerTitle: "Personal Details",
           }}
         />
         <Stack.Screen
           name="ChangeKeyword"
           component={ChangeKeyword}
           options={{
-            headerShown: false,
+            headerShown: true,
+            headerTitle: "Change Password",
           }}
         />
         <Stack.Screen
           name="MpinSetup"
           component={MpinSetup}
           options={{
-            headerShown: false,
+            headerShown: true,
+            headerTitle: "Change mPIN",
           }}
         />
         <Stack.Screen
           name="Helpdesk"
           component={Helpdesk}
           options={{
-            headerShown: false,
+            headerShown: true,
+            headerTitle: "Help Desk",
           }}
         />
       </Stack.Navigator>

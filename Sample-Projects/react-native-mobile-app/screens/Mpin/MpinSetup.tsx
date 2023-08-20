@@ -41,7 +41,6 @@ const MpinSetup = () => {
   return (
     <FormikProvider value={formik}>
       <View>
-        <Text style={styles.header}>Change mPIN?</Text>
         <Text style={styles.headerInfo}>
           An OTP will be sent to your email/mobile for confirmation
         </Text>
@@ -90,15 +89,9 @@ const MpinSetup = () => {
 };
 
 const styles = StyleSheet.create({
-  header: {
-    marginLeft: 10,
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#ffffff",
-  },
   headerInfo: {
     marginLeft: 10,
-    marginTop: 15,
+    marginTop: 40,
     marginBottom: 40,
     color: "#ffffff",
   },

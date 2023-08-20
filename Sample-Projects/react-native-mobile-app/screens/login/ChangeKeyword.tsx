@@ -40,9 +40,7 @@ const ChangeKeyword = () => {
 
   return (
     <FormikProvider value={formik}>
-      <View>
-        <Text style={styles.header}>Change Password</Text>
-
+      <View style={styles.container}>
         <View style={styles.input}>
           <Text style={styles.text}>CURRENT PASSWORD</Text>
           <InputComponentWithIcon
@@ -78,7 +76,7 @@ const ChangeKeyword = () => {
           />
         </View>
       </View>
-      <View style={styles.container}>
+      <View style={styles.footerNote}>
         <Text style={styles.note}>
           password must include atleast one number, one special character, one
           upper case, one lowercase and atleast 8 characters
@@ -94,14 +92,10 @@ const ChangeKeyword = () => {
 };
 
 const styles = StyleSheet.create({
-  header: {
-    marginLeft: 10,
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 40,
-    color: "#ffffff",
-  },
   container: {
+    marginTop: 40,
+  },
+  footerNote: {
     alignItems: "center",
   },
 
