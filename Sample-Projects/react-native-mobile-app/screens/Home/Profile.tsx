@@ -3,12 +3,12 @@ import {
   Feather,
   Foundation,
   Ionicons,
-  MaterialIcons,
   SimpleLineIcons,
 } from "@expo/vector-icons";
 
 import React, { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import HorizontalCard from "../../components/card/HorizontalCard";
 import CircleText from "../../components/custom/CircleText";
 import CustomModal from "../../components/modal/CustomModal";
 import GlobalStyles from "../../components/style/GlobalStyles";
@@ -58,76 +58,35 @@ const Profile = ({ navigation }: StackNavigationProps) => {
         </View>
       </View>
 
-      <Pressable onPress={() => onPressHandler(1)}>
-        <View style={[GlobalStyles.card, GlobalStyles.cardChild]}>
-          <AntDesign name="user" size={30} color="gold" />
-          <View style={GlobalStyles.cardBody}>
-            <Text style={GlobalStyles.text}>Profile</Text>
-          </View>
-          <MaterialIcons
-            name="keyboard-arrow-right"
-            size={30}
-            color="black"
-            style={GlobalStyles.arrow}
-          />
-        </View>
-      </Pressable>
-      <Pressable onPress={() => onPressHandler(2)}>
-        <View style={[GlobalStyles.card, GlobalStyles.cardChild]}>
-          <Foundation name="key" size={30} color="gold" />
-          <View style={GlobalStyles.cardBody}>
-            <Text style={GlobalStyles.text}>Change Password</Text>
-          </View>
-          <MaterialIcons
-            name="keyboard-arrow-right"
-            size={30}
-            color="black"
-            style={GlobalStyles.arrow}
-          />
-        </View>
-      </Pressable>
-      <Pressable onPress={() => onPressHandler(3)}>
-        <View style={[GlobalStyles.card, GlobalStyles.cardChild]}>
-          <Feather name="lock" size={30} color="gold" />
-          <View style={GlobalStyles.cardBody}>
-            <Text style={GlobalStyles.text}>MPIN Setup</Text>
-          </View>
-          <MaterialIcons
-            name="keyboard-arrow-right"
-            size={30}
-            color="black"
-            style={GlobalStyles.arrow}
-          />
-        </View>
-      </Pressable>
-      <Pressable onPress={() => onPressHandler(4)}>
-        <View style={[GlobalStyles.card, GlobalStyles.cardChild]}>
-          <Ionicons name="information-circle-outline" size={30} color="gold" />
-          <View style={GlobalStyles.cardBody}>
-            <Text style={GlobalStyles.text}>Help Desk</Text>
-          </View>
-          <MaterialIcons
-            name="keyboard-arrow-right"
-            size={30}
-            color="black"
-            style={GlobalStyles.arrow}
-          />
-        </View>
-      </Pressable>
-      <Pressable onPress={onPressLogoutHandler}>
-        <View style={[GlobalStyles.card, GlobalStyles.cardChild]}>
-          <SimpleLineIcons name="logout" size={30} color="gold" />
-          <View style={GlobalStyles.cardBody}>
-            <Text style={GlobalStyles.text}>Logout</Text>
-          </View>
-          <MaterialIcons
-            name="keyboard-arrow-right"
-            size={30}
-            color="black"
-            style={GlobalStyles.arrow}
-          />
-        </View>
-      </Pressable>
+      <HorizontalCard title="Profile" onPressHandler={() => onPressHandler(1)}>
+        <AntDesign name="user" size={30} color="gold" />
+      </HorizontalCard>
+
+      <HorizontalCard
+        title="Change Password"
+        onPressHandler={() => onPressHandler(2)}
+      >
+        <Foundation name="key" size={30} color="gold" />
+      </HorizontalCard>
+
+      <HorizontalCard
+        title="MPIN Setup"
+        onPressHandler={() => onPressHandler(3)}
+      >
+        <Feather name="lock" size={30} color="gold" />
+      </HorizontalCard>
+
+      <HorizontalCard
+        title="Help Desk"
+        onPressHandler={() => onPressHandler(4)}
+      >
+        <Ionicons name="information-circle-outline" size={30} color="gold" />
+      </HorizontalCard>
+
+      <HorizontalCard title="Logout" onPressHandler={onPressLogoutHandler}>
+        <SimpleLineIcons name="logout" size={30} color="gold" />
+      </HorizontalCard>
+
       <View style={GlobalStyles.modalContainer}>
         <CustomModal
           visible={logoutPopUpVisible}

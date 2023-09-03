@@ -5,7 +5,7 @@ import { CustomCardWithChildrenType } from "../../types/ComponentType";
 const CardWithChild = (props: CustomCardWithChildrenType) => {
   return (
     <View style={styles.card}>
-      <Text style={styles.title}>{props.title}</Text>
+      {props.title && <Text style={styles.title}>{props.title}</Text>}
       {props.children}
     </View>
   );

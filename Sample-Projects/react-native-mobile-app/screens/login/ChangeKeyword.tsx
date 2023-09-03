@@ -84,7 +84,6 @@ const ChangeKeyword = () => {
         <CustomButton
           title="Update"
           onPressFunction={() => onSubmit(formik.values)}
-          style={styles.button}
         />
       </View>
     </FormikProvider>

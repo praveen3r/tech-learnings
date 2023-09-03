@@ -2,12 +2,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import MpinSetup from "../screens/Mpin/MpinSetup";
+import AddCourse from "../screens/course/AddCourse";
+import EditCourse from "../screens/course/EditCourse";
 import Dashboard from "../screens/dashboard/Dashboard";
 import Helpdesk from "../screens/helpdesk/Helpdesk";
 import ChangeKeyword from "../screens/login/ChangeKeyword";
 import LoginErrPopUp from "../screens/login/LoginErrPopUp";
 import Mpin from "../screens/login/Mpin";
 import MyProfile from "../screens/profile/MyProfile";
+import AddSoftware from "../screens/software/AddSoftware";
+import EditSoftware from "../screens/software/EditSoftware";
 
 const Stack = createStackNavigator();
 
@@ -88,6 +92,38 @@ function StackNav() {
           options={{
             headerShown: true,
             headerTitle: "Help Desk",
+          }}
+        />
+        <Stack.Screen
+          name="AddCourse"
+          component={AddCourse}
+          options={{
+            headerShown: true,
+            headerTitle: "Add Course",
+          }}
+        />
+        <Stack.Screen
+          name="EditCourse"
+          component={EditCourse}
+          options={{
+            headerShown: true,
+            headerTitle: "Modify Course",
+          }}
+        />
+        <Stack.Screen
+          name="AddSoftware"
+          component={AddSoftware}
+          options={{
+            headerShown: true,
+            headerTitle: "Add Software",
+          }}
+        />
+        <Stack.Screen
+          name="EditSoftware"
+          component={EditSoftware}
+          options={{
+            headerShown: true,
+            headerTitle: "Modify Software",
           }}
         />
       </Stack.Navigator>

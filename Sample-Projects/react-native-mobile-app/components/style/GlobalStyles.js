@@ -28,6 +28,14 @@ export default StyleSheet.create({
     borderColor: "black",
     width: "95%",
   },
+  horizontalCard: {
+    marginTop: 40,
+    marginLeft: 10,
+    borderWidth: 1,
+    borderColor: "black",
+    width: 150,
+    height: 150,
+  },
   cardHeader: {
     height: 80,
     alignItems: "center",
@@ -38,12 +46,15 @@ export default StyleSheet.create({
     paddingLeft: 10,
     paddingTop: 10,
   },
+  horizontalCardChild: {
+    paddingLeft: 10,
+    paddingTop: 10,
+  },
   cardBody: {
     flex: 1,
     flexDirection: "row",
   },
   text: {
-    marginLeft: 20,
     fontSize: 20,
     color: "#ffffff",
   },

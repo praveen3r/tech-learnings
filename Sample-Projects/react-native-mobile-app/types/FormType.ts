@@ -14,3 +14,15 @@ export type ChangeKeywordType = {
   newKeyword: string;
   confirmNewKeyword: string;
 };
+
+export type CourseType = {
+  name: string;
+  type: string;
+  author: string;
+};
+
+export type SoftwareType = {
+  name: string;
+  type: string;
+  isExecutable: string;
+};

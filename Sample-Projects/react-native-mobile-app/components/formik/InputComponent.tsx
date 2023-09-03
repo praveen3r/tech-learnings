@@ -14,6 +14,8 @@ function InputComponent(props: any) {
         <InputField {...props} style={styles.input} keyboardType="numeric" />
       );
 
+    case "text":
+      return <InputField {...props} style={styles.input} />;
     default:
       return <InputField {...props} style={styles.input} />;
   }
@@ -26,10 +28,10 @@ const styles = StyleSheet.create({
     borderColor: "#555",
     borderRadius: 10,
     backgroundColor: "#ffffff",
-    textAlign: "center",
     fontSize: 20,
     marginBottom: 25,
     height: 40,
+    paddingLeft: 20,
   },
 });
 

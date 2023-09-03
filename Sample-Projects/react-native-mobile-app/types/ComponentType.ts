@@ -31,7 +31,7 @@ export type CustomCardType = {
 };
 
 export type CustomCardWithChildrenType = {
-  title: string;
+  title?: string;
   children?: JSX.Element;
 };
 export type StackNavigationProps = StackScreenProps<any>;
