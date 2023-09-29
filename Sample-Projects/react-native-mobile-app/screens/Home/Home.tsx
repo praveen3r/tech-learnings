@@ -15,13 +15,13 @@ const Home = ({ navigation }: StackNavigationProps) => {
   const onPressHandler = (screenIndicator: number) => {
     switch (screenIndicator) {
       case 1:
-        navigation.navigate("EditCourse");
+        navigation.navigate("ViewCourse");
         break;
       case 2:
         navigation.navigate("AddCourse");
         break;
       case 3:
-        navigation.navigate("EditSoftware");
+        navigation.navigate("ViewSoftware");
         break;
       case 4:
         navigation.navigate("AddSoftware");

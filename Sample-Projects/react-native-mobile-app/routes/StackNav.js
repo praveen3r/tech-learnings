@@ -4,6 +4,7 @@ import React from "react";
 import MpinSetup from "../screens/Mpin/MpinSetup";
 import AddCourse from "../screens/course/AddCourse";
 import EditCourse from "../screens/course/EditCourse";
+import ViewCourse from "../screens/course/ViewCourse";
 import Dashboard from "../screens/dashboard/Dashboard";
 import Helpdesk from "../screens/helpdesk/Helpdesk";
 import ChangeKeyword from "../screens/login/ChangeKeyword";
@@ -12,6 +13,7 @@ import Mpin from "../screens/login/Mpin";
 import MyProfile from "../screens/profile/MyProfile";
 import AddSoftware from "../screens/software/AddSoftware";
 import EditSoftware from "../screens/software/EditSoftware";
+import ViewSoftware from "../screens/software/ViewSoftware";
 
 const Stack = createStackNavigator();
 
@@ -103,6 +105,14 @@ function StackNav() {
           }}
         />
         <Stack.Screen
+          name="ViewCourse"
+          component={ViewCourse}
+          options={{
+            headerShown: true,
+            headerTitle: "View Course",
+          }}
+        />
+        <Stack.Screen
           name="EditCourse"
           component={EditCourse}
           options={{
@@ -124,6 +134,14 @@ function StackNav() {
           options={{
             headerShown: true,
             headerTitle: "Modify Software",
+          }}
+        />
+        <Stack.Screen
+          name="ViewSoftware"
+          component={ViewSoftware}
+          options={{
+            headerShown: true,
+            headerTitle: "View Software",
           }}
         />
       </Stack.Navigator>

@@ -1,6 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import GlobalStyles from "../style/GlobalStyles";
 
 const HorizontalCard = (props: any) => {
@@ -9,7 +9,7 @@ const HorizontalCard = (props: any) => {
       <View style={[GlobalStyles.card, GlobalStyles.cardChild]}>
         {props.children}
         <View style={GlobalStyles.cardBody}>
-          <Text style={GlobalStyles.text}>{props.title}</Text>
+          <Text style={[GlobalStyles.text, styles.text]}>{props.title}</Text>
         </View>
         <MaterialIcons
           name="keyboard-arrow-right"
@@ -22,4 +22,9 @@ const HorizontalCard = (props: any) => {
   );
 };
 
+const styles = StyleSheet.create({
+  text: {
+    paddingLeft: 10
+  }
+})
 export default HorizontalCard;
