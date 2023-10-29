@@ -3,11 +3,18 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import * as Yup from "yup";
 import CustomButton from "../../components/button/CustomButton";
+import DropdownComponent from "../../components/formik/DropdownComponent";
 import InputComponent from "../../components/formik/InputComponent";
 import { StackNavigationProps } from "../../types/ComponentType";
 import { CourseType } from "../../types/FormType";
 import { GeneralUtils } from "../../util/GeneralUtils";
 import { MessageUtils } from "../../util/MessageUtils";
+
+const items: any = [
+  { label: "Front end", value: "fntend" },
+  { label: "Back end", value: "bkend" },
+  { label: "Dev Ops", value: "devops" },
+];
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name cannot be empty"),
@@ -51,13 +58,10 @@ const EditCourse = ({ route }: StackNavigationProps) => {
         </View>
         <View style={styles.input}>
           <Text style={styles.text}>Type</Text>
-          <InputComponent
-            dataType="text"
-            placeholder="Enter type here"
-            id="type"
-            name="type"
-            onChangeText={formik.handleChange("type")}
-            value={formik.values.type}
+          <DropdownComponent
+            name="softwareType"
+            items={items}
+            value={formik.values.value}
           />
         </View>
 

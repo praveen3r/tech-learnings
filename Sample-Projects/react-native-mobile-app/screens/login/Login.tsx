@@ -30,9 +30,11 @@ const Login = ({ navigation }: StackNavigationProps) => {
         name: values.userId,
       };
       await AsyncStorage.setItem("UserData", JSON.stringify(user));
+      submitProps.resetForm();
       navigation.navigate("Mpin");
     } catch (error) {
       console.log(error);
+      submitProps.resetForm();
     }
   };
 

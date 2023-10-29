@@ -8,16 +8,19 @@ const courses: CourseType[] = [
   {
     name: "Angular",
     type: "Front End",
+    value: "fntend",
     author: "Rengarajan Rengasamy",
   },
   {
     name: "ReactJS",
     type: "Front End",
+    value: "fntend",
     author: "Rengarajan Rengasamy",
   },
   {
     name: "Spring boot",
     type: "Back End",
+    value: "bkend",
     author: "Praveen Rajan",
   },
 ];

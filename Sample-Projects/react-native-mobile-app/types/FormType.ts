@@ -18,6 +18,7 @@ export type ChangeKeywordType = {
 export type CourseType = {
   name: string;
   type: string;
+  value?: string;
   author: string;
 };
 
