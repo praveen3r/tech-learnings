@@ -1,0 +1,132 @@
+const { buildSchema } = require("graphql");
+const Book = require("./../mongodb/model/Book");
+const Author = require("./../mongodb/model/Author");
+const ObjectId = require("mongoose").Types.ObjectId;
+
+const schema = buildSchema(`
+
+type AuthorType {
+  id: ID
+  age: Int
+  name: String
+  books: [BookType]
+}
+
+  type BookType {
+    id: ID
+    name: String
+    genre: String
+    author: AuthorType   # The author of this book
+  }
+
+  input BookInput {
+    name: String
+    genre: String
+    authorId: String
+  }
+
+  input AuthorInput {
+    name: String
+    age: Int
+  }
+
+  type Mutation {
+    createBook(input: BookInput!): BookType
+    updateBook(id: ID!, input: BookInput!): BookType
+    createAuthor(input: AuthorInput!): AuthorType
+    updateAuthor(id: ID!, input: AuthorInput!): AuthorType
+  }
+
+  type Query {
+    books: [BookType!]!             # Query to get a list of all books
+    book(id: ID!): BookType          # Query to get a book by its ID
+    authors: [AuthorType!]!             # Query to get a list of all authors
+    author(id: ID!): AuthorType          # Query to get a author by its ID  
+
+  }
+
+  
+  `);
+
+const resolvers = {
+  books: async () => {
+      console.log('coming here');
+      const books = await Book.find({});
+      if(!books){
+        return null;
+      }
+      
+        return books.map((book) => {
+          return {
+            ...book.toJSON(),
+            id: book._id.toString(),
+            author: Author.findById(book.authorId),
+          }
+        })
+      
+      
+  },
+  book: async ({ id }) => {
+    const book = await Book.findById(id);
+    if (!book) {
+      return null;
+    }
+    const author = await Author.findById(book.authorId);
+    return {
+      ...book.toJSON(),
+      id: book._id.toString(),
+      author: author ? { ...author.toJSON(), id: author._id.toString() } : null,
+    };
+  },
+  authors: async () => {
+    const authors = await Author.find({});
+    if(!authors){
+      return null;
+    }
+    
+      return authors.map((author) => {
+        return {
+          ...author.toJSON(),
+          id: author._id.toString(),
+          books: Book.find({authorId: author._id.toString()}),
+        }
+      })
+    
+    
+},
+  author: async ({ id }) => {
+    const author = await Author.findById(id);
+    if (!author) {
+      return null;
+    }
+    const books = await Book.find({ authorId: author.id });
+    return {
+      ...author.toJSON(),
+      id: author._id.toString(),
+      books: books ? books : null,
+    };
+  },
+  createBook: async ({ input }) => {
+    try {
+      return await Book.create({
+        name: input.name,
+        genre: input.genre,
+        authorId: input.authorId,
+      });
+    } catch (err) {
+      console.log(`Error occured ${err}`);
+    }
+  },
+  createAuthor: async ({ input }) => {
+    try {
+      return await Author.create({
+        name: input.name,
+        age: input.age,
+      });
+    } catch (err) {
+      console.log(`Error occured ${err}`);
+    }
+  },
+};
+
+module.exports = { resolvers, schema };

@@ -52,3 +52,64 @@
   }
 }
 
+{
+  books{
+    id
+    name
+    genre
+    author{
+      id
+    }
+  }
+}
+
+-------------------------------------------
+
+mutation {
+  createBook(input: {
+    name: "Brave New World"
+    genre: "Crime"
+    authorId: "66179bb5a4fb93f2b945c7f4"
+  }){
+    id
+    name
+    genre
+  }
+}
+-------------------------------------------
+mutation {
+  createAuthor(input: {
+    name: "Author 6"
+    age: 32
+  }){
+    id
+    name
+    age
+  }
+}
+
+--------------------------------------------
+
+{
+  author(id: "66179bb5a4fb93f2b945c7f4"){
+    id
+    name
+    books{
+      id
+      name
+    }
+  }
+}
+
+--------------------------------------------
+
+{
+  book(id: "6617b7c3abb67337301c196c"){
+    id
+    name
+    author{
+      id
+    }
+  }
+}
+
