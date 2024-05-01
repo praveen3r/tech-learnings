@@ -1,0 +1,19 @@
+
+  mutation{
+    addUser(user: { name: "Sriram" , age: 23, gender: "Male"}) {
+    id
+    name
+  }
+  }
+
+-------------------------------------------------------------------------
+
+  mutation{
+    editUser(id: "66323483b7817fb697140022", user: { name: "Sriram" , age: 25, gender: "Male"}) 
+  }
+
+-------------------------------------------------------------------------
+
+  mutation{
+    deleteUser(id: "66323483b7817fb697140022") 
+  }

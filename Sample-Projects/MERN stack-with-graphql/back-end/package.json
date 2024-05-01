@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --testTimeout=5000",
-    "start": "tsc.cmd & nodemon dist/index.js"
+    "start": "tsc.cmd & nodemon --max-old-space-size=4096 dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.0.6",
+    "@graphql-codegen/typescript-operations": "^4.2.0",
     "aspect.js": "^0.8.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
@@ -20,6 +23,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
+    "express-graphql": "^0.12.0",
     "http-status-codes": "^2.2.0",
     "jackson-js": "^1.1.0",
     "jest": "^29.7.0",
