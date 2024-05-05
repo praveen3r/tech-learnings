@@ -1,6 +1,7 @@
 export const userType = `
 type UserType {
   id: ID!,
+  sNo: Int,
   name: String,
   age: Int,
   gender: String

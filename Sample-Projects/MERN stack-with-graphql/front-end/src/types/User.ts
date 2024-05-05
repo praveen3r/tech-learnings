@@ -1,7 +1,7 @@
 import { DropdownOptions } from "./FormTypes";
 
 export type User = {
-    _id?: string;
+    id?: string;
     sNo: number;
     name: string;
     age: number | undefined;

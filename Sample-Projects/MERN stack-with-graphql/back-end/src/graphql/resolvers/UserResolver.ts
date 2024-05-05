@@ -1,13 +1,18 @@
 import { DeleteResult, UpdateResult } from "mongodb";
 import UserModel from "../../model/UserModel";
 import UserInput from "../../types/UserInput";
+import User from "../../types/User";
 
 // Define resolvers for your schema
 export const userResolver = {
   users: async () => {
-    const users = await UserModel.find({});
+    let users: User[] = await UserModel.find({});
     if (!users) {
       return null;
+    }else{
+      users.forEach((user, index) => {
+        user.sNo = index+1;
+      })
     }
     return users;
   },
@@ -29,7 +34,7 @@ export const userResolver = {
       throw error;
     }
   },
-  deleteUser: async ({id}: { id: string)  => {
+  deleteUser: async ({id}: { id: string})  => {
     try {
       const result: DeleteResult = await UserModel.deleteOne({"_id" : id});
       if (result.deletedCount !== 1) {
@@ -38,5 +43,5 @@ export const userResolver = {
     } catch (error) {
       throw error;
     }
-  };
+  }
 };
