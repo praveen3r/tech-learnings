@@ -7,7 +7,7 @@ const CustomProvider = ({ children }: ChildrenType) => {
   return (
     <LangProvider>
       <Provider>
-        <BrowserRouter>{children}</BrowserRouter>
+          <BrowserRouter>{children}</BrowserRouter>
       </Provider>
     </LangProvider>
   );

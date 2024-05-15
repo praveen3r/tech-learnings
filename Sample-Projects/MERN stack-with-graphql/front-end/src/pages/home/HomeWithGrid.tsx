@@ -117,26 +117,10 @@ function HomeWithGrid() {
     setOverlay(true);
     UserService.deleteUser(id)
     .then((response) => {
-      setOverlay(false);
+      MessageUtils.showDeleteSuccessMessage("User");
       fetchUsers();
     });
-    /*setOverlay(true);
-    setTimeout(() => {
-      UserService.deleteUser(id)
-        .then((response) => {
-          MessageUtils.showDeleteSuccessMessage("User");
-          fetchUsers();
-        })
-        .catch((error: AxiosError) => {
-          const status = error.response?.status;
-          if (status) {
-            if (!Constants.global_error_codes.includes(status)) {
-              MessageUtils.showUnexpectedErrorMessage();
-            }
-            setOverlay(false);
-          }
-        });
-    }, 1500);*/
+    
   };
 
   // Hide the modal
@@ -183,60 +167,26 @@ function HomeWithGrid() {
     setOverlay(true);
     UserService.addUser(userNew)
     .then((response) => {
-      setOverlay(false);
+      MessageUtils.showAddSuccessMessage("User");
+      //setOverlay(false);
       fetchUsers();
     });
     
-    /*setTimeout(() => {
-      UserService.addUser(userNew)
-        .then((response) => {
-          if (response?.data?.success) {
-            MessageUtils.showAddSuccessMessage("User");
-            fetchUsers();
-          } else {
-            MessageUtils.showUnexpectedErrorMessage();
-            setOverlay(false);
-          }
-        })
-        .catch((error: AxiosError) => {
-          const status = error.response?.status;
-          if (status) {
-            if (!Constants.global_error_codes.includes(status)) {
-              MessageUtils.showUnexpectedErrorMessage();
-            }
-            setOverlay(false);
-          }
-        });
-    }, 1500);*/
+    
   };
 
   const processEditUser = async (userNew: User) => {
     setOverlay(true);
     UserService.editUser(userNew, userNew.id!)
     .then((response) => {
-      setOverlay(false);
+      MessageUtils.showEditSuccessMessage("User");
       fetchUsers();
+      //setOverlay(false);
     });
+    
 
-   /* UserService.editUser(userNew, userNew._id!)
-      .then((response) => {
-        if (response?.data?.success) {
-          MessageUtils.showEditSuccessMessage("User");
-          fetchUsers();
-        } else {
-          MessageUtils.showUnexpectedErrorMessage();
-          setOverlay(false);
-        }
-      })
-      .catch((error: AxiosError) => {
-        const status = error.response?.status;
-        if (status) {
-          if (!Constants.global_error_codes.includes(status)) {
-            MessageUtils.showUnexpectedErrorMessage();
-          }
-          setOverlay(false);
-        }
-      });*/
+
+   
   };
 
   // Hide the modal

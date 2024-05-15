@@ -31,3 +31,15 @@ mutation DeleteUser($id: ID!) {
   deleteUser(id:$id) 
 }
 `;
+
+export const SEARCH_USERS = gql`
+  query SearchUsers($name: String) {
+    searchUsers(name: $name) {
+      id
+      sNo
+      name
+      gender
+      age
+    }
+  }
+`;

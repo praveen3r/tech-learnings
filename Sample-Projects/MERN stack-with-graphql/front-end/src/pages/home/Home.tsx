@@ -120,7 +120,7 @@ function Home() {
     if (isEqual(user, userNew)) {
       toast.info(`No changes to save`, { position: toast.POSITION.TOP_RIGHT });
     } else {
-      UserService.editUser(userNew, userNew.id!)
+      /*UserService.editUser(userNew, userNew.id!)
         .then((response) => {
           toast.success(`User updated successfully`, {
             position: toast.POSITION.TOP_RIGHT,
@@ -132,7 +132,7 @@ function Home() {
             position: toast.POSITION.TOP_RIGHT,
           });
           setOverlay(false);
-        });
+        });*/
     }
   };
 

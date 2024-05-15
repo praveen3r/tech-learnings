@@ -43,5 +43,21 @@ export const userResolver = {
     } catch (error) {
       throw error;
     }
-  }
+  },
+  searchUsers: async ({name}: { name: string}) => {
+    try {
+      const users: Array<User> = await UserModel.find({"name": { $regex : '.*'+ name + '.*' , $options: 'i'} })
+      if (!users) {
+        return null;
+      }else{
+        users.forEach((user, index) => {
+          user.sNo = index+1;
+        })
+      }
+      
+      return users;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

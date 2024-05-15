@@ -183,7 +183,7 @@ function HomeWithGrid() {
   };
 
   const processEditUser = (userNew: User) => {
-    setOverlay(true);
+    /*setOverlay(true);
     if (isEqual(user, userNew)) {
       toast.info(`No changes to save`, { position: toast.POSITION.TOP_RIGHT });
     } else {
@@ -206,7 +206,7 @@ function HomeWithGrid() {
           });
           setOverlay(false);
         });
-    }
+    }*/
   };
 
   // Hide the modal

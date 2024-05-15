@@ -33,13 +33,21 @@ function UserSearch() {
     values: UserSearchType,
     submitProps: FormikHelpers<UserSearchType>
   ) => {
-    const params: AxiosRequestConfig["params"] = {
+    /*const params: AxiosRequestConfig["params"] = {
       name: values.name,
       fromDate: DateUtil.formatDate(startDate,  Constants.date_format_ddmmyyyy),
       toDate: DateUtil.formatDate(endDate,  Constants.date_format_ddmmyyyy)
-    };
+    };*/
     setOverlay(true);
-    setTimeout(() => {
+    UserSearchService.getSearchData(values.name)
+      .then((response) => {
+        console.log(response);
+        
+        setUserData(response?.searchUsers);
+        setDisplaySearchResults(true);
+        setOverlay(false);
+      })
+    /*setTimeout(() => {
     UserSearchService.getSearchData(new URLSearchParams(params))
       .then((response) => {
         setUserData(response?.data?.users);
@@ -56,7 +64,7 @@ function UserSearch() {
           setDisplaySearchResults(false);
         }
       })
-    }, 1500);
+    }, 1500);*/
   }
 
   const clearForm = (formik: FormikHelpers<UserSearchType>) => {
