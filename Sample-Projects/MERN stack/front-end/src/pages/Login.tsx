@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { Formik, Form, FormikHelpers } from "formik";
-import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import InputComponent from "../components/formik-control/InputComponent";
-import { LoginType } from "../types/FormTypes";
-import { AuthService } from "../services/AuthService";
 import { AxiosError } from "axios";
+import { Form, Formik, FormikHelpers } from "formik";
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
 import LoadingOverlay from "react-loading-overlay-ts";
+import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import InputComponent from "../components/formik-control/InputComponent";
 import DisplayMessage from "../components/i18n/DisplayMessage";
+import { AuthService } from "../services/AuthService";
+import { LoginType } from "../types/FormTypes";
 //import { useTranslation } from "react-i18next";
-import { ResponseData } from "../types/ResponseData";
-import { useAuth } from "../components/context/Auth";
 import CryptoJS from "crypto-js";
+import { useAuth } from "../components/context/Auth";
+import { ResponseData } from "../types/ResponseData";
 
 const initialValues: LoginType = {
   username: "",

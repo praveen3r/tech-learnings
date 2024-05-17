@@ -1,14 +1,13 @@
 import { apolloClient } from "../providers/CustomApolloProvider";
 import { SEARCH_USERS } from "../queries/UserQueries";
-import { UserRes } from "../types/User";
-import httpClient from "../util/HttpClient";
+
 
 export class UserSearchService {
-  static getSearchData = async (name?: String) => {
+  static getSearchData = async (name?: String, age?: Number) => {
    
     const { data } = await apolloClient.query({
       query: SEARCH_USERS,
-      variables: { name },
+      variables: { name, age },
     });
     return data;
   };

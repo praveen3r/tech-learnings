@@ -33,8 +33,8 @@ mutation DeleteUser($id: ID!) {
 `;
 
 export const SEARCH_USERS = gql`
-  query SearchUsers($name: String) {
-    searchUsers(name: $name) {
+  query SearchUsers($name: String, $age: Int) {
+    searchUsers(user: {name: $name, age: $age}) {
       id
       sNo
       name

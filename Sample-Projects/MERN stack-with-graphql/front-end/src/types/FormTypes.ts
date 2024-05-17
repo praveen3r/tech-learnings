@@ -49,7 +49,8 @@ export type DropdownType = {
 };
 
 export type UserSearchType = {
-  name: string;
+  name?: string;
+  age?: Number;
   fromDate: Date | null;
   toDate: Date | null;
 };

@@ -23,7 +23,7 @@ type Mutation {
 
 type Query {
   users: [UserType!]!
-  searchUsers(name: String): [UserType!]!
+  searchUsers(user: UserInput): [UserType!]!
 }
 
 `;

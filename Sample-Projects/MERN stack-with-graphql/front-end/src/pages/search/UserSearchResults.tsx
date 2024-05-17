@@ -17,15 +17,19 @@ import { SearchResultsType } from "../../types/FormTypes";
 function UserSearchResults(props: SearchResultsType) {
   const { userData } = props;
   const [rowsPerPage, setRowsPerPage] = useState<number>(3);
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
 
   const handleChangePage = (event: any, newPage: number) => {
+    if(newPage ===  0){
+      newPage = 1;
+    }
     setPage(newPage);
+  
   };
 
   const handleChangeRowsPerPage = (event: any) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    setPage(1);
   };
 
 

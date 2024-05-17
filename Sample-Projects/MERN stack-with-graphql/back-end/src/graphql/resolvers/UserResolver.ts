@@ -2,6 +2,7 @@ import { DeleteResult, UpdateResult } from "mongodb";
 import UserModel from "../../model/UserModel";
 import UserInput from "../../types/UserInput";
 import User from "../../types/User";
+import UserSearch from "../../types/UserSearch";
 
 // Define resolvers for your schema
 export const userResolver = {
@@ -44,9 +45,17 @@ export const userResolver = {
       throw error;
     }
   },
-  searchUsers: async ({name}: { name: string}) => {
+  searchUsers: async ({user}: { user: UserSearch}) => {
+    const query:any = {};
     try {
-      const users: Array<User> = await UserModel.find({"name": { $regex : '.*'+ name + '.*' , $options: 'i'} })
+      if (user.name) {
+        query.name = { $regex : '.*'+ user.name + '.*' , $options: 'i'} ;
+    }
+    
+    if (user.age) {
+        query.age = user.age;
+    }
+      const users: Array<User> = await UserModel.find(query);
       if (!users) {
         return null;
       }else{

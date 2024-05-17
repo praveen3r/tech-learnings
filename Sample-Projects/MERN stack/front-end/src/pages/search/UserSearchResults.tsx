@@ -1,4 +1,3 @@
-import React, {useState} from "react";
 import {
   Paper,
   Table,
@@ -10,6 +9,7 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
+import { useState } from "react";
 import DisplayMessage from "../../components/i18n/DisplayMessage";
 import ExpandableTableRow from "../../components/table/ExpandableTableRow";
 import { SearchResultsType } from "../../types/FormTypes";
@@ -17,17 +17,19 @@ import { SearchResultsType } from "../../types/FormTypes";
 function UserSearchResults(props: SearchResultsType) {
   const { userData } = props;
   const [rowsPerPage, setRowsPerPage] = useState<number>(3);
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
 
   const handleChangePage = (event: any, newPage: number) => {
+    if (newPage === 0) {
+      newPage = 1;
+    }
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event: any) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    setPage(1);
   };
-
 
   return (
     <TableContainer component={Paper}>
@@ -73,7 +75,9 @@ function UserSearchResults(props: SearchResultsType) {
               ))
           ) : (
             <TableRow>
-              <TableCell colSpan={5} sx={{textAlign: "center"}}>No data to display</TableCell>
+              <TableCell colSpan={5} sx={{ textAlign: "center" }}>
+                No data to display
+              </TableCell>
             </TableRow>
           )}
         </TableBody>

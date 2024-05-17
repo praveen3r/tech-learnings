@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Modal, Button } from "react-bootstrap";
-import { FormModalType } from "../../types/ComponentType";
-import { User } from "../../types/User";
-import * as Yup from "yup";
-import { Formik, Form, FormikHelpers } from "formik";
-import InputComponent from "../../components/formik-control/InputComponent";
-import DropdownComponent from "../../components/formik-control/DropdownComponent";
-import { DropdownOptions } from "../../types/FormTypes";
-import DisplayMessage from "../../components/i18n/DisplayMessage";
+import { Form, Formik, FormikHelpers } from "formik";
 import { isEqual } from "lodash";
+import { useState } from "react";
+import { Button, Modal } from "react-bootstrap";
+import * as Yup from "yup";
 import InfoMessage from "../../components/display/InfoMessage";
+import DropdownComponent from "../../components/formik-control/DropdownComponent";
+import InputComponent from "../../components/formik-control/InputComponent";
+import DisplayMessage from "../../components/i18n/DisplayMessage";
+import { FormModalType } from "../../types/ComponentType";
+import { DropdownOptions } from "../../types/FormTypes";
+import { User } from "../../types/User";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -26,6 +26,8 @@ const UserDetails = ({
   confirmModal,
   data,
 }: FormModalType<User>) => {
+  const isEdit = data._id ? true : false;
+
   const [isInfo, setInfo] = useState(false);
 
   const onSubmit = (userNew: User, submitProps: FormikHelpers<User>) => {
@@ -52,7 +54,7 @@ const UserDetails = ({
       keyboard={false}
     >
       <Modal.Header closeButton onHide={() => setInfo(false)}>
-        <Modal.Title>Add User</Modal.Title>
+        <Modal.Title>{isEdit ? "MODIFY User" : "Add User"} </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>

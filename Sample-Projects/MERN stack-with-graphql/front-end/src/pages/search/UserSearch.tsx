@@ -5,18 +5,14 @@ import InputComponent from "../../components/formik-control/InputComponent";
 import { Button } from "react-bootstrap";
 import DisplayMessage from "../../components/i18n/DisplayMessage";
 import DateRangePickerComponent from "../../components/formik-control/DateRangePickerComponent";
-
 import UserSearchResults from "./UserSearchResults";
 import { User } from "../../types/User";
-import Constants from "../../util/Constants";
-import { MessageUtils } from "../../util/MessageUtils";
-import { AxiosError, AxiosRequestConfig } from "axios";
 import { DateUtil } from "../../util/DateUtil";
 import { UserSearchService } from "../../services/UserSearchService";
 import LoadingOverlay from "react-loading-overlay-ts";
 
+
 const initialValues: UserSearchType = {
-  name: "",
   fromDate: null,
   toDate: null,
 };
@@ -33,38 +29,19 @@ function UserSearch() {
     values: UserSearchType,
     submitProps: FormikHelpers<UserSearchType>
   ) => {
-    /*const params: AxiosRequestConfig["params"] = {
-      name: values.name,
-      fromDate: DateUtil.formatDate(startDate,  Constants.date_format_ddmmyyyy),
-      toDate: DateUtil.formatDate(endDate,  Constants.date_format_ddmmyyyy)
-    };*/
+    
     setOverlay(true);
-    UserSearchService.getSearchData(values.name)
+    let age = values.age;
+    if(age){
+      age = Number(values.age);
+    }
+    UserSearchService.getSearchData(values.name, age)
       .then((response) => {
-        console.log(response);
-        
         setUserData(response?.searchUsers);
         setDisplaySearchResults(true);
         setOverlay(false);
       })
-    /*setTimeout(() => {
-    UserSearchService.getSearchData(new URLSearchParams(params))
-      .then((response) => {
-        setUserData(response?.data?.users);
-        setDisplaySearchResults(true);
-        setOverlay(false);
-      })
-      .catch((error: AxiosError) => {
-        const status = error.response?.status;
-        if (status) {
-          if (!Constants.global_error_codes.includes(status)) {
-            MessageUtils.showError(error);
-          }
-          setOverlay(false);
-          setDisplaySearchResults(false);
-        }
-      })
-    }, 1500);*/
+    
   }
 
   const clearForm = (formik: FormikHelpers<UserSearchType>) => {
@@ -88,6 +65,15 @@ function UserSearch() {
                   type="text"
                   id="name"
                   name="name"
+                  maxLength="15"
+                  dataType="text"
+                />
+
+              <InputComponent
+                  label="age"
+                  type="text"
+                  id="age"
+                  name="age"
                   maxLength="15"
                   dataType="text"
                 />

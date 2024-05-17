@@ -37,7 +37,7 @@ function HomeWithGrid() {
   const [userData, setUserData] = useState<User[] | null>(null);
   const [orderDirection, setOrderDirection] = useState<string>("asc");
   const [rowsPerPage, setRowsPerPage] = useState<number>(3);
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
   const [id, setId] = useState<string>("");
   const [user, setUser] = useState<User>(defaultUser);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
@@ -57,26 +57,7 @@ function HomeWithGrid() {
     const response = await UserService.getUsers();
     setUserData(response.users);
     setLoading(false);
-          setOverlay(false);
     
-    /*setTimeout(() => {
-      UserService.getUsers()
-        .then((response) => {
-          setUserData(response?.data?.users);
-          setLoading(false);
-          setOverlay(false);
-        })
-        .catch((error: AxiosError) => {
-          const status = error.response?.status;
-          if (status) {
-            if (!Constants.global_error_codes.includes(status)) {
-              MessageUtils.showError(error);
-            }
-            setLoading(false);
-            setOverlay(false);
-          }
-        });
-    }, 1500);*/
   };
 
   const sortArray = () => {
@@ -98,12 +79,18 @@ function HomeWithGrid() {
   };
 
   const handleChangePage = (event: any, newPage: number) => {
+    console.log(event);
+    
+    console.log(`coming here`);
+    if(newPage === 0){
+      newPage = 1;
+    }
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event: any) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    setPage(1);
   };
 
   const onClickDelete = (user: User) => {
