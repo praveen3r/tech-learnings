@@ -24,6 +24,7 @@ import { User } from "../../types/User";
 import Constants from "../../util/Constants";
 import { MessageUtils } from "../../util/MessageUtils";
 import UserDetails from "./UserDetails";
+import { GeneralUtil } from "../../util/GeneralUtil";
 
 let defaultUser: User = {
   sNo: 0,
@@ -53,10 +54,19 @@ function HomeWithGrid() {
     fetchUsers();
   }, []);
 
-  const fetchUsers = async () => {
-    const response = await UserService.getUsers();
-    setUserData(response.users);
+  const fetchUsers = () => {
+    
+    UserService.getUsers().then(response => {
+      if(response && response.users){
+      setUserData(response.users);
+      
+      }
+      
+    }).catch(error => {
+      MessageUtils.handleError(error);
+    })
     setLoading(false);
+    setOverlay(false);
     
   };
 
@@ -81,7 +91,6 @@ function HomeWithGrid() {
   const handleChangePage = (event: any, newPage: number) => {
     console.log(event);
     
-    console.log(`coming here`);
     if(newPage === 0){
       newPage = 1;
     }
@@ -106,7 +115,10 @@ function HomeWithGrid() {
     .then((response) => {
       MessageUtils.showDeleteSuccessMessage("User");
       fetchUsers();
-    });
+    }).catch(error => {
+      MessageUtils.handleError(error);    
+      setOverlay(false);
+    })
     
   };
 
@@ -124,12 +136,7 @@ function HomeWithGrid() {
         setUserDetails(true);
       })
       .catch((error: AxiosError) => {
-        const status = error.response?.status;
-        if (status) {
-          if (!Constants.global_error_codes.includes(status)) {
-            MessageUtils.showError(error);
-          }
-        }
+        MessageUtils.handleError(error);
       });
   };
 
@@ -155,8 +162,11 @@ function HomeWithGrid() {
     UserService.addUser(userNew)
     .then((response) => {
       MessageUtils.showAddSuccessMessage("User");
-      //setOverlay(false);
       fetchUsers();
+    }).catch(error => {
+      MessageUtils.handleError(error);
+      setOverlay(false);
+        
     });
     
     
@@ -168,7 +178,10 @@ function HomeWithGrid() {
     .then((response) => {
       MessageUtils.showEditSuccessMessage("User");
       fetchUsers();
-      //setOverlay(false);
+    }).catch(error => {
+      MessageUtils.handleError(error);
+      setOverlay(false);
+        
     });
     
 

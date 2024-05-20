@@ -5,10 +5,17 @@ import httpClient from "../util/HttpClient";
 
 export class UserService {
   static getUsers = async () => {
-    const { data } = await apolloClient.query({
-      query: FETCH_USERS,
-    });
-    return data;
+    try {
+      const { data, errors } = await apolloClient.query({
+        query: FETCH_USERS,
+      });
+      if(errors){
+        throw errors;
+      }
+      return data;
+    }catch (networkError) {
+      throw networkError;
+    }
   };
   
 

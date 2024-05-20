@@ -1,6 +1,8 @@
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { ResponseData } from "../types/ResponseData";
+import { GeneralUtil } from "./GeneralUtil";
+import Constants from "./Constants";
 
 export class MessageUtils {
 
@@ -39,5 +41,12 @@ export class MessageUtils {
     toast.error(message, {
       position: toast.POSITION.TOP_RIGHT,
     });
+  };
+
+  static handleError = (error: any) => {
+    const errorObj = GeneralUtil.getErrorValues(error);
+    if (!Constants.global_error_codes.includes(errorObj.statusCode!)) {
+      MessageUtils.showErrorMessage(errorObj.errorMessage!);
+    }
   };
 }
