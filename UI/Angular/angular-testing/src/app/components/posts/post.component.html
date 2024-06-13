@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User ID</th>
+      <th>Title</th>
+      <th>Body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of posts">
+      <td>{{ row.userId }}</td>
+      <td>{{ row.id }}</td>
+      <td>{{ row.title }}</td>
+      <td>{{ row.body }}</td>
+    </tr>
+  </tbody>
+</table>
