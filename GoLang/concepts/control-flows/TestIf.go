@@ -39,6 +39,9 @@ func main() {
 	} else {
 		fmt.Println("A is not equal to C")
 	}
-	
+
+	if num := 3; num < 10 {
+		fmt.Println("Num is less than 10")
+	}
 
 }

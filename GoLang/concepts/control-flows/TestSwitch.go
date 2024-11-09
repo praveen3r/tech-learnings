@@ -11,6 +11,7 @@ func main() {
 		fmt.Println("1")
 	case 2:
 		fmt.Println("2")
+		fallthrough
 	default:
 		fmt.Println("Default")
 	}

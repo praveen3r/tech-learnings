@@ -1,0 +1,5 @@
+go env
+go mod init test.com/testmodule
+go get -u github.com/gorilla/mux
+go mod tidy
+go build

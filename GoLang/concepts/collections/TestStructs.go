@@ -24,6 +24,7 @@ func main() {
 	}
 
 	fmt.Println("the value of aCelebrity is ", aCelebrity)
+	fmt.Printf("the value of aCelebrity is %+v\n", aCelebrity)
 	fmt.Println("the value of aCelebrity is ", aCelebrity.age)
 	fmt.Println("the value of aCelebrity is ", aCelebrity.movies)
 

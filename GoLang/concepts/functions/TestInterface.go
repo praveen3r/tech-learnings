@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-type Vehicle interface {
+type Vehicle INTERFACE {
 	display() string
 }
 
