@@ -87,3 +87,27 @@ def function5(x):
 
 print(function5("test1"))
 print(function5("test2"))
+
+"""
+Deafult parameters Values
+
+"""
+
+def function6(x=20):
+    print("the value of x is",x)
+
+
+function6(22)
+function6()
+
+"""
+one or more Values with astericks
+
+"""
+
+def function7(*marks):
+    print(marks)
+
+
+function7(22)
+function7(22, 34, 43)

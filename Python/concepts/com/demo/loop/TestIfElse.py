@@ -47,3 +47,15 @@ If you have only one statement to execute, you can put it on the same line as th
 
 if a > b: print("a is greater than b")
 
+"""
+nested if
+"""
+name = "animal"
+name1 = "dog"
+if name=="animal":
+    if name1=="dog":
+        print("Dog is an animal")
+    print("it is animal")
+else:
+    print("it is not animal")
+

@@ -8,6 +8,8 @@ print('Hello1')
 a = "Hello2"
 print(a)
 
+print(a * 10) # shortcut to print a 10 times
+
 # You can assign a multiline string to a variable by using three quotes:
 
 a = """Lorem ipsum dolor sit amet,

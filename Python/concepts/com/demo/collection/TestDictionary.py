@@ -183,3 +183,37 @@ x = dict(brand="Ford", model="Mustang", year=1964)
 # note that keywords are not string literals
 # note the use of equals rather than colon for the assignment
 print(x)
+
+# A simple nested dictionary
+students = {
+    "student1": {"name": "Alice", "age": 20, "grade": "A"},
+    "student2": {"name": "Bob", "age": 22, "grade": "B"},
+    "student3": {"name": "Charlie", "age": 19, "grade": "C"},
+}
+
+# You can access elements in a nested dictionary using multiple keys:
+
+# Access Bob's grade
+print(students["student2"]["grade"])  # Output: B
+
+# Access Alice's age
+print(students["student1"]["age"])  # Output: 20
+
+# You can modify values by referencing the specific keys:
+
+students["student3"]["grade"] = "B+"
+print(students["student3"])  # Output: {'name': 'Charlie', 'age': 19, 'grade': 'B+'}
+
+# To add a new dictionary or key-value pair:
+
+students["student4"] = {"name": "Diana", "age": 21, "grade": "A"}
+print(students["student4"])  # Output: {'name': 'Diana', 'age': 21, 'grade': 'A'}
+
+# Iterating Over a Nested Dictionary
+
+# Loop through the outer dictionary
+for student_id, details in students.items():
+    print(f"{student_id}:")
+    # Loop through the inner dictionary
+    for key, value in details.items():
+        print(f"  {key}: {value}")
