@@ -1,0 +1,39 @@
+1. Using LIMIT (Standard Usage)
+Limits the number of rows returned.
+
+SELECT * FROM employees LIMIT 10;
+
+-------------------------------------------------------------------------------------------
+
+2. Rename Table in Hive
+To rename an existing table in Hive, use the ALTER TABLE ... RENAME TO command.
+
+Syntax:
+ALTER TABLE old_table_name RENAME TO new_table_name;
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+2. Create Table As (CTAS) in Hive
+The CREATE TABLE AS SELECT (CTAS) statement creates a new table from an existing table with the results of a query.
+
+Syntax:
+
+CREATE TABLE new_table_name AS
+SELECT column1, column2, ...
+FROM existing_table
+WHERE condition;
+
+Example:
+
+CREATE TABLE high_salary_employees AS
+SELECT employee_id, name, salary
+FROM employees
+WHERE salary > 50000;
+🔹 This creates a new table high_salary_employees with employees earning more than 50,000.
+
+Key Notes About CTAS:
+The new table is created as a managed table (unless an external location is specified).
+The new table does not inherit constraints, partitions, or primary keys from the original table.
+CTAS cannot be used with partitioned tables directly. Instead, use INSERT INTO after creating a partitioned table.
+
+-----------------------------------------------------------------------------------------------------------------------------------

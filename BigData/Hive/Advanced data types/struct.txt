@@ -1,0 +1,27 @@
+CREATE TABLE employee_details (
+    id INT,
+    name STRING,
+    address STRUCT<street:STRING, city:STRING, zip:INT>
+)
+STORED AS ORC;
+
+=========================================================================================================================
+
+INSERT INTO employee_details VALUES (1, 'Alice', NAMED_STRUCT('street', '5th Ave', 'city', 'New York', 'zip', 10001));
+INSERT INTO employee_details VALUES (2, 'Bob', NAMED_STRUCT('street', 'Main St', 'city', 'Los Angeles', 'zip', 90001));
+
+=========================================================================================================================
+
+SELECT * FROM employee_details;
+
+1   Alice   {"street":"5th Ave", "city":"New York", "zip":10001}
+2   Bob     {"street":"Main St", "city":"Los Angeles", "zip":90001}
+
+=========================================================================================================================
+
+SELECT id, name, address.city AS city FROM employee_details;
+
+1   Alice   New York
+2   Bob     Los Angeles
+
+=========================================================================================================================

@@ -1,0 +1,42 @@
+CREATE TABLE student_details (
+    id INT,
+    name STRING,
+    subjects ARRAY<STRING>
+)
+STORED AS ORC;
+
+==========================================================================================================
+
+INSERT INTO student_details VALUES (1, 'John Doe', ARRAY('Math', 'Science', 'English'));
+INSERT INTO student_details VALUES (2, 'Jane Smith', ARRAY('History', 'Geography'));
+
+==========================================================================================================
+
+SELECT * FROM student_details;
+
+1   John Doe    ["Math", "Science", "English"]
+2   Jane Smith  ["History", "Geography"]
+
+==========================================================================================================
+
+SELECT name, subjects[0] AS first_subject FROM student_details;
+
+John Doe    Math
+Jane Smith  History
+
+==========================================================================================================
+
+SELECT id, name, subject 
+FROM student_details 
+LATERAL VIEW EXPLODE(subjects) t AS subject;
+
+1   John Doe    Math
+1   John Doe    Science
+1   John Doe    English
+2   Jane Smith  History
+2   Jane Smith  Geography
+
+==========================================================================================================
+
+
+

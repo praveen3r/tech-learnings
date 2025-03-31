@@ -1,0 +1,114 @@
+==============================================================================================================
+
+1. size(array)
+
+Returns the size of an array
+
+Example:
+
+SELECT size(array(10, 20, 30));	
+
+Output:
+
+3
+
+
+==============================================================================================================
+
+2. array_contains(array, value)
+
+Checks if an array contains a value	
+
+Example:
+
+SELECT array_contains(array('apple', 'banana'), 'banana');	
+
+Output:
+
+true
+==============================================================================================================
+
+3. sort_array(array)	
+
+Sorts an array in ascending order	
+
+Example:
+
+SELECT sort_array(array(3, 1, 2));	
+
+Output:
+
+[1,2,3]
+
+==============================================================================================================
+
+4. reverse(array)	
+
+Reverses an array	
+
+Example:
+
+SELECT reverse(array(1, 2, 3));	
+
+Output:
+
+[3,2,1]
+
+
+==============================================================================================================
+
+5. array_distinct(array)	
+
+Removes duplicates	
+
+Example:
+
+SELECT array_distinct(array(1, 2, 2, 3));	
+
+Output:
+
+[1,2,3]
+
+==============================================================================================================
+
+6. array_union(a, b)	
+
+Merges two arrays (removes duplicates)	
+
+Example:
+
+SELECT array_union(array(1, 2), array(2, 3));	
+
+Output:
+
+[1,2,3]
+
+
+==============================================================================================================
+
+7. array_intersect(a, b)	
+
+Returns common elements from both arrays	
+
+Example:
+
+SELECT array_intersect(array(1,2,3), array(2,3,4));	
+
+Output:
+
+[2,3]
+
+==============================================================================================================
+
+8. array_except(a, b)	
+
+Returns elements in A but not in B	
+
+Example:
+
+SELECT array_except(array(1,2,3), array(2,3,4));	
+
+Output:
+
+[1]
+==============================================================================================================

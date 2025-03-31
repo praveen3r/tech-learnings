@@ -1,0 +1,83 @@
+================================================================================================================================================
+
+1. Current Date & Timestamp
+
+Function	  | Description	                       | Example
+-------------------------------------------------------------------------------------------------------------
+CURRENT_DATE	  | Returns the current date	       | SELECT CURRENT_DATE; → 2025-03-12
+CURRENT_TIMESTAMP | Returns the current date & time    | SELECT CURRENT_TIMESTAMP; → 2025-03-12 14:30:45.123
+UNIX_TIMESTAMP()  | Returns the current UNIX timestamp | SELECT UNIX_TIMESTAMP(); → 1710247845
+
+================================================================================================================================================
+
+2. Converting Strings & Timestamps
+
+Function	                      | Description	                         | Example
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+UNIX_TIMESTAMP('YYYY-MM-DD HH:MI:SS') | Converts string to UNIX timestamp        | SELECT UNIX_TIMESTAMP('2025-03-12 										                                                 | 14:30:00'); → 1710247800
+
+FROM_UNIXTIME(epoch, 'format')	      | Converts UNIX timestamp to readable date | SELECT FROM_UNIXTIME(1710247800, 'yyyy-										                                         | MM-dd HH:mm:ss'); → 2025-03-12 14:30:00
+
+TO_DATE(timestamp)	              | Extracts date from timestamp	         | SELECT TO_DATE('2025-03-12 14:30:00'); → 2025-03-12
+
+================================================================================================================================================
+
+3. Extracting Date Components
+
+Function	 | Description	   | Example
+------------------------------------------------------------------------------------------------
+YEAR(date)	 | Extracts year   | SELECT YEAR('2025-03-12'); → 2025
+MONTH(date)	 | Extracts month  | SELECT MONTH('2025-03-12'); → 3
+DAY(date)	 | Extracts day	   | SELECT DAY('2025-03-12'); → 12
+HOUR(timestamp)	 | Extracts hour   | SELECT HOUR('2025-03-12 14:30:00'); → 14
+MINUTE(timestamp)| Extracts minute | SELECT MINUTE('2025-03-12 14:30:00'); → 30
+
+==============================================================================================================================================
+
+4. Adding & Subtracting Time
+
+Function	      | Description     |	Example
+------------------------------------------------------------------------------------------------
+DATE_ADD(date, days)  |	Adds days	| SELECT DATE_ADD('2025-03-12', 5); → 2025-03-17
+DATE_SUB(date, days)  |	Subtracts days	| SELECT DATE_SUB('2025-03-12', 5); → 2025-03-07
+ADD_MONTHS(date, n)   |	Adds months	| SELECT ADD_MONTHS('2025-03-12', 2); → 2025-05-12
+==============================================================================================================================================
+
+5. Date Difference & Formatting
+
+Function	                     | Description	     | Example
+------------------------------------------------------------------------------------------------------------------------------------
+DATEDIFF(end_date, start_date)	     | Difference in days    |	SELECT DATEDIFF('2025-03-15', '2025-03-12'); → 3
+MONTHS_BETWEEN(end_date, start_date) | Difference in months  |	SELECT MONTHS_BETWEEN('2025-06-12', '2025-03-12'); → 3.0
+DATE_FORMAT(date, 'format')	     | Formats date	     |  SELECT DATE_FORMAT('2025-03-12', 'yyyy/MM/dd'); → 2025/03/12
+
+
+===========================================================================================================================================
+
+6. Example: Working with Dates in a Table
+
+CREATE TABLE employees (
+    id INT,
+    name STRING,
+    join_date STRING
+)
+STORED AS ORC;
+
+Insert data
+
+INSERT INTO employees VALUES 
+(1, 'Alice', '2024-05-10'),
+(2, 'Bob', '2023-12-01'),
+(3, 'Charlie', '2022-07-20');
+
+===========================================================================================================================================
+
+Query: Find Employees Who Joined More Than a Year Ago
+
+SELECT id, name, join_date
+FROM employees
+WHERE DATEDIFF(CURRENT_DATE, join_date) > 365;
+
+
+============================================================================================================================================

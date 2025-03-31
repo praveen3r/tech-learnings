@@ -1,0 +1,86 @@
+==========================================================================================================
+
+
+1. Rename Table
+
+ALTER TABLE old_table_name RENAME TO new_table_name;
+
+Ex: ALTER TABLE employee RENAME TO employee_details;
+
+
+==========================================================================================================
+
+2. Add a New Column
+
+ALTER TABLE table_name ADD COLUMNS (column_name DATA_TYPE);
+
+Ex: ALTER TABLE employee ADD COLUMNS (email STRING);
+
+==========================================================================================================
+
+3. Change Column Name and Data Type
+
+ALTER TABLE employee CHANGE COLUMN salary emp_salary FLOAT;
+
+Ex: ALTER TABLE employee CHANGE COLUMN salary emp_salary FLOAT;
+
+==========================================================================================================
+
+4. Drop a Column (Not Directly Supported)
+Hive does not support dropping a column directly, but you can recreate the table without that column:
+
+Create a new table without the column.
+Copy data from the old table to the new table.
+Drop the old table and rename the new table.
+
+==========================================================================================================
+
+5. Add a Partition
+
+ALTER TABLE table_name ADD PARTITION (partition_column=value);
+
+Ex: ALTER TABLE employee ADD PARTITION (department='HR');
+
+
+==========================================================================================================
+
+6. Drop a Partition - This removes only the partitioned data, not the entire table.
+
+ALTER TABLE table_name DROP PARTITION (partition_column=value);
+
+Ex: ALTER TABLE employee DROP PARTITION (department='HR');
+
+==========================================================================================================
+
+7. Change Table Properties
+
+ALTER TABLE table_name SET TBLPROPERTIES ('property_name'='value');
+
+Ex: ALTER TABLE employee SET TBLPROPERTIES ('comment'='Employee details table');
+
+==========================================================================================================
+
+8. Change Table Format
+
+ALTER TABLE table_name SET FILEFORMAT file_format;
+
+Ex: ALTER TABLE employee SET FILEFORMAT PARQUET;
+
+ Table format must match existing data format, or queries may fail.
+
+==========================================================================================================
+
+9. Remove columns
+
+ALTER TABLE employees REPLACE COLUMNS (
+    id INT,
+    name STRING,
+    department STRING
+);
+
+❗ Warning: This only updates the schema and does not physically delete data.
+
+==========================================================================================================
+
+
+

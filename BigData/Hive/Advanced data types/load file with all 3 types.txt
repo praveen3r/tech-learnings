@@ -1,0 +1,39 @@
+==========================================================================================================
+
+CREATE TABLE employee_data (
+    id INT,
+    name STRING,
+    skills ARRAY<STRING>,
+    experience MAP<STRING, INT>,
+    address STRUCT<street:STRING, city:STRING, zip:INT>
+)
+ROW FORMAT DELIMITED  
+FIELDS TERMINATED BY ','  
+COLLECTION ITEMS TERMINATED BY ';'  
+MAP KEYS TERMINATED BY ':'  
+STORED AS TEXTFILE;
+
+FIELDS TERMINATED BY ',' → Separates main columns in the file.
+COLLECTION ITEMS TERMINATED BY ';' → Separates multiple values in an ARRAY or MAP.
+MAP KEYS TERMINATED BY ':' → Separates key-value pairs inside a MAP.
+
+==========================================================================================================
+sample file
+
+1,Alice,Java;Python;SQL,Java:5;Python:3;SQL:4,5th Ave:New York:10001
+2,Bob,C++;Go,C++:2;Go:4,Main St:Los Angeles:90001
+3,Charlie,Python;Scala,Python:6;Scala:2,Elm St:Chicago:60601
+
+==========================================================================================================
+
+LOAD DATA LOCAL INPATH '/path/to/employee_data.txt' INTO TABLE employee_data;
+
+==========================================================================================================
+
+SELECT * FROM employee_data;
+
+1   Alice   ["Java", "Python", "SQL"]   {"Java":5, "Python":3, "SQL":4}   {"street":"5th Ave", "city":"New York", "zip":10001}
+2   Bob     ["C++", "Go"]               {"C++":2, "Go":4}                 {"street":"Main St", "city":"Los Angeles", "zip":90001}
+3   Charlie ["Python", "Scala"]         {"Python":6, "Scala":2}           {"street":"Elm St", "city":"Chicago", "zip":60601}
+
+==========================================================================================================

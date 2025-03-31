@@ -1,0 +1,67 @@
+==========================================================================================================
+
+1. Run HDFS Commands in Hive
+
+You can execute HDFS commands inside Hive by using:
+
+dfs <hadoop-command>;
+
+==========================================================================================================
+
+Example: Listing Files in HDFS
+
+dfs -ls /user/hive/warehouse;
+
+==========================================================================================================
+
+Example: Checking HDFS Disk Usage
+
+dfs -du -h /user/hive/warehouse;
+
+==========================================================================================================
+
+Example: Viewing File Contents
+
+dfs -cat /user/hive/warehouse/myfile.txt;
+
+==========================================================================================================
+
+Example: Deleting a File
+
+dfs -rm /user/hive/warehouse/myfile.txt;
+
+==========================================================================================================
+
+Example: Moving a File
+
+dfs -mv /user/hive/warehouse/myfile.txt /user/hive/backup/;
+
+==========================================================================================================
+
+2. Running Hadoop mapred Commands in Hive
+You can also run Hadoop MapReduce commands inside Hive using ! (exclamation mark) 
+
+==========================================================================================================
+
+Example
+
+!hadoop fs -ls /user/hive/warehouse;
+
+==========================================================================================================
+
+4. Running System (!) Commands in Hive
+
+Hive also allows system shell commands using !.
+==========================================================================================================
+
+Example: Checking Free Disk Space
+
+!df -h;
+
+==========================================================================================================
+
+Example: Viewing Running Processes
+
+!ps -ef | grep hive;
+
+==========================================================================================================

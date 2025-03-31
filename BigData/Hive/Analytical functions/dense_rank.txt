@@ -1,0 +1,73 @@
+==========================================================================================================
+The DENSE_RANK() function in Hive is a window function that assigns ranks to rows without skipping numbers in case of ties (unlike RANK()).
+
+Syntax
+
+DENSE_RANK() OVER (PARTITION BY column ORDER BY column)
+
+==========================================================================================================
+
+Example:
+
+CREATE TABLE employee (
+    id INT,
+    name STRING,
+    department STRING,
+    salary FLOAT
+)
+STORED AS ORC;
+
+==========================================================================================================
+
+Insert Sample Data
+
+INSERT INTO employee VALUES 
+(1, 'Alice', 'HR', 50000),
+(2, 'Bob', 'IT', 60000),
+(3, 'Charlie', 'IT', 70000),
+(4, 'David', 'HR', 55000),
+(5, 'Eve', 'IT', 80000),
+(6, 'Frank', 'IT', 70000);
+
+==========================================================================================================
+
+Using DENSE_RANK() Without Partitioning
+
+SELECT id, name, department, salary,
+       DENSE_RANK() OVER (ORDER BY salary DESC) AS rank
+FROM employee;
+
+Output
+
+id  | name    | department | salary  | rank
+------------------------------------------
+5   | Eve     | IT        | 80000   | 1
+3   | Charlie | IT        | 70000   | 2
+6   | Frank   | IT        | 70000   | 2
+2   | Bob     | IT        | 60000   | 3
+4   | David   | HR        | 55000   | 4
+1   | Alice   | HR        | 50000   | 5
+
+==========================================================================================================
+
+Using DENSE_RANK() Within Each Department (PARTITION BY)
+
+SELECT id, name, department, salary,
+       DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS rank
+FROM employee;
+
+Output
+
+id  | name    | department | salary  | rank
+------------------------------------------
+4   | David   | HR        | 55000   | 1
+1   | Alice   | HR        | 50000   | 2
+5   | Eve     | IT        | 80000   | 1
+3   | Charlie | IT        | 70000   | 2
+6   | Frank   | IT        | 70000   | 3
+2   | Bob     | IT        | 60000   | 4
+
+==========================================================================================================
+==========================================================================================================
+==========================================================================================================
+==========================================================================================================

@@ -1,0 +1,85 @@
+==============================================================================================================
+
+1. Storing JSON Data in Hive
+
+Creating a Table for JSON Data
+
+CREATE TABLE employees_json (
+    json_string STRING
+) STORED AS TEXTFILE;
+
+==============================================================================================================
+
+Inserting JSON Data
+
+INSERT INTO employees_json VALUES
+('{"id": 1, "name": "Alice", "salary": 60000}'),
+('{"id": 2, "name": "Bob", "salary": 50000}');
+
+==============================================================================================================
+
+2. Extracting Data from JSON
+
+Using get_json_object()
+
+SELECT get_json_object(json_string, '$.salary') AS salary 
+FROM employees_json;
+
+Extracts the salary from JSON.
+==============================================================================================================
+
+Using json_tuple()
+
+Extracts multiple fields at once.
+
+SELECT json_tuple(json_string, 'id', 'name') AS (id, name) 
+FROM employees_json;
+
+Returns two columns: id and name.
+
+
+==============================================================================================================
+
+3. Handling JSON Arrays
+
+If your JSON contains an array, use LATERAL VIEW explode().
+
+Example JSON Array:
+
+{
+  "id": 1,
+  "name": "Alice",
+  "skills": ["Java", "SQL", "Hive"]
+}
+
+
+==============================================================================================================
+
+Query to Extract Array Elements
+
+SELECT e.id, s.skill
+FROM employee_json e
+LATERAL VIEW explode(get_json_object(json_string, '$.skills')) s AS skill;
+
+Converts JSON array into multiple rows.
+
+==============================================================================================================
+
+4. Storing JSON Data in Hive Table (Recommended Approach)
+
+Instead of storing JSON as a single string, use a structured table with serde:
+
+CREATE TABLE employee_json_table (
+    id INT,
+    name STRING,
+    salary DOUBLE
+)
+ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
+STORED AS TEXTFILE;
+
+This allows direct querying without needing get_json_object().
+
+==============================================================================================================
+==============================================================================================================
+==============================================================================================================
+==============================================================================================================

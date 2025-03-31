@@ -1,0 +1,3 @@
+aggregate functions in depth
+distribute by and clustered by
+sub partition

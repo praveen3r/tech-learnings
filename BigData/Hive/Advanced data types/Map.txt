@@ -1,0 +1,40 @@
+CREATE TABLE employee_details (
+    id INT,
+    name STRING,
+    skills MAP<STRING, INT>
+)
+STORED AS ORC;
+
+==========================================================================================================
+
+INSERT INTO employee_details VALUES (1, 'Alice', MAP('Java', 5, 'Python', 3, 'SQL', 4));
+INSERT INTO employee_details VALUES (2, 'Bob', MAP('C++', 2, 'Go', 4, 'SQL', 5));
+
+==========================================================================================================
+
+SELECT * FROM employee_details;
+
+1   Alice   {"Java":5, "Python":3, "SQL":4}
+2   Bob     {"C++":2, "Go":4, "SQL":5}
+
+==========================================================================================================
+
+SELECT id, name, skills["Java"] AS java_experience FROM employee_details;
+
+1   Alice   5
+2   Bob     NULL
+
+==========================================================================================================
+
+SELECT id, name, skill, experience
+FROM employee_details 
+LATERAL VIEW EXPLODE(skills) t AS skill, experience;
+
+1   Alice   Java      5
+1   Alice   Python    3
+1   Alice   SQL       4
+2   Bob     C++       2
+2   Bob     Go        4
+2   Bob     SQL       5
+
+

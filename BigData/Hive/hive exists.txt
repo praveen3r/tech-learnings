@@ -1,0 +1,60 @@
+==============================================================================================================
+The EXISTS operator in Hive is used in subqueries to check whether a subquery returns any rows.
+It is commonly used in WHERE conditions to filter data based on the existence of related records.
+==============================================================================================================
+
+Syntax
+
+SELECT column_list 
+FROM main_table 
+WHERE EXISTS (
+    SELECT 1 FROM sub_table WHERE condition
+);
+
+ The subquery returns at least one row, and EXISTS evaluates to TRUE.
+
+ If the subquery returns no rows, EXISTS evaluates to FALSE.
+==============================================================================================================
+
+Example
+
+Get all employees who have at least one project assigned.
+
+SELECT e.id, e.name 
+FROM employees e
+WHERE EXISTS (
+    SELECT 1 FROM projects p WHERE p.emp_id = e.id
+);
+
+Returns employees who exist in the projects table.
+
+==============================================================================================================
+
+NOT EXISTS Example
+
+If you want employees who do not have projects, use NOT EXISTS:
+
+SELECT e.id, e.name 
+FROM employees e
+WHERE NOT EXISTS (
+    SELECT 1 FROM projects p WHERE p.emp_id = e.id
+);
+
+Returns employees without any assigned projects.
+
+==============================================================================================================
+
+EXISTS vs. IN Example
+
+-- Using EXISTS
+SELECT * FROM employees e
+WHERE EXISTS (SELECT 1 FROM projects p WHERE p.emp_id = e.id);
+
+-- Using IN (Similar but different execution)
+SELECT * FROM employees e
+WHERE e.id IN (SELECT emp_id FROM projects);
+
+EXISTS is often faster for large datasets.
+IN is better for small lists.
+
+==============================================================================================================

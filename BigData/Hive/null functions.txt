@@ -1,0 +1,71 @@
+==============================================================================================================
+1. Checking for NULL Values
+
+IS NULL & IS NOT NULL
+
+Used to check whether a column contains NULL values.
+
+==============================================================================================================
+
+SELECT * FROM employees WHERE salary IS NULL;
+
+Returns rows where salary is NULL.
+
+==============================================================================================================
+
+SELECT * FROM employees WHERE salary IS NOT NULL;
+
+Returns rows where salary is NOT NULL.
+
+==============================================================================================================
+
+2.Using NVL() to Replace NULLs
+
+SELECT name, NVL(department, 'Unknown') AS department 
+FROM employees;
+
+Replaces NULL department with 'Unknown'.
+==============================================================================================================
+
+3. Using COALESCE() for Multiple Values
+
+SELECT id, COALESCE(phone, email, 'No Contact') AS contact 
+FROM customers;
+
+Returns phone if available, else email, else 'No Contact'.
+==============================================================================================================
+
+4. nvl2(value, value_if_not_null, value_if_null)
+
+Returns different values for NULL & non-NULL
+
+Example:
+
+SELECT nvl2(NULL, 'Not Null', 'Is Null');
+
+output:
+
+'Is Null'
+
+
+==============================================================================================================
+
+5. Using IF() for Conditional Replacement
+
+SELECT id, if(salary IS NULL, 'No Salary Data', salary) AS salary_status 
+FROM employees;
+
+Shows 'No Salary Data' if salary is NULL.
+
+==============================================================================================================
+
+6. NULL Behavior in Hive
+
+NULL values do not participate in aggregations (SUM, AVG, etc.) unless handled explicitly.
+
+Comparing NULL with = or != does not work → Use IS NULL or IS NOT NULL.
+
+Functions like nvl(), coalesce(), and if() help in handling NULL values efficiently.
+
+==============================================================================================================
+==============================================================================================================

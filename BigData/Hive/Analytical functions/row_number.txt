@@ -1,0 +1,88 @@
+==========================================================================================================
+
+The ROW_NUMBER() function in Hive is a window function that assigns a unique sequential number to each row within a partition of a dataset, based on the specified order.
+
+Syntax 
+
+ROW_NUMBER() OVER (PARTITION BY column ORDER BY column)
+
+==========================================================================================================
+
+Example
+
+CREATE TABLE employee (
+    id INT,
+    name STRING,
+    department STRING,
+    salary FLOAT
+)
+STORED AS ORC;
+
+==========================================================================================================
+
+Insert Sample Data
+
+INSERT INTO employee VALUES 
+(1, 'Alice', 'HR', 50000),
+(2, 'Bob', 'IT', 60000),
+(3, 'Charlie', 'IT', 70000),
+(4, 'David', 'HR', 55000),
+(5, 'Eve', 'IT', 80000);
+
+
+==========================================================================================================
+
+Assign Row Numbers Based on Salary (Without Partitioning)
+
+SELECT id, name, department, salary,
+       ROW_NUMBER() OVER (ORDER BY salary DESC) AS row_num
+FROM employee;
+
+Output
+
+id  | name    | department | salary  | row_num
+------------------------------------------------
+5   | Eve     | IT        | 80000   | 1
+3   | Charlie | IT        | 70000   | 2
+2   | Bob     | IT        | 60000   | 3
+4   | David   | HR        | 55000   | 4
+1   | Alice   | HR        | 50000   | 5
+
+
+==========================================================================================================
+
+Assign Row Numbers Within Each Department (PARTITION BY)
+
+SELECT id, name, department, salary,
+       ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) AS row_num
+FROM employee;
+
+Output
+
+id  | name    | department | salary  | row_num
+------------------------------------------------
+4   | David   | HR        | 55000   | 1
+1   | Alice   | HR        | 50000   | 2
+5   | Eve     | IT        | 80000   | 1
+3   | Charlie | IT        | 70000   | 2
+2   | Bob     | IT        | 60000   | 3
+
+==========================================================================================================
+
+Using ROW_NUMBER() to Get the Highest Salary per Department
+
+SELECT * FROM (
+    SELECT id, name, department, salary,
+           ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) AS row_num
+    FROM employee
+) t WHERE row_num = 1;
+
+Output
+
+id  | name  | department | salary
+---------------------------------
+4   | David | HR        | 55000
+5   | Eve   | IT        | 80000
+
+
+==========================================================================================================

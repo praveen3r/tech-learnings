@@ -1,0 +1,46 @@
+==============================================================================================================
+
+A view in Hive is a virtual table that does not store data but provides a logical abstraction over queries.
+Views are useful for simplifying complex queries, restricting access, and improving code reusability.
+
+==============================================================================================================
+
+1. Creating a View
+
+CREATE VIEW employee_view AS
+SELECT id, name, department, salary
+FROM employees
+WHERE salary > 50000;
+
+
+==============================================================================================================
+
+2. Using a View
+
+SELECT * FROM employee_view;
+
+==============================================================================================================
+
+3. Dropping a View
+
+DROP VIEW IF EXISTS employee_view;
+
+==============================================================================================================
+
+4. Creating a View with Joins
+
+CREATE VIEW department_salary_view AS
+SELECT e.name, e.salary, d.department_name
+FROM employees e
+JOIN departments d ON e.department_id = d.id;
+
+==============================================================================================================
+
+5. Updating a View (Recreate)
+
+DROP VIEW IF EXISTS employee_view;
+
+CREATE VIEW employee_view AS
+SELECT id, name, salary FROM employees WHERE salary > 60000;
+
+==============================================================================================================

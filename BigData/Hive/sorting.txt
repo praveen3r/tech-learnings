@@ -1,0 +1,14 @@
+Example Usage
+Using ORDER BY:
+
+SELECT * FROM your_table
+ORDER BY some_column;
+
+This query will return a globally sorted result based on some_column, but all rows are processed by a single reducer.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Using SORT BY:
+
+SELECT * FROM your_table
+SORT BY some_column;
+Here, each reducer sorts its own subset of data based on some_column. The overall output is not globally sorted, but each partition is internally ordered.

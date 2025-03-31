@@ -1,0 +1,47 @@
+==========================================================================================================
+1. Using Beeline or Hive CLI and Redirecting Output
+
+hive -e "SELECT * FROM employees;" > /home/user/output.txt
+
+==========================================================================================================
+
+2. Using INSERT OVERWRITE DIRECTORY to Store Output in HDFS or Local File
+
+INSERT OVERWRITE DIRECTORY '/user/hive/output'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+SELECT * FROM employees;
+
+Store Output in Local File System
+
+INSERT OVERWRITE LOCAL DIRECTORY '/home/user/output'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+SELECT * FROM employees;
+
+==========================================================================================================
+
+3. Export Data as CSV Using INSERT OVERWRITE DIRECTORY
+
+INSERT OVERWRITE DIRECTORY '/user/hive/output_csv'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+SELECT id, name, salary FROM employees;
+
+
+==========================================================================================================
+
+4. Using hive -f to Run an HQL Script and Store Output
+
+Step 1: Create an HQL file (query.hql)
+
+SELECT * FROM employees;
+
+==========================================================================================================
+
+Step 2: Run the Query and Save Output
+
+hive -f query.hql > /home/user/output.txt
+
+==========================================================================================================
