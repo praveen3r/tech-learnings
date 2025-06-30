@@ -1,0 +1,16 @@
+[
+  {
+    "Name": "Sachin",
+    "Stats": {
+      "Runs": 12000,
+      "Matches": 300
+    }
+  },
+  {
+    "Name": "Dravid",
+    "Stats": {
+      "Runs": 10000,
+      "Matches": 250
+    }
+  }
+]
