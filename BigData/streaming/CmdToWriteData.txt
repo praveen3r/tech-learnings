@@ -1,0 +1,2 @@
+echo hello spark hello world > C:\Workspace\Learn\projects\BigData\streaming\concepts\data\test1.
+echo spark streaming test spark > C:\Workspace\Learn\projects\BigData\streaming\concepts\data\test1.txt
